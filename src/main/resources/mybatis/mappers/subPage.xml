@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   
+<!-- 상세페이지와 관련한 모든 쿼리문장은 여기에서 관리함 -->
+
+<mapper namespace="com.fun.subPage">
+
+	<!-- (1) 프로젝트 테이블 가져오기 -->
+	<select id="listProject" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</select>
+	
+	<!-- (2) 리워드 테이블 가져오기 -->
+	<select id="listReward" resultType="com.fun.subPage.dto.rewardDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM reward WHERE p_seq=#{p_seq}
+		]]>
+	</select>
+	
+
+</mapper>
