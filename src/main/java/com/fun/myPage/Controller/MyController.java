@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MyController {
 	
 	
-	@RequestMapping(value="/fundingMy", method=RequestMethod.GET)
+	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
 	public void projectList(Model model) throws Exception {
 		
 	
