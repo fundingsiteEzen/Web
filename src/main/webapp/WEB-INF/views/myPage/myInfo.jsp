@@ -34,6 +34,45 @@
     border: 1px solid #dcdcdc;
     background-color: #fafafa;
 }
+.tbl_model {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+    word-wrap: break-word;
+    word-break: keep-all;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+.tbl_model th {
+    color: #333;
+    border-right: 1px solid #e5e5e5;
+    background: #f9f9f9;
+}
+.tbl_model td, .tbl_model th {
+    line-height: 14px;
+    text-align: left;
+    vertical-align: top;
+    letter-spacing: -1px;
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+}
+.tbl_model .thcell {
+    padding: 32px 31px 32px;
+}
+.tbl_model td {
+    color: #565656;
+}
+.tbl_model .contxt_webctrl {
+    font-size: 0;
+    line-height: 0;
+    position: relative;
+    overflow: hidden;
+    margin-left: -8px;
+    padding: 13px 0 5px;
+    color: #666;
+}
     </style>
 
 </head>
@@ -49,9 +88,32 @@
 
 			</div> 
 		</div>
-		<div class "i_header">
+		<div class "c_header">
 			<h2>회원 정보관리</h2>
+			<p class="contxt">회원 비밀번호, 닉네임, 계좌정보를 관리 하실 수 있습니다.</p>
 		</div>
+		<table border="0" class="tbl_model">
+			<colgroup>
+			<col style="width:22%;">
+			<col>
+			</colgroup>
+			<tr>
+			<th scope="row">
+				<div class="thcell">
+					<label for="inpNickname">닉네임</label>
+				</div>
+			</th>
+			<td>
+				<div class="tdcell">
+				<p class="contxt_webctrl nickname">
+				<input type="text" name="nickname" id="inpNickname" value="닉네임" style="width:254px" onclick="clickcr(this, 'prf.nick', '', '', event);">
+				<input type="text" style="display: none;">
+				</p>
+				</div>
+				</td>
+			</tr>
+		</table>
+		
 	</div>
  
  
