@@ -47,6 +47,11 @@
   </style>
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+	<!-- 네비게이션 -->
+	<!--<jsp:include page="../menu/navigation.jsp" flush="false" />-->
+	
+	
 	<div class="container">
 		<!-- 메인정보 div -->
 		<div class="row">
@@ -104,23 +109,23 @@
 		                            <div class="row g-5">
 		                                <div class="col-6 text-start" >
 		                                    <i class="fas fa-briefcase fa-2x text-start"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1258" data-purecounter-duration="3">10,000,000</h2>
+		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1258" data-purecounter-duration="3">작성중</h2>
 		                                    <p>모인 금액</p>
 		                                </div>
 		                                <div class="col-6" >
 		                                    <i class="fas fa-award fa-2x"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="3">20일</h2>
+		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="3">${dayCount} 일</h2>
 		                                    <p>남은시간</p>
 		                                </div>
 		                                <div class="col-6">
 		                                    <i class="fas fa-users fa-2x"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1255" data-purecounter-duration="3">100명</h2>
+		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1255" data-purecounter-duration="3">${project.p_backer} 명</h2>
 		                                    <p>후원자</p>
 		                                </div>
 										<div class="col-6">
-											<span>목표금액 10,000,000</span><br>
-											<span>펀딩 기간 00.00.00</span><br>
-											<span>결제예정일 00.00.00</span><br>
+											<span>목표금액 ${project.p_goal} 원</span><br>
+											<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
+											<span>결제예정일 ${project.p_payDate}</span><br>
 											<button class="btn btn-primary">리스트에 추가</button>
 											<button class="btn btn-info">후원하기</button>
 										</div>
