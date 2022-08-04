@@ -12,7 +12,7 @@ public class projectDTO {
 	private Date p_payDate; // 결제 예정일
 	private String content; // 프로젝트 소개
 	private char p_ing; // 'Y' : 펀딩중, 'N' : 펀딩 종료
-	private int backer; // 총 후원 인원
+	private int p_backer; // 총 후원 인원
 	private long p_goal; // 목표 금액
 	
 	
@@ -65,11 +65,11 @@ public class projectDTO {
 	public void setP_ing(char p_ing) {
 		this.p_ing = p_ing;
 	}
-	public int getBacker() {
-		return backer;
+	public int getP_backer() {
+		return p_backer;
 	}
-	public void setBacker(int backer) {
-		this.backer = backer;
+	public void setP_backer(int p_backer) {
+		this.p_backer = p_backer;
 	}
 	public long getP_goal() {
 		return p_goal;
@@ -84,7 +84,7 @@ public class projectDTO {
 	public String toString() {
 		return "projectDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_beginDate=" + p_beginDate
 				+ ", p_endDate=" + p_endDate + ", p_payDate=" + p_payDate + ", content=" + content + ", p_ing=" + p_ing
-				+ ", backer=" + backer + ", p_goal=" + p_goal + "]";
+				+ ", p_backer=" + p_backer + ", p_goal=" + p_goal + "]";
 	}
 	
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   
+<!-- 로그인과 관련한 모든 쿼리문장은 여기에서 관리함 -->
+
+<mapper namespace="com.fun.login">
+
+
+</mapper>
