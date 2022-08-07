@@ -1,16 +1,40 @@
 package com.fun.category.controller;
 
+import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.fun.category.dto.CategoryDTO;
+import com.fun.category.service.CategoryService;
 
 //------------------------------------------------------------------------------------------------------------
 //카테고리
 //------------------------------------------------------------------------------------------------------------
-
+@Controller	// Bean의 대상으로 인식시키기 위해서 servlet-context.xml에 등록한다.
+@RequestMapping(value = "/category/*")
 public class CategoryController {
 
+	@Inject
+	private CategoryService categoryService;
 	//------------------------------------------------------------------------------------------------------------
-	// 봄 카테고리
+	// 봄 카테고리 목록
 	//------------------------------------------------------------------------------------------------------------
-	
+	@RequestMapping(value = "/SpringList", method = RequestMethod.GET)
+	public void CategoryList(Locale locale, Model model) throws Exception {
+		
+		System.out.println("CategoryController SpringList() 시작");
+		
+		List<CategoryDTO> SpringList = categoryService.SpringList();
+		System.out.println("CategoryController SpringList() Data ==> " + SpringList);
+		model.addAttribute("SpringList", SpringList);
+		
+	}
 	
 	//------------------------------------------------------------------------------------------------------------
 	// 여름 카테고리
