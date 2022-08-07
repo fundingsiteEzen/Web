@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: EZEN
-=======
-Built-By: Kirasung
->>>>>>> main
+Built-By: sowjs
 Build-Jdk: 11.0.15.1
 Created-By: Maven Integration for Eclipse
 

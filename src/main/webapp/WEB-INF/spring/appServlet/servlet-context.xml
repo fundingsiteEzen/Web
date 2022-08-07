@@ -26,6 +26,6 @@
 	<context:component-scan base-package="com.fun.main" />
 	<context:component-scan base-package="com.fun.category"/>
 	<context:component-scan base-package="com.fun.subPage" />
-	
+	<context:component-scan base-package="com.fun.myPage" />
 	
 </beans:beans>
