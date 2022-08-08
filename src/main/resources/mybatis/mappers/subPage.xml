@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- (2) 리워드 테이블 가져오기 -->
-	<select id="listReward" resultType="com.fun.subPage.dto.rewardDTO" parameterType="String">
+	<select id="listReward" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
 		<![CDATA[
 		SELECT * FROM reward WHERE p_seq=#{p_seq}
 		]]>

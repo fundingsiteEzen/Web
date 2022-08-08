@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
 </head>
 
 <style>
@@ -49,7 +50,7 @@
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
 
 	<!-- 네비게이션 -->
-	<!--<jsp:include page="../menu/navigation.jsp" flush="false" />-->
+	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
 	
 	<div class="container">
@@ -209,5 +210,10 @@
 		</div>
 		
 	</div> <!-- 최상위 container -->
+	
+	<script src="js/jquery.min.js"></script>
+  	<script src="js/popper.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+  	<script src="js/main.js"></script>
 </body>
 </html>

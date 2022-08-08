@@ -9,6 +9,7 @@ public class logController {
 
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginHome() throws Exception {
+		System.out.println("로그인 컨트롤러");
 		return "login/login";
 	}
 	
