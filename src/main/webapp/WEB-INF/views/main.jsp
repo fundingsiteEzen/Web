@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<!-- 상단 메뉴 -->
+<jsp:include page="menu/navigation.jsp" flush="false" />
 
 <!-- 이미지 슬라이드 만들기 -->
 <div class="container">
@@ -77,19 +77,6 @@
 	
 </div>
 
-<!-- 카테고리 프로젝트 -->
-
-<!-- 봄 -->
-<jsp:include page="category/SpringList.jsp"></jsp:include>
-<hr>
-<!-- 여름 -->
-<jsp:include page="category/SummerList.jsp"></jsp:include>
-<hr>
-<!-- 가을 -->
-<jsp:include page="category/AutumnList.jsp"></jsp:include>
-<hr>
-<!-- 겨울 -->
-<jsp:include page="category/WinterList.jsp"></jsp:include>
 
 
 <!-- footer.jsp -->

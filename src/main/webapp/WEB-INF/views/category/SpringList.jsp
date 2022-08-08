@@ -35,6 +35,9 @@
 </head>
 <body>
 
+<!-- 상단 메뉴바 -->
+<jsp:include page="../menu/navigation.jsp" flush="false" />
+
 <!-- 상단 카테고리 제목 -->
 <div align="center">
 	<h1><b>봄에 보기 좋은 영화</b></h1><hr><br><br>
