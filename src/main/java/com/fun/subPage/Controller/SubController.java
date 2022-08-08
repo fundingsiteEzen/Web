@@ -28,7 +28,7 @@ public class SubController {
 		System.out.println("서브 컨트롤러 (1) 실행 ");
 		
 		// 1. project 테이블 가져오기
-		String p_seq = "pro01"; // 임시로 고정해놓음
+		String p_seq = "1111"; // 임시로 고정해놓음
 		projectDTO dto = sService.projectList(p_seq);
 		
 		System.out.println("가져온 데이터 : " + dto);

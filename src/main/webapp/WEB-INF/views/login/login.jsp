@@ -15,7 +15,7 @@
 	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 	
 	<!-- 네비게이션 -->
-	<!--<jsp:include page="../menu/navigation.jsp" flush="false" />-->
+	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
 	<section class="ftco-section">
 		<div class="container">
