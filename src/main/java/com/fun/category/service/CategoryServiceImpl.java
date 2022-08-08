@@ -1,9 +1,31 @@
 package com.fun.category.service;
 
-public interface CategoryServiceImpl extends CategoryService {
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.fun.category.dao.CategoryDAO;
+import com.fun.category.dto.CategoryDTO;
+
+//------------------------------------------------------------------------------------------------------------
+// public class CategoryServiceImpl implements CategoryService
+//------------------------------------------------------------------------------------------------------------
+@Service
+public class CategoryServiceImpl implements CategoryService {
+	
+	@Inject
+	private CategoryDAO categoryDAO;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 봄 카테고리 게시글 목록
 	//-----------------------------------------------------------------------------------------------------------
+	@Override
+	public List<CategoryDTO> SpringList() throws Exception {
 
-} // End -public interface CategoryServiceImpl extends CategoryService
+		System.out.println("CategoryServiceImpl SpringList() 시작");
+		return categoryDAO.SpringList();
+		
+	}
+} // End - public class CategoryServiceImpl implements CategoryService
