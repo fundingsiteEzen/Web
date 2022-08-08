@@ -4,13 +4,15 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fun.category">
-	<!-- 게시글 프로젝트 이름 목록 추출하기 -->
+	<!-- 게시글 프로젝트 이름, 프로젝트 종료일 목록 추출하기 -->
 	<select id="p_name_All" resultType="com.fun.category.dto.CategoryDTO">
 		<![CDATA[
-		SELECT	p_name
+		SELECT	*
 		FROM	project
+		WHERE	p_category='spring'
 		]]>
 	</select>
+	
 	
 	<!-- 게시글 전체 목록 추출하기 -->
 	<!-- <select id="listAll" resultType="com.edu.subPage.dto.projectDTO">

@@ -7,6 +7,7 @@ public class CategoryDTO {
 	private String 	id; 			// user아이디
 	private String 	p_seq; 			// 프로젝트 고유번호
 	private String 	p_name; 		// 프로젝트 이름
+	private String 	p_category;		// 프로젝트 카테고리
 	private Date 	p_beginDate; 	// 펀딩 시작일
 	private Date 	p_endDate; 		// 펀딩 종료일
 	private Date 	p_payDate; 		// 결제 예정일
@@ -14,9 +15,6 @@ public class CategoryDTO {
 	private char 	p_ing; 			// 'Y' : 펀딩중, 'N' : 펀딩 종료
 	private int 	p_backer; 		// 총 후원 인원
 	private long 	p_goal; 		// 목표 금액
-	
-	
-	// get/set 메서드
 	public String getId() {
 		return id;
 	}
@@ -34,6 +32,12 @@ public class CategoryDTO {
 	}
 	public void setP_name(String p_name) {
 		this.p_name = p_name;
+	}
+	public String getP_category() {
+		return p_category;
+	}
+	public void setP_category(String p_category) {
+		this.p_category = p_category;
 	}
 	public Date getP_beginDate() {
 		return p_beginDate;
@@ -78,12 +82,10 @@ public class CategoryDTO {
 		this.p_goal = p_goal;
 	}
 	
-	
-	// toString
 	@Override
 	public String toString() {
-		return "CategoryDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_beginDate=" + p_beginDate
-				+ ", p_endDate=" + p_endDate + ", p_payDate=" + p_payDate + ", content=" + content + ", p_ing=" + p_ing
-				+ ", p_backer=" + p_backer + ", p_goal=" + p_goal + "]";
+		return "CategoryDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_category=" + p_category
+				+ ", p_beginDate=" + p_beginDate + ", p_endDate=" + p_endDate + ", p_payDate=" + p_payDate
+				+ ", content=" + content + ", p_ing=" + p_ing + ", p_backer=" + p_backer + ", p_goal=" + p_goal + "]";
 	}
 } // End -public class CategoryDTO

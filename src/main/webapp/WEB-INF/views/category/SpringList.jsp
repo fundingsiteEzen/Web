@@ -12,26 +12,54 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
+	
+	<style>
+		h1 {
+		margin-top:		80px;
+		margin-bottom:	80px;
+		}
+		/* .container {
+		margin:			0 auto;
+		text-align:		center;
+		} */
+		#category {
+		margin:				10px;
+		display:			inline-block;
+		height:				250px;
+		width:				250px;
+		background-color: 	gray;
+		} */
+		
+	</style>
+
 </head>
 <body>
 
-<h4><b>봄에 보기 좋은 영화</b></h4>
+<!-- 상단 카테고리 제목 -->
+<div align="center">
+	<h1><b>봄에 보기 좋은 영화</b></h1><hr><br><br>
+</div>
+
 
 <!-- boardList, seatReservation 참고해서 나열하기 -->
 
-<!-- 표지(?), 제목(p_name), 창작자 이름(c_name) -->
-<c:forEach items="${SpringList}" var="list">
+<!-- 게시물마다 표지, 프로젝트 이름(p_name)띄우기 -->
+<div class="container">
+	<c:forEach items="${SpringList}" var="list" varStatus="status">
+		<!-- 고유번호(seq)페이지로 이동 -->
+		<div align="center" id="category">
+			<a href="#">${list.p_name}<br/>${list.p_endDate}</a>
+		</div>
+		
+		<!-- 게시물 한줄에 3개씩 정렬 -->
+		<c:choose>
+			<c:when test="${status.count % 4  == 0}">
+				<br/>
+			</c:when>
+		</c:choose>	
+	</c:forEach>
+</div>
 
-	<!-- 고유번호(seq)페이지로 이동 -->
-	<a href="#">${list.p_name}<br/>${list.p_name}</a>
-	
-</c:forEach>
-
-<c:choose>
-	<c:when test="${status.count % 5  == 0}">
-		<br/>
-	</c:when>
-</c:choose>
 
 </body>
 </html>
