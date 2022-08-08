@@ -24,6 +24,7 @@
 </head>
 
 <body>
+<jsp:include page="../menu/navigation.jsp" flush="false" />
 	<article>
 	<div class="container">
 		
