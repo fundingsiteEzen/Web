@@ -17,6 +17,7 @@
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 전체 section -->
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">

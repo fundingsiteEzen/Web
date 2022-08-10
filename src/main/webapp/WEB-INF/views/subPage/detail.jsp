@@ -58,7 +58,7 @@
 		<div class="row">
 			<!-- 프로젝트 이름 부분 -->
 			<div>
-				<h1 align="center">프로젝트명</h1>
+				<h1 align="center">${project.p_name}</h1>
 			</div>
 			
 			<!-- 메인 정보 section -->
