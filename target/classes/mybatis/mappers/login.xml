@@ -10,5 +10,19 @@
 
 <mapper namespace="com.fun.login">
 
+	<!-- 아이디에 해당하는 userinfo 찾아오기 -->
+	<!-- <select id="searchid" parameterType="String" resultType="com.fun.subPage.dto.userinfoDTO">
+		<![CDATA[
+		SELECT * FROM userinfo WHERE id=#{id}
+		]]>
+	</select>
+	 -->
+	
+	<!-- 시큐리티랑 연결됨. 유저정보 받아오기 -->
+	<select id="getInfo" parameterType="String" resultType="com.fun.subPage.dto.userinfoDTO">
+		<![CDATA[
+		SELECT * FROM userinfo WHERE id=#{id}
+		]]>
+	</select>
 
 </mapper>

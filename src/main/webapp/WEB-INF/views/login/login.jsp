@@ -28,15 +28,16 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
-				      	<form action="#" class="signin-form">
+				      	
+				      	<form action="${contextPath}/idsearch" class="signin-form" method="post"> <!-- 로그인하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
-				      			<input type="text" class="form-control" placeholder="아이디" required>
+				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
 				      		</div>
 				      		<!-- 비밀번호 -->
 				            <div class="form-group">
-				            	<input id="password-field" type="password" class="form-control" placeholder="비밀번호" required>
-				            	<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+				            	<input type="password" id="pass" name="pass" class="form-control" placeholder="비밀번호" required>
+				            	<span toggle="#pass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				            </div>
 				            <!-- sign In 버튼 -->
 				            <div class="form-group">
