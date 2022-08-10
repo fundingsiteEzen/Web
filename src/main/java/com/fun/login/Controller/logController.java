@@ -13,4 +13,8 @@ public class logController {
 		return "login/login";
 	}
 	
+	@RequestMapping(value="/idsearch", method=RequestMethod.POST)
+	public void searchID() throws Exception {
+		
+	}
 }
