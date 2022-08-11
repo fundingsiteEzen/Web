@@ -35,7 +35,7 @@
 </head>
 <body>
 <!-- 상단 메뉴바 -->
-<jsp:include page="menu/navigation.jsp" flush="false" />
+<jsp:include page="../menu/navigation.jsp" flush="false" />
 
 <!-- 상단 카테고리 제목 -->
 <div align="center">
