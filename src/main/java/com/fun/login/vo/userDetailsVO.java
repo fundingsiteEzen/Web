@@ -17,7 +17,7 @@ public class userDetailsVO implements UserDetails{
 	// 멤버변수
 	private String username; // 아이디
 	private String password; // 비밀번호
-	private List<GrantedAuthority> authorities; // 이게 뭐지 ?!?!?
+	private List<GrantedAuthority> authorities; // 이게 뭐지 ?!?!? >> 권한 모아 놓는것. ROLE_USER, ROLE_ADMIN 등등
 	
 	// set 메서드(따로 만들어줌)
 	public void setUsername(String username) { this.username = username; }

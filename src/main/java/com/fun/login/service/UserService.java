@@ -30,6 +30,7 @@ public class UserService implements UserDetailsService {
 				resultVO.setUsername(dto.getId());
 				resultVO.setUsername(dto.getPass());
 			}
+			System.out.println(dto.getEmail());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
