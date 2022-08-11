@@ -23,11 +23,15 @@
 	
 	
 	<!-- 컨트롤러 등록 -->
-	<context:component-scan base-package="com.fun.main" />
-	<context:component-scan base-package="com.fun.category"/>
-	<context:component-scan base-package="com.fun.subPage" />
-	<context:component-scan base-package="com.fun.login" />
-	<context:component-scan base-package="com.fun.crpage" />
-	<context:component-scan base-package="com.fun.manager" />
-	<context:component-scan base-package="com.fun.myPage" />
+<context:component-scan base-package="com.fun.main" />
+   <context:component-scan base-package="com.fun.category"/>
+   <context:component-scan base-package="com.fun.subPage" />
+   <context:component-scan base-package="com.fun.login" />
+   <context:component-scan base-package="com.fun.manager" />
+   <context:component-scan base-package="com.fun.myPage" />
+   <context:component-scan base-package="com.fun.crpage" />
+	
+	
+	
 </beans:beans>
+
