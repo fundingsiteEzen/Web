@@ -31,18 +31,17 @@ public class logController {
 		return "login/login";
 	}
 	
+	// ~~ 학원에서 배운 방법 ~~
 	// 1. 로그인 처리
 	// 정보 대조를 위해 아이디, 비밀번호를 뷰에서 받아옴. dto로 받고 dto를 통째로 서비스쪽으로 넘겨줌
-	@RequestMapping(value="/idsearch", method=RequestMethod.POST)
-	public ModelAndView searchID(@ModelAttribute("userinfo") userinfoDTO userinfo, RedirectAttributes rAttr, HttpServletRequest req,
-			HttpServletResponse res) throws Exception {
-		
-		ModelAndView mav = new ModelAndView();
-		System.out.println("브라우저에서 입력받은 아이디 : " + userinfo.getId());
-		System.out.println("브라우저에서 입력받은 비번 : " + userinfo.getPass());
-		
-		
-		
-		return null;
-	}
+//	@RequestMapping(value="/idsearch", method=RequestMethod.POST)
+//	public ModelAndView searchID(@ModelAttribute("userinfo") userinfoDTO userinfo, RedirectAttributes rAttr, HttpServletRequest req,
+//			HttpServletResponse res) throws Exception {
+//		
+//		ModelAndView mav = new ModelAndView();
+//		System.out.println("브라우저에서 입력받은 아이디 : " + userinfo.getId());
+//		System.out.println("브라우저에서 입력받은 비번 : " + userinfo.getPass());
+//		
+//		return null;
+//	}
 }

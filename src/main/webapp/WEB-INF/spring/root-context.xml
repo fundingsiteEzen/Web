@@ -65,6 +65,8 @@
 			invalidate-session="true"
 			delete-cookies="true" />
 	</security:http>
+	
+	
 	<!-- 스프링 시큐리티 DB 설정 -->
 	<security:authentication-manager>
 		<security:authentication-provider>

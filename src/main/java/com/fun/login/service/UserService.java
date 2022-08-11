@@ -19,9 +19,11 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		// 최종적으로 시큐쪽으로 보낼 객체
 		userDetailsVO resultVO = new userDetailsVO();
 		
-		// DB에서 사용자 정보를 가져옴
+		// DB에서 사용자 정보를 가져옴.
+		// DB에서 받아올때는 userinfoDTO로 받고 그 정보를 VO에 담아서 시큐로 보냄 !
 		try {
 			userinfoDTO dto = dao.selectUserInfo(username);
 			if(dto == null) {
@@ -34,7 +36,6 @@ public class UserService implements UserDetailsService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		return resultVO;
 	}

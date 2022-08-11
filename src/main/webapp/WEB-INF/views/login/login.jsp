@@ -29,7 +29,7 @@
 					<div class="login-wrap p-0">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
 				      	
-				      	<form action="${contextPath}/idsearch" class="signin-form" method="post"> <!-- 로그인하기 form -->
+				      	<form action="${contextPath}/seculogin" class="signin-form" method="post"> <!-- 로그인하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
 				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
