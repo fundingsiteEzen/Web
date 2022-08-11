@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>비바 메인페이지</title>
+	<title>꿈의 시작 BEVA</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -102,7 +102,7 @@
 	</div>
 	
 </div>
-<!-- footer.jsp -->
+<!-- 스크롤확인용 임시글 -->
 <h3>asdaaaaaaaaaaaaaaaaaaaaaaaaaaa</h3><br/>
 <h3>asdaaaaaaaaaaaaaaaaaaaaaaaaaaa</h3><br/>
 <h3>asdaaaaaaaaaaaaaaaaaaaaaaaaaaa</h3><br/>
