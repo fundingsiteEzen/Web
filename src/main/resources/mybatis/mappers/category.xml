@@ -41,6 +41,11 @@
 	</select>
 	
 	<!-- 메인 추출 -->
+	
+	<!-- 최다 펀딩 목록 추출-->
+	
+	<!-- 최신 등록 프로젝트 목록 추출 -->
+	
 	<!-- 게시글 전체 목록 추출하기 -->
 	<!-- <select id="listAll" resultType="com.edu.subPage.dto.projectDTO">
 		<![CDATA[

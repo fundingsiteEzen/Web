@@ -46,8 +46,8 @@
 <div class="container">
 	<c:forEach items="${SpringList}" var="list" varStatus="status">
 		<!-- 고유번호(seq)페이지로 이동 -->
-		<div align="center" id="category">
-			<a href="#">${list.p_name}<br/>${list.p_endDate}</a>
+		<div align="center" id="category" onclick="location.href='${contextPath}/subPage/Detail?p_seq=${list.p_seq}';" style="cursor:pointer;">
+			${list.p_name}<br/>${list.p_endDate}
 		</div>
 		
 		<!-- 게시물 한줄에 3개씩 정렬 -->
