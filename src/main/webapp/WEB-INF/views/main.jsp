@@ -14,8 +14,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
 </head>
 <body>
+
+<!-- 상단 메뉴바 -->
 <jsp:include page="menu/navigation.jsp" flush="false" />
-<!-- 상단 메뉴 -->
 
 <!-- 이미지 슬라이드 만들기 -->
 <div class="container">
