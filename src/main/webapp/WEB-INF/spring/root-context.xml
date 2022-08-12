@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
@@ -13,7 +15,7 @@
       	  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<value>/WEB-INF/config/jdbc.properties</value>
-		</property>   
+		</property>
 	</bean>
 	
 	<!-- DB와 연결할 객체 3개 -->
@@ -34,5 +36,47 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
+	
+	
+	<!-- 스프링 시큐리티 -->
+	<security:http auto-config="true" use-expressions="true">
+
+		<!-- 정적 리소스는 모두 접근 허용 -->
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+
+		<!-- 로그인된 상태에서 로그인화면에 접근 못하도록 함 -->
+		<security:intercept-url pattern="/seculogin" access="isAnonymous()" />
+
+		<!-- 관리자페이지는 관리자만 접근 허용 -->
+		<!-- <security:intercept-url pattern="/admin/**" access="hasRole('admin')" />  -->
+
+		<!-- 로그인 설정 -->
+		<security:form-login	
+			username-parameter="userId" 
+			password-parameter="userPw"
+			login-processing-url="/seculoginClear" 
+			login-page="/seculogin" default-target-url="/"
+			authentication-failure-url="/seculogin" />
+
+		<!-- 로그아웃 설정 -->
+		<security:logout 
+			logout-url="/logoutAsk"
+			logout-success-url="/"
+			invalidate-session="true"
+			delete-cookies="true" />
+	</security:http>
+	
+	
+	<!-- 스프링 시큐리티 DB 설정 -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+                <security:user name="admin" password="123"
+                    authorities="ROLE_USER, ROLE_ADMIN" />
+                <security:user name="id01" password="1111" authorities="ROLE_USER" />
+            </security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
 
 </beans>

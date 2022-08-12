@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.fun.subPage.dao.subDAO;
+import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Service
@@ -33,7 +34,13 @@ public class subService implements subServiceIfc {
 		return dao.rewardList(p_seq);
 	}
 
-	
-	
+	// (3) 창작자 테이블 가져오기
+	@Override
+	public creatorDTO creatorList(String id) throws Exception {
+		
+		System.out.println("서브 Service (3) 실행");
+		
+		return dao.creatorList(id);
+	}
 	
 }

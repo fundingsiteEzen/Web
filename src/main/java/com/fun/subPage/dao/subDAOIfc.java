@@ -2,6 +2,7 @@ package com.fun.subPage.dao;
 
 import java.util.List;
 
+import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
 
 public interface subDAOIfc {
@@ -11,5 +12,8 @@ public interface subDAOIfc {
 	
 	// (2) 리워드 테이블 가져오기
 	public List<projectDTO> rewardList(String p_seq) throws Exception;
+	
+	// (3) 창작자 테이블 가져오기
+	public creatorDTO creatorList(String id) throws Exception;
 
 }

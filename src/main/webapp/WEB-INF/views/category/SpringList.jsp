@@ -46,7 +46,7 @@
 <div class="container">
 	<c:forEach items="${SpringList}" var="list" varStatus="status">
 		<!-- 고유번호(seq)페이지로 이동 -->
-		<div align="center" id="category" onclick="location.href='${contextPath}/subPage/Detail?p_seq=${list.p_seq}';" style="cursor:pointer;">
+		<div align="center" id="category" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';" style="cursor:pointer;">
 			${list.p_name}<br/>${list.p_endDate}
 		</div>
 		

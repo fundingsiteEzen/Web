@@ -58,7 +58,7 @@
 		<div class="row">
 			<!-- 프로젝트 이름 부분 -->
 			<div>
-				<h1 align="center">프로젝트명</h1>
+				<h1 align="center">${project.p_name}</h1>
 			</div>
 			
 			<!-- 메인 정보 section -->
@@ -66,7 +66,7 @@
 		        <div class="container-fluid text-light">
 		            <div class="row" >
 		            	<!-- 이미지 슬라이더 -->
-		                <div class="col-lg-8 d-flex align-items-center" data-aos="fade-right" style="border: 1px solid #333">
+		                <div class="col-lg-8 d-flex align-items-center" data-aos="fade-right">
 		                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 		
 							<!-- 인디케이터 -->
@@ -78,16 +78,16 @@
 							<!-- 슬라이드 wrap -->
 							<div class="carousel-inner">
 								<div class="item active">
-									<img class="img-responseve center-block" src="${contextPath}/resources/images/***.jpg" alt="img01" width="100%" height="350px"/>
-									<div class="carousel-caption"><h2>캡션1</h2></div>
+									<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail01.jpg" alt="img01" width="100%" height="350px"/>
+									<div class="carousel-caption"></div>
 								</div>
 								<div class="item">
-									<img class="img-responseve center-block" src="${contextPath}/resources/images/***.jpg" alt="img02" width="100%" height="350px"/>
-									<div class="carousel-caption"><h2>캡션2</h2></div>
+									<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail02.jpg" alt="img02" width="100%" height="350px"/>
+									<div class="carousel-caption"><h2></h2></div>
 								</div>
 								<div class="item">
-									<img class="img-responseve center-block" src="${contextPath}/resources/images/***.jpg" alt="img03" width="100%" height="350px"/>
-									<div class="carousel-caption"><h2>캡션3</h2></div>
+									<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail03.jpg" alt="img03" width="100%" height="350px"/>
+									<div class="carousel-caption"><h2></h2></div>
 								</div>
 							</div>
 							
@@ -109,26 +109,30 @@
 		                        <div class="container" data-aos="fade-up">
 		                            <div class="row g-5">
 		                                <div class="col-6 text-start" >
-		                                    <i class="fas fa-briefcase fa-2x text-start"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1258" data-purecounter-duration="3">작성중</h2>
+		                                    <br>
 		                                    <p>모인 금액</p>
+		                                    <h2 class="purecounter">작성중</h2>
+		                                    <br>
 		                                </div>
 		                                <div class="col-6" >
-		                                    <i class="fas fa-award fa-2x"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="3">${dayCount} 일</h2>
 		                                    <p>남은시간</p>
+		                                    <h2 class="purecounter">${dayCount} 일</h2>
+		                                    <br>
 		                                </div>
 		                                <div class="col-6">
-		                                    <i class="fas fa-users fa-2x"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1255" data-purecounter-duration="3">${project.p_backer} 명</h2>
+		                                	<br>
 		                                    <p>후원자</p>
+		                                    <h2 class="purecounter">${project.p_backer} 명</h2>
+		                                    <br>
 		                                </div>
 										<div class="col-6">
 											<span>목표금액 ${project.p_goal} 원</span><br>
 											<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
 											<span>결제예정일 ${project.p_payDate}</span><br>
-											<button class="btn btn-primary">리스트에 추가</button>
-											<button class="btn btn-info">후원하기</button>
+											<!-- 리스트 추가버튼 -->
+											<button class="btn btn-primary" onclick="addList()">리스트에 추가</button>
+											<!-- 후원버튼 -->
+											<button class="btn btn-info" onclick="BACK()">후원하기</button>
 										</div>
 		                            </div>
 		                        </div>
@@ -179,29 +183,24 @@
 					<div class="col-lg-4" style="border: 1px solid #333">
 						<!-- 판매자 정보란 -->
 						<div align="center">
-							<button>창작자 소개</button>
+							<button>창작자 소개</button><br>
+							<h2>${creator.c_name}</h2>
+							<span>${creator.c_content}</span><br>
 						</div>
 						<!-- 리워드 -->
 						<div style="border: 1px solid #333">
 							<ol>
-								<li>선택1
+							<c:forEach items="${rewardList}" var="list" varStatus="status">
+								<li>
 									<div>
-										<h3>1000원</h3>
+										<span>선택 ${list.r_seq}</span>
+										<h3>${list.r_price} 원</h3>
+										<span>${list.r_content}</span><br>
 										<button>진행하기</button>
+										<hr>
 									</div>
 								</li>
-								<li>선택2
-									<div>
-										<h3>2000원</h3>
-										<button>진행하기</button>
-									</div>
-								</li>
-								<li>선택3
-									<div>
-										<h3>3000원</h3>
-										<button>진행하기</button>
-									</div>
-								</li>
+							</c:forEach>
 							</ol>
 						</div>
 					</div>
@@ -215,5 +214,12 @@
   	<script src="js/popper.js"></script>
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
+  	
+  	<!-- 커스텀 스크립트 -->
+  	<script>
+  		function BACK() {
+  			alert("후원 완료");
+  		}
+  	</script>
 </body>
 </html>
