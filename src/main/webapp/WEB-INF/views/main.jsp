@@ -14,21 +14,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
 	
 <style>
-	#mainTOP {
-	/*height:					300px;
-	background-image: 		url("${contextPath}/resources/images/mainSlide/mainTOP.jpg");
-	background-repeat:		no-repeat;
-	background-size:		cover;
-	background-position:	center; */
-	background-color:		#0002;
-	
-	height:					400px;
-	weight:					80%;
-	}
-	#mainTOP > h1, h2 {
-	color: 					#FFFF;
-	text-align:				right;
-	}
 
 </style>
 
@@ -38,13 +23,14 @@
 <!-- 상단 메뉴바 -->
 <jsp:include page="menu/navigation.jsp" flush="false" />
 
-<!-- 비바메인 상단 -->
-<!-- <div class="container" id=mainTOP>
+<div class="container">
+  <div class="jumbotron">
+    <h1>VIVA</h1>
+    <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+    responsive, mobile-first projects on the web.</p>
+  </div>
+</div>
 
-	<h1>BEVA</h1>
-	<h2>우리의 꿈을 응원해</h2>
-	
-</div> -->
 <!-- 이미지 슬라이드 만들기 -->
 <div class="container">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -62,21 +48,21 @@
 				<img class="img-responsive center-block" src="${contextPath}/resources/images/mainSlide/mainSlide1.jpg" width="100%" height="200px"/>
 				<!-- carousel에 설명을 달아준다. -->
 				<div class="carousel-caption">
-					<h1><b>재미</b></h1>
+					<h1><b>신선한 재미</b></h1>
 				</div>
 			</div> 
 			<div class="item">
 				<!-- class="img-responsive center-block" : 반응형 이미지를 가운데 정렬한다. -->
 				<img class="img-responsive center-block" src="${contextPath}/resources/images/mainSlide/mainSlide2.jpg" width="100%" height="100px"/>
 				<div class="carousel-caption">
-					<h1><b>열정</b></h1>
+					<h1><b>우리들의 열정</b></h1>
 				</div>
 			</div> 
 			<div class="item">
 				<!-- class="img-responsive center-block" : 반응형 이미지를 가운데 정렬한다. -->
 				<img class="img-responsive center-block" src="${contextPath}/resources/images/mainSlide/mainSlide3.jpg" width="100%" height="200px"/>
 				<div class="carousel-caption">
-					<h1><b>꿈과희망</b></h1>
+					<h1><b>모두의 꿈과 희망</b></h1>
 				</div>
 			</div> 
 		</div>
@@ -94,11 +80,13 @@
 <!-- 메인 상단 프로젝트 -->
 <div class="container">
 	<div class="col-sm-9"	style="background-color:blue">
-		<h3>실시간 HOT한 영화</h3>
+		<h3>Hot Movie</h3>
+		<p>실시간 베스트 무비를 즐겨보세요.</p>
 	</div>
 	
 	<div class="col-sm-3"  	style="background-color:red">
-		<h3><b>최신 영화</b></h3>
+		<h3><b>New Movie</b></h3>
+		<p>새로운 무비를 즐겨보세요.</p>
 	</div>
 	
 </div>
