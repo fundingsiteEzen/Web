@@ -50,7 +50,7 @@
 			${list.p_name}<br/>${list.p_endDate}
 		</div>
 		
-		<!-- 게시물 한줄에 3개씩 정렬 -->
+		<!-- 게시물 한줄에 4개씩 정렬 -->
 		<c:choose>
 			<c:when test="${status.count % 4  == 0}">
 				<br/>
