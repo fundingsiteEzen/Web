@@ -3,10 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-
-
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<style>
+	.navbar {				
+	position:	sticky;	/* 메뉴바 상단 고정 */
+	top:		0;		/* 메뉴바 상단 0 */
+	z-index: 100;		/* 메뉴바가 최상위에 위치하도록함 */
+	}
+</style>
 
 <nav class="navbar navbar-default">
   <div class="container">
@@ -16,12 +21,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">메인</a>
+      <a class="navbar-brand" href="/">BEVA</h1></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/subPage/detail">상세페이지</a></li>
-        <li><a href="#pricing">판매등록페이지</a></li>
+        <li><a href="/crpage/cr">판매등록페이지</a></li>
         <li><a href="/manager.do">관리자페이지</a></li>
         <li><a href="/myPage/myInfo">마이페이지</a></li>
         <li><a href="/login.do">로그인</a></li>

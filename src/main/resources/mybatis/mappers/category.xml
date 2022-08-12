@@ -4,15 +4,47 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fun.category">
-	<!-- 게시글 프로젝트 이름, 프로젝트 종료일 목록 추출하기 -->
-	<select id="p_name_All" resultType="com.fun.category.dto.CategoryDTO">
+
+	<!-- 카테고리별 추출 -->
+	
+	<!-- 봄 게시글 목록 추출하기 -->
+	<select id="spring_categoryList" resultType="com.fun.category.dto.CategoryDTO">
 		<![CDATA[
 		SELECT	*
 		FROM	project
 		WHERE	p_category='spring'
 		]]>
 	</select>
+	<!-- 여름 게시글 목록 추출하기 -->
+	<select id="summer_categoryList" resultType="com.fun.category.dto.CategoryDTO">
+		<![CDATA[
+		SELECT	*
+		FROM	project
+		WHERE	p_category='summer'
+		]]>
+	</select>
+	<!-- 가을 게시글 목록 추출하기 -->
+	<select id="autumn_categoryList" resultType="com.fun.category.dto.CategoryDTO">
+		<![CDATA[
+		SELECT	*
+		FROM	project
+		WHERE	p_category='autumn'
+		]]>
+	</select>
+	<!-- 겨울 게시글 목록 추출하기 -->
+	<select id="winter_categoryList" resultType="com.fun.category.dto.CategoryDTO">
+		<![CDATA[
+		SELECT	*
+		FROM	project
+		WHERE	p_category='winter'
+		]]>
+	</select>
 	
+	<!-- 메인 추출 -->
+	
+	<!-- 최다 펀딩 목록 추출-->
+	
+	<!-- 최신 등록 프로젝트 목록 추출 -->
 	
 	<!-- 게시글 전체 목록 추출하기 -->
 	<!-- <select id="listAll" resultType="com.edu.subPage.dto.projectDTO">

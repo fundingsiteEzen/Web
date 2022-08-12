@@ -28,7 +28,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 		System.out.println("CategoryDAOImpl SpringList() 시작");
 		
-		List<CategoryDTO> SpringList = sqlSession.selectList(namespace + ".p_name_All");
+		List<CategoryDTO> SpringList = sqlSession.selectList(namespace + ".spring_categoryList");
 		
 		System.out.println("CategoryDAOImpl SpringList() Data ==> " + SpringList);
 		
