@@ -1,12 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% request.setCharacterEncoding("UTF-8"); %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>창작 등록 페이지</title>
+	<meta charset="UTF-8">
+	<title>창작 등록 페이지</title>
+	<!-- 제이쿼리 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+	<!-- 부트스트랩 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
 </head>
+
 <body>
+<jsp:include page="../menu/navigation.jsp" flush="false" />
 <div class = "admin_content_wrap">	
 	<div class = "admin_content_subject"><h1>창작 등록 페이지</h1></div>
 			<div class="admin_content_main">
@@ -24,16 +40,10 @@
                     				<label>창작자</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="creater" value="">
+                    				ID <input name="creater" value="">
                     			</div>
                     		</div>            
-                    		<div class="form_section">
-                    			<div class="form_section_title">
-                    				<label>창작일</label>
-                    			</div>
-                    			<div class="form_section_content">
-                    				<input name="creatingDate">
-                    			</div>
+                    		</form>
                     		</div>            
                     		<div class="form_section">
                     			<div class="form_section_title">
@@ -48,7 +58,10 @@
                     				<label>창작물 카테고리</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="category">
+                    				<input type='radio' name='category' value='spring' />봄
+  									<input type='radio' name='category' value='summer' />여름
+  									<input type='radio' name='category' value='autumn' />가을
+  									<input type='radio' name='category' value='winter' />겨울
                     			</div>
                     		</div>          
                     		<div class="form_section">
@@ -66,13 +79,30 @@
                     			<div class="form_section_content">
                     				<input name="projectPeriod">
                     			</div>
-                    		</div>        		
-                   		</form>
-                   			<div class="btn_section">
+                    		</div> 
+                    		<div class="form_section">
+                    			<div class="form_section_title">
+                    				<label>메인이미지</label>
+                    			</div>
+                    			<div class="form_section_content">
+                    				<input type=file name="mainPicture">
+                    			</div>
+                    		</div>            
+                    		<div class="form_section">
+                    			<div class="form_section_title">
+                    				<label>상세이미지</label>
+                    			</div>
+                    			<div class="form_section_content">
+                    				<input type=file name="detailPictures">
+                    				<input type=file name="detailPictures">
+                    				<input type=file name="detailPictures">
+                    			</div>
+                    		</div> 
+                            <div class="btn_section">
 	                    		<button id="enrollBtn" class="btn enroll_btn">등 록</button>
                    				<button id="cancelBtn" class="btn">취 소</button>
 	                    	</div> 
-                    </div>  
+                     
  </div>
 
 <style type="text/css">
