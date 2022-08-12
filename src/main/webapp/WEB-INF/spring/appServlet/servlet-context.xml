@@ -13,7 +13,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/**" location="/resources/" />
 
 	<!-- Resolves views seslected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -23,13 +23,13 @@
 	
 	
 	<!-- 컨트롤러 등록 -->
-<context:component-scan base-package="com.fun.main" />
-   <context:component-scan base-package="com.fun.category"/>
-   <context:component-scan base-package="com.fun.subPage" />
-   <context:component-scan base-package="com.fun.login" />
-   <context:component-scan base-package="com.fun.manager" />
-   <context:component-scan base-package="com.fun.myPage" />
-   <context:component-scan base-package="com.fun.crpage" />
+	<context:component-scan base-package="com.fun.main" />
+	<context:component-scan base-package="com.fun.category"/>
+	<context:component-scan base-package="com.fun.subPage" />
+	<context:component-scan base-package="com.fun.login" />
+	<context:component-scan base-package="com.fun.manager" />
+	<context:component-scan base-package="com.fun.myPage" />
+	<context:component-scan base-package="com.fun.crpage" />
 	
 	
 	

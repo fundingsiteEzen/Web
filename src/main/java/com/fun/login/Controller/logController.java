@@ -31,6 +31,13 @@ public class logController {
 		return "login/login";
 	}
 	
+	// 0. 회원가입 화면으로 이동
+	@RequestMapping(value="register.do", method=RequestMethod.GET)
+	public String registerHome() throws Exception {
+		System.out.println("로그 컨트롤러.회원가입");
+		return "login/register";
+	}
+	
 	// ~~ 학원에서 배운 방법 ~~
 	// 1. 로그인 처리
 	// 정보 대조를 위해 아이디, 비밀번호를 뷰에서 받아옴. dto로 받고 dto를 통째로 서비스쪽으로 넘겨줌

@@ -27,6 +27,7 @@ public class UserController {
 //		return "/login/login";
 //	}
 	
+	// 로그인
 	@RequestMapping(value="/seculogin", method=RequestMethod.POST)
 	public ModelAndView seculogin(@ModelAttribute("userinfo") userinfoDTO userinfo, RedirectAttributes rAttr, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
@@ -38,7 +39,6 @@ public class UserController {
 		String id = "id01";
 		uService.loadUserByUsername(id);
 		return null;
-		
 	}
 	
 	// 로그인 실패

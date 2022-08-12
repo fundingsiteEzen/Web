@@ -27,9 +27,9 @@
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-				      	<h3 class="mb-4 text-center">LOGIN</h3>
+				      	<h3 class="mb-4 text-center">회원가입</h3>
 				      	
-				      	<form action="${contextPath}/seculogin" class="signin-form" method="post"> <!-- 로그인하기 form -->
+				      	<form action="${contextPath}/register" class="signin-form" method="post"> <!-- 회원가입하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
 				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
@@ -37,34 +37,22 @@
 				      		<!-- 비밀번호 -->
 				            <div class="form-group">
 				            	<input type="password" id="pass" name="pass" class="form-control" placeholder="비밀번호" required>
-				            	<span toggle="#pass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				            </div>
-				            <!-- sign In 버튼 -->
+				            <!-- 비밀번호 확인 -->
 				            <div class="form-group">
-				            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+				            	<input type="password" id="pass_re" name="pass_re" class="form-control" placeholder="비밀번호를 한번 더 입력하세요" required>
 				            </div>
-				            
-				            <!-- Remember Me / Forgot Password -->
-				            <!-- 
-				            <div class="form-group d-md-flex">
-				            	<div class="w-50">
-					            	<label class="checkbox-wrap checkbox-primary">Remember Me
-										<input type="checkbox" checked>
-										<span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="w-50 text-md-right">
-									<a href="#" style="color: #fff">Forgot Password</a>
-								</div>
+				            <!-- 이메일 -->
+				      		<div class="form-group">
+				      			<input type="text" id="email" name="email" class="form-control" placeholder="이메일" required>
+				      		</div>
+				      		<!-- 줄 -->
+				      		<hr>
+				            <!-- sign UP 버튼 -->
+				            <div class="form-group">
+				            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign UP</button>
 				            </div>
-				             -->
 				        </form>
-				        
-				        <p class="w-100 text-center">&mdash; 회원가입하기 &mdash;</p>
-				         
-				        <div class="social d-flex text-center">
-				        	<a href="${contextPath}/register.do" class="px-2 py-2 mr-md-1 rounded"><span class="icon-logo-facebook mr-2"></span>Go Register</a>
-				        </div>
 				        
 		      		</div>
 				</div>
