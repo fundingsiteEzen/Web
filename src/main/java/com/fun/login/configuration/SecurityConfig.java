@@ -31,11 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		System.out.println("콘피규어 작동중");
 //		super.configure(http);
 		http
-			.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/myPage/myInfo").hasRole("USER")
-				.antMatchers("/manager.do").hasRole("ADMIN")
-				.and()
 			.formLogin()
 				.usernameParameter("id")
 				.passwordParameter("pass")
@@ -45,6 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl("/login.do")
 				.successHandler(new UserLoginSuccessHandler())
 				.failureHandler(new UserLoginFailHandler())
+			.and()
+				.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/myPage/myInfo").hasRole("USER")
+				.antMatchers("/manager.do").hasRole("ADMIN")
 			.and()
 				.logout()
 				.logoutUrl("/logout")
