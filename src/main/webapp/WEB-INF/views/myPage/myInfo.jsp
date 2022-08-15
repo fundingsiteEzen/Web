@@ -221,6 +221,16 @@ border: 1px solid rgb(230, 230, 230);
 background-color: rgb(255, 255, 255);
 color: rgb(109, 109, 109);
 }
+
+/* '회원정보 관리' fiedset */
+.userinfo {
+    display: none;
+}
+/* '내 펀딩 목록' fiedset */
+.myfunding {
+    display: block;
+}
+
 </style>
 
 </head>
@@ -230,17 +240,17 @@ color: rgb(109, 109, 109);
     <div class="wrap">
         <div class="my_lnb_wrap" id="myLnb">
             <div id="lnb" class="my_lnb" role="menu">
-                <a href="" role="menuitem" class="my_lnb_item" id="lnb_infor" aria-current="true">회원정보 관리</a>
-                <a href="" role="menuitem" class="my_lnb_item" id="lnb_pay" aria-current="true">결제정보 관리</a>
-                <a href="" role="menuitem" class="my_lnb_item" id="lnb_my_funding" aria-current="true">내 펀딩 목록</a>
-                <a href="" role="menuitem" class="my_lnb_item" id="lnb_project" aria-current="true">프로젝트 등록</a>
+                <a href="#" role="menuitem" class="my_lnb_item" id="lnb_infor" aria-current="true">회원정보 관리</a>
+                <a href="#" role="menuitem" class="my_lnb_item" id="lnb_pay" aria-current="true">결제정보 관리</a>
+                <a href="#" role="menuitem" class="my_lnb_item" id="lnb_my_funding" aria-current="true">내 펀딩 목록</a>
+                <a href="#" role="menuitem" class="my_lnb_item" id="lnb_project" aria-current="true">프로젝트 등록</a>
             </div>
         </div>
         <div class="c_header">
             <h2>회원 정보관리</h2>
             <p class="contxt">회원 비밀번호, 닉네임을 수정 하실 수 있습니다.</p>
         </div>
-        <fieldset>
+        <fieldset class="userinfo">
             <table class="tbl_model">
                 <colgroup>
                     <col style="width:22%;">
@@ -303,6 +313,26 @@ color: rgb(109, 109, 109);
                         onclick="clickcr(this,'prf.cancel','','',event);">취소</b></a>
             </div>
         </fieldset>
+        <fieldset class="myfunding">
+        	<h2>내 펀딩 목록</h2>
+        	<div class="fundList">
+        		<img>
+        		<h4>{}</h4>
+        	</div>
+        </fieldset>
     </div>
+
+    <script>
+    	// 회원정보관리
+        $("#lnb_infor").click(function() {
+            $(".userinfo").css("display", "block");
+            $(".myfunding").css("display", "none");
+        });
+    	// 내 펀딩목록
+        $("#lnb_my_funding").click(function() {
+            $(".userinfo").css("display", "none");
+            $(".myfunding").css("display", "block");
+        });
+    </script>
 </body>
 </html>

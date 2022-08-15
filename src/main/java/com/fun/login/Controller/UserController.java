@@ -12,13 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fun.login.service.UserService;
-import com.fun.subPage.dto.userinfoDTO;
+import com.fun.subPage.dto.newUserinfoDTO;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private UserService uService;
+	private UserService UserService;
 	
 //	@RequestMapping(value="/seculogin", method=RequestMethod.GET)
 //	public String seculogin() {
@@ -29,7 +29,7 @@ public class UserController {
 	
 	// 로그인
 	@RequestMapping(value="/seculogin", method=RequestMethod.POST)
-	public ModelAndView seculogin(@ModelAttribute("userinfo") userinfoDTO userinfo, RedirectAttributes rAttr, HttpServletRequest req,
+	public ModelAndView seculogin(@ModelAttribute("userinfo") newUserinfoDTO userinfo, RedirectAttributes rAttr, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
@@ -37,8 +37,16 @@ public class UserController {
 		System.out.println("브라우저에서 입력받은 비번 : " + userinfo.getPass());
 		
 		String id = "id01";
-		uService.loadUserByUsername(id);
+		UserService.loadUserByUsername(id);
 		return null;
+	}
+	
+	// 회원가입
+	@RequestMapping(value="/securegister", method=RequestMethod.POST)
+	public String register(newUserinfoDTO userinfo) throws Exception {
+		System.out.println("회원가입");
+		int register = UserService.register(userinfo);
+		return "/";
 	}
 	
 	// 로그인 실패

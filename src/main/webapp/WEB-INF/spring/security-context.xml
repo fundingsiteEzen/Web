@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 로그인 성공, 실패 핸들러 -->
+<bean id="UserLoginSuccessHandler" class="com.fun.login.service.UserLoginSuccessHandler"></bean>
+<bean id="UserLoginFailHandler" class="com.fun.login.service.UserLoginFailHandler"></bean>
+
+<security:http>
+	<security:intercept-url pattern="/resources/**" access="permitAll" />
+
+	<!-- 로그인된 상태에서 로그인화면에 접근 못하도록 함 -->
+	<!-- <security:intercept-url pattern="/login.do" access="isAnonymous()" />  -->
+
+	<!-- 관리자페이지는 관리자만 접근 허용 -->
+	<security:intercept-url pattern="/manager.do" access="hasRole('ROLE_ADMIN')" />
+	
+	<!-- 로그인 설정 -->
+	<security:form-login	
+		username-parameter="id" 
+		password-parameter="pass"
+		login-processing-url="/seculogin" 
+		login-page="/login.do"
+		default-target-url="/"
+		authentication-failure-handler-ref="UserLoginFailHandler"
+		authentication-success-handler-ref="UserLoginSuccessHandler" />
+	<!-- login-page가 커스텀 페이지로 이동하게 만드는 것 -->
+	
+	<!-- csrf 설정 끔 -->
+	<security:csrf disabled="true" />
+	
+</security:http>
+
+<security:authentication-manager>
+	<security:authentication-provider>
+			<security:user-service>
+                <security:user name="admin" password="{noop}123"
+                    authorities="ROLE_USER, ROLE_ADMIN" />
+                <security:user name="id01" password="{noop}1111" authorities="ROLE_USER" />
+            </security:user-service>
+		</security:authentication-provider>
+</security:authentication-manager>
+</beans>

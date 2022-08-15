@@ -6,7 +6,8 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/root-context.xml
+		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -52,14 +53,6 @@
 	<!-- 한글 설정 끝 -->
 	
 	
-	<!-- 스프링 시큐리티 필터 -->
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name> <!-- 필터 이름 바꾸면 안됨 -->
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern> <!-- 모든 url 패턴에 적용됨 -->
-	</filter-mapping>
+
 
 </web-app>
