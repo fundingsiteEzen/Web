@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorities("USER")
 			.and()
 			.withUser("admin")
-			.password("{noop}123")
+			.password("{noop}1234")
 			.authorities("ADMIN", "USER");
 	}
 
