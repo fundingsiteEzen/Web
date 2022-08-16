@@ -6,7 +6,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -625,10 +625,10 @@ margin-right: 10px;
                                             <span>등록 완료</span>
                                         </div>
                                     </button>
-                                    <button class="modalBtn">
-                                        <div class="cardBtnN">
+                                    <button class="modalBtn" id="cardBtnN">
+                                    
                                         <span>취 소</span>
-                                        </div>
+
                                     </button>
                                 </div>
                             </div>
@@ -673,10 +673,8 @@ margin-right: 10px;
                                             <span>등록 완료</span>
                                             </div>
                                         </button>
-                                        <button class="modalBtn">
-                                            <div class="cashBtnN">
+                                        <button class="modalBtn" id="cashBtnN">
                                             <span>취 소</span>
-                                            </div>
                                         </button>
                                     </fieldset>
                                 </div>
@@ -706,7 +704,7 @@ margin-right: 10px;
         $(".payBtnCard").eq(0).click(function(){
             $("#CardModal").fadeIn(200);
         });
-        $(".cardBtnN").click(function(){
+        $("#cardBtnN").click(function(){
             $("#CardModal").fadeOut(200);
         });
     
@@ -716,7 +714,7 @@ margin-right: 10px;
         $(".payBtnCash").eq(0).click(function(){
             $("#CashModal").fadeIn(200);
         });
-        $(".cashBtnN").click(function(){
+        $("#cashBtnN").click(function(){
             $("#CashModal").fadeOut(200);
         });
     </script>
