@@ -11,8 +11,8 @@ import com.fun.login.dao.UserDAO;
 import com.fun.login.vo.userDetailsVO;
 import com.fun.subPage.dto.newUserinfoDTO;
 
-@Service
-public class UserService implements UserDetailsService {
+@Service("userDetailsServiceCustom")
+public class UserDetailsServiceCustom implements UserDetailsService {
 
 	@Autowired
 	private UserDAO dao;

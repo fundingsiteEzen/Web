@@ -10,6 +10,7 @@
 	position:	sticky;	/* 메뉴바 상단 고정 */
 	top:		0;		/* 메뉴바 상단 0 */
 	z-index: 100;		/* 메뉴바가 최상위에 위치하도록함 */
+	height: 50px;
 	}
 </style>
 

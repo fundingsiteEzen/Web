@@ -61,6 +61,6 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern> <!-- 모든 url 패턴에 적용됨 -->
 	</filter-mapping>
-
+	
 
 </web-app>
