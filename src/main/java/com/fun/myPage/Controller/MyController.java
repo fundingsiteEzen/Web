@@ -12,7 +12,6 @@ public class MyController {
 	
 	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
 	public void projectList(Model model) throws Exception {
-		
 	
 	}
 	
