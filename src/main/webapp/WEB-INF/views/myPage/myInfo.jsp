@@ -560,7 +560,7 @@ margin-right: 10px;
                         <div class="payment">
                             <div class="payment_plus">결제수단 추가 </div>
                             <button class="payBtnCard" data-target="#CardModal" data-toggle="modal"> 신용/체크 카드 등록</button>
-                            <!--모달창-->
+                            <!--카드 모달창-->
                             <div class="modal" id="CardModal">
                                 <div class="inner">
                                     <div class="paymentCard">
@@ -634,7 +634,7 @@ margin-right: 10px;
                             </div>
                         </div>
                         <button class="payBtnCash" data-target="#CashModal" data-toggle="modal">은행계좌 등록</button>
-                        <!--모달창-->
+                        <!--계좌 모달창-->
                         <div class="modal" id="CashModal">
                             <div class="inner">
                                 <div class="paymentCash">
@@ -685,6 +685,7 @@ margin-right: 10px;
                     </td>
                 </tr>
             </table>
+            <!-- 적용, 취소 버튼 -->
             <div class="btn_wrap">
                 <a href="javascript:;" class="btn_model"><b id="btnConfirm" class="btn2 txt_disable"
                         onclick="clickcr(this,'prf.apply','','',event);">적용</b></a>
