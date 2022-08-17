@@ -78,7 +78,7 @@
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
 	
-	<div class="container">
+	<div class="container w-100">
 		<!-- 메인정보 div -->
 		<div class="row">
 			<!-- 프로젝트 이름 부분 -->
@@ -88,7 +88,7 @@
 			
 			<!-- 메인 정보 section -->
 			<section class="main">
-		        <div class="container">
+		        <div class="container w-100">
 		            <div class="row" >
 		            	<!-- 이미지 슬라이더 -->
 		                <div class="col-sm-8">
@@ -228,7 +228,7 @@
 						</div>
 					</div>
 				</div>
-			</section> 
+			</section>
 		</div>
 		
 	</div> <!-- 최상위 container -->
@@ -244,5 +244,6 @@
   			alert("후원 완료");
   		}
   	</script>
+  	
 </body>
 </html>
