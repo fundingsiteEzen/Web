@@ -232,6 +232,7 @@
 		</div>
 		
 	</div> <!-- 최상위 container -->
+	<jsp:include page="../menu/footer.jsp" flush="false" />
 	
 	<script src="js/jquery.min.js"></script>
   	<script src="js/popper.js"></script>
