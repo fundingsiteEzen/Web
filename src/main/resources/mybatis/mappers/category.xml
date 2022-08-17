@@ -4,9 +4,6 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fun.category">
-
-	<!-- 카테고리별 추출 -->
-	
 	<!-- 봄 게시글 목록 추출하기 -->
 	<select id="spring_categoryList" resultType="com.fun.category.dto.CategoryDTO">
 		<![CDATA[
@@ -15,6 +12,7 @@
 		WHERE	p_category='spring'
 		]]>
 	</select>
+	
 	<!-- 여름 게시글 목록 추출하기 -->
 	<select id="summer_categoryList" resultType="com.fun.category.dto.CategoryDTO">
 		<![CDATA[
@@ -23,6 +21,7 @@
 		WHERE	p_category='summer'
 		]]>
 	</select>
+	
 	<!-- 가을 게시글 목록 추출하기 -->
 	<select id="autumn_categoryList" resultType="com.fun.category.dto.CategoryDTO">
 		<![CDATA[
@@ -31,6 +30,7 @@
 		WHERE	p_category='autumn'
 		]]>
 	</select>
+	
 	<!-- 겨울 게시글 목록 추출하기 -->
 	<select id="winter_categoryList" resultType="com.fun.category.dto.CategoryDTO">
 		<![CDATA[
@@ -39,72 +39,5 @@
 		WHERE	p_category='winter'
 		]]>
 	</select>
-	
-	<!-- 메인 추출 -->
-	
-	<!-- 최다 펀딩 목록 추출-->
-	
-	<!-- 최신 등록 프로젝트 목록 추출 -->
-	
-	<!-- 게시글 전체 목록 추출하기 -->
-	<!-- <select id="listAll" resultType="com.edu.subPage.dto.projectDTO">
-		<![CDATA[
-		SELECT	id, p_seq, p_name, p_beginDate, p_endDate, p_payDate, p_content, p_ing, p_backer, p_goal
-		FROM	project
-		]]>
-	</select>
-	
-	제일 큰 게시글 번호 추출하기
-	<select id="maxSeq" resultType="java.lang.Integer">
-		<![CDATA[
-		SELECT	MAX(seq)
-		FROM	board
-		]]>
-	</select>
-	
-	게시글 등록하기
-	<insert id="register" parameterType="com.edu.board.dto.BoardDTO">
-		<![CDATA[
-		INSERT INTO board
-				(seq,		subject,	content,	name,		reg_date,		readcount)
-		VALUES	(#{seq},	#{subject},	#{content},	#{name},	#{reg_date},	0)
-		]]>
-	</insert>
-	
-	게시글 번호에 해당하는 게시글의 조회수 증가시키기
-	<update id="updateReadCount" parameterType="int">
-		<![CDATA[
-		UPDATE	board
-		SET		readcount = readcount + 1
-		WHERE	seq = #{seq}
-		]]>
-	</update>
-	
-	게시글 번호에 해당하는 게시글 정보 추출하기
-	<select id="detail" parameterType="int" resultType="com.edu.board.dto.BoardDTO">
-		<![CDATA[
-		SELECT	seq, subject, content, name, reg_date, readcount
-		FROM	board
-		WHERE	seq = #{seq}
-		]]>
-	</select>
-	
-	게시글 번호에 해당하는 게시글 정보(제목, 글쓴이, 내용)를 수정하기
-	<update id="update" parameterType="com.edu.board.dto.BoardDTO">
-		<![CDATA[
-		UPDATE	board
-		SET		subject = #{subject}, name = #{name}, content = #{content}
-		WHERE	seq = #{seq}
-		]]>
-	</update>
-	
-	게시글 번호에 해당하는 게시글 삭제하기
-	<delete id="delete" parameterType="int">
-		<![CDATA[
-		DELETE	FROM	board
-		WHERE	seq = #{seq}
-		]]>
-	</delete>
-	 -->
 
 </mapper>
