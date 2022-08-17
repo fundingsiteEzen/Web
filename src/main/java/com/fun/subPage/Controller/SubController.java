@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
@@ -24,6 +25,7 @@ public class SubController {
 	subService sService;
 
 	
+	// main에서 상세페이지로 이동
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public void projectList(Model model,  HttpServletRequest req) throws Exception {
 		
@@ -70,5 +72,9 @@ public class SubController {
 		model.addAttribute("creator", Cdto);
 		
 	}
+	
+	
+	// 후원 완료 한 후 마이페이지로 이동하기
+
 	
 }

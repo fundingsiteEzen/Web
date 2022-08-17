@@ -29,7 +29,7 @@
 					<div class="login-wrap p-0">
 				      	<h3 class="mb-4 text-center">회원가입</h3>
 				      	
-				      	<form action="${contextPath}/register" class="signin-form" method="post"> <!-- 회원가입하기 form -->
+				      	<form action="${contextPath}/securegister" class="signin-form" method="post"> <!-- 회원가입하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
 				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
