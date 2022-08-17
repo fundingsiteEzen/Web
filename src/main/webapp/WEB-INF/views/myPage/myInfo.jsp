@@ -23,7 +23,9 @@
 .c_header {
 padding-bottom: 43px;
 }
-
+.wrap {
+overflow : scroll;
+}
 .my_lnb_item[aria-current=true] {
 font-weight: 700;
 color: #202020;
@@ -94,7 +96,6 @@ color: #565656;
 font-size: 0;
 line-height: 0;
 position: relative;
-overflow: hidden;
 margin-left: -8px;
 padding: 13px 0 5px;
 color: #666;
@@ -122,15 +123,17 @@ padding: 20px 0 10px 30px;
 
 .tbl_model+.btn_wrap {
 margin-top: 30px;
+
 }
 
 .btn_wrap {
-overflow: hidden;
 text-align: center;
+
 }
 
 .btn_wrap .btn_model {
 margin: 0 2px;
+
 }
 
 .btn_model {
@@ -139,11 +142,13 @@ line-height: 14px;
 display: inline-block;
 vertical-align: top;
 text-decoration: none !important;
+  
 }
 
 .btn_model {
 border: 1px solid #bfbfbf;
 background: #fff;
+
 }
 
 .btn_model .btn1,
@@ -153,7 +158,7 @@ min-width: 52px;
 min-height: 21px;
 line-height: 15px;
 padding: 8px 18px;
-color: #a3a3a3;
+  color: #333;
 box-sizing: border-box;
 }
 
@@ -161,11 +166,62 @@ box-sizing: border-box;
 .btn_model>em,
 .btn_model>span {
 display: inline-block;
-overflow: hidden;
 text-align: center;
 vertical-align: top;
 letter-spacing: -1px;
 }
+.profile_photo .mask {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url(https://static.nid.naver.com/images/web/user/img_bg_profile_thumb.png) 0 0;
+}
+.profile_photo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.btn_file input[type=file] {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+.btn_file label .btn2 {
+    color: #333;
+}
+.btn_file label {
+    display: inline-block;
+    width: 77px;
+    height: 33px;
+    cursor: pointer;
+}
+.profile_photo+.btn_area_btm {
+    overflow: visible;
+    position: relative;
+    height: 33px;
+    padding-top: 21px;
+}
+.btn_file {
+    position: relative;
+    display: inline-block;
+    float: left;
+    margin-left: 8px;
+}
+.tbl_model .btn_area_btm a {
+    float: left;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+
 
 .payment_plus {
 font-weight: bold;
@@ -210,7 +266,6 @@ align-items: center;
 -webkit-box-pack: center;
 justify-content: center;
 height: 52px;
-white-space: nowrap;
 border-radius: 1px;
 margin: 0px;
 outline: 0px;
@@ -229,7 +284,6 @@ align-items: center;
 -webkit-box-pack: center;
 justify-content: center;
 height: 52px;
-white-space: nowrap;
 border-radius: 1px;
 margin: 0px;
 outline: 0px;
@@ -263,12 +317,7 @@ margin-bottom: -10px;
     left: 50%; 
     top: 50%; 
     transform: translate(-50%, -55%); 
-    overflow: scroll;
 }
-
-
-
-
 .cardSubT {
     color: rgb(61, 61, 61);
     margin: 0px 0px 10px;
@@ -386,7 +435,6 @@ margin-bottom: -10px;
     -webkit-box-pack: center;
     justify-content: center;
     height: 52px;
-    white-space: nowrap;
     border-radius: 1px;
     margin: 0px;
     border: 1px solid rgb(230, 230, 230);
@@ -472,7 +520,6 @@ padding: 38px 0px 0px;
     appearance: none !important;
     opacity: 0.8;
 }
-
 .paymentCash {
 margin-left: 10px;
 margin-right: 10px;
@@ -485,6 +532,7 @@ margin-right: 10px;
 .myfunding {
     display: block;
 }
+
 
 </style>
 
@@ -512,6 +560,7 @@ margin-right: 10px;
                     <col style="width:22%;">
                     <col>
                 </colgroup>
+                <!--비밀번호-->
                 <tr>
                     <th scope="row">
                         <div class="thcell">
@@ -530,6 +579,7 @@ margin-right: 10px;
                         </div>
                     </td>
                 </tr>
+                <!--닉네임-->
                 <tr>
                     <th scope="row">
                         <div class="thcell">
@@ -544,6 +594,27 @@ margin-right: 10px;
                                 <input type="text" name="nickname" id="inpNickname" style="width:254px"
                                     placeholder="닉네임" required>
                             </p>
+                        </div>
+                    </td>
+                </tr>
+                <!--프로필 사진-->
+                <tr>
+                    <th scope="row">
+                        <div class="thcell">프로필 사진</div>
+                    </th>
+                    <td>
+                        <div class="tdcell">
+                            <div class="profile_photo">
+                                <img id="imgThumb" src="https://static.nid.naver.com/images/web/user/default.png?type=s160" width="100" height="100">
+                                <span class="mask"></span>
+                            </div>
+                            <div class="btn_area_btm">
+                                <span class="btn_file">
+                                    <label for="inputImage" class="btn_model"><b id="btnChangeProfile" class="btn2">사진변경</b></label>
+                                    <input type="file" id="inputImage" name="profileImage" accept="image/*">
+                                </span>
+                                <a href="javascript:;" class="btn_model"><b id="btnDelete" class="btn2 btn_disable">삭제</b></a>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -628,7 +699,6 @@ margin-right: 10px;
                                     <button class="modalBtn" id="cardBtnN">
                                     
                                         <span>취 소</span>
-
                                     </button>
                                 </div>
                             </div>
