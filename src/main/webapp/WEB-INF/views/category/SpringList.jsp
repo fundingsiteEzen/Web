@@ -24,7 +24,6 @@
 		display:			inline-block;
 		height:				300px;
 		width:				250px;
-		border: 			1px solid black;
 		}
 		
 	</style>
@@ -49,7 +48,7 @@
 		<!-- 고유번호(seq)페이지로 이동 -->
 		<div align="center" id="category" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';" style="cursor:pointer;">
 			<div style="overflow: hidden; height:80%">
-				<img class="img-responsive center-block" src="${contextPath}/images/fundingImage/${list.p_thumnail_img}" height="100%"/>
+				<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
 			</div>
 			<div>
 				<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
