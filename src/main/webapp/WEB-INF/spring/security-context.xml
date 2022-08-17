@@ -13,7 +13,7 @@
 	<security:intercept-url pattern="/resources/**" access="permitAll" />
 
 	<!-- 로그인된 상태에서 로그인화면에 접근 못하도록 함 -->
-	<!-- <security:intercept-url pattern="/login.do" access="isAnonymous()" />  -->
+	<!-- <security:intercept-url pattern="/login.do" access="isAnonymous()" /> -->
 
 	<!-- 관리자페이지는 관리자만 접근 허용 -->
 	<security:intercept-url pattern="/manager.do" access="hasRole('ROLE_ADMIN')" />
