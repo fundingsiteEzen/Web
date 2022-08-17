@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fun.login.service.UserService;
+import com.fun.login.service.UserDetailsServiceCustom;
 import com.fun.subPage.dto.newUserinfoDTO;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private UserService UserService;
+	private UserDetailsServiceCustom userService;
 	
 //	@RequestMapping(value="/seculogin", method=RequestMethod.GET)
 //	public String seculogin() {
@@ -36,17 +36,21 @@ public class UserController {
 		System.out.println("브라우저에서 입력받은 아이디 : " + userinfo.getId());
 		System.out.println("브라우저에서 입력받은 비번 : " + userinfo.getPass());
 		
-		String id = "id01";
-		UserService.loadUserByUsername(id);
-		return null;
+		String id = userinfo.getId();
+		userService.loadUserByUsername(id);
+		
+		mav.addObject("userinfo", userinfo);
+		mav.setViewName("redirect:/");
+		
+		return mav;
 	}
 	
 	// 회원가입
 	@RequestMapping(value="/securegister", method=RequestMethod.POST)
 	public String register(newUserinfoDTO userinfo) throws Exception {
 		System.out.println("회원가입");
-		int register = UserService.register(userinfo);
-		return "/";
+		int register = userService.register(userinfo);
+		return "redirect:/";
 	}
 	
 	// 로그인 실패
