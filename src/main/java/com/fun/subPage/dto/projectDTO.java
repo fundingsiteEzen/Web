@@ -15,6 +15,11 @@ public class projectDTO {
 	private char p_ing; // 'Y' : 펀딩중, 'N' : 펀딩 종료
 	private int p_backer; // 총 후원 인원
 	private long p_goal; // 목표 금액
+	private String p_thumnail_img;
+	private String p_Sub_img1;
+	private String p_Sub_img2;
+	private String p_Sub_img3;
+	private long p_total; // 총 후원 금액
 	
 	
 	// get/set 메서드
@@ -84,14 +89,45 @@ public class projectDTO {
 	public void setP_goal(long p_goal) {
 		this.p_goal = p_goal;
 	}
+	public String getP_thumnail_img() {
+		return p_thumnail_img;
+	}
+	public void setP_thumnail_img(String p_thumnail_img) {
+		this.p_thumnail_img = p_thumnail_img;
+	}
+	public String getP_Sub_img1() {
+		return p_Sub_img1;
+	}
+	public void setP_Sub_img1(String p_Sub_img1) {
+		this.p_Sub_img1 = p_Sub_img1;
+	}
+	public String getP_Sub_img2() {
+		return p_Sub_img2;
+	}
+	public void setP_Sub_img2(String p_Sub_img2) {
+		this.p_Sub_img2 = p_Sub_img2;
+	}
+	public String getP_Sub_img3() {
+		return p_Sub_img3;
+	}
+	public void setP_Sub_img3(String p_Sub_img3) {
+		this.p_Sub_img3 = p_Sub_img3;
+	}
+	public long getP_total() {
+		return p_total;
+	}
+	public void setP_total(long p_total) {
+		this.p_total = p_total;
+	}
 	
 	
 	// toString
 	@Override
 	public String toString() {
-		return "CategoryDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_category=" + p_category
+		return "projectDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_category=" + p_category
 				+ ", p_beginDate=" + p_beginDate + ", p_endDate=" + p_endDate + ", p_payDate=" + p_payDate
-				+ ", content=" + content + ", p_ing=" + p_ing + ", p_backer=" + p_backer + ", p_goal=" + p_goal + "]";
+				+ ", content=" + content + ", p_ing=" + p_ing + ", p_backer=" + p_backer + ", p_goal=" + p_goal
+				+ ", p_thumnail_img=" + p_thumnail_img + ", p_Sub_img1=" + p_Sub_img1 + ", p_Sub_img2=" + p_Sub_img2
+				+ ", p_Sub_img3=" + p_Sub_img3 + ", p_total=" + p_total + "]";
 	}
-	
 }
