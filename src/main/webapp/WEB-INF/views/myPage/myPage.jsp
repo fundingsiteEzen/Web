@@ -27,7 +27,7 @@
         .main-back {
         }
         .main {
-            height: 800px;
+            height: 600px;
             background-color: #fff;
         }
 
