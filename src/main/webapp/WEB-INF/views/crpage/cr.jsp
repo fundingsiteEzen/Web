@@ -71,15 +71,34 @@
                     			<div class="form_section_content">
                     				<input name="reward" value="0">
                     			</div>
-                    		</div>               
+                    		</div> 
+                    		<div class="form_section">
+                    			<div class="form_section_title">
+                    				<label>목표금액</label>
+                    			</div>
+                    			<div class="form_section_content">
+                    				<input name="TargetAmount" value="0">
+                    			</div>
+                    		</div>                          
                     		<div class="form_section">
                     			<div class="form_section_title">
                     				<label>프로젝트 기간</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="projectPeriod">
+                    				프로젝트 시작일<input name="projectPeriod">
+                    			</div>
+                    			<div class="form_section_content">
+                    				프로젝트 종료일<input name="projectPeriod">
                     			</div>
                     		</div> 
+                    		<div class="form_section">
+                    			<div class="form_section_title">
+                    				<label>결제 예정일</label>
+                    			</div>
+                    			<div class="form_section_content">
+                    				<input name="paymentScheduledDate" value="0">
+                    			</div>
+                    		</div>               
                     		<div class="form_section">
                     			<div class="form_section_title">
                     				<label>메인이미지</label>
