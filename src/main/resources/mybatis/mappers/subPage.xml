@@ -31,5 +31,19 @@
 		]]>
 	</select>
 	
+	<!-- (4) 후원자 테이블에 저장하기 -->
+	<insert id="backProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		INSERT INTO backer
+		VALUES (#{id}, #{p_seq}, #{r_seq}, #{is_like})
+		]]>
+	</insert>
+	
+	<!-- 후원자 테이블 가져오기 -->
+	<select id="getBacker" resultType="com.fun.myPage.dto.backerDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM backer WHERE id=#{id}
+		]]>
+	</select>
 
 </mapper>

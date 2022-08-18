@@ -154,10 +154,12 @@
 									<span>목표금액 ${project.p_goal} 원</span><br>
 									<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
 									<span>결제예정일 ${project.p_payDate}</span><br>
-									<!-- 리스트 추가버튼 -->
-									<button class="btn btn-primary" onclick="addList()">리스트에 추가</button>
-									<!-- 후원버튼 -->
-									<button class="btn btn-info" onclick="BACK()">후원하기</button>
+									<form>
+										<!-- 리스트 추가버튼 -->
+										<button type="button" class="btn btn-primary" onclick="addList(${project.p_seq}, 'Y')">리스트에 추가</button>
+										<!-- 후원버튼 -->
+										<button type="button" class="btn btn-info" onclick="BACK(${project.p_seq}, 'N')">후원하기</button>
+									</form>
 								</div>
 		                    </div>
 		                </div>
@@ -241,8 +243,31 @@
   	
   	<!-- 커스텀 스크립트 -->
   	<script>
-  		function BACK() {
-  			alert("후원 완료");
+  		function insert(p_seq, is_like) {
+  			$.ajax({
+  				type: "POST",
+  				url: "/subPage/back.do",
+  				data: {p_seq:p_seq, is_like:is_like},
+  				success: function(data) {
+  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
+  					if(data == 'Y'){
+  						location.href = "redirect:/subPage/detail";
+  						}
+  					},
+  				error: function(data) {alert('문제가 발생했습니다');}
+  			});
+  		}
+  		// 후원하기 버튼
+  		function BACK(p_seq, is_like) {
+  			if(confirm("후원하시겠습니까 ?")){
+	  			insert(p_seq, is_like);
+  			}
+  			alert("후원이 완료되었습니다");
+  		}
+  		// 관심목록 버튼
+  		function addList(p_seq, is_like) {
+  			insert(p_seq, is_like);
+  			alert("관심 목록에 추가되었습니다");
   		}
   	</script>
   	
