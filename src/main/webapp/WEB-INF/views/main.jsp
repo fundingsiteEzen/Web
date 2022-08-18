@@ -31,7 +31,7 @@
 	    .wrap {
 	        background-image: url("${contextPath}/images/MAIN_img/spring.png");
 	        background-attachment: fixed;
-	        transition: 0.4s; }
+	        transition: 0.4s;}
 	    .main {background-color: #fff; margin-top: 100px;}
 	
 	    .season_bar {
@@ -61,15 +61,11 @@
 		
 		/* 프로젝트 목록 */
 		.category {
-		margin:				10px;
-		display:			inline-block;
-		height:				300px;
-		width:				250px;
+		height:	300px;
 		cursor: pointer;
+		margin-bottom: 40px;
 		}
 		
-		/* 계졀별 div */
-		#div_summer, #div_autumn, #div_winter {display: none;}
 	</style>
 </head>
 
@@ -94,11 +90,11 @@
                         </ul>
                     </div>
                 </div>
-                <div class="filter">
+                <div class="row filter">
 	                <!-- 봄 -->
 	                <c:forEach items="${SpringList}" var="list" varStatus="status">
 						<!-- 고유번호(seq)페이지로 이동 -->
-						<div align="center" class="category p_spring" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+						<div align="center" class="col-sm-3 category p_spring" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
 								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
 							</div>
@@ -110,7 +106,7 @@
 	                <!-- 봄 끝 -->
 	                <!-- 여름 -->
 	                <c:forEach items="${SummerList}" var="list" varStatus="status">
-						<div align="center" class="category p_summer" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+						<div align="center" class="col-sm-3 category p_summer" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
 								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
 							</div>
@@ -122,7 +118,7 @@
 					<!-- 여름 끝 -->
 					<!-- 가을 -->
 					<c:forEach items="${AutumnList}" var="list" varStatus="status">
-						<div align="center" class="category p_autumn" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+						<div align="center" class="col-sm-3 category p_autumn" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
 								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
 							</div>
@@ -135,7 +131,7 @@
 					<!-- 겨울 -->
 					<c:forEach items="${WinterList}" var="list" varStatus="status">
 						<!-- 고유번호(seq)페이지로 이동 -->
-						<div align="center" class="category p_winter" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+						<div align="center" class="col-sm-3 category p_winter" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
 								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
 							</div>
@@ -149,18 +145,15 @@
             </div>
         </div>
     </div>
+                <jsp:include page="menu/footer.jsp" flush="false"></jsp:include>
 
 	<!-- 스크립트 -->
     <script>
 	    $(".spring").click(function() {
 	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/spring.png')");
-	        $("#div_spring").css("display", "block");
 	    });
 	    $(".summer").click(function() {
 	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/summer01.png')");
-	        $("#div_spring").css("display", "none");
-	        $("#div_summer").css("display", "block");
-	        // $(".wrap").css("background-size", "1500px 1000px");
 	    });
 	    $(".autumn").click(function() {
 	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/autumn.png')");

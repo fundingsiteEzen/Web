@@ -526,10 +526,6 @@ margin-right: 10px;
 }
 /* '회원정보 관리' fiedset */
 .userinfo {
-    display: none;
-}
-/* '내 펀딩 목록' fiedset */
-.myfunding {
     display: block;
 }
 
@@ -547,8 +543,6 @@ margin-right: 10px;
             <div id="lnb" class="my_lnb" role="menu">
                 <a href="#" role="menuitem" class="my_lnb_item" id="lnb_infor" aria-current="true">회원정보 관리</a>
                 <a href="#" role="menuitem" class="my_lnb_item" id="lnb_pay" aria-current="true">결제정보 관리</a>
-                <a href="#" role="menuitem" class="my_lnb_item" id="lnb_my_funding" aria-current="true">내 펀딩 목록</a>
-                <a href="#" role="menuitem" class="my_lnb_item" id="lnb_project" aria-current="true">프로젝트 등록</a>
             </div>
         </div>
         <div class="c_header">
@@ -761,13 +755,6 @@ margin-right: 10px;
                         onclick="clickcr(this,'prf.cancel','','',event);">취소</b></a>
             </div>
         </fieldset>
-        <fieldset class="myfunding">
-        	<h2>내 펀딩 목록</h2>
-        	<div class="fundList">
-        		<img>
-        		<h4>{}</h4>
-        	</div>
-        </fieldset>
     </div>
     <!--신용카드 모달창-->
     <script>
@@ -808,7 +795,7 @@ margin-right: 10px;
            });
         });
         </script>
-        <script>
+        <!-- <script>
             // 회원정보관리
             $("#lnb_infor").click(function() {
                 $(".userinfo").css("display", "block");
@@ -819,6 +806,6 @@ margin-right: 10px;
                 $(".userinfo").css("display", "none");
                 $(".myfunding").css("display", "block");
             });
-        </script>
+        </script>  -->
 </body>
 </html>

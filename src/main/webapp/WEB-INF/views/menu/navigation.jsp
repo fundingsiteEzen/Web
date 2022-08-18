@@ -28,7 +28,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/crpage/cr">판매등록페이지</a></li>
-        <li><a href="/myPage/myInfo">마이페이지</a></li>
+        <li><a href="/myPage/myInfo">회원정보 관리</a></li>
+        <li><a href="/myPage/myPage">마이페이지</a></li>
         <li><a href="/login.do">로그인</a></li>
       </ul>
     </div>
