@@ -12,7 +12,9 @@ public class MyController {
 	
 	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
 	public void projectList(Model model) throws Exception {
-	
 	}
+	
+	@RequestMapping(value="/myPage", method=RequestMethod.GET)
+	public void mypage(Model model) throws Exception {}
 	
 }
