@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.fun.myPage.dto.backerDTO;
 import com.fun.subPage.dao.subDAO;
 import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
@@ -42,5 +43,24 @@ public class subService implements subServiceIfc {
 		
 		return dao.creatorList(id);
 	}
+
+	// (4) 후원자 테이블에 저장하기
+	@Override
+	public int back_this(backerDTO dto) throws Exception {
+		
+		System.out.println("서브 Service (4) 실행");
+		
+		return dao.back_this(dto);
+	}
+	
+	// 중복검사
+	public int check_back(backerDTO dto) throws Exception {
+		
+		System.out.println("서비스 중복검사");
+		
+		return dao.check_back(dto);
+	}
+	
+	
 	
 }

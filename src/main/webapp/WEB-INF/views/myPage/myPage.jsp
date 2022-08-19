@@ -119,13 +119,16 @@
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">
 						<c:forEach items="${backList}" var="list" varStatus="status">
-						<div align="center" class="col-sm-4" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+						<div class="col-sm-4">
+							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+								<div style="overflow: hidden; height:80%">
+									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+								</div>
+								<div>
+									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								</div>
 							</div>
-							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-							</div>
+							<button onclick="deleteProject(${backer.p_seq})">삭제</button>
 						</div>
 						</c:forEach>
                     </section>
@@ -178,5 +181,15 @@
     });
 	</script>
 	
+	<!-- 삭제버튼 -->
+
+	<script>
+	function deleteProject(seq) {
+		var chk = confirm("정말 삭제하시겠습니까?");
+		if (chk) {
+			location.href='myPage';
+		}
+	}	
+</script>
 </body>
 </html>

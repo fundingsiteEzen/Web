@@ -31,5 +31,21 @@
 		]]>
 	</select>
 	
+	<!-- (4) 후원자 테이블에 저장하기 -->
+	<insert id="backProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		INSERT INTO backer
+		VALUES (#{id}, #{p_seq}, #{r_seq}, #{is_like})
+		]]>
+	</insert>
+	
+	<!-- (5) 후원중인지 중복 체크 -->
+	<select id="getBacker" parameterType="com.fun.myPage.dto.backerDTO" resultType="int" >
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM backer
+		WHERE p_seq=#{p_seq} and is_like=#{is_like}
+		]]>
+	</select>
 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fun.myPage.dao.myDAO;
@@ -15,6 +16,8 @@ public class myServiceImpl implements mySerivce {
 
 	@Autowired
 	myDAO dao;
+	
+	
 	
 	// (1) 정보 가져오기
 	public List<backerDTO> getBacker(String id) throws Exception {
@@ -58,6 +61,15 @@ public class myServiceImpl implements mySerivce {
 	
 		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
 		return pList;
+	}
+
+	// (4) 후원 취소
+	@Override
+	public int deleteProject(String p_seq) throws Exception {
+		
+		System.out.println("마이 서비스 (4) 실행");
+		
+		return dao.deleteProject(p_seq);
 	}
 	
 }

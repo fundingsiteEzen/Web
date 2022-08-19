@@ -11,8 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fun.myPage.dto.backerDTO;
 import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
 import com.fun.subPage.service.subService;
@@ -28,8 +29,6 @@ public class SubController {
 	// main에서 상세페이지로 이동
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public void projectList(Model model,  HttpServletRequest req) throws Exception {
-		
-		System.out.println("서브 컨트롤러 (1) 실행 ");
 		
 		// 1. project 테이블 가져오기
 		// 이전화면에서 p_seq 값을 받아옴
@@ -73,6 +72,42 @@ public class SubController {
 		
 	}
 	
+	
+	// 후원or관심 버튼 누를시 동작
+	@ResponseBody
+	@RequestMapping(value="/back.do", method=RequestMethod.POST)
+	public String back_this(Model model, HttpServletRequest req) throws Exception {
+		
+		System.out.println("서브 컨트롤러(2) 실행");
+		
+		// 해당 프로젝트의 p_seq값 받아옴
+		String p_seq = req.getParameter("p_seq");
+		
+		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러
+		String result = null;
+		
+		backerDTO dto = new backerDTO();
+		dto.setId("user1"); // !!!!! 아이디 임시로 고정해둠
+		dto.setP_seq(Integer.parseInt(p_seq));
+		dto.setIs_like(req.getParameter("is_like").charAt(0));
+		
+		// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
+		if(sService.check_back(dto) == 0) { // 중복 값이 없는 경우
+			// DB에 등록이 성공한 경우
+			if(sService.back_this(dto) == 1) {
+				System.out.println("등록성공");
+				result = "Y";
+			} // 등록에 실패한 경우
+			else {
+				System.out.println("등록실패");
+				result = "N";
+			}
+		} else { 
+			System.out.println("중복");
+			result="D"; } // 중복 값이 있는 경우
+		
+		return result;
+	}
 	
 	// 후원 완료 한 후 마이페이지로 이동하기
 
