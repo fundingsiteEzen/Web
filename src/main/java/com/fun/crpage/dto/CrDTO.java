@@ -1,8 +1,8 @@
-package com.fun.category.dto;
+package com.fun.crpage.dto;
 
 import java.sql.Date;
 
-public class CategoryDTO {
+public class CrDTO {
 
 	private String 	id; 			// user아이디
 	private int 	p_seq; 			// 프로젝트 고유번호
@@ -119,5 +119,4 @@ public class CategoryDTO {
 				+ ", p_thumnail_img=" + p_thumnail_img + ", p_Sub_img1=" + p_Sub_img1 + ", p_Sub_img2=" + p_Sub_img2
 				+ ", p_Sub_img3=" + p_Sub_img3 + "]";
 	}
-	
-} // End -public class CategoryDTO
+}
