@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.service.mySerivce;
@@ -38,11 +41,24 @@ public class MyController {
 		model.addAttribute("backList", project_BACK);
 		model.addAttribute("likeList", project_LIKE);
 		
+		
 	}
 	
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
 	public void projectList(Model model) throws Exception {
 	}
+	
+	// 삭제
+	@ResponseBody
+	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
+	public String deleteProject() throws Exception {
+		
+		String p_seq = "223";
+		mService.deleteProject(p_seq);
+		
+		return "";
+	}
+	
 	
 }

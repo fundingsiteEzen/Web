@@ -128,7 +128,7 @@
 									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
 								</div>
 							</div>
-							<button onclick="deleteList()">삭제</button>
+							<button onclick="deleteProject(${backer.p_seq})">삭제</button>
 						</div>
 						</c:forEach>
                     </section>
@@ -182,10 +182,14 @@
 	</script>
 	
 	<!-- 삭제버튼 -->
+
 	<script>
-		function deleteList() {
-			alert("삭제");
+	function deleteProject(seq) {
+		var chk = confirm("정말 삭제하시겠습니까?");
+		if (chk) {
+			location.href='myPage';
 		}
-	</script>	
+	}	
+</script>
 </body>
 </html>

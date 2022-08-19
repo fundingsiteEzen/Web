@@ -16,4 +16,7 @@ public interface myDAO {
 	// (1)-3 프로젝트 테이블 가져오기(관심목록)
 	public projectDTO getProject_like(String p_seq) throws Exception;
 	
+	// (1)-4 프로젝트 테이블 가져오기(후원취소)
+	public int deleteProject(String p_seq) throws Exception;
+	
 }
