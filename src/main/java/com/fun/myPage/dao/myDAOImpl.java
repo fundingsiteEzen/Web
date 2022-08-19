@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.fun.myPage.dto.backerDTO;
@@ -34,5 +35,13 @@ public class myDAOImpl implements myDAO{
 		
 		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
 	}
-	
+
+	// (1)-4 프로젝트 테이블 가져오기(후원삭제)
+	@Override
+	public int deleteProject(String p_seq) throws Exception {
+		
+		return sqlsession.delete(namespace + ".deleteProject", p_seq);
+	}
+
+
 }
