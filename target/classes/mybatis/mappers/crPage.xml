@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fun.crpage">
+
+	<!-- 프로젝트 내용 입력 -->
+	<insert id="register" parameterType="com.fun.crpage.dto.CrDTO">
+		<![CDATA[
+	 	INSERT INTO 
+	 	PROJECT	(
+	 	p_seq, p_name, id, p_category, p_beginDate, p_endDate, p_payDate
+	 	, p_content, p_goal
+	 	)
+	 	VALUES	(
+	 	project_seq.nextval, #{p_name}, #{id}, #{p_category}, sysdate, #{p_endDate}, #{p_payDate}
+	 	, #{p_content}, #{p_goal}
+	 	)
+		]]>
+	</insert>
+	
+</mapper>
