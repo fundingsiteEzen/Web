@@ -243,7 +243,7 @@
   	
   	<!-- 커스텀 스크립트 -->
   	<script>
-  		function insert(p_seq, is_like) {
+  		function insert(p_seq, is_like, mode) {
   			$.ajax({
   				type: "POST",
   				url: "/subPage/back.do",
@@ -252,22 +252,27 @@
   					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
   					if(data == 'Y'){
   						location.href = "redirect:/subPage/detail";
-  						}
-  					},
+  						if(mode == 1) {alert("후원이 완료되었습니다");}
+  						else {alert("관심 목록에 추가되었습니다");}
+  					}
+  					if(data == 'D') {
+  						alert("이미 후원중인 프로젝트입니다");
+  					}
+  				},
   				error: function(data) {alert('문제가 발생했습니다');}
   			});
   		}
   		// 후원하기 버튼
   		function BACK(p_seq, is_like) {
   			if(confirm("후원하시겠습니까 ?")){
-	  			insert(p_seq, is_like);
+	  			insert(p_seq, is_like, 1);
+	  			//alert("후원이 완료되었습니다");
   			}
-  			alert("후원이 완료되었습니다");
   		}
   		// 관심목록 버튼
   		function addList(p_seq, is_like) {
-  			insert(p_seq, is_like);
-  			alert("관심 목록에 추가되었습니다");
+  			insert(p_seq, is_like, 2);
+  			//alert("관심 목록에 추가되었습니다");
   		}
   	</script>
   	

@@ -39,10 +39,12 @@
 		]]>
 	</insert>
 	
-	<!-- 후원자 테이블 가져오기 -->
-	<select id="getBacker" resultType="com.fun.myPage.dto.backerDTO" parameterType="String">
+	<!-- (5) 후원중인지 중복 체크 -->
+	<select id="getBacker" parameterType="com.fun.myPage.dto.backerDTO" resultType="int" >
 		<![CDATA[
-		SELECT * FROM backer WHERE id=#{id}
+		SELECT COUNT(*)
+		FROM backer
+		WHERE p_seq=#{p_seq} and is_like=#{is_like}
 		]]>
 	</select>
 

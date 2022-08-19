@@ -46,7 +46,7 @@ public class subDAO implements subDAOIfc {
 		return sqlsession.selectOne(namespace + ".listCreator", id);
 	}
 
-	// (4) 후원자 테이블에 저장하기 (후원목록)
+	// (4) 후원자 테이블에 저장하기
 	@Override
 	public int back_this(backerDTO dto) throws Exception {
 		
@@ -55,12 +55,13 @@ public class subDAO implements subDAOIfc {
 		return sqlsession.insert(namespace + ".backProject", dto);
 	}
 
-	// 중복검사
+	// (5) 중복검사
 	@Override
-	public backerDTO check_back(String id, String is_like) throws Exception {
-		System.out.println("dao 중복검사");
+	public int check_back(backerDTO dto) throws Exception {
 		
-		return sqlsession.selectOne(namespace + ".getBacker", id);
+		System.out.println("dao(5) 중복검사");
+		
+		return sqlsession.selectOne(namespace + ".getBacker", dto);
 	}
 	
 }

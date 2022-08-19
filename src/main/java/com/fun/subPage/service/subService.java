@@ -54,10 +54,11 @@ public class subService implements subServiceIfc {
 	}
 	
 	// 중복검사
-	public backerDTO check_back(String id, String is_like) throws Exception {
-		System.out.println("중복검사");
+	public int check_back(backerDTO dto) throws Exception {
 		
-		return dao.check_back(id, is_like);
+		System.out.println("서비스 중복검사");
+		
+		return dao.check_back(dto);
 	}
 	
 	

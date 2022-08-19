@@ -20,7 +20,7 @@ public interface subServiceIfc {
 	// (4) 후원자 테이블에 저장하기
 	public int back_this(backerDTO dto) throws Exception;
 	
-	// 중복검사
-	public backerDTO check_back(String id, String is_like) throws Exception;
+	// (5) 중복검사
+	public int check_back(backerDTO dto) throws Exception;
 	
 }
