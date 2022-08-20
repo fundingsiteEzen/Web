@@ -65,11 +65,11 @@ public class myServiceImpl implements mySerivce {
 
 	// (4) 후원 취소
 	@Override
-	public int deleteProject(String p_seq) throws Exception {
+	public int deleteProject(backerDTO bDTO) throws Exception {
 		
 		System.out.println("마이 서비스 (4) 실행");
 		
-		return dao.deleteProject(p_seq);
+		return dao.deleteProject(bDTO);
 	}
 	
 }

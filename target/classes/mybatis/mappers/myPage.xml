@@ -25,10 +25,10 @@
 		]]>
 	</select>
 	
-	<!-- 후원 취소 -->
-	<delete id="deleteProject" parameterType="String">
+	<!-- 후원 & 관심목록에서 없애기 -->
+	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
-		DELETE FROM project WHERE p_seq=#{p_seq}
+		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like}
 		]]>
 	</delete>
 	

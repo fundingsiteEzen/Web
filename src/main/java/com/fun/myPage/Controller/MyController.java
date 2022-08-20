@@ -2,6 +2,8 @@ package com.fun.myPage.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,15 +51,24 @@ public class MyController {
 	public void projectList(Model model) throws Exception {
 	}
 	
-	// 삭제
+	// 후원 & 관심 목록 삭제
 	@ResponseBody
 	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
-	public String deleteProject() throws Exception {
+	public String deleteProject(Model model, HttpServletRequest req, backerDTO bDTO) throws Exception {
 		
-		String p_seq = "223";
-		mService.deleteProject(p_seq);
+		System.out.println("마이페이지에서 받아온 is_like 값 : " + bDTO.getIs_like() + ", p_Seq값 : " + bDTO.getP_seq());
 		
-		return "";
+		String result = null;
+		if(mService.deleteProject(bDTO) <= 1) { // 삭제가 성공한 경우
+			System.out.println("삭제성공");
+			result = "Y";
+		} // 삭제에 실패한 경우
+		else {
+			System.out.println("삭제실패");
+			result = "N";
+		}
+		
+		return result;
 	}
 	
 	
