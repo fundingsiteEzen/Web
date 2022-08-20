@@ -43,11 +43,10 @@ public class MyController {
 		model.addAttribute("backList", project_BACK);
 		model.addAttribute("likeList", project_LIKE);
 		
-		
 	}
 	
 	// 회원정보 수정화면으로 이동
-	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
+	@RequestMapping(value="/mymy", method=RequestMethod.GET)
 	public void projectList(Model model) throws Exception {
 	}
 	

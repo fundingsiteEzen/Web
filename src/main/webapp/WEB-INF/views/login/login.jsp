@@ -65,7 +65,6 @@
 				        <div class="social d-flex text-center">
 				        	<a href="${contextPath}/register.do" class="px-2 py-2 mr-md-1 rounded"><span class="icon-logo-facebook mr-2"></span>Go Register</a>
 				        </div>
-				        
 		      		</div>
 				</div>
 			</div>
