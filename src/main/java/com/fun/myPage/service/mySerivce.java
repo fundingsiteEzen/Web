@@ -19,6 +19,6 @@ public interface mySerivce {
 	public List<projectDTO> getProject_Like(List<backerDTO> bList) throws Exception;
 	
 	// 후원 삭제하기
-	public int deleteProject(String p_seq) throws Exception;
+	public int deleteProject(backerDTO bDTO) throws Exception;
 
 }

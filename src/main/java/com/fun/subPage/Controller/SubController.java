@@ -28,11 +28,12 @@ public class SubController {
 	
 	// main에서 상세페이지로 이동
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
-	public void projectList(Model model,  HttpServletRequest req) throws Exception {
+	public void projectList(Model model, HttpServletRequest req) throws Exception {
 		
 		// 1. project 테이블 가져오기
 		// 이전화면에서 p_seq 값을 받아옴
 		String p_seq = req.getParameter("p_seq");
+		
 		
 		System.out.println("메인에서 받아온 파람값 : " + p_seq);
 		projectDTO Pdto = sService.projectList(p_seq);

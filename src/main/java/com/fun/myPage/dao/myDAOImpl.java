@@ -36,11 +36,11 @@ public class myDAOImpl implements myDAO{
 		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
 	}
 
-	// (1)-4 프로젝트 테이블 가져오기(후원삭제)
+	// 후원 취소
 	@Override
-	public int deleteProject(String p_seq) throws Exception {
+	public int deleteProject(backerDTO bDTO) throws Exception {
 		
-		return sqlsession.delete(namespace + ".deleteProject", p_seq);
+		return sqlsession.delete(namespace + ".deleteProject", bDTO);
 	}
 
 

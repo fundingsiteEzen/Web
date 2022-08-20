@@ -235,11 +235,6 @@
 		
 	</div> <!-- 최상위 container -->
 	<jsp:include page="../menu/footer.jsp" flush="false" />
-	
-	<script src="js/jquery.min.js"></script>
-  	<script src="js/popper.js"></script>
-  	<script src="js/bootstrap.min.js"></script>
-  	<script src="js/main.js"></script>
   	
   	<!-- 커스텀 스크립트 -->
   	<script>
