@@ -22,29 +22,54 @@
 </head>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
+
 	* {list-style: none;
 		padding: 0;
-		margin: 0 auto;}
+		margin: 0 auto;
+		font-family: 'Hahmlet', serif;}
   body {
     position: relative;
   }
-  ul.nav-pills {
-    top: 20px;
-    position: sticky;
+  h2 {font-weight: 400;}
+  
+  .story {
+  	height: 2000px;
   }
-  div.col-lg-7 div {
-    height: 250px;
+  .story li { width: 100%;}
+  
+  /* 스크롤바이 */
+  .scroll {
+  	top: 50px;
+  	position:sticky;
+  }
+  .scrollul {
+  	text-align: center;
+  }
+  .scrollul li {
+	line-height: 60px;
+	background-color: #ccc;
+  }
+  .navigation {
+  	padding: 20px;
+  	background-color: #ccc;
+  }
+  .navigation a {
+  	padding-right: 20px;
+  }
+  
+  .reward { height: 2000px; }
+  .reward_each {
+	top: 50px;
+	position: sticky; }
+
+  div.col-sm-7 div {
+    height: 1000px;
     font-size: 28px;
   }
-  #section1 {color: #fff; background-color: #ccc;}
-  #section2 {color: #fff; background-color: #ccc;}
-  #section3 {color: #fff; background-color: #ccc;}
+  #section1, #section2, #section3  {color: #fff; background-color: #ccc;}
   
-  @media screen and (max-width: 810px) {
-    #section1, #section2, #section3, #section41, #section42  {
-      margin-left: 150px;
-    }
-  }
   </style>
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
@@ -53,20 +78,20 @@
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
 	
-	<div class="container">
+	<div class="container w-100">
 		<!-- 메인정보 div -->
 		<div class="row">
 			<!-- 프로젝트 이름 부분 -->
 			<div>
-				<h1 align="center">프로젝트명</h1>
+				<h1 align="center">${project.p_name}</h1>
 			</div>
 			
 			<!-- 메인 정보 section -->
-			<section class="work d-flex align-items-center py-5" >
-		        <div class="container-fluid text-light">
+			<section class="main">
+		        <div class="container w-100">
 		            <div class="row" >
 		            	<!-- 이미지 슬라이더 -->
-		                <div class="col-lg-8 d-flex align-items-center" data-aos="fade-right" style="border: 1px solid #333">
+		                <div class="col-sm-8">
 		                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 		
 							<!-- 인디케이터 -->
@@ -78,16 +103,16 @@
 							<!-- 슬라이드 wrap -->
 							<div class="carousel-inner">
 								<div class="item active">
-									<img class="img-responseve center-block" src="${contextPath}/resources/images/***.jpg" alt="img01" width="100%" height="350px"/>
-									<div class="carousel-caption"><h2>캡션1</h2></div>
+									<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail01.jpg" alt="img01" width="100%" height="350px"/>
+									<div class="carousel-caption"></div>
 								</div>
 								<div class="item">
-									<img class="img-responseve center-block" src="${contextPath}/resources/images/***.jpg" alt="img02" width="100%" height="350px"/>
-									<div class="carousel-caption"><h2>캡션2</h2></div>
+									<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail02.jpg" alt="img02" width="100%" height="350px"/>
+									<div class="carousel-caption"><h2></h2></div>
 								</div>
 								<div class="item">
-									<img class="img-responseve center-block" src="${contextPath}/resources/images/***.jpg" alt="img03" width="100%" height="350px"/>
-									<div class="carousel-caption"><h2>캡션3</h2></div>
+									<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail03.jpg" alt="img03" width="100%" height="350px"/>
+									<div class="carousel-caption"><h2></h2></div>
 								</div>
 							</div>
 							
@@ -104,34 +129,38 @@
 		                </div>
 		                
 		                <!-- 상세소개란 -->
-		                <div class="col-lg-4 d-flex align-items-center px-4 py-3" data-aos="">
-		                    <div class="row" style="border: 1px solid #333">
-		                        <div class="container" data-aos="fade-up">
-		                            <div class="row g-5">
-		                                <div class="col-6 text-start" >
-		                                    <i class="fas fa-briefcase fa-2x text-start"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1258" data-purecounter-duration="3">작성중</h2>
-		                                    <p>모인 금액</p>
-		                                </div>
-		                                <div class="col-6" >
-		                                    <i class="fas fa-award fa-2x"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="3">${dayCount} 일</h2>
-		                                    <p>남은시간</p>
-		                                </div>
-		                                <div class="col-6">
-		                                    <i class="fas fa-users fa-2x"></i>
-		                                    <h2 class="purecounter" data-purecounter-start="0" data-purecounter-end="1255" data-purecounter-duration="3">${project.p_backer} 명</h2>
-		                                    <p>후원자</p>
-		                                </div>
-										<div class="col-6">
-											<span>목표금액 ${project.p_goal} 원</span><br>
-											<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
-											<span>결제예정일 ${project.p_payDate}</span><br>
-											<button class="btn btn-primary">리스트에 추가</button>
-											<button class="btn btn-info">후원하기</button>
-										</div>
-		                            </div>
-		                        </div>
+		                <div class="col-sm-4">
+		                    <div class="row">
+                                <div class="col-6" >
+                                	<div class="progress" style="height: 10px;" >
+  										<div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+                                    <p>모인 금액</p>
+                                    <h2 class="purecounter">작성중</h2>
+                                    <br>
+                                </div>
+                                <div class="col-6" >
+                                    <p>남은시간</p>
+                                    <h2 class="purecounter">${dayCount} 일</h2>
+                                    <br>
+                                </div>
+                                <div class="col-6">
+                                	<br>
+                                    <p>후원자</p>
+                                    <h2 class="purecounter">${project.p_backer} 명</h2>
+                                    <br>
+                                </div>
+								<div class="col-6">
+									<span>목표금액 ${project.p_goal} 원</span><br>
+									<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
+									<span>결제예정일 ${project.p_payDate}</span><br>
+									<form>
+										<!-- 리스트 추가버튼 -->
+										<button type="button" class="btn btn-primary" onclick="addList(${project.p_seq}, 'Y')">리스트에 추가</button>
+										<!-- 후원버튼 -->
+										<button type="button" class="btn btn-info" onclick="BACK(${project.p_seq}, 'N')">후원하기</button>
+									</form>
+								</div>
 		                    </div>
 		                </div>
 		            </div>
@@ -141,8 +170,8 @@
 		
 		<!-- 소개 div -->
 		<div class="row">
-			<div> <!-- 미니 네비게이션 -->
-				<div style="border: 1px solid #333">
+			<div class="navigation" > <!-- 미니 네비게이션 -->
+				<div>
 					<nav>
 						<a>프로젝트 계획</a>
 						<a>커뮤니티</a>
@@ -150,70 +179,97 @@
 					</nav>
 				</div>
 			</div> 
-			<section> <!-- 소개란 & 리워드 부분 -->
+			<section class="story"> <!-- 소개란 & 리워드 부분 -->
 				<!-- 소개란 -->
 				<div class="row">
 					<!-- scrollby 네비-->
-					<nav class="col-sm-1" id="myScrollspy" style="border: 1px solid #333">
-				      <ul class="nav nav-pills nav-stacked">
-				        <li class="active"><a href="#section1">story</a></li>
-				        <li><a href="#section2">risks</a></li>
-				        <li><a href="#section3">Section 3</a></li>
-				      </ul>
+					<nav class="col-sm-1 scroll" id="myScrollspy">
+				    	<ul class="scrollul">
+				        	<li class="active"><a href="#section1">story</a></li>
+				        	<li><a href="#section2">risks</a></li>
+				    	</ul>
 				    </nav>
-				    <div class="col-lg-7" style="border: 1px solid #333">
-				      <div id="section1">    
-				        <h1>story</h1>
-				        <p>소개글</p>
-				      </div>
-				      <div id="section2"> 
-				        <h1>story</h1>
-				        <p>소개글</p>
-				      </div>        
-				      <div id="section3">         
-				        <h1>story</h1>
-				        <p>소개글</p>
-				      </div>
+				    <div class="col-sm-7">
+				    	<div style="border: 1px solid #333">
+				    	<div id="section1">    
+				        	<h1>story</h1>
+				        	<p>소개글</p>
+				    	</div>
+				    	<div id="section2"> 
+				        	<h1>risks</h1>
+				        	<p>소개글</p>
+				    	</div>
+				    	</div>        
 				    </div>
 					<!-- 리워드 선택란 -->
-					<div class="col-lg-4" style="border: 1px solid #333">
+					<div class="col-sm-4">
 						<!-- 판매자 정보란 -->
-						<div align="center">
-							<button>창작자 소개</button>
-						</div>
-						<!-- 리워드 -->
-						<div style="border: 1px solid #333">
-							<ol>
-								<li>선택1
-									<div>
-										<h3>1000원</h3>
-										<button>진행하기</button>
-									</div>
-								</li>
-								<li>선택2
-									<div>
-										<h3>2000원</h3>
-										<button>진행하기</button>
-									</div>
-								</li>
-								<li>선택3
-									<div>
-										<h3>3000원</h3>
-										<button>진행하기</button>
-									</div>
-								</li>
-							</ol>
+						<div class="reward">
+							<div align="center">
+								<button>창작자 소개</button><br>
+								<h2>${creator.c_name}</h2>
+								<span>${creator.c_content}</span><br>
+							</div>
+							
+							<!-- 리워드 -->
+							<div class="reward_each" style="border: 1px solid #333">
+								<ol>
+								<c:forEach items="${rewardList}" var="list" varStatus="status">
+									<li>
+										<div>
+											<span>선택 ${list.r_seq}</span>
+											<h3 style="text-align: center;">${list.r_price} 원</h3>
+											<span>${list.r_content}</span><br>
+											<button class="btn btn-primary">진행하기</button>
+											<hr>
+										</div>
+									</li>
+								</c:forEach>
+								</ol>
+							</div>
 						</div>
 					</div>
 				</div>
-			</section> 
+			</section>
 		</div>
 		
 	</div> <!-- 최상위 container -->
-	
-	<script src="js/jquery.min.js"></script>
-  	<script src="js/popper.js"></script>
-  	<script src="js/bootstrap.min.js"></script>
-  	<script src="js/main.js"></script>
+	<jsp:include page="../menu/footer.jsp" flush="false" />
+  	
+  	<!-- 커스텀 스크립트 -->
+  	<script>
+  		function insert(p_seq, is_like, mode) {
+  			$.ajax({
+  				type: "POST",
+  				url: "/subPage/back.do",
+  				data: {p_seq:p_seq, is_like:is_like},
+  				success: function(data) {
+  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
+  					if(data == 'Y'){
+  						location.href = "redirect:/subPage/detail";
+  						if(mode == 1) {alert("후원이 완료되었습니다");}
+  						else {alert("관심 목록에 추가되었습니다");}
+  					}
+  					if(data == 'D') {
+  						alert("이미 후원중인 프로젝트입니다");
+  					}
+  				},
+  				error: function(data) {alert('문제가 발생했습니다');}
+  			});
+  		}
+  		// 후원하기 버튼
+  		function BACK(p_seq, is_like) {
+  			if(confirm("후원하시겠습니까 ?")){
+	  			insert(p_seq, is_like, 1);
+	  			//alert("후원이 완료되었습니다");
+  			}
+  		}
+  		// 관심목록 버튼
+  		function addList(p_seq, is_like) {
+  			insert(p_seq, is_like, 2);
+  			//alert("관심 목록에 추가되었습니다");
+  		}
+  	</script>
+  	
 </body>
 </html>

@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.fun.myPage.dto.backerDTO;
+import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Repository
@@ -33,6 +35,33 @@ public class subDAO implements subDAOIfc {
 		System.out.println("서브DAO (2) 실행");
 		
 		return sqlsession.selectList((namespace) + ".listReward", p_seq);
+	}
+
+	// (3) 창작자 테이블 가져오기
+	@Override
+	public creatorDTO creatorList(String id) throws Exception {
+
+		System.out.println("서브DAO (3) 실행");
+		
+		return sqlsession.selectOne(namespace + ".listCreator", id);
+	}
+
+	// (4) 후원자 테이블에 저장하기
+	@Override
+	public int back_this(backerDTO dto) throws Exception {
+		
+		System.out.println("서브DAO (4) 실행");
+		
+		return sqlsession.insert(namespace + ".backProject", dto);
+	}
+
+	// (5) 중복검사
+	@Override
+	public int check_back(backerDTO dto) throws Exception {
+		
+		System.out.println("dao(5) 중복검사");
+		
+		return sqlsession.selectOne(namespace + ".getBacker", dto);
 	}
 	
 }

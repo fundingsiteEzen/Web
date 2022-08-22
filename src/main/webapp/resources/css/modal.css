@@ -1,0 +1,225 @@
+@charset "UTF-8";
+
+	.modal{
+	    position: fixed; 
+	    top:0; 
+	    left:0; 
+	    width: 100%; 
+	    height: 100%; 
+	    z-index: 100;
+	    display: none; 
+	    background: rgba(0,0,0,0.7);
+	}
+	.modal .inner{
+	    width: 620px; 
+	    height: 600px;
+	    background: #fff; 
+	    position: absolute; 
+	    left: 50%; 
+	    top: 50%; 
+	    transform: translate(-50%, -55%); 
+	}
+	.cardSubT {
+	    color: rgb(61, 61, 61);
+	    margin: 0px 0px 10px;
+	}
+	.cardBody {
+	    width: auto;
+	}
+	.cardNum {
+	    border: 1px solid rgb(230, 230, 230);
+	    border-radius: 4px;
+	    display: flex;
+	    padding: 0px 12px;
+	    -webkit-box-align: center;
+	    align-items: center;
+	}
+	.inCardNum {
+	    border: 0px;
+	    color: rgb(13, 13, 13);
+	    background: rgb(255, 255, 255);
+	    padding: 0px 12px;
+	    max-height: 44px;
+	    display: flex;
+	    font-size: 14px;
+	    line-height: 24px;
+	    letter-spacing: -0.015em;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    border-radius: 1px;
+	}
+	.jMWjNk {
+	    margin: 0px 10px 0px 0px;
+	}
+	.cardNum input {
+	    max-width: 45px;
+	}
+	.pwdCardNum {
+	    width: 100%;
+	    background: transparent;
+	    border: 0px;
+	    padding: 11px 0px;
+	    box-sizing: border-box;
+	    height: 100%;
+	    outline: none;
+	    margin: 0px;
+	    appearance: none !important;
+	    opacity: 0.8;
+	}
+	.textCardNum {
+	    /* width: 100%; */
+	    background: transparent;
+	    border: 0px;
+	    padding: 11px 0px;
+	    box-sizing: border-box;
+	    height: 100%;
+	    outline: none;
+	    margin: 0px;
+	    appearance: none !important;
+	    opacity: 0.8;
+	}
+	
+	.cardLife {
+	    margin: 20px 0px 0px;
+	    margin-right: 12px;
+	}
+	
+	.cLifeDetail {
+	    display: inline-flex;
+	    position: relative;
+	    border: 1px solid rgb(230, 230, 230);
+	    border-radius: 4px;
+	    background: rgb(255, 255, 255);
+	    color: rgb(13, 13, 13);
+	    height: 44px;
+	    margin-right: 12px;
+	}
+	.selDetail {
+	    display: flex;
+	    -webkit-box-flex: 1;
+	    flex-grow: 1;
+	    outline: 0px;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    margin: 0px;
+	    padding: 0px 15px 0px 12px !important;
+	    border: 0px !important;
+	    background: transparent !important;
+	    border-radius: 0px !important;
+	    box-shadow: none !important;
+	}
+	.cardBox .cardGap {
+	    margin-bottom: 32px;
+	    margin-top: 0px;
+	}
+	.cardInfo {
+	    border: 1px solid rgb(230, 230, 230);
+	    color: rgb(13, 13, 13);
+	    background: rgb(255, 255, 255);
+	    padding: 0px 12px;
+	    max-height: 44px;
+	    min-width: 100px;
+	    display: flex;
+	    font-size: 14px;
+	    line-height: 24px;
+	    letter-spacing: -0.015em;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    border-radius: 1px;
+	}
+	.modalBtn {
+	    width: 49%;
+	    cursor: pointer;
+	    display: inline-flex;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    -webkit-box-pack: center;
+	    justify-content: center;
+	    height: 52px;
+	    border-radius: 1px;
+	    margin: 0px;
+	    border: 1px solid rgb(230, 230, 230);
+	    outline: 0px;
+	    font-weight: bold;
+	    box-sizing: border-box;
+	    padding: 0px 24px;
+	    background-color: rgb(255, 87, 87);
+	    color: rgb(255, 255, 255);
+	}
+	
+	.paymentCard {
+	    margin-left: 10px;
+	    margin-right: 10px;
+	}
+	.title {
+	    font-weight: bold;
+	    position: relative;
+	    min-height: 36px;
+	    font-size: 24px;
+	    line-height: 36px;
+	    letter-spacing: -0.025em;
+	    margin: 0px 0px 24px;
+	    padding: 38px 0px 0px;
+	}
+	.selectBank .sub {
+    margin-bottom: 32px;
+	}
+	.subTitle {
+	    color: rgb(61, 61, 61);
+	    margin: 0px 0px 10px;
+	}
+	.bankList {
+	    display: inline-flex;
+	    position: relative;
+	    border: 1px solid rgb(230, 230, 230);
+	    border-radius: 4px;
+	    background: rgb(255, 255, 255);
+	    color: rgb(13, 13, 13);
+	    height: 44px;
+	    width: 100%;
+	}
+	.selectList {
+	    display: flex;
+	    -webkit-box-flex: 1;
+	    flex-grow: 1;
+	    outline: 0px;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    margin: 0px;
+	    padding: 0px 36px 0px 12px !important;
+	    border: 0px !important;
+	    background: transparent !important;
+	    border-radius: 0px !important;
+	    box-shadow: none !important;
+	}
+	.inputBox {
+	    border: 1px solid rgb(230, 230, 230);
+	    color: rgb(13, 13, 13);
+	    background: rgb(255, 255, 255);
+	    padding: 0px 12px;
+	    max-height: 44px;
+	    min-width: 100px;
+	    display: flex;
+	    font-size: 14px;
+	    line-height: 24px;
+	    letter-spacing: -0.015em;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    border-radius: 1px;
+	}
+	.inputDetail {
+	    width: 100%;
+	    background: transparent;
+	    border: 0px;
+	    padding: 11px 0px;
+	    box-sizing: border-box;
+	    height: 100%;
+	    outline: none;
+	    margin: 0px;
+	    appearance: none !important;
+	    opacity: 0.8;
+	}
+	.paymentCash {
+	margin-left: 10px;
+	margin-right: 10px;
+	}

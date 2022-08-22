@@ -17,6 +17,7 @@
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 전체 section -->
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -27,15 +28,16 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
-				      	<form action="#" class="signin-form">
+				      	
+				      	<form action="${contextPath}/seculogin" class="signin-form" method="post"> <!-- 로그인하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
-				      			<input type="text" class="form-control" placeholder="아이디" required>
+				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
 				      		</div>
 				      		<!-- 비밀번호 -->
 				            <div class="form-group">
-				            	<input id="password-field" type="password" class="form-control" placeholder="비밀번호" required>
-				            	<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+				            	<input type="password" id="pass" name="pass" class="form-control" placeholder="비밀번호" required>
+				            	<span toggle="#pass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				            </div>
 				            <!-- sign In 버튼 -->
 				            <div class="form-group">
@@ -58,13 +60,11 @@
 				             -->
 				        </form>
 				        
-				        <p class="w-100 text-center">&mdash; 다른 방법으로 로그인 &mdash;</p>
-				        <!-- 
+				        <p class="w-100 text-center">&mdash; 회원가입하기 &mdash;</p>
+				         
 				        <div class="social d-flex text-center">
-				        	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="icon-logo-facebook mr-2"></span> Facebook</a>
-				          	<a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="icon-logo-twitter mr-2"></span> Twitter</a>
+				        	<a href="${contextPath}/register.do" class="px-2 py-2 mr-md-1 rounded"><span class="icon-logo-facebook mr-2"></span>Go Register</a>
 				        </div>
-				         -->
 		      		</div>
 				</div>
 			</div>

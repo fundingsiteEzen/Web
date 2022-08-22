@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   
+<!-- 마이페이지와 관련한 모든 쿼리문장은 여기에서 관리함 -->
+
+<mapper namespace="com.fun.myPage">
+
+
+	<!-- bakcer 테이블 가져오기 -->
+	<select id="backerInfo" resultType="com.fun.myPage.dto.backerDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM backer WHERE id=#{id}
+		]]>
+	</select>
+	
+	<!-- p_seq값으로 프로젝트 테이블 가져오기 -->
+	<select id="projectInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</select>
+	
+	<!-- 후원 & 관심목록에서 없애기 -->
+	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like}
+		]]>
+	</delete>
+	
+	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
+
+</mapper>

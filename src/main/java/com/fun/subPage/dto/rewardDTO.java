@@ -6,7 +6,7 @@ public class rewardDTO {
 	private String p_seq; // 프로젝트 고유번호
 	private String r_seq; // 리워드 고유번호
 	private int r_price; // 리워드 가격
-	private String content; // 리워드 소개
+	private String r_content; // 리워드 소개
 	private int addMoney; // 추가후원금
 	private int r_count; // 준비수량
 	
@@ -36,11 +36,11 @@ public class rewardDTO {
 	public void setR_price(int r_price) {
 		this.r_price = r_price;
 	}
-	public String getContent() {
-		return content;
+	public String getR_content() {
+		return r_content;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setR_content(String r_content) {
+		this.r_content = r_content;
 	}
 	public int getAddMoney() {
 		return addMoney;
@@ -60,7 +60,7 @@ public class rewardDTO {
 	@Override
 	public String toString() {
 		return "rewardDTO [id=" + id + ", p_seq=" + p_seq + ", r_seq=" + r_seq + ", r_price=" + r_price + ", content="
-				+ content + ", addMoney=" + addMoney + ", r_count=" + r_count + "]";
+				+ r_content + ", addMoney=" + addMoney + ", r_count=" + r_count + "]";
 	}
 
 }
