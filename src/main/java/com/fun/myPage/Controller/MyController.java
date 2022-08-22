@@ -70,5 +70,7 @@ public class MyController {
 		return result;
 	}
 	
+	// 카드 정보 입력
+	
 	
 }
