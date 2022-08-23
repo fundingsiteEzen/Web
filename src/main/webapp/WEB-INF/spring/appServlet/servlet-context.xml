@@ -42,7 +42,7 @@
 	<!-- 파일 업로드 경로 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<!-- 생성자를 이용해서 주입 -->
-		<beans:constructor-arg value="G:/filedata/upload" />
+		<beans:constructor-arg value="C:/viva_img" />
 	</beans:bean>
 	
 	

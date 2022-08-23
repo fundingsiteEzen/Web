@@ -136,7 +136,7 @@
 		$.ajax({
 			type: "post",
 			url: "/crpage/file",
-			data: {formData:formData, id:id},
+			data: formData,
 			dataType:		"json",
 			processData:	false,
 			contentType:	false,
