@@ -1,6 +1,6 @@
 package com.fun.myPage.dto;
 
-public class accountInfo {
+public class accountInfoDTO {
 	private String id;			// 유저 아이디
 	private String ai_bank;		// 결제 은행
 	private String ai_num;		// 계좌 번호
@@ -38,6 +38,6 @@ public class accountInfo {
 	// toString
 	@Override
 	public String toString() {
-		return "cardInfoDTO [id=" + id + ", ai_bank=" + ai_bank + ", ai_num=" + ai_num + ", ai_name=" + ai_name + "]";
+		return "accountInfoDTO [id=" + id + ", ai_bank=" + ai_bank + ", ai_num=" + ai_num + ", ai_name=" + ai_name + "]";
 	}
 }

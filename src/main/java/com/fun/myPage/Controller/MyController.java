@@ -3,17 +3,17 @@ package com.fun.myPage.Controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fun.myPage.dto.backerDTO;
+import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.myPage.service.mySerivce;
 import com.fun.subPage.dto.projectDTO;
 
@@ -71,6 +71,9 @@ public class MyController {
 	}
 	
 	// 카드 정보 입력
-	
-	
+	@RequestMapping(value="myPage", method = RequestMethod.POST)
+	public void inserCard(cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+	}
 }

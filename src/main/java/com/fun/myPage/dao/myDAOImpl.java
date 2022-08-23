@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
+import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Repository
@@ -43,5 +45,20 @@ public class myDAOImpl implements myDAO{
 		return sqlsession.delete(namespace + ".deleteProject", bDTO);
 	}
 
+	// 카드 정보 입력
+	@Override
+	public int cardInfo(cardInfoDTO cDTO) throws Exception {
+	
+		return sqlsession.insert(namespace + ".insertCard", cDTO);
+	}
+
+	// 계좌정보입력
+	@Override
+	public int accountInfo(accountInfoDTO aDTO) throws Exception {
+		return sqlsession.insert(namespace + ".insertAccount", aDTO);
+	}
+	
+	
+	
 
 }
