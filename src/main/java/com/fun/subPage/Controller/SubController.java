@@ -61,8 +61,6 @@ public class SubController {
 		long sec = (eCal.getTimeInMillis() - todayCal.getTimeInMillis()) / 1000;
 		long dayCount = sec / (24*60*60);
 		
-		// 총 후원 금액 구하기
-		
 		
 		// 4. model에 붙히기
 		// 남은 날짜, 프로젝트 정보, 리워드 정보, 창작자 정보

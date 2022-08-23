@@ -69,14 +69,14 @@
 			 <textarea class="form-control" rows="5" id="p_content" name="p_content" placeholder="자신의 프로젝트를 소개하세요." maxlength="100"></textarea>
 		</div>
 		
-		<!-- 썸네일 사진1개
-		<div class="form-group">
-			<label>썸네일 사진</label><br/>
-			<div class="col-sm-8">
-				<input type="file"   class="btn btn-warning" name="file"/>
+		<!-- 썸네일 사진1개  -->
+			<div class="form-group">
+				<label>썸네일 사진</label><br/>
+				<div class="col-sm-8">
+					<input type="file" class="btn btn-warning" onchange="addFile(this);" name="p_img" multiple />
+				</div>
 			</div>
-		</div>
-		
+		<!-- 
 		상세페이지 사진3개
 		<div class="form-group">
 			<label>상세페이지 사진1</label><br/>
@@ -100,8 +100,14 @@
 		<!-- 목표금액 -->
 		<div class="form-group">
 			<label>목표금액</label>
-		  <input type="text" class="form-control" id="p_goal" name="p_goal">원
+		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
 		</div>
+		
+		<div class="form-group" id="reward">
+			<label>r_price</label>
+		  	<input type="text" class="form-control" id="r_price" name="list[0].r_price">
+		</div>
+			<button type="button" onclick="addReward()">리워드 추가하기</button>
 		
 		<!-- 다시입력, 등록 버튼 -->
 		<div class="form-group">
@@ -113,5 +119,45 @@
 	</form>
 </div>
 
+
+<script>
+	function addFile(images) {
+		alert("작동");
+		
+		// form 객체를 만들고 files를 추가함
+		var files = images.files[0];
+		
+		var formData = new FormData();
+		formData.append("file", files);
+		alert(files.name);
+		
+		alert("ajax 실행준비");
+		// processData와 contentType을 false로 해서 보내주어야함
+		$.ajax({
+			type: "post",
+			url: "/crpage/file",
+			data: formData,
+			dataType:		"json",
+			processData:	false,
+			contentType:	false,
+			success: function(data, status, req) {
+				alert("성공");
+			},
+			error: function(data) {alert('문제가 발생했습니다');}
+		});
+		alert("ajax 끝");
+		
+	}
+</script>
+<script>
+	var index = 1;
+	function addReward() {
+		var str =
+			"<label>추가됨</label>";
+			str+= "<input type='text' class='form-control' id='r_price' name='list[" + index + "].r_price'>";
+		$("#reward").append(str);
+		index++;
+	};
+</script>
 </body>
 </html>
