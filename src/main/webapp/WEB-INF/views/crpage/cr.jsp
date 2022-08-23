@@ -130,13 +130,15 @@
 		var formData = new FormData();
 		formData.append("file", files);
 		alert(files.name);
+		var id = $("#id").val();
+		alert(id);
 		
 		alert("ajax 실행준비");
 		// processData와 contentType을 false로 해서 보내주어야함
 		$.ajax({
 			type: "post",
 			url: "/crpage/file",
-			data: formData,
+			data: {formData:formData, id:id},
 			dataType:		"json",
 			processData:	false,
 			contentType:	false,

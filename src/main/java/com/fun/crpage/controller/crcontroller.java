@@ -74,6 +74,7 @@ public class crcontroller {
 		System.out.println("파일크기 : " + file.getSize());
 		System.out.println("컨텐츠 타입 : " + file.getContentType());
 		
+		
 		return new ResponseEntity<String>(
 				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
 	}
