@@ -78,7 +78,7 @@
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
 	
-	<div class="container w-100">
+	<div class="container">
 		<!-- 메인정보 div -->
 		<div class="row">
 			<!-- 프로젝트 이름 부분 -->
@@ -87,6 +87,7 @@
 			</div>
 			
 			<!-- 메인 정보 section -->
+			
 			<section class="main">
 		        <div class="container w-100">
 		            <div class="row" >
