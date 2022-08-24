@@ -5,6 +5,7 @@ public class backerDTO {
 	private String id;
 	private int p_seq;
 	private int r_seq;
+	private int r_addMoney;
 	private char is_like;
 	
 	
@@ -27,6 +28,12 @@ public class backerDTO {
 	public void setR_seq(int r_seq) {
 		this.r_seq = r_seq;
 	}
+	public int getR_addMoney() {
+		return r_addMoney;
+	}
+	public void setR_addMoney(int r_addMoney) {
+		this.r_addMoney = r_addMoney;
+	}
 	public char getIs_like() {
 		return is_like;
 	}
@@ -38,7 +45,8 @@ public class backerDTO {
 	// toString
 	@Override
 	public String toString() {
-		return "backerDTO [id=" + id + ", p_seq=" + p_seq + ", r_seq=" + r_seq + ", is_like=" + is_like + "]";
+		return "backerDTO [id=" + id + ", p_seq=" + p_seq + ", r_seq=" + r_seq + ", r_addMoney=" + r_addMoney
+				+ ", is_like=" + is_like + "]";
 	}
 	
 }

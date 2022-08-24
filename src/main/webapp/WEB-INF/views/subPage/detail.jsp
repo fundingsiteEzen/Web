@@ -32,8 +32,7 @@
 	
 	.wrap {
 		background-image: url(${contextPath}/images/MAIN_img/winter.png);
-	       background-attachment: fixed;
-	       transition: 0.4s; }
+	    background-attachment: fixed; }
 	.main {background-color: #fff;}
 	.add_button {padding-top: 60px;}
 	.List_btn {
@@ -44,8 +43,8 @@
 	.back_btn {
 		box-sizing: border-box;
 		border: 1px solid #ccc;
-		margin-left: 10px;
 		height: 40px;
+		margin-left: 10px;
 	}
 	.navigation {
 		margin-top: 100px;
@@ -142,13 +141,18 @@
 						<div class="col-sm-6" align="right">
 							<h6>목표 ${project.p_goal} 원</h6>
 						</div>
-						<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
-						<span>결제예정일 ${project.p_payDate}</span><br>
-						<div class="add_button">
-							<!-- 리스트 추가버튼 -->
-							<button type="button" class="col-sm-4 List_btn" onclick="addList(${project.p_seq}, 'Y')">+</button>
-							<!-- 후원버튼 -->
-							<button type="button" class="col-sm-7 back_btn" onclick="BACK(${project.p_seq}, 'N')">back</button>
+						<div class="col-sm-12">
+							<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
+							<span>결제예정일 ${project.p_payDate}</span><br>
+							<div class="add_button">
+								<!-- 리스트 추가버튼 -->
+								<button type="button" class="col-sm-4 List_btn" onclick="addList(${project.p_seq}, 'Y')">+</button>
+								<!-- 후원버튼 -->
+								<!--
+								<button type="button" class="col-sm-7 back_btn" onclick="BACK(${project.p_seq}, 'N')">back</button>
+								 -->
+								<button type="button" class="col-sm-7 back_btn">back</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -168,8 +172,13 @@
 			</div>
         </div>
     </div>
-		
+    
+	<!-- 리워드 창 -->
+	<jsp:include page="reward.jsp" flush="false" />
+	
+	<!-- 푸터 -->
 	<jsp:include page="../menu/footer.jsp" flush="false" />
+	
   	
   	<!-- 커스텀 스크립트 -->
   	<script>
@@ -180,6 +189,10 @@
   				data: {p_seq:p_seq, is_like:is_like},
   				success: function(data) {
   					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
+  					if(data == 'F') {
+  						alert("로그인이 필요한 서비스입니다");
+  						location.href = "/login.do";
+  					}
   					if(data == 'Y'){
   						location.href = "redirect:/subPage/detail";
   						if(mode == 1) {alert("후원이 완료되었습니다");}
@@ -196,14 +209,23 @@
   		function BACK(p_seq, is_like) {
   			if(confirm("후원하시겠습니까 ?")){
 	  			insert(p_seq, is_like, 1);
-	  			//alert("후원이 완료되었습니다");
   			}
   		}
   		// 관심목록 버튼
   		function addList(p_seq, is_like) {
   			insert(p_seq, is_like, 2);
-  			//alert("관심 목록에 추가되었습니다");
   		}
+  	</script>
+  	<script>
+  		// 모달창
+  		$(".back_btn").click(function(){
+	        $(".modal").fadeIn(200);
+	    });
+		$(document).mouseup(function (e){
+		if($(".modal").has(e.target).length === 0){
+			$(".modal").fadeOut(200);
+			}
+		});
   	</script>
   	
 </body>

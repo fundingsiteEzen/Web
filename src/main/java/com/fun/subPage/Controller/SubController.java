@@ -90,28 +90,33 @@ public class SubController {
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("userID");
 		
-		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러
+		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러 'F'는 로그인 안됨
 		String result = null;
 		
-		backerDTO dto = new backerDTO();
-		dto.setId(id);
-		dto.setP_seq(Integer.parseInt(p_seq));
-		dto.setIs_like(req.getParameter("is_like").charAt(0));
-		
-		// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
-		if(sService.check_back(dto) == 0) { // 중복 값이 없는 경우
-			// DB에 등록이 성공한 경우
-			if(sService.back_this(dto) == 1) {
-				System.out.println("등록성공");
-				result = "Y";
-			} // 등록에 실패한 경우
-			else {
-				System.out.println("등록실패");
-				result = "N";
-			}
-		} else { 
-			System.out.println("중복");
-			result="D"; } // 중복 값이 있는 경우
+		// 로그인 여부 확인
+		if(session.getAttribute("isLogin") != null) {
+			
+			backerDTO dto = new backerDTO();
+			dto.setId(id);
+			dto.setP_seq(Integer.parseInt(p_seq));
+			dto.setIs_like(req.getParameter("is_like").charAt(0));
+			
+			// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
+			if(sService.check_back(dto) == 0) { // 중복 값이 없는 경우
+				// DB에 등록이 성공한 경우
+				if(sService.back_this(dto) == 1) {
+					System.out.println("등록성공");
+					result = "Y";
+				} // 등록에 실패한 경우
+				else {
+					System.out.println("등록실패");
+					result = "N";
+				}
+			} else { 
+				System.out.println("중복");
+				result="D"; } // 중복 값이 있는 경우
+			
+		} else { result="F"; }
 		
 		return result;
 	}
