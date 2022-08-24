@@ -1,18 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
-  <head>
-  	<title>Login 10</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/style.css">
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-	</head>
-	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- 제이쿼리 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+	<!-- 부트스트랩 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
+	<!-- 페이지가 시작될 때 실행되는 스크립트 -->
+	<c:choose>
+		<c:when test="${result == 'loginFailed'}">
+		<script>
+			window.onload = function() {
+				alert("아이디를 잘못 입력하셨습니다. \n다시 로그인 해주세요.");
+			}
+		</script>
+		</c:when>
+		<c:when test="${result == 'passwordFailed'}">
+		<script>
+			window.onload = function() {
+				alert("비밀번호가 일치하지 않습니다. \n다시 로그인 해주세요.");
+			}
+		</script>
+		</c:when>
+	</c:choose>
+</head>
+	
+<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 	
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
@@ -29,7 +56,7 @@
 					<div class="login-wrap p-0">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
 				      	
-				      	<form action="${contextPath}/seculogin" class="signin-form" method="post"> <!-- 로그인하기 form -->
+				      	<form action="${contextPath}/idsearch.do" class="signin-form" method="post"> <!-- 로그인하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
 				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
@@ -76,6 +103,6 @@
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
 
-	</body>
+</body>
 </html>
 

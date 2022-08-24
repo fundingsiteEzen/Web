@@ -32,10 +32,9 @@
 		  <label>프로젝트 제목</label>
 		  <input type="text" class="form-control" id="p_name" name="p_name" placeholder="프로젝트 제목" maxlength="50">
 		</div>
-		<div class="form-group">	<!-- 자동 -->
+		<div class="form-group">	<!-- 세션에서 아이기 가져옴 -->
 		  <label>창작자</label>
-		  <!-- ******** 세션에서 창작자 아이디 가져오기 **********8-->
-		  <input type="text" class="form-control" id="id" name="id" value="user1" readonly>
+		  <input type="text" class="form-control" id="id" name="id" value="${userID}" readonly>
 		</div>
 		
 		<!-- 카테고리 선택(선택하면 자동) -->
@@ -130,13 +129,15 @@
 		var formData = new FormData();
 		formData.append("file", files);
 		alert(files.name);
+		var id = $("#id").val();
+		alert(id);
 		
 		alert("ajax 실행준비");
 		// processData와 contentType을 false로 해서 보내주어야함
 		$.ajax({
 			type: "post",
 			url: "/crpage/file",
-			data: formData,
+			data: {formData:formData, id:id},
 			dataType:		"json",
 			processData:	false,
 			contentType:	false,

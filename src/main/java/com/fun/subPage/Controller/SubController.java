@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,6 @@ public class SubController {
 		// 1. project 테이블 가져오기
 		// 이전화면에서 p_seq 값을 받아옴
 		String p_seq = req.getParameter("p_seq");
-		
 		
 		System.out.println("메인에서 받아온 파람값 : " + p_seq);
 		projectDTO Pdto = sService.projectList(p_seq);
@@ -82,11 +82,15 @@ public class SubController {
 		// 해당 프로젝트의 p_seq값 받아옴
 		String p_seq = req.getParameter("p_seq");
 		
+		// 세션으로 아이디 값 가져오기
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
+		
 		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러
 		String result = null;
 		
 		backerDTO dto = new backerDTO();
-		dto.setId("user1"); // !!!!! 아이디 임시로 고정해둠
+		dto.setId(id);
 		dto.setP_seq(Integer.parseInt(p_seq));
 		dto.setIs_like(req.getParameter("is_like").charAt(0));
 		
