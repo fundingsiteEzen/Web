@@ -5,12 +5,13 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!-- 카드 모달창 -->
 <div class="modal" id="CardModal">
 	<div class="inner">
 		<div class="paymentCard">
-			<form method="post">
+			<form action="/myPage/mymy" method="post">
 			<div class="title">신용/체크 카드 등록</div>
                 <div class="cardBox">
                 <div class="cardGap">
