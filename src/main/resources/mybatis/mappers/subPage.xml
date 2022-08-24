@@ -44,7 +44,7 @@
 		<![CDATA[
 		SELECT COUNT(*)
 		FROM backer
-		WHERE p_seq=#{p_seq} and is_like=#{is_like}
+		WHERE p_seq=#{p_seq} AND is_like=#{is_like} AND id=#{id}
 		]]>
 	</select>
 

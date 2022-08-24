@@ -68,8 +68,6 @@ public class crcontroller {
 	@RequestMapping(value="/file", method=RequestMethod.POST)
 	public ResponseEntity<String> inputFile(MultipartFile file, String id) throws Exception {
 		
-		System.out.println("아이디 : " + id);
-		
 		System.out.println("파일명 : " + file.getOriginalFilename());
 		System.out.println("파일크기 : " + file.getSize());
 		System.out.println("컨텐츠 타입 : " + file.getContentType());

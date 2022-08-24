@@ -3,6 +3,7 @@ package com.fun.myPage.Controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,15 @@ public class MyController {
 	
 	// 마이페이지로 이동
 	@RequestMapping(value="/myPage", method=RequestMethod.GET)
-	public void mypage(Model model) throws Exception {
+	public void mypage(Model model, HttpServletRequest req) throws Exception {
 		
 		System.out.println("마이 컨트롤러(1) 실행");
 		
 		// 아이디로 정보 가져오기
-		String id = "user1"; // 임의로 고정해놓음
+		// 세션으로 아이디 값 가져오기
+//		HttpSession session = req.getSession();
+//		String id = (String)session.getAttribute("userID");
+		String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
 		
 		// 후원목록 / 관심목록 나누기
