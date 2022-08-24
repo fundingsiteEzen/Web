@@ -60,6 +60,10 @@ public class MyController {
 	public String deleteProject(Model model, HttpServletRequest req, backerDTO bDTO) throws Exception {
 		
 		System.out.println("마이페이지에서 받아온 is_like 값 : " + bDTO.getIs_like() + ", p_Seq값 : " + bDTO.getP_seq());
+		// 아이디는 세션에서 받아옴
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
+		bDTO.setId(id);
 		
 		String result = null;
 		if(mService.deleteProject(bDTO) <= 1) { // 삭제가 성공한 경우

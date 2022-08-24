@@ -61,12 +61,16 @@ public class SubController {
 		long sec = (eCal.getTimeInMillis() - todayCal.getTimeInMillis()) / 1000;
 		long dayCount = sec / (24*60*60);
 		
+		// 후원 % 구하기
+		int percent = (int)((double)Pdto.getP_total() / (double)Pdto.getP_goal() * 100);
+		
 		
 		// 4. model에 붙히기
 		// 남은 날짜, 프로젝트 정보, 리워드 정보, 창작자 정보
 		model.addAttribute("project", Pdto);
 		model.addAttribute("rewardList", r_list);
 		model.addAttribute("dayCount", dayCount);
+		model.addAttribute("percent", percent);
 		model.addAttribute("creator", Cdto);
 		
 	}

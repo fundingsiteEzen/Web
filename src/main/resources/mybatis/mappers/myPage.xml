@@ -28,7 +28,7 @@
 	<!-- 후원 & 관심목록에서 없애기 -->
 	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
-		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like}
+		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like} AND id=#{id}
 		]]>
 	</delete>
 	
