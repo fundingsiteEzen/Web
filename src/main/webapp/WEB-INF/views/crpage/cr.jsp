@@ -16,7 +16,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	
+
+	<!-- summernote -->	
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	
 </head>
 
@@ -32,9 +36,10 @@
 		  <label>프로젝트 제목</label>
 		  <input type="text" class="form-control" id="p_name" name="p_name" placeholder="프로젝트 제목" maxlength="50">
 		</div>
-		<div class="form-group">	<!-- 세션에서 아이기 가져옴 -->
+		<div class="form-group">
 		  <label>창작자</label>
-		  <input type="text" class="form-control" id="id" name="id" value="${userID}" readonly>
+		  <!-- <input type="text" class="form-control" id="id" name="id" value="${userID}" readonly>  세션에서 가져온 아이디. 로그인 기능 끝나고 풀기 -->
+		  <input type="text" class="form-control" id="id" name="id" value="user1" readonly>
 		</div>
 		
 		<!-- 카테고리 선택(선택하면 자동) -->
@@ -61,40 +66,21 @@
 			<label>결제 예정일</label>
 			<input type="date" id="p_payDate" name="p_payDate">
 		</div>
+
+		<!-- 썸네일 사진, 슬라이드 이미지 첨부하기 (다중첨부 가능하게)  -->
+		<div class="form-group">
+			<label>썸네일 사진</label><br/>
+			<div class="col-sm-8">
+				<input type="file" class="btn btn-warning" onchange="addFile(this);" name="p_img" multiple />
+			</div>
+		</div>
 		
 		<!-- 프로젝트 소개글 -->
 		<div class="form-group">
-			 <label for="comment">프로젝트 소개글</label>
-			 <textarea class="form-control" rows="5" id="p_content" name="p_content" placeholder="자신의 프로젝트를 소개하세요." maxlength="100"></textarea>
+			<label for="comment">프로젝트 소개글</label>
+			<!-- <textarea class="form-control" rows="5" id="p_content" name="p_content" placeholder="자신의 프로젝트를 소개하세요." maxlength="100"></textarea>  -->
+			<textarea class="summernote" name="p_content"></textarea>    
 		</div>
-		
-		<!-- 썸네일 사진1개  -->
-			<div class="form-group">
-				<label>썸네일 사진</label><br/>
-				<div class="col-sm-8">
-					<input type="file" class="btn btn-warning" onchange="addFile(this);" name="p_img" multiple />
-				</div>
-			</div>
-		<!-- 
-		상세페이지 사진3개
-		<div class="form-group">
-			<label>상세페이지 사진1</label><br/>
-			<div class="col-sm-8">
-				<input type="file"   class="btn btn-warning" name="file"/>
-			</div>
-		</div>
-		<div class="form-group">
-			<label>상세페이지 사진2</label><br/>
-			<div class="col-sm-8">
-				<input type="file"   class="btn btn-warning" name="file"/>
-			</div>
-		</div>
-		<div class="form-group">
-			<label>상세페이지 사진3</label><br/>
-			<div class="col-sm-8">
-				<input type="file"   class="btn btn-warning" name="file"/>
-			</div>
-		</div> -->
 		
 		<!-- 목표금액 -->
 		<div class="form-group">
@@ -102,11 +88,13 @@
 		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
 		</div>
 		
+		<!-- 리워드 목록. 나중에 주석해제
 		<div class="form-group" id="reward">
 			<label>r_price</label>
 		  	<input type="text" class="form-control" id="r_price" name="list[0].r_price">
 		</div>
 			<button type="button" onclick="addReward()">리워드 추가하기</button>
+		-->
 		
 		<!-- 다시입력, 등록 버튼 -->
 		<div class="form-group">
@@ -160,5 +148,13 @@
 		index++;
 	};
 </script>
+<script>
+// 써머노트
+	$('.summernote').summernote({
+		  height: 300,
+		  lang: "ko-KR"
+	});
+</script>
+
 </body>
 </html>
