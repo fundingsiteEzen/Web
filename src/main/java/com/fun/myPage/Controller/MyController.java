@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.myPage.service.mySerivce;
@@ -98,7 +99,26 @@ public class MyController {
 		ModelAndView mav	= new ModelAndView();
 		mav.setViewName("/myPage/mymy");
 		return mav;
-}
+	}
+	
+	// 계좌 정보 입력
+	@RequestMapping(value="/addAccount.do", method=RequestMethod.POST)
+	public ModelAndView addAcoount(@ModelAttribute("accountInfoDTO") accountInfoDTO aDTO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("MyController에서 받은 accountInfoDTO ==> " + aDTO);
+		
+		String id = "user1";
+		aDTO.setId(id);
+		
+		int result = 0;
+		// 사용자가 입력한 정보를 서비스에게 넘겨주어 처리하게 한다.
+		result = mService.addAccount(aDTO);
+
+		ModelAndView mav	= new ModelAndView();
+		mav.setViewName("/myPage/mymy");
+		return mav;
+	}
 }
 
 

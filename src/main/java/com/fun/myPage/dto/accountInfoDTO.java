@@ -5,6 +5,7 @@ public class accountInfoDTO {
 	private String ai_bank;		// 결제 은행
 	private String ai_num;		// 계좌 번호
 	private String ai_name;		// 예금주 이름
+	private String ai_birth;    // 예금주 생년월일
 	
 	
 	// get/set 메서드
@@ -32,12 +33,17 @@ public class accountInfoDTO {
 	public void setai_name(String ai_name) {
 		this.ai_name = ai_name;
 	}
-
+	public String getai_birth() {
+		return ai_birth;
+	}
+	public void setai_birth(String ai_birth) {
+		this.ai_birth = ai_birth;
+	}
 
 	
 	// toString
 	@Override
 	public String toString() {
-		return "accountInfoDTO [id=" + id + ", ai_bank=" + ai_bank + ", ai_num=" + ai_num + ", ai_name=" + ai_name + "]";
+		return "accountInfoDTO [id=" + id + ", ai_bank=" + ai_bank + ", ai_num=" + ai_num + ", ai_name=" + ai_name + ", ai_birth=" + ai_birth + "]";
 	}
 }
