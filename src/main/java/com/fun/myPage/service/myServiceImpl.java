@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.fun.crpage.dto.CrDTO;
 import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.backerDTO;
+import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Service
@@ -72,4 +74,13 @@ public class myServiceImpl implements mySerivce {
 		return dao.deleteProject(bDTO);
 	}
 	
+	// (5) 카드 정보 입력
+	@Override
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException {
+		
+		System.out.println("MyServiceImpl에서 받은 cardInfoDTO ==> " + cDTO);
+		return dao.addCard(cDTO);
+
+	}
 }
+

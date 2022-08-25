@@ -3,18 +3,20 @@ package com.fun.myPage.Controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fun.myPage.dto.backerDTO;
+import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.myPage.service.mySerivce;
 import com.fun.subPage.dto.projectDTO;
 
@@ -78,5 +80,28 @@ public class MyController {
 		return result;
 	}
 	
+	// 카드 정보 입력
 	
+	@RequestMapping(value="/addCard.do", method=RequestMethod.POST)
+	public ModelAndView addCard(@ModelAttribute("cardInfoDTO") cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("MyController에서 받은 cardInfoDTO ==> " + cDTO);
+		
+		String id = "user1";
+		cDTO.setId(id);
+		
+		int result = 0;
+		// 사용자가 입력한 정보를 서비스에게 넘겨주어 처리하게 한다.
+		result = mService.addCard(cDTO);
+
+		ModelAndView mav	= new ModelAndView();
+		mav.setViewName("/myPage/mymy");
+		return mav;
 }
+}
+
+
+
+
+
