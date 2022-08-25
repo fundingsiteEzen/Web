@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fun.myPage.dto.backerDTO;
 import com.fun.subPage.dto.creatorDTO;
+import com.fun.subPage.dto.prbDTO;
 import com.fun.subPage.dto.projectDTO;
 import com.fun.subPage.service.subService;
 
@@ -76,7 +79,7 @@ public class SubController {
 	}
 	
 	
-	// 후원or관심 버튼 누를시 동작
+	// 관심 버튼 누를시 동작
 	@ResponseBody
 	@RequestMapping(value="/back.do", method=RequestMethod.POST)
 	public String back_this(Model model, HttpServletRequest req) throws Exception {
@@ -121,7 +124,40 @@ public class SubController {
 		return result;
 	}
 	
-	// 후원 완료 한 후 마이페이지로 이동하기
+	// 리워드 선택 후 진행하기 버튼 누를시 동작
+	@RequestMapping(value="/detail", method=RequestMethod.POST)
+	public ModelAndView projectList(prbDTO prbDTO, HttpServletRequest req, HttpServletResponse res) throws Exception {
+		
+		// p_seq, r_seq, r_price, r_count, r_addMoney 가져옴
+		System.out.println("가져온 DTO값 : " + prbDTO);
+		
+		// 세션으로 아이디 값 가져오기
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
+		
+		backerDTO bDTO = new backerDTO();
+		bDTO.setId(id);
+		bDTO.setP_seq(prbDTO.getP_seq());
+		bDTO.setR_seq(prbDTO.getR_seq());
+		bDTO.setR_addMoney(prbDTO.getR_addMoney());
+		bDTO.setIs_like('N');
+		
+		// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
+		if(sService.check_back(bDTO) == 0) { // 중복 값이 없는 경우
+			// DB에 등록이 성공한 경우
+			if(sService.back_this(bDTO) == 1) {
+				System.out.println("등록성공");
+			} // 등록에 실패한 경우
+			else {
+				System.out.println("등록실패");
+			}
+		} else { 
+			System.out.println("중복");
+		} // 중복 값이 있는 경우
+		
+		ModelAndView mav = new ModelAndView("/myPage/myPage");
 
+		return mav;
+	}
 	
 }

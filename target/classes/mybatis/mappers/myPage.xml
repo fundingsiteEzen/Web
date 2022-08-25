@@ -32,6 +32,15 @@
 		]]>
 	</delete>
 	
+	<!-- 카드 정보 입력 -->
+	<insert id="addCard" parameterType="com.fun.myPage.dto.cardInfoDTO">
+		<![CDATA[
+		insert into cardInfo (id, ci_num1, ci_num2, ci_num3, ci_num4, ci_month, ci_year, ci_pass, ci_birth)
+		values (#{id}, #{ci_num1}, #{ci_num2}, #{ci_num3}, #{ci_num4}, #{ci_month}, #{ci_year}, #{ci_pass}, #{ci_birth})
+		]]>
+	</insert>
+	
 	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
+	
 
 </mapper>
