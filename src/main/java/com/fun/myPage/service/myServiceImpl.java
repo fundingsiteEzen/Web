@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.fun.crpage.dto.CrDTO;
 import com.fun.myPage.dao.myDAO;
+import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
@@ -80,6 +81,15 @@ public class myServiceImpl implements mySerivce {
 		
 		System.out.println("MyServiceImpl에서 받은 cardInfoDTO ==> " + cDTO);
 		return dao.addCard(cDTO);
+
+	}
+	
+	// (6) 계좌 정보입력
+	@Override
+	public int addAccount(accountInfoDTO aDTO) throws DataAccessException {
+		
+		System.out.println("MyServiceImpl에서 받은 accountInfoDTO ==> " + aDTO);
+		return dao.addAccount(aDTO);
 
 	}
 }
