@@ -49,7 +49,7 @@ public class myDAOImpl implements myDAO{
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException {
 
 		System.out.println("myDAOImpl에서 받은 cardInfoDTO ==> " + cDTO);
-		int result = sqlsession.insert("mapper.myPage.addCard", cDTO);
+		int result = sqlsession.insert(namespace + ".addCard", cDTO);
 		return result;
 
 	}

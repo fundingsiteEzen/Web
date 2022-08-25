@@ -82,6 +82,9 @@ public class MyController {
 
 		System.out.println("MyController에서 받은 cardInfoDTO ==> " + cDTO);
 		
+		String id = "user1";
+		cDTO.setId(id);
+		
 		int result = 0;
 		// 사용자가 입력한 정보를 서비스에게 넘겨주어 처리하게 한다.
 		result = mService.addCard(cDTO);
@@ -91,3 +94,8 @@ public class MyController {
 		return mav;
 }
 }
+
+
+
+
+
