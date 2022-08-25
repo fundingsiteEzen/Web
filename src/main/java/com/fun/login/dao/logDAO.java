@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fun.subPage.dto.newUserinfoDTO;
 import com.fun.subPage.dto.userinfoDTO;
 
 @Repository
@@ -23,4 +24,22 @@ public class logDAO {
 		return sqlsession.selectOne(namespace + ".searchid", id);
 	}
 	
+	
+	// (3) 회원가입
+	public int addMember(newUserinfoDTO userinfo) {
+		
+		System.out.println("회원가입(3)dao 실행");
+		
+		return sqlsession.insert(namespace + ".addMember", userinfo);
+	}
+	
+	
+	// 아이디 중복체크
+	public int checkID(String id) throws Exception {
+		
+		System.out.println("회원가입 아이디 중복체크");
+		
+		return sqlsession.selectOne(namespace + ".checkID", id);
+	}
+
 }

@@ -29,10 +29,11 @@
 					<div class="login-wrap p-0">
 				      	<h3 class="mb-4 text-center">회원가입</h3>
 				      	
-				      	<form action="${contextPath}/securegister" class="signin-form" method="post"> <!-- 회원가입하기 form -->
+				      	<form action="${contextPath}/addMember.do" class="signin-form" method="post"> <!-- 회원가입하기 form -->
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
 				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
+				      			<button onclick="checkId()">중복확인</button>
 				      		</div>
 				      		<!-- 비밀번호 -->
 				            <div class="form-group">
@@ -64,6 +65,29 @@
   	<script src="js/popper.js"></script>
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
+  	
+  	<!-- 아이디 중복체크 -->
+  	<script>
+  		function checkId() {
+  			alert("아이디 체크");
+  			$.ajax({
+  				type: "post",
+				url: "/checkId.do",
+				dataType: "json",
+				data: {"id": $("#id").val()},
+				success: function(data, textStatus) {
+					if(data == 1){
+						alert("이미 사용중인 아이디입니다.");
+						$("#id").val('');
+					} else if(data == 0) {
+						alert("사용 가능한 아이디입니다");
+					}
+				}, error: function(data, textStatus) {
+					alert("에러");
+				}
+  			});
+  		}
+  	</script>
 
 	</body>
 </html>
