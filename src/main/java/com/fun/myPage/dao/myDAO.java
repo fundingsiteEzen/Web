@@ -2,7 +2,8 @@ package com.fun.myPage.dao;
 
 import java.util.List;
 
-import com.fun.myPage.dto.accountInfoDTO;
+import org.springframework.dao.DataAccessException;
+
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
@@ -22,8 +23,8 @@ public interface myDAO {
 	public int deleteProject(backerDTO bDTO) throws Exception;
 	
 	// 카드 정보 입력
-	public int cardInfo(cardInfoDTO cDTO) throws Exception;
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
 	
 	// 계좌 정보 입력
-	public int accountInfo(accountInfoDTO aDTO) throws Exception;
+	
 }

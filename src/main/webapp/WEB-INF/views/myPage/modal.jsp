@@ -11,7 +11,7 @@
 <div class="modal" id="CardModal">
 	<div class="inner">
 		<div class="paymentCard">
-			<form action="/myPage/mymy" method="post">
+			<form class="form-horizontal" method="post" action="${contextPath}/myPage/addCard.do">
 			<div class="title">신용/체크 카드 등록</div>
                 <div class="cardBox">
                 <div class="cardGap">

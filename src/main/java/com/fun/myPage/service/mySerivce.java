@@ -23,7 +23,7 @@ public interface mySerivce {
 	public int deleteProject(backerDTO bDTO) throws Exception;
 	
 	// 카드 정보 입력
-	public int cardInfo(cardInfoDTO cDTO) throws Exception;
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
 	
 
 }

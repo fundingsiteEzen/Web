@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
@@ -47,17 +46,15 @@ public class myDAOImpl implements myDAO{
 
 	// 카드 정보 입력
 	@Override
-	public int cardInfo(cardInfoDTO cDTO) throws Exception {
-	
-		return sqlsession.insert(namespace + ".insertCard", cDTO);
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException {
+
+		System.out.println("myDAOImpl에서 받은 cardInfoDTO ==> " + cDTO);
+		int result = sqlsession.insert("mapper.myPage.addCard", cDTO);
+		return result;
+
 	}
 
 	// 계좌정보입력
-	@Override
-	public int accountInfo(accountInfoDTO aDTO) throws Exception {
-		return sqlsession.insert(namespace + ".insertAccount", aDTO);
-	}
-	
 	
 	
 

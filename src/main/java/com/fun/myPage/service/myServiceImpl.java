@@ -76,9 +76,11 @@ public class myServiceImpl implements mySerivce {
 	
 	// (5) 카드 정보 입력
 	@Override
-	public int cardInfo(cardInfoDTO cDTO) throws Exception {
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException {
 		
-		return dao.cardInfo(cDTO); 
+		System.out.println("MyServiceImpl에서 받은 cardInfoDTO ==> " + cDTO);
+		return dao.addCard(cDTO);
 
 	}
 }
+
