@@ -86,12 +86,13 @@
 <div class="modal" id="CashModal">
     <div class="inner">
         <div class="paymentCash">
+        <form class="form-horizontal" method="post" action="${contextPath}/myPage/addAccount.do">
 			<div class="title">은행계좌 등록</div>
 			<div class="selectBank">
 			    <div class="sub">
 			        <div class="subTitle">결제 은행</div>
 			        <div class="bankList">
-			            <select class="selectList">
+			            <select class="selectList" name="ai_bank">
 			            <option value="11">농협</option><option value="20">우리은행</option><option value="23">SC은행</option><option value="45">새마을금고</option><option value="71">우체국</option><option value="81">하나은행</option><option value="88">신한은행</option><option value="03">기업은행</option><option value="04">국민은행</option>
 			            </select>
 			        </div>
@@ -99,22 +100,22 @@
 				<div class="sub">
 				    <div class="subTitle">계좌번호</div>
 				    <span class="inputBox">
-				    <input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="공백, -없이 입력해주세요." maxlength="20" autocomplete="off" autocapitalize="off" class="inputDetail" value="">
+				    <input type="text" placeholder="공백, -없이 입력해주세요." maxlength="20" name="ai_num" class="inputDetail" value="">
 				    </span>
 				</div>
 				<div class="sub">
 				    <div class="subTitle">예금주명</div>
 				    <span class="inputBox">
-				    <input type="text" inputmode="text" placeholder="예금주 명을 입력해주세요." autocomplete="off" autocapitalize="off" class="inputDetail" value="">
+				    <input type="text" inputmode="text" placeholder="예금주 명을 입력해주세요." name="ai_name" class="inputDetail" value="">
 				    </span>
 				</div>
 				<div class="sub">
 				    <div class="subTitle">예금주 생년월일</div>
 				    <span class="inputBox">
-				    <input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="예) 920101" maxlength="6" autocomplete="off" autocapitalize="off" class="inputDetail" value="">
+				    <input type="text" placeholder="예) 920101" maxlength="6" name="ai_birth" class="inputDetail" value="">
 				    </span>
 				</div>
-				<button class="modalBtn">
+				<button type="submit" class="modalBtn">
 				    <div class="cashBtnY">
 				    <span>등록 완료</span>
 				    </div>
@@ -123,6 +124,7 @@
 				    <span>취 소</span>
 				</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>

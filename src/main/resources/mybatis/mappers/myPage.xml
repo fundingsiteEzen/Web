@@ -40,7 +40,14 @@
 		]]>
 	</insert>
 	
-	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
+	<!-- 계좌 정보 입력 -->
+	<insert id="addAccount" parameterType="com.fun.myPage.dto.accountInfoDTO">
+		<![CDATA[
+		insert into accountInfo (id, ai_bank, ai_num, ai_name, ai_birth)
+		values (#{id}, #{ai_bank}, #{ai_num}, #{ai_name}, #{ai_birth})
+		]]>
+	</insert>
 	
+	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
 
 </mapper>
