@@ -40,6 +40,7 @@
 <!-- 리워드 창 -->
 <div class="modal">
 	<div class="inner">
+		<form method="post">
 			<ul>
 				<c:forEach items="${rewardList}" var="list" varStatus="status">
 					<li>
@@ -48,10 +49,17 @@
 							<h3 style="text-align: center;">${list.r_price} 원</h3>
 							<span>${list.r_content}</span><br>
 							<input type="text" name="r_addMoney" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="0">
+							<input type="hidden" name="r_seq" value="${list.r_seq}">
+							<input type="hidden" name="r_price" value="${list.r_price}">
+							<input type="hidden" name="r_count" value="${list.r_count}">
+							<!-- 
+							<button type="submit">back</button>
+							 -->
 							<button type="button" class="back_btn" onclick="BACK(${project.p_seq}, ${list.r_seq}, ${list.r_price}, ${list.r_count})">back</button>
 						</div>
 					</li>
 				</c:forEach>
 			</ul>
+		</form>
 	</div>
 </div>

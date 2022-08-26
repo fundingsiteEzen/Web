@@ -19,6 +19,23 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		
+		
+	<c:choose>
+		<c:when test="${project.p_seq == 100000}">
+		<script>
+			window.onload = function() {
+				alert("아이디를 잘못 입력하셨습니다. \n다시 로그인 해주세요.");
+			}
+		</script>
+		</c:when>
+		<c:when test="${backResult == 1}">
+		<script>
+			window.onload = function() {
+				alert("성공.");
+			}
+		</script>
+		</c:when>
+	</c:choose>
 </head>
 
 <style>
@@ -165,6 +182,7 @@
 					<p>${project.p_content}</p>
 					<p>~~~ 프로젝트 소개글이 뜨는 부분 ~~~</p>
 					<p>${project.p_backer} 명 후원중</p>
+					<p>${backResult}</p>
 				</div>
 			</div>
         </div>
@@ -203,7 +221,8 @@
   		}
   		// 후원하기 버튼
   		function BACK(p_seq, r_seq, r_price, r_count) {
-  			var addMoney = $(this).$("#r_addMoney").val();
+  			//var addMoney = $("#r_addMoney").val();
+  			var addMoney = $('ul').children('li:eq(r_seq)');
   			alert(addMoney);
   			if(confirm("후원하시겠습니까 ?")){
   				$.ajax({

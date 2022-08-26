@@ -174,6 +174,7 @@
 	}
 </script>
 <script>
+	// 이미지 등록
 	function fn_submit(){
 	    
 	    var form = new FormData();
