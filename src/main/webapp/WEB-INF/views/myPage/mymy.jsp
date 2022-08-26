@@ -64,6 +64,8 @@
 	    object-fit: cover;
 	}
 	
+	.hide {display:none;}
+	
 	input {margin-bottom: 20px;}
 	.info {
 	    padding-top: 30px;
@@ -114,7 +116,9 @@
                 	<img id="img" src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
                     <div class="opacity img-circle profile">
                     </div>
+                    <div class="hide">
    				    <input type="file" id="file1" name="file1"> 
+                    </div>
                 </div>
 
 			
@@ -217,11 +221,15 @@
 		    $("#CashModal").fadeOut(200);
 		});
 		
-		
-		
-		
     </script>
+    
+    <!-- 이미지 업로드 -->
     <script type="text/javascript">
+    
+    $(".opacity").click(function() {
+        $("#file1").click();
+    });
+    
     //이미지 미리보기
     var sel_file;
  
@@ -245,37 +253,34 @@
  
             var reader = new FileReader();
             reader.onload = function(e) {
-                $("#img").attr("src", e.target.result);
-            }
-            reader.readAsDataURL(f);
-        });
-    }
-</script>
-    
-<script>
-//파일 업로드
-function fn_submit(){
-        
-        var form = new FormData();
-        form.append( "file1", $("#file1")[0].files[0] );
-        
-         jQuery.ajax({
-             url : "/myapp/result"
-           , type : "POST"
-           , processData : false
-           , contentType : false
-           , data : form
-           , success:function(response) {
-               alert("성공하였습니다.");
-               console.log(response);
-           }
-           ,error: function (jqXHR) 
-           { 
-               alert(jqXHR.responseText); 
-           }
-       });
-}
-</script>
+            	$("#img").attr("src", e.target.result);
+            	}
+            	reader.readAsDataURL(f);
+		});
+	}
+	//파일 업로드
+	function fn_submit(){
+	        
+	        var form = new FormData();
+	        form.append( "file1", $("#file1")[0].files[0] );
+	        
+	         jQuery.ajax({
+	             url : "/myapp/result"
+	           , type : "POST"
+	           , processData : false
+	           , contentType : false
+	           , data : form
+	           , success:function(response) {
+	               alert("성공하였습니다.");
+	               console.log(response);
+	           }
+	           ,error: function (jqXHR) 
+	           { 
+	               alert(jqXHR.responseText); 
+	           }
+	       });
+	}
+	</script>
     
 </body>
 </html>
