@@ -71,7 +71,10 @@
 		<div class="form-group">
 			<label>썸네일 사진</label><br/>
 			<div class="col-sm-8">
-				<input type="file" class="btn btn-warning" onchange="addFile(this);" name="p_img" multiple />
+				<input type="file" class="btn btn-warning" id="file1" name="p_img" multiple />
+			</div>
+			<div>
+				<img id="img" class="show">
 			</div>
 		</div>
 		
@@ -101,7 +104,7 @@
 		<div class="form-group">
 			<div class="col-sm-offset-4 left">
 				<button type="reset"  class="btn btn-warning">다시 입력</button>
-				<button type="submit" class="btn btn-primary">펀딩 등록</button>
+				<button type="submit" class="btn btn-primary" onclick="fn_submit()">펀딩 등록</button>
 			</div>
 		</div>
 	</form>
@@ -168,6 +171,30 @@
 	        	}
 	        	reader.readAsDataURL(f);
 		});
+	}
+</script>
+<script>
+	function fn_submit(){
+	    
+	    var form = new FormData();
+	    form.append( "file1", $("#file1")[0].files[0]);
+	    
+	     $.ajax({
+	         url : "/result"
+	       , type : "POST"
+	       , processData : false
+	       , contentType : false
+	       , data : form
+	       , success:function(response) {
+	           alert("성공하였습니다.");
+	           console.log(response);
+	       }
+	       ,error: function (jqXHR) 
+	       { 
+	    	   alert("오류");
+	           alert(jqXHR.responseText); 
+	       }
+	   });
 	}
 </script>
 
