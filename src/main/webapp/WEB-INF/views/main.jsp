@@ -32,7 +32,9 @@
 	        background-image: url("${contextPath}/images/MAIN_img/spring.png");
 	        background-attachment: fixed;
 	        transition: 0.4s;}
-	    .main {background-color: #fff; margin-top: 100px;}
+	    .main {background-color: #fff;
+	    
+	    }
 	
 	    .season_bar {
 	        margin-top: 30px;

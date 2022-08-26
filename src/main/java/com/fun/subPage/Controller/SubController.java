@@ -31,7 +31,7 @@ public class SubController {
 	subService sService;
 
 	
-	// main에서 상세페이지로 이동
+	// (1) main에서 상세페이지로 이동
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public void projectList(Model model, HttpServletRequest req) throws Exception {
 		
@@ -80,9 +80,9 @@ public class SubController {
 	}
 	
 	
-	// 관심 버튼 누를시 동작
+	// (2) 관심 버튼 누를시 동작
 	@ResponseBody
-	@RequestMapping(value="/back.do", method=RequestMethod.POST)
+	@RequestMapping(value="/addLike.do", method=RequestMethod.POST)
 	public String back_this(Model model, HttpServletRequest req) throws Exception {
 		
 		System.out.println("서브 컨트롤러(2) 실행");
@@ -103,7 +103,7 @@ public class SubController {
 			backerDTO dto = new backerDTO();
 			dto.setId(id);
 			dto.setP_seq(Integer.parseInt(p_seq));
-			dto.setIs_like(req.getParameter("is_like").charAt(0));
+			dto.setIs_like('Y');
 			
 			// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
 			if(sService.check_back(dto) == 0) { // 중복 값이 없는 경우
@@ -125,41 +125,51 @@ public class SubController {
 		return result;
 	}
 	
-	// 리워드 선택 후 진행하기 버튼 누를시 동작
-	@RequestMapping(value="/detail", method=RequestMethod.POST)
+	// (3) 리워드 선택 후 진행하기 버튼 누를시 동작
+	@RequestMapping(value="/back.do", method=RequestMethod.POST)
 	@Transactional
-	public ModelAndView projectList(prbDTO prbDTO, HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public String projectList(prbDTO prbDTO, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		// p_seq, r_seq, r_price, r_count, r_addMoney 가져옴
-		System.out.println("가져온 DTO값 : " + prbDTO);
+		String p_seq = req.getParameter("p_seq");
+		String r_seq = req.getParameter("r_seq");
+		String r_price = req.getParameter("r_price");
+		String r_count = req.getParameter("r_count");
+		System.out.println("받은값 :::: " + p_seq + r_price);
 		
 		// 세션으로 아이디 값 가져오기
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("userID");
 		
 		backerDTO bDTO = new backerDTO();
-		bDTO.setId(id);
-		bDTO.setP_seq(prbDTO.getP_seq());
-		bDTO.setR_seq(prbDTO.getR_seq());
-		bDTO.setR_addMoney(prbDTO.getR_addMoney());
-		bDTO.setIs_like('N');
 		
-		// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
-		if(sService.check_back(bDTO) == 0) { // 중복 값이 없는 경우
-			// DB에 등록이 성공한 경우
-			if(sService.back_this(bDTO) == 1) {
-				System.out.println("등록성공");
-			} // 등록에 실패한 경우
-			else {
-				System.out.println("등록실패");
-			}
-		} else { 
-			System.out.println("중복");
-		} // 중복 값이 있는 경우
+		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러 'F'는 로그인 안됨
+		String result = null;
 		
-		ModelAndView mav = new ModelAndView("/myPage/myPage");
-
-		return mav;
+		// 로그인 여부 확인
+		if(session.getAttribute("isLogin") != null) {
+			
+			backerDTO dto = new backerDTO();
+			
+			// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
+			if(sService.check_back(dto) == 0) { // 중복 값이 없는 경우
+				// DB에 등록이 성공한 경우
+				if(sService.back_this(dto) == 1) {
+					System.out.println("등록성공");
+					result = "Y";
+				} // 등록에 실패한 경우
+				else {
+					System.out.println("등록실패");
+					result = "N";
+				}
+			} else { 
+				System.out.println("중복");
+				result="D"; } // 중복 값이 있는 경우
+			
+		} else { result="F"; }
+		
+		return result;
+		
 	}
 	
 }
