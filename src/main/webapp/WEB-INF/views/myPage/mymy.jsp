@@ -46,11 +46,11 @@
 	    height: 200px;
 	    position: relative;
 	}
+	
 	.opacity {
 	    position: absolute;
 	    top: 0;
 	    background-color: #fff;
-	    opacity: 0;
 	    transition: 0.3s;
 	}
 	.opacity:hover {
@@ -60,7 +60,7 @@
 	.profile {
 	    width: 100%;
 	    height: 100%;
-	    object-fit: cover;
+	    
 	}
 	
 	input {margin-bottom: 20px;}
@@ -107,12 +107,19 @@
 	<!-- 메인 -->
     <div class="container-fluid main-back">
     	<div class="container main">
-            <div class="row">
+            <div class="row">  
+
                 <div class="profile-img" data-toggle="tooltip" title="사진 바꾸기">
-                    <img src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
                     <div class="opacity img-circle profile">
+   				    <input type="file" id="file1" name="file1" class="opacity"> 
                     </div>
+                    <div class="img_wrap">
+                    <img id="img" class="img-circle profile"/>
+                    </div>
+                    
                 </div>
+
+			
                 <div class="row info" align="center">
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">닉네임</label>
@@ -159,6 +166,7 @@
             
             <!-- 카드 & 계좌 모달창 -->
 			<jsp:include page="modal.jsp" flush="false" />
+			
 	    </div>
 	</div>
 	
@@ -210,7 +218,66 @@
 		$("#cashBtnN").click(function(){
 		    $("#CashModal").fadeOut(200);
 		});
+		
+		
+		
+		
     </script>
+    <script type="text/javascript">
+    //이미지 미리보기
+    var sel_file;
+ 
+    $(document).ready(function() {
+        $("#file1").on("change", handleImgFileSelect);
+    });
+ 
+    function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+ 
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+ 
+        filesArr.forEach(function(f) {
+            if (!f.type.match(reg)) {
+                alert("확장자는 이미지 확장자만 가능합니다.");
+                return;
+            }
+ 
+            sel_file = f;
+ 
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#img").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+</script>
+    
+<script>
+//파일 업로드
+function fn_submit(){
+        
+        var form = new FormData();
+        form.append( "file1", $("#file1")[0].files[0] );
+        
+         jQuery.ajax({
+             url : "/myapp/result"
+           , type : "POST"
+           , processData : false
+           , contentType : false
+           , data : form
+           , success:function(response) {
+               alert("성공하였습니다.");
+               console.log(response);
+           }
+           ,error: function (jqXHR) 
+           { 
+               alert(jqXHR.responseText); 
+           }
+       });
+}
+</script>
     
 </body>
 </html>
