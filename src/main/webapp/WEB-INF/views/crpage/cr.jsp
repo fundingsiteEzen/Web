@@ -88,7 +88,8 @@
 		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
 		</div>
 		
-		<!-- 리워드 목록. 나중에 주석해제
+		<!-- 리워드 목록. 나중에 주석해제 -->
+		<!--
 		<div class="form-group" id="reward">
 			<label>r_price</label>
 		  	<input type="text" class="form-control" id="r_price" name="list[0].r_price">

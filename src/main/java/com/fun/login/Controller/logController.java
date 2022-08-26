@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fun.login.service.logService;
+import com.fun.subPage.dto.newUserinfoDTO;
 import com.fun.subPage.dto.userinfoDTO;
 
 @Controller
@@ -37,7 +39,7 @@ public class logController {
 	}
 	
 	// 0. 회원가입 화면으로 이동
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
+	@RequestMapping(value="/register.do", method=RequestMethod.GET)
 	public String registerHome() throws Exception {
 		System.out.println("로그 컨트롤러.회원가입");
 		return "login/register";
@@ -61,7 +63,11 @@ public class logController {
 			if(uDTO != null) {
 				
 				// 아이디와 비밀번호가 일치할 경우
-				if(userinfo.getPass().equals(uDTO.getPass())) {
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				boolean match = passwordEncoder.matches(userinfo.getPass(), uDTO.getPass());
+				System.out.println("복호화 끝난 값 : " + match);
+//				if(userinfo.getPass().equals(uDTO.getPass())) {
+				if(match) {
 					// 세션을 만들고, 세션에 해당 로그인 정보를 붙힘
 					HttpSession session = req.getSession();
 					session.setAttribute("userID", uDTO.getId());
@@ -72,7 +78,7 @@ public class logController {
 				else {
 					System.out.println("비밀번호 불일치");
 					rAttr.addAttribute("result", "passwordFailed");
-					mav.setViewName("redirect:/");
+					mav.setViewName("redirect:/login.do");
 				}
 			} // 정보가 없을 경우
 			else {
@@ -85,7 +91,6 @@ public class logController {
 		return mav;
 	}
 	
-
 	
 	// 2. 로그아웃 처리
 	@RequestMapping(value="/logout.do",  method=RequestMethod.GET)
@@ -104,18 +109,41 @@ public class logController {
 		
 		return mav;
 	}
-//	
-//	// 10. 아이디 중복 검사
-//	@ResponseBody
-//	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
-//	public int idCheck(MemberVO memberVO) throws Exception {
-//		
-//		System.out.println("아이디 중복검사 실행");
-//		
-//		int result = memberService.idCheck(memberVO);
-//		System.out.println("result : " + result);
-//		
-//		return result;
-//	}
+	
+	
+	// 3. 회원가입
+	@RequestMapping(value="/addMember.do", method=RequestMethod.POST)
+	public ModelAndView addMember(@ModelAttribute("userinfo") newUserinfoDTO uDTO, HttpServletRequest req, HttpServletResponse res)
+		throws Exception {
+		
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html;charset=UTF-8");
+		
+		System.out.println("입력받은 값 : " + uDTO);
+		
+		// 비밀번호 암호화
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		uDTO.setPass(passwordEncoder.encode(uDTO.getPass())); // 비밀번호 암호화
+		System.out.println("암호화 끝난 값" + uDTO.getPass());
+		uDTO.setName(uDTO.getId());
+		uDTO.setUser_auth("USER");
+		
+		int result = lSerivce.addMember(uDTO);
+		
+		ModelAndView mav = new ModelAndView("redirect:/"); // 로그인 완료되면 메인으로 돌아감
+		
+		return mav;
+	}
+	
+	// 3-2. 아이디 중복체크
+	@ResponseBody
+	@RequestMapping(value="/checkId.do", method=RequestMethod.POST)
+	public int checkId(HttpServletRequest req) throws Exception {
+		
+		String id = req.getParameter("id");
+		System.out.println("회원가입 아이디 : " + id);
+		
+		return lSerivce.checkId(id);
+	}
 	
 }

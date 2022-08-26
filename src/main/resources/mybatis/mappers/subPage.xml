@@ -35,7 +35,7 @@
 	<insert id="backProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
 		INSERT INTO backer
-		VALUES (#{id}, #{p_seq}, #{r_seq}, #{is_like})
+		VALUES (#{id}, #{p_seq}, #{r_seq}, #{r_addMoney}, #{is_like})
 		]]>
 	</insert>
 	

@@ -51,6 +51,7 @@
 	    position: absolute;
 	    top: 0;
 	    background-color: #fff;
+	    opacity: 0;
 	    transition: 0.3s;
 	}
 	.opacity:hover {
@@ -60,7 +61,7 @@
 	.profile {
 	    width: 100%;
 	    height: 100%;
-	    
+	    object-fit: cover;
 	}
 	
 	input {margin-bottom: 20px;}
@@ -110,13 +111,10 @@
             <div class="row">  
 
                 <div class="profile-img" data-toggle="tooltip" title="사진 바꾸기">
+                	<img id="img" src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
                     <div class="opacity img-circle profile">
-   				    <input type="file" id="file1" name="file1" class="opacity"> 
                     </div>
-                    <div class="img_wrap">
-                    <img id="img" class="img-circle profile"/>
-                    </div>
-                    
+   				    <input type="file" id="file1" name="file1"> 
                 </div>
 
 			
