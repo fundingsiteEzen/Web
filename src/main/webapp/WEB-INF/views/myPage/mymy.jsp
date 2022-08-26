@@ -114,7 +114,7 @@
    				    <input type="file" id="file1" name="file1" class="opacity"> 
                     </div>
                     <div class="img_wrap">
-                    <img id="img" />
+                    <img id="img" class="img-circle profile"/>
                     </div>
                     
                 </div>
@@ -166,7 +166,7 @@
             
             <!-- 카드 & 계좌 모달창 -->
 			<jsp:include page="modal.jsp" flush="false" />
-			<input type="file"   class="btn btn-warning" name="file"/>
+			
 	    </div>
 	</div>
 	
