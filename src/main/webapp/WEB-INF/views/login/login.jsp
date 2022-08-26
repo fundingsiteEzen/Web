@@ -21,6 +21,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 		
+</head>
+	
+<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+
 	<!-- 페이지가 시작될 때 실행되는 스크립트 -->
 	<c:choose>
 		<c:when test="${result == 'loginFailed'}">
@@ -38,9 +42,6 @@
 		</script>
 		</c:when>
 	</c:choose>
-</head>
-	
-<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 	
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />

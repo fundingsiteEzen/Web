@@ -51,7 +51,10 @@
 							<input type="hidden" name="r_seq" value="${list.r_seq}">
 							<input type="hidden" name="r_price" value="${list.r_price}">
 							<input type="hidden" name="r_count" value="${list.r_count}">
+							<button type="submit"></button>
+							<!--
 							<button type="button" class="back_btn" onclick="BACK(${project.p_seq}, 'N')">back</button>
+							-->
 						</div>
 					</li>
 				</c:forEach>

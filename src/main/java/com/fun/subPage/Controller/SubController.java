@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -126,6 +127,7 @@ public class SubController {
 	
 	// 리워드 선택 후 진행하기 버튼 누를시 동작
 	@RequestMapping(value="/detail", method=RequestMethod.POST)
+	@Transactional
 	public ModelAndView projectList(prbDTO prbDTO, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		// p_seq, r_seq, r_price, r_count, r_addMoney 가져옴
