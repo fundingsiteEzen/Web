@@ -93,7 +93,6 @@
 			        <div class="subTitle">결제 은행</div>
 			        <div class="bankList">
 			            <select class="selectList" name="ai_bank">
-			            <option value="11">농협</option><option value="20">우리은행</option><option value="23">SC은행</option><option value="45">새마을금고</option><option value="71">우체국</option><option value="81">하나은행</option><option value="88">신한은행</option><option value="03">기업은행</option><option value="04">국민은행</option>
 			            </select>
 			        </div>
 			    </div>

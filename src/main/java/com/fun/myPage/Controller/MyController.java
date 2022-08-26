@@ -54,7 +54,18 @@ public class MyController {
 	
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy", method=RequestMethod.GET)
-	public void projectList(Model model) throws Exception {
+	public void projectList(Model model, cardInfoDTO cDTO) throws Exception {
+		
+		// 카드 정보 뿌리기
+		
+		String id = "user1";
+		cDTO.setId(id);
+		
+		System.out.println("MyController cardList() 시작");
+		List<cardInfoDTO> cardList = mService.cardList();
+		System.out.println("MyController cardList() Data ==> " + cardList);
+		model.addAttribute("cardList", cardList);
+		
 	}
 	
 	// 후원 & 관심 목록 삭제
@@ -119,6 +130,8 @@ public class MyController {
 		mav.setViewName("/myPage/mymy");
 		return mav;
 	}
+	
+	
 }
 
 
