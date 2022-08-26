@@ -28,9 +28,25 @@
 	<!-- 후원 & 관심목록에서 없애기 -->
 	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
-		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like}
+		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like} AND id=#{id}
 		]]>
 	</delete>
+	
+	<!-- 카드 정보 입력 -->
+	<insert id="addCard" parameterType="com.fun.myPage.dto.cardInfoDTO">
+		<![CDATA[
+		insert into cardInfo (id, ci_num1, ci_num2, ci_num3, ci_num4, ci_month, ci_year, ci_pass, ci_birth)
+		values (#{id}, #{ci_num1}, #{ci_num2}, #{ci_num3}, #{ci_num4}, #{ci_month}, #{ci_year}, #{ci_pass}, #{ci_birth})
+		]]>
+	</insert>
+	
+	<!-- 계좌 정보 입력 -->
+	<insert id="addAccount" parameterType="com.fun.myPage.dto.accountInfoDTO">
+		<![CDATA[
+		insert into accountInfo (id, ai_bank, ai_num, ai_name, ai_birth)
+		values (#{id}, #{ai_bank}, #{ai_num}, #{ai_name}, #{ai_birth})
+		]]>
+	</insert>
 	
 	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
 
