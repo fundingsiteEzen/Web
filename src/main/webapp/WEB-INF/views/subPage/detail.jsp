@@ -20,22 +20,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		
 		
-	<c:choose>
-		<c:when test="${project.p_seq == 100000}">
-		<script>
-			window.onload = function() {
-				alert("아이디를 잘못 입력하셨습니다. \n다시 로그인 해주세요.");
-			}
-		</script>
-		</c:when>
-		<c:when test="${backResult == 1}">
-		<script>
-			window.onload = function() {
-				alert("성공.");
-			}
-		</script>
-		</c:when>
-	</c:choose>
 </head>
 
 <style>
@@ -66,34 +50,13 @@
 	.navigation {
 		margin-top: 100px;
 	}
-		
-  .story {
-  	height: 2000px;
-  }
-  .story li { width: 100%;}
-  
-  /* 기존 style 스크롤바이 */
-  .scroll {
-  	top: 50px;
-  	position:sticky;
-  }
-  .scrollul {
-  	text-align: center;
-  }
-  .scrollul li {
-	line-height: 60px;
-	background-color: #ccc;
-  }
-  .reward { height: 2000px; }
-  .reward_each {
-	top: 50px;
-	position: sticky; }
-
-  div.col-sm-7 div {
-    height: 1000px;
-    font-size: 28px;
-  }
-  #section1, #section2, #section3  {color: #fff; background-color: #ccc;}
+	.item {
+		width:100%;
+		object-fit: cover;
+	}
+	.carousel-control.left, .carousel-control.right {
+    	background-image: none
+	}
   
   </style>
 
@@ -113,24 +76,33 @@
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						<!-- 인디케이터 -->
 						<ol class="carousel-indicators">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1"></li>
-							<li data-target="#myCarousel" data-slide-to="2"></li>
+							<c:forEach var="i" begin="0" end="${project.p_imgCnt-1}" varStatus="status">
+								<c:choose>
+								<c:when test="${status.index == 0}">
+								<li data-target="#myCarousel" data-slide-to="${status.index}" class="active"></li>
+								</c:when>
+								<c:when test="${status.index > 0}">
+								<li data-target="#myCarousel" data-slide-to="${status.index}"></li>
+								</c:when>
+								</c:choose>
+							</c:forEach>
 						</ol>
 						<!-- 슬라이드 wrap -->
 						<div class="carousel-inner">
-							<div class="item active">
-								<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail01.jpg" alt="img01" width="100%" height="350px"/>
-								<div class="carousel-caption"></div>
-							</div>
-							<div class="item">
-								<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail02.jpg" alt="img02" width="100%" height="350px"/>
-								<div class="carousel-caption"><h2></h2></div>
-							</div>
-							<div class="item">
-								<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail03.jpg" alt="img03" width="100%" height="350px"/>
-								<div class="carousel-caption"><h2></h2></div>
-							</div>
+							<c:forEach items="${slide}" var="list" varStatus="status">
+								<c:choose>
+								<c:when test="${status.index == 0}">
+								<div class="item active">
+									<img class="img-responseve center-block" src="${contextPath}/images/thumnail/${list}"/>
+								</div>
+								</c:when>
+								<c:when test="${status.index > 0}">
+								<div class="item">
+									<img class="img-responseve center-block" src="${contextPath}/images/thumnail/${list}"/>
+								</div>
+								</c:when>
+								</c:choose>
+							</c:forEach>
 						</div>
 						
 						<!-- 좌우 버튼 -->

@@ -50,10 +50,10 @@ public class SubController {
 		List<projectDTO> r_list = sService.rewardList(p_seq);
 		System.out.println("리워드 리스트 가져온 데이터 : " + r_list);
 		
-		// 3. creator 테이블 가져오기
+		// 3. creator 테이블 가져오기.. creator 테이블을 안 씀..
 		// 1에서 가져온 테이블에서 id를 넘김
-		creatorDTO Cdto = sService.creatorList(Pdto.getId());
-		System.out.println("Cdto 가져온 데이터 : " + Cdto);
+//		creatorDTO Cdto = sService.creatorList(Pdto.getId());
+//		System.out.println("Cdto 가져온 데이터 : " + Cdto);
 		
 		
 		// 남은 날짜 구하기
@@ -70,6 +70,12 @@ public class SubController {
 		// 후원 % 구하기
 		int percent = (int)((double)Pdto.getP_total() / (double)Pdto.getP_goal() * 100);
 		
+		// 슬라이드 이미지 구하기
+		String str = Pdto.getP_slide();
+		String[] strArr = str.split(",");
+		for(int i = 0; i < strArr.length; i++) {
+			System.out.println(strArr[i]);
+		}
 		
 		// 4. model에 붙히기
 		// 남은 날짜, 프로젝트 정보, 리워드 정보, 창작자 정보
@@ -77,7 +83,8 @@ public class SubController {
 		model.addAttribute("rewardList", r_list);
 		model.addAttribute("dayCount", dayCount);
 		model.addAttribute("percent", percent);
-		model.addAttribute("creator", Cdto);
+//		model.addAttribute("creator", Cdto);
+		model.addAttribute("slide", strArr);
 		
 	}
 	

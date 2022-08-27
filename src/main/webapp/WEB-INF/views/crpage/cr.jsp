@@ -35,6 +35,20 @@
             width: 300px;
             object-fit: cover;
         }
+        #file1 {
+            display: none;
+        }
+        .img_button {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #999999;
+            cursor: pointer;
+        }
+        .right {
+            float: right;
+            margin-bottom: 10px;
+            margin-top: -10px;
+        }
     </style>
 </head>
 
@@ -48,7 +62,7 @@
 		<!-- 프로젝트 제목, 창작자 이름(자동) -->
 		<div class="form-group">
 		  <label>프로젝트 제목</label>
-		  <input type="text" class="form-control" id="p_name" name="p_name" placeholder="프로젝트 제목" maxlength="50">
+		  <input type="text" class="form-control" id="p_name" name="p_name" placeholder="프로젝트 제목" maxlength="50" required>
 		</div>
 		<div class="form-group">
 		  <label>창작자</label>
@@ -72,52 +86,61 @@
 		 	<!-- <input type="date" id="p_beginDate" name="p_beginDate"> -->
 			
 			<label>프로젝트 종료날짜</label>
-			<input type="date" id="p_endDate" name="p_endDate">
+			<input type="date" id="p_endDate" name="p_endDate" required>
 		</div>
 		
 		<!-- 결제 예정일 -->
 		<div class="form-group">
 			<label>결제 예정일</label>
-			<input type="date" id="p_payDate" name="p_payDate">
+			<input type="date" id="p_payDate" name="p_payDate" required>
 		</div>
 		
 		<!-- 목표금액 -->
 		<div class="form-group">
 			<label>목표금액</label>
-		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
 		</div>
 
 		<!-- 썸네일 사진, 슬라이드 이미지 첨부하기 (다중첨부 가능하게)  -->
 		<div class="form-group">
 			<label>이미지 첨부</label><br/>
-			<div class="col-sm-8">
-				<input type="file" id="file1" multiple />
-			</div>
-			<div class="img_add">
-			</div>
+			<input type="file" id="file1" name="p_slide" multiple />
+            <label class="img_button" for="file1">+ 추가</label>
+			<div class="img_add"></div>
 		</div>
 		
 		<!-- 프로젝트 소개글 -->
 		<div class="form-group">
 			<label for="comment">프로젝트 소개글</label>
 			<!-- <textarea class="form-control" rows="5" id="p_content" name="p_content" placeholder="자신의 프로젝트를 소개하세요." maxlength="100"></textarea>  -->
-			<textarea class="summernote" name="p_content"></textarea>    
+			<textarea class="summernote" name="p_content" required></textarea>    
 		</div>
 		
 		<!-- 리워드 목록. 나중에 주석해제 -->
-		<!--
-		-->
-		<div class="form-group" id="reward">
-			<label>r_price</label>
-		  	<input type="text" class="form-control" id="r_price" name="list[0].r_price">
+		<div id="reward">
+            <label>리워드 구성</label>
+            <div class="img_button right" onclick="addReward()">+ 리워드 추가하기</div>
+            <div class="form-group">
+                <textarea class="form-control" name="list[0].r_content"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">최소 후원 금액</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="r_price" name="list[0].r_price">
+                </div>
+                <label class="control-label col-sm-2">준비 수량</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="r_price" name="list[0].r_count">
+                </div>
+                <input type="hidden" name="list[0].r_seq" value="1">
+            </div>
 		</div>
-			<button type="button" onclick="addReward()">리워드 추가하기</button>
 		
 		<!-- 다시입력, 등록 버튼 -->
 		<div class="form-group">
 			<div class="col-sm-offset-4 left">
 				<button type="reset"  class="btn btn-warning">다시 입력</button>
-				<button type="submit" class="btn btn-primary" onclick="fn_submit()">펀딩 등록</button>
+				<button type="submit" class="btn btn-primary">펀딩 등록</button>
 			</div>
 		</div>
 	</form>
@@ -134,8 +157,6 @@
 		var formData = new FormData();
 		formData.append("file", files);
 		alert(files.name);
-		var id = $("#id").val();
-		alert(id);
 		
 		alert("ajax 실행준비");
 		// processData와 contentType을 false로 해서 보내주어야함
@@ -145,12 +166,14 @@
 			data: formData,
 			processData:	false,
 			contentType:	false,
-			success: function(data, status, req) {
+			success: function(request, status, error) {
 				alert("성공");
+				alert(request); // 이거 저장된 파일 이름.. !!
 			},
-			error: function(data) {alert('문제가 발생했습니다');}
+			error: function(request, status, error) {
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
 		});
-		alert("ajax 끝");
 		
 	}
 </script>
@@ -163,13 +186,17 @@
 	    $("#file1").on("change", handleImgFileSelect);
 	});
 	
+    var index=1;
 	function handleImgFileSelect(e) {
+		if(index >4) {
+            alert("이미지는 4장까지만 첨부 가능합니다");
+            return;
+	    }
 	    var files = e.target.files;
 	    var filesArr = Array.prototype.slice.call(files);
 	    
 	    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
 	    
-	    var index=1;
 	    filesArr.forEach(function(f) {
 	        if (!f.type.match(reg)) {
 	            alert("이미지만 첨부 가능합니다.");
