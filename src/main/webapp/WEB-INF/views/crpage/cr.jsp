@@ -22,6 +22,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	
+	
+	<style>
+        .img_add {
+            overflow: auto;
+            white-space: nowrap;
+            width: 100%;
+        }
+        .img {
+            padding-right: 10px;
+            height: 200px;
+            width: 300px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -66,15 +80,20 @@
 			<label>결제 예정일</label>
 			<input type="date" id="p_payDate" name="p_payDate">
 		</div>
+		
+		<!-- 목표금액 -->
+		<div class="form-group">
+			<label>목표금액</label>
+		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		</div>
 
 		<!-- 썸네일 사진, 슬라이드 이미지 첨부하기 (다중첨부 가능하게)  -->
 		<div class="form-group">
-			<label>썸네일 사진</label><br/>
+			<label>이미지 첨부</label><br/>
 			<div class="col-sm-8">
-				<input type="file" class="btn btn-warning" id="file1" name="p_img" multiple />
+				<input type="file" id="file1" multiple />
 			</div>
-			<div>
-				<img id="img" class="show">
+			<div class="img_add">
 			</div>
 		</div>
 		
@@ -85,20 +104,14 @@
 			<textarea class="summernote" name="p_content"></textarea>    
 		</div>
 		
-		<!-- 목표금액 -->
-		<div class="form-group">
-			<label>목표금액</label>
-		  <input type="text" class="form-control" id="p_goal" name="p_goal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
-		</div>
-		
 		<!-- 리워드 목록. 나중에 주석해제 -->
 		<!--
+		-->
 		<div class="form-group" id="reward">
 			<label>r_price</label>
 		  	<input type="text" class="form-control" id="r_price" name="list[0].r_price">
 		</div>
 			<button type="button" onclick="addReward()">리워드 추가하기</button>
-		-->
 		
 		<!-- 다시입력, 등록 버튼 -->
 		<div class="form-group">
@@ -129,8 +142,7 @@
 		$.ajax({
 			type: "post",
 			url: "/crpage/file",
-			data: {formData:formData, id:id},
-			dataType:		"json",
+			data: formData,
 			processData:	false,
 			contentType:	false,
 			success: function(data, status, req) {
@@ -154,22 +166,28 @@
 	function handleImgFileSelect(e) {
 	    var files = e.target.files;
 	    var filesArr = Array.prototype.slice.call(files);
-	
+	    
 	    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-	
+	    
+	    var index=1;
 	    filesArr.forEach(function(f) {
 	        if (!f.type.match(reg)) {
-	            alert("확장자는 이미지 확장자만 가능합니다.");
+	            alert("이미지만 첨부 가능합니다.");
 	            return;
 	        }
-	
+	        
 	        sel_file = f;
-	
+	        
 	        var reader = new FileReader();
 	        reader.onload = function(e) {
-	        	$("#img").attr("src", e.target.result);
+	            var str = "<img class='img add"+index+"'>";
+		        $(".img_add").append(str);
+	        	$('.add'+index).attr("src", e.target.result);
+	            index++;
+	            console.log($(".img_add").children(index));
 	        	}
 	        	reader.readAsDataURL(f);
+	
 		});
 	}
 </script>

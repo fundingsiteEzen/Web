@@ -5,7 +5,7 @@ import java.sql.Date;
 public class projectDTO {
 
 	private String id; // user아이디
-	private String p_seq; // 프로젝트 고유번호
+	private int p_seq; // 프로젝트 고유번호
 	private String p_name; // 프로젝트 이름
 	private String p_category; // 프로젝트 카테고리
 	private Date p_beginDate; // 펀딩 시작일
@@ -29,10 +29,10 @@ public class projectDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getP_seq() {
+	public int getP_seq() {
 		return p_seq;
 	}
-	public void setP_seq(String p_seq) {
+	public void setP_seq(int p_seq) {
 		this.p_seq = p_seq;
 	}
 	public String getP_name() {

@@ -197,6 +197,7 @@
   	
   	<!-- 커스텀 스크립트 -->
   	<script>
+  		// 관심목록 버튼
   		function addList(p_seq) {
   			$.ajax({
   				type: "POST",
@@ -220,15 +221,16 @@
   			});
   		}
   		// 후원하기 버튼
-  		function BACK(p_seq, r_seq, r_price, r_count) {
-  			//var addMoney = $("#r_addMoney").val();
-  			var addMoney = $('ul').children('li:eq(r_seq)');
-  			alert(addMoney);
+  		function back_this(r_seq) {
+  			var formsubmitSerialArray = $('#form'+r_seq).serializeArray();
+  			var formsubmit = JSON.stringify(objectifyForm(formsubmitSerialArray));
+  			//var formsubmit = $("#form1").serialize();
   			if(confirm("후원하시겠습니까 ?")){
   				$.ajax({
   	  				type: "POST",
   	  				url: "/subPage/back.do",
-  	  				data: {p_seq:p_seq, r_seq:r_seq, r_price:r_price, r_count:r_count},
+	  	  			contentType: 'application/json; charset=utf-8',
+  	  				data: formsubmit,
   	  				success: function(data) {
   	  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
   	  					if(data == 'F') {
@@ -237,15 +239,27 @@
   	  					}
   	  					if(data == 'Y'){
   	  						location.href = "redirect:/subPage/detail";
-  	  						alert("관심 목록에 추가되었습니다");
+  	  						alert("후원이 완료되었습니다");
   	  					}
   	  					if(data == 'D') {
   	  						alert("이미 후원중인 프로젝트입니다");
   	  					}
   	  				},
-  	  				error: function(data) {alert('문제가 발생했습니다');}
+  	  				error: function(request, status, error) {alert("문제가 발생했습니다");}
   	  			});
   			}
+  		}
+  		function objectifyForm(formArray) {//serializeArray data function
+  			var returnArray = {};
+  			for (var i = 0; i < formArray.length; i++) {
+  				returnArray[formArray[i]['name']] = formArray[i]['value'];
+  			}
+  			return returnArray;
+  		}
+  		// 후원하면 BACK 버튼 생김
+  		function addSubmit(r_seq) {
+  			$(".BACK").attr("disabled", false);
+  			$('#addMondy'+r_seq).focus();
   		}
   	</script>
   	<script>
