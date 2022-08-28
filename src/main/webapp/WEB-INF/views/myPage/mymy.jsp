@@ -24,14 +24,17 @@
 	<link rel="stylesheet" href="${contextPath}/css/modal.css">
 	
 	<style>
-	* {
-	    margin: 0 auto;
-	    padding: 0;
-	    list-style: none;}
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
+    * {
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        font-family: 'Hahmlet', serif;}
+     label{font-weight: 500;}
 	.bg-image {
-	    background-image: url('${contextPath}/images/MAIN_img/summer02.png');
+	    background-image: url('${contextPath}/images/MAIN_img/summer.jpg');
 	    background-attachment: fixed;
-	    height: 200px;
+	    height: 300px;
 	}
 	.main-back {
 	}
@@ -46,6 +49,7 @@
 	    height: 200px;
 	    position: relative;
 	}
+	
 	.opacity {
 	    position: absolute;
 	    top: 0;
@@ -62,6 +66,8 @@
 	    height: 100%;
 	    object-fit: cover;
 	}
+	
+	.hide {display:none;}
 	
 	input {margin-bottom: 20px;}
 	.info {
@@ -107,12 +113,18 @@
 	<!-- 메인 -->
     <div class="container-fluid main-back">
     	<div class="container main">
-            <div class="row">
+            <div class="row">  
+
                 <div class="profile-img" data-toggle="tooltip" title="사진 바꾸기">
-                    <img src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
+                	<img id="img" src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
                     <div class="opacity img-circle profile">
                     </div>
+                    <div class="hide">
+   				    <input type="file" id="file1" name="file1"> 
+                    </div>
                 </div>
+
+			
                 <div class="row info" align="center">
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">닉네임</label>
@@ -159,6 +171,7 @@
             
             <!-- 카드 & 계좌 모달창 -->
 			<jsp:include page="modal.jsp" flush="false" />
+			
 	    </div>
 	</div>
 	
@@ -210,7 +223,67 @@
 		$("#cashBtnN").click(function(){
 		    $("#CashModal").fadeOut(200);
 		});
+		
     </script>
+    
+    <!-- 이미지 업로드 -->
+    <script type="text/javascript">
+    
+    $(".opacity").click(function() {
+        $("#file1").click();
+    });
+    
+    //이미지 미리보기
+    var sel_file;
+ 
+    $(document).ready(function() {
+        $("#file1").on("change", handleImgFileSelect);
+    });
+ 
+    function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+ 
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+ 
+        filesArr.forEach(function(f) {
+            if (!f.type.match(reg)) {
+                alert("확장자는 이미지 확장자만 가능합니다.");
+                return;
+            }
+ 
+            sel_file = f;
+ 
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            	$("#img").attr("src", e.target.result);
+            	}
+            	reader.readAsDataURL(f);
+		});
+	}
+	//파일 업로드
+	function fn_submit(){
+	        
+	        var form = new FormData();
+	        form.append( "file1", $("#file1")[0].files[0] );
+	        
+	         jQuery.ajax({
+	             url : "/myapp/result"
+	           , type : "POST"
+	           , processData : false
+	           , contentType : false
+	           , data : form
+	           , success:function(response) {
+	               alert("성공하였습니다.");
+	               console.log(response);
+	           }
+	           ,error: function (jqXHR) 
+	           { 
+	               alert(jqXHR.responseText); 
+	           }
+	       });
+	}
+	</script>
     
 </body>
 </html>

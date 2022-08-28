@@ -11,14 +11,32 @@
 <mapper namespace="com.fun.login">
 
 	<!-- 아이디에 해당하는 userinfo 찾아오기 -->
-	<!-- <select id="searchid" parameterType="String" resultType="com.fun.subPage.dto.userinfoDTO">
+	<select id="searchid" parameterType="String" resultType="com.fun.subPage.dto.userinfoDTO">
 		<![CDATA[
 		SELECT * FROM userinfo WHERE id=#{id}
 		]]>
 	</select>
-	 -->
+	
+	<!-- 회원가입 시 회원정보 넣기 -->
+	<insert id="addMember" parameterType="com.fun.subPage.dto.newUserinfoDTO">
+		<![CDATA[
+		INSERT INTO userinfo
+		VALUES(#{id}, #{pass}, #{name}, #{email}, #{user_auth})
+		]]>
+	</insert>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="checkID" parameterType="String" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM userinfo
+		WHERE id=#{id}
+		]]>
+	</select>
+	
 	
 	<!-- 시큐리티랑 연결됨. 유저정보 받아오기 -->
+	<!--
 	<select id="getInfo" parameterType="String" resultType="com.fun.subPage.dto.newUserinfoDTO">
 		<![CDATA[
 		SELECT * FROM userinfo WHERE id=#{id}
@@ -31,5 +49,6 @@
 		VALUES(#{id}, #{pass}, #{name}, #{email}, #{user_auth})
 		]]>
 	</insert>
+	 -->
 
 </mapper>

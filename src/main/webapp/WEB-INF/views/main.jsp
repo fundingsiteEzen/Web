@@ -24,15 +24,20 @@
 	
 	
 	<style>
-	    * {margin: 0 auto;
-	    padding: 0;
-	    list-style: none;}
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
+        * {
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            font-family: 'Hahmlet', serif;}
 	    
 	    .wrap {
-	        background-image: url("${contextPath}/images/MAIN_img/spring.png");
+	        background-image: url("${contextPath}/images/MAIN_img/spring.jpg");
 	        background-attachment: fixed;
 	        transition: 0.4s;}
-	    .main {background-color: #fff; margin-top: 100px;}
+	    .main {background-color: #fff;
+	    
+	    }
 	
 	    .season_bar {
 	        margin-top: 30px;
@@ -96,7 +101,7 @@
 						<!-- 고유번호(seq)페이지로 이동 -->
 						<div align="center" class="col-sm-3 category p_spring" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 							</div>
 							<div>
 								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
@@ -108,7 +113,7 @@
 	                <c:forEach items="${SummerList}" var="list" varStatus="status">
 						<div align="center" class="col-sm-3 category p_summer" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 							</div>
 							<div>
 								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
@@ -120,7 +125,7 @@
 					<c:forEach items="${AutumnList}" var="list" varStatus="status">
 						<div align="center" class="col-sm-3 category p_autumn" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 							</div>
 							<div>
 								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
@@ -133,7 +138,7 @@
 						<!-- 고유번호(seq)페이지로 이동 -->
 						<div align="center" class="col-sm-3 category p_winter" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 							</div>
 							<div>
 								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
@@ -150,16 +155,16 @@
 	<!-- 스크립트 -->
     <script>
 	    $(".spring").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/spring.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/spring.jpg')");
 	    });
 	    $(".summer").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/summer01.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/summer.jpg')");
 	    });
 	    $(".autumn").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/autumn.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/autumn.jpg')");
 	    });
 	    $(".winter").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/winter.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/winter.jpg')");
 	    });
     </script>
     

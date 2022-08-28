@@ -4,22 +4,24 @@ import java.sql.Date;
 
 public class CategoryDTO {
 
-	private String 	id; 			// user아이디
-	private int 	p_seq; 			// 프로젝트 고유번호
-	private String 	p_name; 		// 프로젝트 이름
-	private String 	p_category;		// 프로젝트 카테고리
-	private Date 	p_beginDate; 	// 펀딩 시작일
-	private Date 	p_endDate; 		// 펀딩 종료일
-	private Date 	p_payDate; 		// 결제 예정일
-	private String 	p_content; 		// 프로젝트 소개
-	private char 	p_ing; 			// 'Y' : 펀딩중, 'N' : 펀딩 종료
-	private int 	p_backer; 		// 총 후원 인원
-	private long 	p_goal; 		// 목표 금액
-	private String 	p_thumnail_img;	// 썸네일 이미지
-	private String 	p_Sub_img1;		// 상세페이지 이미지1
-	private String 	p_Sub_img2;		// 상세페이지 이미지2
-	private String 	p_Sub_img3;		// 상세페이지 이미지3
+	private String id; // user아이디
+	private int p_seq; // 프로젝트 고유번호
+	private String p_name; // 프로젝트 이름
+	private String p_category; // 프로젝트 카테고리
+	private Date p_beginDate; // 펀딩 시작일
+	private Date p_endDate; // 펀딩 종료일
+	private Date p_payDate; // 결제 예정일
+	private String p_content; // 프로젝트 소개
+	private char p_ing; // 'Y' : 펀딩중, 'N' : 펀딩 종료
+	private int p_backer; // 총 후원 인원
+	private long p_goal; // 목표 금액
+	private String p_thumb; // 썸네일 이미지
+	private String p_slide; // 슬라이드 이미지(여러개)
+	private int p_imgCnt; // 이미지 갯수
+	private long p_total; // 총 후원 금액
 	
+	
+	// get/set 메서드
 	public String getId() {
 		return id;
 	}
@@ -86,38 +88,41 @@ public class CategoryDTO {
 	public void setP_goal(long p_goal) {
 		this.p_goal = p_goal;
 	}
-	public String getP_thumnail_img() {
-		return p_thumnail_img;
+	public String getP_thumb() {
+		return p_thumb;
 	}
-	public void setP_thumnail_img(String p_thumnail_img) {
-		this.p_thumnail_img = p_thumnail_img;
+	public void setP_thumb(String p_thumb) {
+		this.p_thumb = p_thumb;
 	}
-	public String getP_Sub_img1() {
-		return p_Sub_img1;
+	public String getP_slide() {
+		return p_slide;
 	}
-	public void setP_Sub_img1(String p_Sub_img1) {
-		this.p_Sub_img1 = p_Sub_img1;
+	public void setP_slide(String p_slide) {
+		this.p_slide = p_slide;
 	}
-	public String getP_Sub_img2() {
-		return p_Sub_img2;
+	public int getP_imgCnt() {
+		return p_imgCnt;
 	}
-	public void setP_Sub_img2(String p_Sub_img2) {
-		this.p_Sub_img2 = p_Sub_img2;
+	public void setP_imgCnt(int p_imgCnt) {
+		this.p_imgCnt = p_imgCnt;
 	}
-	public String getP_Sub_img3() {
-		return p_Sub_img3;
+	public long getP_total() {
+		return p_total;
 	}
-	public void setP_Sub_img3(String p_Sub_img3) {
-		this.p_Sub_img3 = p_Sub_img3;
+	public void setP_total(long p_total) {
+		this.p_total = p_total;
 	}
 	
+	
+	// toString 메서드
 	@Override
 	public String toString() {
-		return "CategoryDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_category=" + p_category
+		return "projectDTO [id=" + id + ", p_seq=" + p_seq + ", p_name=" + p_name + ", p_category=" + p_category
 				+ ", p_beginDate=" + p_beginDate + ", p_endDate=" + p_endDate + ", p_payDate=" + p_payDate
 				+ ", p_content=" + p_content + ", p_ing=" + p_ing + ", p_backer=" + p_backer + ", p_goal=" + p_goal
-				+ ", p_thumnail_img=" + p_thumnail_img + ", p_Sub_img1=" + p_Sub_img1 + ", p_Sub_img2=" + p_Sub_img2
-				+ ", p_Sub_img3=" + p_Sub_img3 + "]";
+				+ ", p_thumb=" + p_thumb + ", p_slide=" + p_slide + ", p_imgCnt=" + p_imgCnt + ", p_total=" + p_total
+				+ "]";
 	}
 	
-} // End -public class CategoryDTO
+}
+
