@@ -66,7 +66,6 @@ public class logController {
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				boolean match = passwordEncoder.matches(userinfo.getPass(), uDTO.getPass());
 				System.out.println("복호화 끝난 값 : " + match);
-//				if(userinfo.getPass().equals(uDTO.getPass())) {
 				if(match) {
 					// 세션을 만들고, 세션에 해당 로그인 정보를 붙힘
 					HttpSession session = req.getSession();

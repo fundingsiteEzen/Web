@@ -10,6 +10,7 @@ import com.fun.myPage.dto.backerDTO;
 import com.fun.subPage.dao.subDAO;
 import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 @Service
 public class subService implements subServiceIfc {
@@ -53,14 +54,30 @@ public class subService implements subServiceIfc {
 		return dao.back_this(dto);
 	}
 	
-	// 중복검사
+	// (5) 중복검사
 	public int check_back(backerDTO dto) throws Exception {
 		
 		System.out.println("서비스 중복검사");
 		
 		return dao.check_back(dto);
 	}
-	
-	
+
+	// (6) 프로젝트 테이블 수정하기 (후원자 수, 후원금액 +)
+	@Override
+	public int up_project(projectDTO dto) throws Exception {
+
+		System.out.println("서브 Service (6) 실행");
+		
+		return dao.up_project(dto);
+	}
+
+	// (7) 리워드 테이블 수정하기 (남은수량 -1)
+	@Override
+	public int up_reward(rewardDTO dto) throws Exception {
+		
+		System.out.println("서브 Service (7) 실행");
+		
+		return dao.up_reward(dto);
+	}
 	
 }

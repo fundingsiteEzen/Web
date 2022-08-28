@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.fun.crpage.dto.CrDTO;
+import com.fun.crpage.dto.rewardDTO;
 
 //-----------------------------------------------------------------------------------------------------------
 // public class CrDAOImpl implements CrDAO
@@ -29,4 +30,14 @@ public class CrDAOImpl implements CrDAO {
 		int result = sqlSession.insert("com.fun.crpage.register", crDTO);
 		return result;
 	}
+
+
+	// (2) 리워드 등록
+	@Override
+	public int insertReward(rewardDTO dto) {
+		
+		System.out.println("crDAO (2) 실행");
+		return sqlSession.insert("com.fun.crpage.insertReward", dto);
+	}
+	
 }
