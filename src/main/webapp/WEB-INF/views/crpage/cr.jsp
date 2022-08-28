@@ -104,7 +104,7 @@
 		<!-- 썸네일 사진, 슬라이드 이미지 첨부하기 (다중첨부 가능하게)  -->
 		<div class="form-group">
 			<label>이미지 첨부</label><br/>
-			<input type="file" id="file1" name="p_slide" multiple />
+			<input type="file" id="file1" name="p_slide" multiple required/>
             <label class="img_button" for="file1">+ 추가</label>
 			<div class="img_add"></div>
 		</div>
@@ -119,7 +119,7 @@
 		<!-- 리워드 목록. 나중에 주석해제 -->
 		<div id="reward">
             <label>리워드 구성</label>
-            <div class="img_button right" onclick="addReward()">+ 리워드 추가하기</div>
+            <div class="img_button right" onclick="addReward(this)">+ 리워드 추가하기</div>
             <div class="form-group">
                 <textarea class="form-control" name="list[0].r_content"></textarea>
             </div>
@@ -140,7 +140,7 @@
 		<div class="form-group">
 			<div class="col-sm-offset-4 left">
 				<button type="reset"  class="btn btn-warning">다시 입력</button>
-				<button type="submit" class="btn btn-primary">펀딩 등록</button>
+				<button type="submit" class="btn btn-primary" onclick="addFile()">펀딩 등록</button>
 			</div>
 		</div>
 	</form>
@@ -148,50 +148,17 @@
 
 
 <script>
-	function addFile(images) {
-		alert("작동");
-		
-		// form 객체를 만들고 files를 추가함
-		var files = images.files[0];
-		
-		var formData = new FormData();
-		formData.append("file", files);
-		alert(files.name);
-		
-		alert("ajax 실행준비");
-		// processData와 contentType을 false로 해서 보내주어야함
-		$.ajax({
-			type: "post",
-			url: "/crpage/file",
-			data: formData,
-			processData:	false,
-			contentType:	false,
-			success: function(request, status, error) {
-				alert("성공");
-				alert(request); // 이거 저장된 파일 이름.. !!
-			},
-			error: function(request, status, error) {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				}
-		});
-		
-	}
-</script>
-
-<script>
 	//이미지 미리보기
 	var sel_file;
+	var content_files = new Array();
 	
 	$(document).ready(function() {
 	    $("#file1").on("change", handleImgFileSelect);
 	});
 	
-    var index=1;
+	var idx = 0;
+	var formData = new FormData();
 	function handleImgFileSelect(e) {
-		if(index >4) {
-            alert("이미지는 4장까지만 첨부 가능합니다");
-            return;
-	    }
 	    var files = e.target.files;
 	    var filesArr = Array.prototype.slice.call(files);
 	    
@@ -207,43 +174,41 @@
 	        
 	        var reader = new FileReader();
 	        reader.onload = function(e) {
-	            var str = "<img class='img add"+index+"'>";
+	        	content_files.push(f);
+	        	formData.append("file", content_files[idx]);
+	        	alert(content_files[idx].name);
+	            var str = "<img class='img add"+idx+"'>";
 		        $(".img_add").append(str);
-	        	$('.add'+index).attr("src", e.target.result);
-	            index++;
-	            console.log($(".img_add").children(index));
+	        	$('.add'+idx).attr("src", e.target.result);
+	        	idx++;
 	        	}
 	        	reader.readAsDataURL(f);
-	
 		});
+		console.log(content_files);
+	}	
+	function addFile() {
+		alert("작동");
+		
+		alert("ajax 실행준비");
+		// processData와 contentType을 false로 해서 보내주어야함
+		$.ajax({
+			type: "post",
+			url: "/crpage/file",
+			enctype: "multipart/form-data",
+			data: formData,
+			processData:	false,
+			contentType:	false,
+			success: function(request, status, error) {
+				alert("성공");
+				alert(request); // 이거 저장된 파일 이름.. !!
+			},
+			error: function(request, status, error) {
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+		});
+		
 	}
 </script>
-<script>
-	// 이미지 등록
-	function fn_submit(){
-	    
-	    var form = new FormData();
-	    form.append( "file1", $("#file1")[0].files[0]);
-	    
-	     $.ajax({
-	         url : "/result"
-	       , type : "POST"
-	       , processData : false
-	       , contentType : false
-	       , data : form
-	       , success:function(response) {
-	           alert("성공하였습니다.");
-	           console.log(response);
-	       }
-	       ,error: function (jqXHR) 
-	       { 
-	    	   alert("오류");
-	           alert(jqXHR.responseText); 
-	       }
-	   });
-	}
-</script>
-
 <script>
 	// 리워드 추가
 	var index = 1;

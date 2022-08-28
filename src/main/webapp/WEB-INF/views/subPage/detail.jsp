@@ -53,6 +53,14 @@
 	.item {
 		width:100%;
 		object-fit: cover;
+		overflow: hidden;
+	}
+	.itemImg {
+		object-fit: cover;
+		overflow:hidden;
+		width:100%; 
+		min-height: 400px;
+		max-height: 400px;
 	}
 	.carousel-control.left, .carousel-control.right {
     	background-image: none
@@ -93,12 +101,12 @@
 								<c:choose>
 								<c:when test="${status.index == 0}">
 								<div class="item active">
-									<img class="img-responseve center-block" src="${contextPath}/images/thumnail/${list}"/>
+									<img class="img-responseve center-block itemImg" src="${contextPath}/images/SUB/${list}"/>
 								</div>
 								</c:when>
 								<c:when test="${status.index > 0}">
 								<div class="item">
-									<img class="img-responseve center-block" src="${contextPath}/images/thumnail/${list}"/>
+									<img class="img-responseve center-block itemImg" src="${contextPath}/images/SUB/${list}" />
 								</div>
 								</c:when>
 								</c:choose>
@@ -152,9 +160,7 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<p>${project.p_content}</p>
-					<p>~~~ 프로젝트 소개글이 뜨는 부분 ~~~</p>
 					<p>${project.p_backer} 명 후원중</p>
-					<p>${backResult}</p>
 				</div>
 			</div>
         </div>

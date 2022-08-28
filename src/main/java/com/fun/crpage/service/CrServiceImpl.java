@@ -31,9 +31,10 @@ public class CrServiceImpl implements CrService {
 	@Override
 	public int insertReward(rewardDTO dto) {
 		
-		int result = 0;
+		int result = 1;
 		for(int i = 0; i < dto.getList().size(); i++) {
-			crDAO.insertReward(dto.getList().get(i));
+			if(crDAO.insertReward(dto.getList().get(i)) <=0 )
+				return result = 0;
 		}
 		System.out.println("crService (2) 실행");
 		
