@@ -130,11 +130,11 @@
 				<div class="form-group col-sm-6">
 					<label class="control-label col-sm-4">최소 후원 금액</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="r_price" name="list[0].r_price">
+						<input type="text" class="form-control" name="list[0].r_price">
 					</div>
 					<label class="control-label col-sm-4">준비 수량</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="r_price" name="list[0].r_price">
+						<input type="text" class="form-control" name="list[0].r_count">
 					</div>
 					<input type="hidden" name="list[0].r_seq" value="1">
 				</div>
