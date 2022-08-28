@@ -45,11 +45,16 @@
             cursor: pointer;
         }
         .right {
-            float: right;
-            margin-bottom: 10px;
-            margin-top: -10px;
+			width: 200px;
         }
     </style>
+    
+    <!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
+	<%
+	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+		response.sendRedirect("/login.do");
+	}
+	%>
 </head>
 
 <body>
@@ -57,7 +62,7 @@
 <jsp:include page="../menu/navigation.jsp" flush="false" />
 
 <div class="container">
-	<form class="form-horizontal" name="cr" method="POST">
+	<form class="form-horizontal" name="cr" method="POST" onsubmit="addFile()">
 		
 		<!-- 프로젝트 제목, 창작자 이름(자동) -->
 		<div class="form-group">
@@ -66,8 +71,8 @@
 		</div>
 		<div class="form-group">
 		  <label>창작자</label>
-		  <!-- <input type="text" class="form-control" id="id" name="id" value="${userID}" readonly>  세션에서 가져온 아이디. 로그인 기능 끝나고 풀기 -->
-		  <input type="text" class="form-control" id="id" name="id" value="user1" readonly>
+		  <input type="hidden" class="form-control" id="id" name="id" value="${userID}" readonly>  <!-- 세션에서 가져온 아이디. 로그인 기능 끝나고 주석 해제 -->
+		  <h3>닉네임</h3>
 		</div>
 		
 		<!-- 카테고리 선택(선택하면 자동) -->
@@ -112,38 +117,44 @@
 		<!-- 프로젝트 소개글 -->
 		<div class="form-group">
 			<label for="comment">프로젝트 소개글</label>
-			<!-- <textarea class="form-control" rows="5" id="p_content" name="p_content" placeholder="자신의 프로젝트를 소개하세요." maxlength="100"></textarea>  -->
 			<textarea class="summernote" name="p_content" required></textarea>    
 		</div>
 		
-		<!-- 리워드 목록. 나중에 주석해제 -->
+		<!-- 리워드 목록 -->
 		<div id="reward">
             <label>리워드 구성</label>
-            <div class="img_button right" onclick="addReward(this)">+ 리워드 추가하기</div>
-            <div class="form-group">
-                <textarea class="form-control" name="list[0].r_content"></textarea>
+            <div class="row">
+				<div class="col-sm-6">
+					<textarea class="form-control" name="list[0].r_content" required></textarea>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="control-label col-sm-4">최소 후원 금액</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="r_price" name="list[0].r_price">
+					</div>
+					<label class="control-label col-sm-4">준비 수량</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="r_price" name="list[0].r_price">
+					</div>
+					<input type="hidden" name="list[0].r_seq" value="1">
+				</div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">최소 후원 금액</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="r_price" name="list[0].r_price">
-                </div>
-                <label class="control-label col-sm-2">준비 수량</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="r_price" name="list[0].r_count">
-                </div>
-                <input type="hidden" name="list[0].r_seq" value="1">
-            </div>
+		</div>
+		<div class="row" align="center">
+			<div class="img_button right" onclick="addReward()">+ 리워드 추가하기</div>
 		</div>
 		
 		<!-- 다시입력, 등록 버튼 -->
-		<div class="form-group">
-			<div class="col-sm-offset-4 left">
-				<button type="reset"  class="btn btn-warning">다시 입력</button>
-				<button type="submit" class="btn btn-primary" onclick="addFile()">펀딩 등록</button>
+		<div class="form-group" style="margin-top:40px">
+			<div align="center">
+				<button type="reset"  class="btn btn-primary">다시 입력</button>
+				<button type="submit" class="btn btn-success" onclick="fn_submit()">펀딩 등록</button>
 			</div>
 		</div>
 	</form>
+	
+	<!-- 푸터 -->
+	<jsp:include page="../menu/footer.jsp" flush="false" />
 </div>
 
 
@@ -176,7 +187,6 @@
 	        reader.onload = function(e) {
 	        	content_files.push(f);
 	        	formData.append("file", content_files[idx]);
-	        	alert(content_files[idx].name);
 	            var str = "<img class='img add"+idx+"'>";
 		        $(".img_add").append(str);
 	        	$('.add'+idx).attr("src", e.target.result);
@@ -187,9 +197,6 @@
 		console.log(content_files);
 	}	
 	function addFile() {
-		alert("작동");
-		
-		alert("ajax 실행준비");
 		// processData와 contentType을 false로 해서 보내주어야함
 		$.ajax({
 			type: "post",
@@ -203,19 +210,38 @@
 				alert(request); // 이거 저장된 파일 이름.. !!
 			},
 			error: function(request, status, error) {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 		});
 		
+	}
+	// 입력 값 체크
+	function checkInfo() {
+		if(idx == 0) {
+			alert("이미지를 한 장 이상 첨부하세요");
+		}
+		var text = $(".summernote").val();
+		if(text == "") {
+			alert("프로젝트 계획을 입력하세요");
+		}
 	}
 </script>
 <script>
 	// 리워드 추가
 	var index = 1;
 	function addReward() {
-		var str =
-			"<label>추가됨</label>";
-			str+= "<input type='text' class='form-control' id='r_price' name='list[" + index + "].r_price'>";
+		var str = "<label>리워드 구성</label>";
+			str += "<div class='row'>";
+			str += "<div class='col-sm-6'>";
+			str += "<textarea class='form-control' name='list[" + index + "].r_content' required></textarea></div>";
+			str += "<div class='form-group col-sm-6'>";
+			str += "<label class='control-label col-sm-4'>최소 후원 금액</label><div class='col-sm-8'>";
+			str += "<input type='text' class='form-control' name='list[" + index + "].r_price'"
+			str += "oninput='this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');' required></div>";
+			str += "<label class='control-label col-sm-4'>준비 수량</label><div class='col-sm-8'>";
+			str += "<input type='text' class='form-control' name='list[" + index + "].r_count'"
+			str += "oninput='this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');' required>";
+			str += "</div><input type='hidden' name='list[" + index + "].r_seq' value='" +(index+1) + "'></div>";
 		$("#reward").append(str);
 		index++;
 	};
