@@ -95,11 +95,53 @@ public class myServiceImpl implements mySerivce {
 	
 	// (7) 카드 정보 불러오기
 	@Override
-	public List<cardInfoDTO> cardList() throws Exception {
+	public List<cardInfoDTO> getcardInfo(String id) throws Exception {
 
 		System.out.println("myServiceImpl cardList() 시작");
-		return dao.cardList();
 		
+		List<cardInfoDTO> cList = dao.getCardInfo(id); // DB에서 해당 아이디가 있는 'cardInfo' 테이블을 가져옴. 여러개일 수도 있으므로 List로 받음
+		System.out.println("getCardInfo가져온 데이터 : " + cList);
+		return cList;
 	}
+	
+	public List<cardInfoDTO> getList_CARD(List<cardInfoDTO> cList) throws Exception {
+		
+		// 가져온 테이블에서 p_seq만 뽑아서 'project' 테이블 가져오기
+		List<cardInfoDTO> cList = new ArrayList<cardInfoDTO>(); // List 꼭 생성해줘야함.. ! null로 두면 안됨
+		
+			System.out.println("for문 끝난 데이터 :" + cList);
+		
+		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
+		return cList;
+	}
+	
+	// (1) 정보 가져오기
+	public List<backerDTO> getBacker(String id) throws Exception {
+		
+		System.out.println("마이 서비스 (1) 실행");
+		
+		List<backerDTO> bList = dao.getBacker(id); // DB에서 해당 아이디가 있는 'backer' 테이블을 가져옴. 여러개일 수도 있으므로 List로 받음
+		System.out.println("getBacker가져온 데이터 : " + bList);
+		return bList;
+	}
+	
+	// (2) 후원목록 가져오기
+	public List<projectDTO> getProject_back(List<backerDTO> bList) throws Exception {
+		
+		// 가져온 테이블에서 p_seq만 뽑아서 'project' 테이블 가져오기
+		List<projectDTO> pList = new ArrayList<projectDTO>(); // List 꼭 생성해줘야함.. ! null로 두면 안됨
+		
+			for(int i = 0; i < bList.size(); i++) {
+				if(bList.get(i).getIs_like() == 'N') { // 'N'인 경우만 뽑음
+					String p_seq = Integer.toString(bList.get(i).getP_seq());
+					pList.add(dao.getProject_back(p_seq));
+				}
+			}
+			System.out.println("for문 끝난 데이터 :" + pList);
+		
+		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
+		return pList;
+	}
+	
 }
 

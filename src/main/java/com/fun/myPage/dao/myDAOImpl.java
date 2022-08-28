@@ -68,12 +68,11 @@ public class myDAOImpl implements myDAO{
 	// 카드 정보 가져오기
 	
 	@Override
-	public List<cardInfoDTO> cardList() throws Exception {
+	public List<cardInfoDTO> getCardInfo(String id) throws Exception {
 
 		System.out.println("myDAOImpl cardList() 시작");
-		List<cardInfoDTO> cardList = sqlsession.selectList(namespace + ".cardList");
-		System.out.println("myDAOImpl cardList() cardList ==> " + cardList);
-		return cardList;
+		return sqlsession.selectList(namespace + ".cardList", id);
+		
 	}
 	
 

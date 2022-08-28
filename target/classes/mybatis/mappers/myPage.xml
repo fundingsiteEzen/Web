@@ -52,7 +52,7 @@
 	
 	<select id="cardList" resultType="com.fun.myPage.dto.cardInfoDTO" parameterType="String">
 		<![CDATA[
-		SELECT ci_num4 FROM cardInfo where id=#{id}	
+		SELECT ci_num4 FROM cardInfo WHERE id=#{id}	
 		]]>
 	</select>
 	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
