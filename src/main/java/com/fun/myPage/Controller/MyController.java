@@ -1,6 +1,7 @@
 package com.fun.myPage.Controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,19 +55,20 @@ public class MyController {
 	
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy", method=RequestMethod.GET)
-	public void projectList(Model model, HttpServletRequest req) throws Exception {
+	public void projectList(Locale lacale, cardInfoDTO cDTO, Model model) throws Exception {
 		
 		// 카드 정보 뿌리기
-		
 		String id = "user1";
-		List<cardInfoDTO> cDTO = mService.getcardInfo(id);
-		
+		cDTO.setId(id);
+	
 		System.out.println("MyController cardList() 시작");
-		List<cardInfoDTO> list_CARD = mService.getList_CARD(cDTO);
-		System.out.println("MyController cardList() Data ==> " + cDTO);
-		model.addAttribute("CardList", list_CARD);
+		
+		List<cardInfoDTO> List_CARD = mService.List_CARD();
+		System.out.println("MyController cardList() Data ==> " + List_CARD);
+		model.addAttribute("CardList", List_CARD);
 		
 	}
+	
 	
 	// 후원 & 관심 목록 삭제
 	@ResponseBody

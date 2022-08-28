@@ -29,10 +29,7 @@ public interface mySerivce {
 	// 계좌 정보 입력
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
-	// 아이디로 결제 정보 가져오기
-	public List<cardInfoDTO> getcardInfo(String id) throws Exception;
-	
-	// 카드 목록 가져오기
-	public List<cardInfoDTO> getList_CARD(List<cardInfoDTO> cList) throws Exception;
+	// 카드 정보 가져오기
+	public List<cardInfoDTO> List_CARD() throws Exception;
 
 }
