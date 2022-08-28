@@ -8,15 +8,18 @@
 	<!-- 프로젝트 내용 입력 -->
 	<insert id="register" parameterType="com.fun.crpage.dto.CrDTO">
 		<![CDATA[
-	 	INSERT INTO 
-	 	PROJECT	(
-	 	p_seq, p_name, id, p_category, p_beginDate, p_endDate, p_payDate
-	 	, p_content, p_goal
+	 	INSERT INTO project(p_seq, id, p_name, p_category, p_beginDate, p_endDate, p_payDate, p_content, p_goal, p_thumb, p_slide, p_imgCnt)
+	 	VALUES (
+	 	#{p_seq}, #{id}, #{p_name}, #{p_category}, sysdate, #{p_endDate}, #{p_payDate}
+	 	, #{p_content}, #{p_goal}, #{p_thumb}, #{p_slide}, #{p_imgCnt}
 	 	)
-	 	VALUES	(
-	 	project_seq.nextval, #{p_name}, #{id}, #{p_category}, sysdate, #{p_endDate}, #{p_payDate}
-	 	, #{p_content}, #{p_goal}
-	 	)
+		]]>
+	</insert>
+	
+	<!-- 리워드 테이블에 추가하기 -->
+	<insert id="insertReward" parameterType="com.fun.crpage.dto.rewardDTO">
+		<![CDATA[
+	 	INSERT INTO reward VALUES(#{p_seq}, #{r_seq}, #{r_price}, #{r_content}, #{r_count})
 		]]>
 	</insert>
 	

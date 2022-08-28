@@ -2,24 +2,24 @@ package com.fun.subPage.dto;
 
 public class rewardDTO {
 	
-	private String p_seq; // 프로젝트 고유번호
-	private String r_seq; // 리워드 고유번호
+	private int p_seq; // 프로젝트 고유번호
+	private int r_seq; // 리워드 고유번호
 	private int r_price; // 리워드 가격
 	private String r_content; // 리워드 소개
 	private int r_count; // 준비수량
 	
 	
 	// get/set 메서드
-	public String getP_seq() {
+	public int getP_seq() {
 		return p_seq;
 	}
-	public void setP_seq(String p_seq) {
+	public void setP_seq(int p_seq) {
 		this.p_seq = p_seq;
 	}
-	public String getR_seq() {
+	public int getR_seq() {
 		return r_seq;
 	}
-	public void setR_seq(String r_seq) {
+	public void setR_seq(int r_seq) {
 		this.r_seq = r_seq;
 	}
 	public int getR_price() {

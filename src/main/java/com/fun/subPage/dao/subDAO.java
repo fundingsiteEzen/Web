@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 @Repository
 public class subDAO implements subDAOIfc {
@@ -62,6 +63,24 @@ public class subDAO implements subDAOIfc {
 		System.out.println("dao(5) 중복검사");
 		
 		return sqlsession.selectOne(namespace + ".getBacker", dto);
+	}
+
+	// (6) 프로젝트 테이블 수정하기 (후원자 수, 후원금액 +)
+	@Override
+	public int up_project(projectDTO dto) throws Exception {
+		
+		System.out.println("서브 DAO (6) 실행");
+		
+		return sqlsession.update(namespace + ".updateProject", dto);
+	}
+
+	// (7) 리워드 테이블 수정하기 (남은수량 -1)
+	@Override
+	public int up_reward(rewardDTO dto) throws Exception {
+
+		System.out.println("서브 DAO (7) 실행");
+		
+		return sqlsession.update(namespace + ".updateReward", dto);
 	}
 	
 }
