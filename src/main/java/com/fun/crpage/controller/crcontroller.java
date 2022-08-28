@@ -109,7 +109,7 @@ public class crcontroller {
 		for(int i = 0; i < file.size(); i++) {
 			if(i == 0) {
 				new ResponseEntity<String>(
-						UploadFileUtils.uploadFile(thumbPath, file.get(i).getOriginalFilename(), file.get(i).getBytes()), HttpStatus.OK);
+						UploadFileUtils.uploadThumbFile(thumbPath, file.get(i).getOriginalFilename(), file.get(i).getBytes()), HttpStatus.OK);
 			}
 				new ResponseEntity<String>(
 						UploadFileUtils.uploadFile(slidePath, file.get(i).getOriginalFilename(), file.get(i).getBytes()), HttpStatus.OK);
@@ -117,5 +117,6 @@ public class crcontroller {
 		
 		return "성공";
 	}
+	
 	
 }

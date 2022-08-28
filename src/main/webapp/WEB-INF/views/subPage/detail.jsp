@@ -32,7 +32,7 @@
 		font-family: 'Hahmlet', serif;}
 	
 	.wrap {
-		background-image: url(${contextPath}/images/MAIN_img/winter.png);
+		background-image: url(${contextPath}/images/MAIN_img/${project.p_category}.jpg);
 	    background-attachment: fixed; }
 	.main {background-color: #fff;}
 	.add_button {padding-top: 60px;}

@@ -11,12 +11,10 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.springframework.util.FileCopyUtils;
 
-//-----------------------------------------------------------------------------------------------------------
-// 파일 올리기에 공통으로 사용할 메서드를 가진 클래스
-//-----------------------------------------------------------------------------------------------------------
+// 이미지 올리기
 public class UploadFileUtils {
-
-	// p_seq 값을 이미지 앞에 붙히고 저장
+	
+	// 슬라이드 이미지에 저장
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
 		
 		String savedName = originalName;
@@ -32,7 +30,28 @@ public class UploadFileUtils {
 		
 	}
 	
-} // End - public class UploadFileUtils
+	// 썸네일 이미지에 저장
+	public static String uploadThumbFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
+		
+		String savedName = originalName;
+		
+		// 업로드할 디렉토리를 생성한다.
+		File target	= new File(uploadPath, savedName);
+		
+		// 임시 디렉토리에 업로드 후 지정 디렉토리에 복사
+		FileCopyUtils.copy(fileData, target);
+		
+		// 이미지 사이즈를 줄여서 저장함
+		BufferedImage sourceImg = ImageIO.read(new File(uploadPath, savedName));
+		BufferedImage destImg	= Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 300);
+		ImageIO.write(destImg, savedName, target);
+		
+		System.out.println("작업 완료된 값 : " + savedName);
+		return savedName;
+		
+	}
+	
+}
 
 
 

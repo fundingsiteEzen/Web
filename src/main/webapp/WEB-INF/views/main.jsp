@@ -24,12 +24,15 @@
 	
 	
 	<style>
-	    * {margin: 0 auto;
-	    padding: 0;
-	    list-style: none;}
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
+        * {
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            font-family: 'Hahmlet', serif;}
 	    
 	    .wrap {
-	        background-image: url("${contextPath}/images/MAIN_img/spring.png");
+	        background-image: url("${contextPath}/images/MAIN_img/spring.jpg");
 	        background-attachment: fixed;
 	        transition: 0.4s;}
 	    .main {background-color: #fff;
@@ -152,16 +155,16 @@
 	<!-- 스크립트 -->
     <script>
 	    $(".spring").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/spring.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/spring.jpg')");
 	    });
 	    $(".summer").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/summer01.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/summer.jpg')");
 	    });
 	    $(".autumn").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/autumn.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/autumn.jpg')");
 	    });
 	    $(".winter").click(function() {
-	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/winter.png')");
+	        $(".wrap").css("background-image", "url('${contextPath}/images/MAIN_img/winter.jpg')");
 	    });
     </script>
     
