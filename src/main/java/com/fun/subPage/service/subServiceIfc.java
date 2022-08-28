@@ -5,6 +5,7 @@ import java.util.List;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 public interface subServiceIfc {
 
@@ -22,5 +23,11 @@ public interface subServiceIfc {
 	
 	// (5) 중복검사
 	public int check_back(backerDTO dto) throws Exception;
+	
+	// (6) 프로젝트 테이블 수정하기 (후원자 수, 후원금액 +)
+	public int up_project(projectDTO dto) throws Exception;
+	
+	// (7) 리워드 테이블 수정하기 (남은수량 -1)
+	public int up_reward(rewardDTO dto) throws Exception;
 	
 }

@@ -2,7 +2,11 @@ package com.fun.myPage.dao;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
+import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
+import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 public interface myDAO {
@@ -16,7 +20,12 @@ public interface myDAO {
 	// (1)-3 프로젝트 테이블 가져오기(관심목록)
 	public projectDTO getProject_like(String p_seq) throws Exception;
 	
-	// (1)-4 프로젝트 테이블 가져오기(후원취소)
-	public int deleteProject(String p_seq) throws Exception;
+	// (후원취소)
+	public int deleteProject(backerDTO bDTO) throws Exception;
 	
+	// 카드 정보 입력
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
+	
+	// 계좌 정보 입력
+	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 }

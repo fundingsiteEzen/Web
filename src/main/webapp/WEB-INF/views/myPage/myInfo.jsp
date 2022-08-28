@@ -524,10 +524,6 @@ padding: 38px 0px 0px;
 margin-left: 10px;
 margin-right: 10px;
 }
-/* '회원정보 관리' fiedset */
-.userinfo {
-    display: block;
-}
 
 
 </style>

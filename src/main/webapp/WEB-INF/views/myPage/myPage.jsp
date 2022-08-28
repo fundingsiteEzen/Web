@@ -20,14 +20,16 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
 	<style>
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
         * {
             margin: 0 auto;
             padding: 0;
-            list-style: none;}
+            list-style: none;
+            font-family: 'Hahmlet', serif;}
         .bg-image {
-            background-image: url('${contextPath}/images/MAIN_img/summer02.png');
+            background-image: url('${contextPath}/images/MAIN_img/summer.jpg');
             background-attachment: fixed;
-            height: 200px;
+            height: 300px;
         }
         .main-back {
         }
@@ -114,7 +116,7 @@
                 <!-- 오른쪽 영역(닉네임, 썸네일 목록) -->
                 <div class="col-sm-9 section">
                     <div class="nickname">
-                        <h3>닉네임<span onclick="location.href='/myPage/myInfo'">(수정go)</span></h3>
+                        <h3>닉네임<span onclick="location.href='/myPage/mymy'">(수정go)</span></h3>
                     </div>
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">
@@ -122,26 +124,29 @@
 						<div class="col-sm-4">
 							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 								<div style="overflow: hidden; height:80%">
-									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 								</div>
 								<div>
 									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
 								</div>
 							</div>
-							<button onclick="deleteProject(${backer.p_seq})">삭제</button>
+							<button onclick="deleteProject(${list.p_seq}, 'N')">삭제</button>
 						</div>
 						</c:forEach>
                     </section>
                     <!-- 관심 목록 띄우기 -->
                     <section class="like_list">
                         <c:forEach items="${likeList}" var="list" varStatus="status">
-						<div align="center" class="col-sm-4" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumnail_img}" height="100%"/>
+						<div class="col-sm-4">
+							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+								<div style="overflow: hidden; height:80%">
+									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+								</div>
+								<div>
+									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								</div>
 							</div>
-							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-							</div>
+							<button onclick="deleteProject(${list.p_seq}, 'Y')">삭제</button>
 						</div>
 						</c:forEach>
 
@@ -184,10 +189,21 @@
 	<!-- 삭제버튼 -->
 
 	<script>
-	function deleteProject(seq) {
-		var chk = confirm("정말 삭제하시겠습니까?");
+	function deleteProject(p_seq, is_like) {
+		var chk = confirm("정말 취소하시겠습니까?");
 		if (chk) {
-			location.href='myPage';
+			$.ajax({
+				type: "POST",
+				url: "/myPage/delete.do",
+				data: {p_seq: p_seq, is_like: is_like},
+				success: function(data) {
+					if(data == "Y") {
+						alert("취소가 완료되었습니다");
+						location.href = "/myPage/myPage";
+					}
+				},
+				error: function(data) { alert("에러발생"); }
+			});
 		}
 	}	
 </script>

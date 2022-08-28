@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
+import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 public interface mySerivce {
@@ -19,6 +21,13 @@ public interface mySerivce {
 	public List<projectDTO> getProject_Like(List<backerDTO> bList) throws Exception;
 	
 	// 후원 삭제하기
-	public int deleteProject(String p_seq) throws Exception;
+	public int deleteProject(backerDTO bDTO) throws Exception;
+	
+	// 카드 정보 입력
+	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
+	
+	// 계좌 정보 입력
+	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
+	
 
 }
