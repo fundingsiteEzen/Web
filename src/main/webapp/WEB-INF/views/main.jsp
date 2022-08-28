@@ -30,7 +30,7 @@
             padding: 0;
             list-style: none;
             font-family: 'Hahmlet', serif;}
-	    
+	    .row {margin: 0;}
 	    .wrap {
 	        background-image: url("${contextPath}/images/MAIN_img/spring.jpg");
 	        background-attachment: fixed;

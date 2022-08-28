@@ -31,11 +31,14 @@
 		margin: 0 auto;
 		font-family: 'Hahmlet', serif;}
 	
+	.row {margin:0;}
 	.wrap {
 		background-image: url(${contextPath}/images/MAIN_img/${project.p_category}.jpg);
 	    background-attachment: fixed; }
-	.main {background-color: #fff;}
-	.add_button {padding-top: 60px;}
+	.main {background-color: #fff;
+	padding-top: 30px;}
+	.back_info {padding-top: 20px;}
+	.add_button {padding-top: 20px;}
 	.List_btn {
 		box-sizing: border-box;
 		border: 1px solid #ccc;
@@ -49,6 +52,10 @@
 	}
 	.navigation {
 		margin-top: 100px;
+		margin-bottom: 50px;
+	}
+	.navigation h3 {
+		margin-top: -0.5em;
 	}
 	.item {
 		width:100%;
@@ -64,6 +71,9 @@
 	}
 	.carousel-control.left, .carousel-control.right {
     	background-image: none
+	}
+	.line {
+		border-bottom: 2px solid #ccc;
 	}
   
   </style>
@@ -138,14 +148,14 @@
 						<div class="col-sm-6" align="right">
 							<h6>목표 ${project.p_goal} 원</h6>
 						</div>
-						<div class="col-sm-12">
+						<div class="col-sm-12 back_info">
 							<span>펀딩 기간 ${project.p_beginDate} ~ ${project.p_endDate}</span><br>
-							<span>결제예정일 ${project.p_payDate}</span><br>
+							<span>결제 예정일 ${project.p_payDate}</span><br>
 							<div class="add_button">
 								<!-- 리스트 추가버튼 -->
-								<button type="button" class="col-sm-4 List_btn" onclick="addList(${project.p_seq})">+</button>
+								<button type="button" class="col-sm-4 List_btn" onclick="addList(${project.p_seq})"><span class="glyphicon glyphicon-heart-empty"></span></button>
 								<!-- 후원버튼 -->
-								<button type="button" class="col-sm-7 back_btn">back</button>
+								<button type="button" class="col-sm-7 back_btn">후원하기</button>
 							</div>
 						</div>
 					</div>
@@ -155,11 +165,20 @@
 			<!--소개 시작-->
 			<div class="row">
 				<div class="col-sm-12 navigation" align="center">
-					<a>프로젝트 계획</a>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-4 line"></div>
+					<div class="col-sm-2"><h3>프로젝트 계획</h3></div>
+					<div class="col-sm-4 line"></div>
 				</div>
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<p>${project.p_content}</p>
+				</div>
+				<div class="col-sm-12 navigation" align="center">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-4 line"></div>
+					<div class="col-sm-2"><h3>후원자 목록</h3></div>
+					<div class="col-sm-4 line"></div>
 					<p>${project.p_backer} 명 후원중</p>
 				</div>
 			</div>

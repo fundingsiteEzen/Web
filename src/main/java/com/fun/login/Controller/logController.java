@@ -99,6 +99,7 @@ public class logController {
 					// 세션을 만들고, 세션에 해당 로그인 정보를 붙힘
 					session.setAttribute("userID", uDTO.getId());
 					session.setAttribute("isLogin", true);
+					session.setAttribute("nickName", uDTO.getName());
 					mav.setViewName("redirect:/");
 					System.out.println("로그인 완료");
 				} // 비밀번호가 일치하지 않는 경우
