@@ -59,6 +59,7 @@ public class MyController {
 		
 		System.out.println("마이 컨트롤러(2) 실행");
 		// 카드 정보 뿌리기
+		// 계좌 정보 뿌리기
 		//HttpSession session = req.getSession();
 		//String id = (String)session.getAttribute("userID");
 		String id = "user1";
@@ -68,9 +69,11 @@ public class MyController {
 		System.out.println("MyController cardList() 시작");
 		
 		List<cardInfoDTO> List_CARD = mService.List_CARD(id);
+		List<accountInfoDTO> List_ACCOUNT = mService.List_ACCOUNT(id);
 		System.out.println("MyController cardList() Data ==> " + List_CARD);
 		model.addAttribute("CardList", List_CARD);
-		
+		System.out.println("MyController accountList() Data ==> " + List_ACCOUNT);
+		model.addAttribute("AccountList", List_ACCOUNT);		
 	}
 	
 	
