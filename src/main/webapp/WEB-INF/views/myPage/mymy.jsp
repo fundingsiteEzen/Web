@@ -24,14 +24,17 @@
 	<link rel="stylesheet" href="${contextPath}/css/modal.css">
 	
 	<style>
-	* {
-	    margin: 0 auto;
-	    padding: 0;
-	    list-style: none;}
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
+    * {
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        font-family: 'Hahmlet', serif;}
+     label{font-weight: 500;}
 	.bg-image {
-	    background-image: url('${contextPath}/images/MAIN_img/summer02.png');
+	    background-image: url('${contextPath}/images/MAIN_img/summer.jpg');
 	    background-attachment: fixed;
-	    height: 200px;
+	    height: 300px;
 	}
 	.main-back {
 	}
