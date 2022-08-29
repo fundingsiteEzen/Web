@@ -88,10 +88,10 @@ public class MyController {
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy.do", method=RequestMethod.GET)
 	public ModelAndView getUserInfo(Model model) throws Exception {
-		userinfoDTO dto = mService.getUserInfo("admin");
+		userinfoDTO dto = mService.getUserInfo("user1");
 		
 		if(dto.getProfile_img() == null || dto.getProfile_img() == "") {
-			dto.setProfile_img("images/SUB/detail01.jpg");
+			dto.setProfile_img("images/profile/detail01.jpg");
 		} else {
 			File file = new File(dto.getProfile_img());
 		}
@@ -127,7 +127,7 @@ public class MyController {
             {
                 String originFilename = multi.getOriginalFilename();
                 String Path = request.getSession().getServletContext().getRealPath("/");
-                File file = new File(Path + "/resources/images/SUB/" , originFilename);
+                File file = new File(Path + "/resources/images/profile/" , originFilename);
                 multi.transferTo(file);
                 userinfoDTO dto = new userinfoDTO();
                 dto.setId(request.getParameter("id"));
