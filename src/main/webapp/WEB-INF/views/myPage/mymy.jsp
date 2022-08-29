@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -173,7 +174,18 @@
                     <h4>등록된 결제수단이 없습니다</h4>
                     <!-- 카드 정보  -->         
                     <c:forEach items="${CardList}" var="cardListOne">
-						<h2>************${cardListOne.ci_num4 }</h2>
+                    	<h3>card</h3>
+						<h3>* * * * * * * * * * * * ${cardListOne.ci_num4 }</h3>
+					</c:forEach>
+					<c:forEach items="${AccountList}" var="accountListOne">			
+						<h3>account</h3>
+						<h3>
+						<c:forEach var="i" begin="0" end="${accountListOne.ai_num.length()-5}"> 
+							*
+						</c:forEach>
+						${fn:substring(accountListOne.ai_num, accountListOne.ai_num.length()-4, accountListOne.ai_num.length()) }
+						</h3>
+
 					</c:forEach>
                     <h3 class="card">+ CARD</h3>
                     <h3 class="account">+ ACCOUNT</h3>
