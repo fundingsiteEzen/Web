@@ -22,6 +22,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	
+
+	<!-- crpage.js -->
+	<script src="${contextPath}/../../resources/js/crpage.js"></script>
+		
 	
 	<style>
         .img_add {
@@ -55,6 +59,7 @@
 		response.sendRedirect("/login.do");
 	}
 	%>
+  
 </head>
 
 <body>
