@@ -1,7 +1,9 @@
 package com.fun.myPage.Controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.myPage.service.mySerivce;
 import com.fun.subPage.dto.projectDTO;
 
@@ -52,28 +57,90 @@ public class MyController {
 		model.addAttribute("likeList", project_LIKE);
 		
 	}
+	 @RequestMapping(value="/mymy", method=RequestMethod.GET)
+	   public void projectList(Model model, cardInfoDTO cDTO, HttpServletRequest req) throws Exception {
+	      
+	      System.out.println("마이 컨트롤러(2) 실행");
+	      // 카드 정보 뿌리기
+	      // 계좌 정보 뿌리기
+	      //HttpSession session = req.getSession();
+	      //String id = (String)session.getAttribute("userID");
+	      String id = "user1";
+	      cDTO.setId(id);
+	   
+	   
+	      System.out.println("MyController cardList() 시작");
+	      
+	      List<cardInfoDTO> List_CARD = mService.List_CARD(id);
+	      List<accountInfoDTO> List_ACCOUNT = mService.List_ACCOUNT(id);
+	      System.out.println("MyController cardList() Data ==> " + List_CARD);
+	      model.addAttribute("CardList", List_CARD);
+	      System.out.println("MyController accountList() Data ==> " + List_ACCOUNT);
+	      model.addAttribute("AccountList", List_ACCOUNT);      
+	   }
 	
+	@RequestMapping(value="/juso.do", method=RequestMethod.GET)
+	public ModelAndView getJuso(Model model) throws Exception {
+		ModelAndView mvc = new ModelAndView();
+		mvc.setViewName("/popup/jusoPopup");
+		return mvc;
+	}
 	// 회원정보 수정화면으로 이동
-	@RequestMapping(value="/mymy", method=RequestMethod.GET)
-	public void projectList(Model model, cardInfoDTO cDTO, HttpServletRequest req) throws Exception {
+	@RequestMapping(value="/mymy.do", method=RequestMethod.GET)
+	public ModelAndView getUserInfo(Model model) throws Exception {
+		userinfoDTO dto = mService.getUserInfo("admin");
 		
-		System.out.println("마이 컨트롤러(2) 실행");
-		// 카드 정보 뿌리기
-		// 계좌 정보 뿌리기
-		//HttpSession session = req.getSession();
-		//String id = (String)session.getAttribute("userID");
-		String id = "user1";
-		cDTO.setId(id);
-	
-	
-		System.out.println("MyController cardList() 시작");
+		if(dto.getProfile_img() == null || dto.getProfile_img() == "") {
+			dto.setProfile_img("images/SUB/detail01.jpg");
+		} else {
+			File file = new File(dto.getProfile_img());
+		}
 		
-		List<cardInfoDTO> List_CARD = mService.List_CARD(id);
-		List<accountInfoDTO> List_ACCOUNT = mService.List_ACCOUNT(id);
-		System.out.println("MyController cardList() Data ==> " + List_CARD);
-		model.addAttribute("CardList", List_CARD);
-		System.out.println("MyController accountList() Data ==> " + List_ACCOUNT);
-		model.addAttribute("AccountList", List_ACCOUNT);		
+		ModelAndView mvc = new ModelAndView();
+		mvc.addObject("userInfo", dto);
+		mvc.setViewName("/myPage/mymy");
+		return mvc;
+	}
+	
+	// 회원정보 수정하기
+	@ResponseBody
+	@RequestMapping(value = "/mymyUpdate.do", method = RequestMethod.POST)
+	public String updateUserInfo(Locale locale, Model model, @RequestParam Map<String,String> userInfo) throws Exception {
+		if (userInfo.get("pass").equals(userInfo.get("pass_re"))) {
+			userinfoDTO dto = new userinfoDTO();
+			dto.setUserInfo(userInfo);
+			if(mService.mymyUpdate(dto) > 0) {
+				return "Y";
+			} else {
+				return "N";
+			}
+		} else {
+			return "N";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
+	public String result(@RequestParam("file1") MultipartFile multi,HttpServletRequest request,HttpServletResponse response, Model model) {
+    	try {
+            if(!multi.isEmpty())
+            {
+                String originFilename = multi.getOriginalFilename();
+                String Path = request.getSession().getServletContext().getRealPath("/");
+                File file = new File(Path + "/resources/images/SUB/" , originFilename);
+                multi.transferTo(file);
+                userinfoDTO dto = new userinfoDTO();
+                dto.setId(request.getParameter("id"));
+                dto.setProfile_img("images/SUB/" + originFilename);
+                int result = mService.updateProfile(dto);
+                if (result > 0) {
+                	return "Y";
+                }
+            }
+    	} catch(Exception e) {
+            System.out.println(e);
+        }
+		return "N";
 	}
 	
 	
