@@ -165,7 +165,7 @@
                 <div class="row pay" align="center">
                     <h4>등록된 결제수단이 없습니다</h4>
                     <!-- 카드 정보  -->         
-                    <c:forEach items="${cardList}" var="cardListOne">
+                    <c:forEach items="${CardList}" var="cardListOne">
 						<h2>************${cardListOne.ci_num4 }</h2>
 					</c:forEach>
                     <h3 class="card">+ CARD</h3>

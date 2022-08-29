@@ -73,7 +73,7 @@
                     <span>등록 완료</span>
                 </div>
             </button>
-            <button class="modalBtn" id="cardBtnN">
+            <button type="button" class="modalBtn" id="cardBtnN">
                 <span>취 소</span>
 			</button>
 			</form>
@@ -120,7 +120,7 @@
 				    <span>등록 완료</span>
 				    </div>
 				</button>
-				<button class="modalBtn" id="cashBtnN">
+				<button type="button" class="modalBtn" id="cashBtnN">
 				    <span>취 소</span>
 				</button>
 			</div>

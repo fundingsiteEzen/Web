@@ -30,5 +30,5 @@ public interface myDAO {
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
 	// 카드정보 가져오기
-	public List<cardInfoDTO> List_CARD() throws Exception;
+	public List<cardInfoDTO> List_CARD(String id) throws Exception;
 }

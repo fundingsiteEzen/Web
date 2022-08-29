@@ -55,15 +55,19 @@ public class MyController {
 	
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy", method=RequestMethod.GET)
-	public void projectList(Locale lacale, cardInfoDTO cDTO, Model model) throws Exception {
+	public void projectList(Model model, cardInfoDTO cDTO, HttpServletRequest req) throws Exception {
 		
+		System.out.println("마이 컨트롤러(2) 실행");
 		// 카드 정보 뿌리기
+		//HttpSession session = req.getSession();
+		//String id = (String)session.getAttribute("userID");
 		String id = "user1";
 		cDTO.setId(id);
 	
+	
 		System.out.println("MyController cardList() 시작");
 		
-		List<cardInfoDTO> List_CARD = mService.List_CARD();
+		List<cardInfoDTO> List_CARD = mService.List_CARD(id);
 		System.out.println("MyController cardList() Data ==> " + List_CARD);
 		model.addAttribute("CardList", List_CARD);
 		

@@ -30,6 +30,6 @@ public interface mySerivce {
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
 	// 카드 정보 가져오기
-	public List<cardInfoDTO> List_CARD() throws Exception;
+	public List<cardInfoDTO> List_CARD(String id) throws Exception;
 
 }
