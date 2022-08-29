@@ -11,6 +11,7 @@ import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.myPage.dto.userinfoDTO;
 
 @Repository
 public class myDAOImpl implements myDAO{
@@ -64,6 +65,20 @@ public class myDAOImpl implements myDAO{
 		return result;
 
 	}
-	
 
+	// 회원 정보 수정
+	@Override
+	public int mymyUpdate(userinfoDTO UserinfoDTO) {
+		return sqlsession.update(namespace + ".updateUserInfo", UserinfoDTO);
+	}
+	
+	public int updateProfile(userinfoDTO UserinfoDTO) {
+		return sqlsession.update(namespace + ".updateProfile", UserinfoDTO);
+	}
+
+	@Override
+	public userinfoDTO getUserInfo(String string) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace + ".getUserInfo", string);
+	}
 }

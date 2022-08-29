@@ -114,7 +114,7 @@
                 <!-- 오른쪽 영역(닉네임, 썸네일 목록) -->
                 <div class="col-sm-9 section">
                     <div class="nickname">
-                        <h3>닉네임<span onclick="location.href='/myPage/mymy'">(수정go)</span></h3>
+                        <h3>닉네임<span onclick="location.href='/myPage/mymy.do'">(수정go)</span></h3>
                     </div>
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">
@@ -197,7 +197,7 @@
 				success: function(data) {
 					if(data == "Y") {
 						alert("취소가 완료되었습니다");
-						location.href = "/myPage/myPage";
+						location.href = "/myPage/myPage.do";
 					}
 				},
 				error: function(data) { alert("에러발생"); }

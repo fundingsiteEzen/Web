@@ -49,5 +49,29 @@
 	</insert>
 	
 	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
+	
+	<!-- 회원정보(비밀번호, 이메일, 배송지)를 수정하기 -->
+	<update id="updateUserInfo" parameterType="com.fun.myPage.dto.userinfoDTO">
+		<![CDATA[
+		UPDATE	userinfo
+			SET	pass = #{pass},
+				email = #{email},
+				address = #{address}
+		WHERE id = #{id}
+		]]>
+	</update>
 
+	<update id="updateProfile" parameterType="com.fun.myPage.dto.userinfoDTO">
+		<![CDATA[
+		UPDATE	userinfo
+			SET	profile_img = #{profile_img}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="getUserInfo" resultType="com.fun.myPage.dto.userinfoDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM userinfo WHERE id=#{id}
+		]]>
+	</select>
 </mapper>

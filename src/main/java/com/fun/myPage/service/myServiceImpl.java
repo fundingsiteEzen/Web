@@ -13,6 +13,7 @@ import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.myPage.dto.userinfoDTO;
 
 @Service
 public class myServiceImpl implements mySerivce {
@@ -91,6 +92,21 @@ public class myServiceImpl implements mySerivce {
 		System.out.println("MyServiceImpl에서 받은 accountInfoDTO ==> " + aDTO);
 		return dao.addAccount(aDTO);
 
+	}
+
+	// 회원 정보 수정
+	@Override
+	public int mymyUpdate(userinfoDTO UserinfoDTO) {
+		return dao.mymyUpdate(UserinfoDTO);
+	}
+	
+	public int updateProfile(userinfoDTO UserinfoDTO) {
+		return dao.updateProfile(UserinfoDTO);
+	}
+
+	@Override
+	public userinfoDTO getUserInfo(String string) {
+		return dao.getUserInfo(string);
 	}
 }
 
