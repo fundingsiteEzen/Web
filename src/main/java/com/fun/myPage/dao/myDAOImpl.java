@@ -78,6 +78,19 @@ public class myDAOImpl implements myDAO{
 		return List_CARD;
 		
 	}
+	// 계좌 정보 가져오기
+	@Override
+	public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
+
+		System.out.println("accountDAOImpl List_ACCOUNT() 시작");
+		
+		List<accountInfoDTO> List_ACCOUNT = sqlsession.selectList(namespace + ".accountList", id);
+		
+		System.out.println("accountDAOImpl List_ACCOUNT() Data ==> " + List_ACCOUNT);
+		
+		return List_ACCOUNT;
+		
+	}
 
 	
 

@@ -31,4 +31,7 @@ public interface myDAO {
 	
 	// 카드정보 가져오기
 	public List<cardInfoDTO> List_CARD(String id) throws Exception;
+	
+	// 계좌정보 가져오기
+	public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception;
 }
