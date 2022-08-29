@@ -116,13 +116,10 @@
                 <!-- 오른쪽 영역(닉네임, 썸네일 목록) -->
                 <div class="col-sm-9 section">
                     <div class="nickname">
-                        <h3>닉네임${nickName}&nbsp;&nbsp;<span class="glyphicon glyphicon-cog" onclick="location.href='/myPage/mymy'" style="font-size:0.8em; color:#aaa;"></span></h3>
+                        <h3>닉네임<span onclick="location.href='/myPage/mymy.do'">(수정go)</span></h3>
                     </div>
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">
-                    	<c:if test="${backList[0] == null}">
-                    		<div align="center">후원 중인 프로젝트가 없습니다</div>
-                    	</c:if>
 						<c:forEach items="${backList}" var="list" varStatus="status">
 						<div class="col-sm-4">
 							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
@@ -136,14 +133,9 @@
 							<button onclick="deleteProject(${list.p_seq}, 'N')">삭제</button>
 						</div>
 						</c:forEach>
-                    	
                     </section>
                     <!-- 관심 목록 띄우기 -->
                     <section class="like_list">
-                   		<c:if test="${likeList[0] == null}">
-                    		<div align="center">관심 목록이 비었습니다</div>
-                    	</c:if>
-                    	
                         <c:forEach items="${likeList}" var="list" varStatus="status">
 						<div class="col-sm-4">
 							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
@@ -207,7 +199,7 @@
 				success: function(data) {
 					if(data == "Y") {
 						alert("취소가 완료되었습니다");
-						location.href = "/myPage/myPage";
+						location.href = "/myPage/myPage.do";
 					}
 				},
 				error: function(data) { alert("에러발생"); }
