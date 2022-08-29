@@ -131,7 +131,7 @@ public class MyController {
                 multi.transferTo(file);
                 userinfoDTO dto = new userinfoDTO();
                 dto.setId(request.getParameter("id"));
-                dto.setProfile_img("images/SUB/" + originFilename);
+                dto.setProfile_img("images/profile/" + originFilename);
                 int result = mService.updateProfile(dto);
                 if (result > 0) {
                 	return "Y";
