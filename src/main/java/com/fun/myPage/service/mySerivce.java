@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 public interface mySerivce {
@@ -31,5 +32,12 @@ public interface mySerivce {
 	
 	// 카드 정보 가져오기
 	public List<cardInfoDTO> List_CARD(String id) throws Exception;
+	
+	// 회원 정보 수정
+	public int mymyUpdate(userinfoDTO UserinfoDTO);
+
+	public int updateProfile(userinfoDTO dto);
+
+	public userinfoDTO getUserInfo(String string);
 
 }

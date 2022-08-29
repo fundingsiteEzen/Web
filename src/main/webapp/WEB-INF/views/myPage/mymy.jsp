@@ -120,10 +120,10 @@
                     <div class="opacity img-circle profile">
                     </div>
                     <div class="hide">
-   				    <input type="file" id="file1" name="file1"> 
+   				    <input type="file" id="file1" name="file1">
                     </div>
                 </div>
-
+				
 			
                 <div class="row info" align="center">
                     <div class="form-group">
@@ -267,7 +267,7 @@
             }
  
             sel_file = f;
- 
+ 			
             var reader = new FileReader();
             reader.onload = function(e) {
             	$("#img").attr("src", e.target.result);

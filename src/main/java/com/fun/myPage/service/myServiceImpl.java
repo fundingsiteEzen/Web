@@ -12,6 +12,7 @@ import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Service
@@ -102,6 +103,21 @@ public class myServiceImpl implements mySerivce {
 		return dao.List_CARD(id);
 		
 	}
+	
+	// 회원 정보 수정
+		@Override
+		public int mymyUpdate(userinfoDTO UserinfoDTO) {
+			return dao.mymyUpdate(UserinfoDTO);
+		}
+		
+		public int updateProfile(userinfoDTO UserinfoDTO) {
+			return dao.updateProfile(UserinfoDTO);
+		}
+
+		@Override
+		public userinfoDTO getUserInfo(String string) {
+			return dao.getUserInfo(string);
+		}
 
 }
 

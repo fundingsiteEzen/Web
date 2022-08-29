@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Repository
@@ -78,7 +79,21 @@ public class myDAOImpl implements myDAO{
 		return List_CARD;
 		
 	}
+	
+	// 회원 정보 수정
+	@Override
+		public int mymyUpdate(userinfoDTO UserinfoDTO) {
+			return sqlsession.update(namespace + ".updateUserInfo", UserinfoDTO);
+		}
+		
+		public int updateProfile(userinfoDTO UserinfoDTO) {
+			return sqlsession.update(namespace + ".updateProfile", UserinfoDTO);
+		}
 
+		@Override
+		public userinfoDTO getUserInfo(String string) {
+		return sqlsession.selectOne(namespace + ".getUserInfo", string);
+		}
 	
 
 }
