@@ -92,5 +92,16 @@ public class myServiceImpl implements mySerivce {
 		return dao.addAccount(aDTO);
 
 	}
+	
+	// (7) 카드 정보 불러오기
+	@Override
+	public List<cardInfoDTO> List_CARD(String id) throws Exception {
+		
+
+		System.out.println("cardServiceImpl cardList() 시작");
+		return dao.List_CARD(id);
+		
+	}
+
 }
 
