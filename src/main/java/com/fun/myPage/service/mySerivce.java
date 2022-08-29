@@ -31,7 +31,10 @@ public interface mySerivce {
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
 	// 카드 정보 가져오기
-	public List<cardInfoDTO> List_CARD(String id) throws Exception;
+	   public List<cardInfoDTO> List_CARD(String id) throws Exception;
+	   
+	   // 계좌 정보 가져오기
+	   public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception; 
 	
 	// 회원 정보 수정
 	public int mymyUpdate(userinfoDTO UserinfoDTO);

@@ -94,15 +94,24 @@ public class myServiceImpl implements mySerivce {
 
 	}
 	
-	// (7) 카드 정보 불러오기
-	@Override
-	public List<cardInfoDTO> List_CARD(String id) throws Exception {
-		
+	  // (7) 카드 정보 불러오기
+	   @Override
+	   public List<cardInfoDTO> List_CARD(String id) throws Exception {
+	      
 
-		System.out.println("cardServiceImpl cardList() 시작");
-		return dao.List_CARD(id);
-		
-	}
+	      System.out.println("cardServiceImpl cardList() 시작");
+	      return dao.List_CARD(id);
+	      
+	   }
+	   // (8) 계좌 정보 불러오기
+	   @Override
+	   public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
+	      
+
+	      System.out.println("accountServiceImpl accountList() 시작");
+	      return dao.List_ACCOUNT(id);
+	      
+	   }
 	
 	// 회원 정보 수정
 		@Override
