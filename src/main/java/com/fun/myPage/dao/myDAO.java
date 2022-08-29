@@ -2,15 +2,12 @@ package com.fun.myPage.dao;
 
 import java.util.List;
 
-
 import org.springframework.dao.DataAccessException;
-
 
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
-import com.fun.myPage.dto.userinfoDTO;
 
 public interface myDAO {
 
@@ -32,10 +29,6 @@ public interface myDAO {
 	// 계좌 정보 입력
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
-	// 회원 정보 수정
-	public int mymyUpdate(userinfoDTO UserinfoDTO);
-
-	public int updateProfile(userinfoDTO userinfoDTO);
-
-	public userinfoDTO getUserInfo(String string);
+	// 카드정보 가져오기
+	public List<cardInfoDTO> List_CARD(String id) throws Exception;
 }

@@ -27,8 +27,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/myPage/myPage.do">마이페이지</a></li>
-        <li><a href="/crpage/cr">등록 go</a></li>
+        <li><a href="/myPage/myPage">마이페이지</a></li>
         <c:choose>
 		<c:when test="${isLogin == null}">
 	        <li><a href="/login.do">로그인</a></li>

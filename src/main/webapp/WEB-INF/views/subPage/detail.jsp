@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		
+		
 </head>
 
 <style>
@@ -31,7 +32,7 @@
 		font-family: 'Hahmlet', serif;}
 	
 	.wrap {
-		background-image: url(${contextPath}/images/MAIN_img/winter.png);
+		background-image: url(${contextPath}/images/MAIN_img/${project.p_category}.jpg);
 	    background-attachment: fixed; }
 	.main {background-color: #fff;}
 	.add_button {padding-top: 60px;}
@@ -49,34 +50,21 @@
 	.navigation {
 		margin-top: 100px;
 	}
-		
-  .story {
-  	height: 2000px;
-  }
-  .story li { width: 100%;}
-  
-  /* 기존 style 스크롤바이 */
-  .scroll {
-  	top: 50px;
-  	position:sticky;
-  }
-  .scrollul {
-  	text-align: center;
-  }
-  .scrollul li {
-	line-height: 60px;
-	background-color: #ccc;
-  }
-  .reward { height: 2000px; }
-  .reward_each {
-	top: 50px;
-	position: sticky; }
-
-  div.col-sm-7 div {
-    height: 1000px;
-    font-size: 28px;
-  }
-  #section1, #section2, #section3  {color: #fff; background-color: #ccc;}
+	.item {
+		width:100%;
+		object-fit: cover;
+		overflow: hidden;
+	}
+	.itemImg {
+		object-fit: cover;
+		overflow:hidden;
+		width:100%; 
+		min-height: 400px;
+		max-height: 400px;
+	}
+	.carousel-control.left, .carousel-control.right {
+    	background-image: none
+	}
   
   </style>
 
@@ -96,24 +84,33 @@
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						<!-- 인디케이터 -->
 						<ol class="carousel-indicators">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1"></li>
-							<li data-target="#myCarousel" data-slide-to="2"></li>
+							<c:forEach var="i" begin="0" end="${project.p_imgCnt-1}" varStatus="status">
+								<c:choose>
+								<c:when test="${status.index == 0}">
+								<li data-target="#myCarousel" data-slide-to="${status.index}" class="active"></li>
+								</c:when>
+								<c:when test="${status.index > 0}">
+								<li data-target="#myCarousel" data-slide-to="${status.index}"></li>
+								</c:when>
+								</c:choose>
+							</c:forEach>
 						</ol>
 						<!-- 슬라이드 wrap -->
 						<div class="carousel-inner">
-							<div class="item active">
-								<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail01.jpg" alt="img01" width="100%" height="350px"/>
-								<div class="carousel-caption"></div>
-							</div>
-							<div class="item">
-								<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail02.jpg" alt="img02" width="100%" height="350px"/>
-								<div class="carousel-caption"><h2></h2></div>
-							</div>
-							<div class="item">
-								<img class="img-responseve center-block" src="${contextPath}/images/SUB/detail03.jpg" alt="img03" width="100%" height="350px"/>
-								<div class="carousel-caption"><h2></h2></div>
-							</div>
+							<c:forEach items="${slide}" var="list" varStatus="status">
+								<c:choose>
+								<c:when test="${status.index == 0}">
+								<div class="item active">
+									<img class="img-responseve center-block itemImg" src="${contextPath}/images/SUB/${list}"/>
+								</div>
+								</c:when>
+								<c:when test="${status.index > 0}">
+								<div class="item">
+									<img class="img-responseve center-block itemImg" src="${contextPath}/images/SUB/${list}" />
+								</div>
+								</c:when>
+								</c:choose>
+							</c:forEach>
 						</div>
 						
 						<!-- 좌우 버튼 -->
@@ -163,7 +160,6 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<p>${project.p_content}</p>
-					<p>~~~ 프로젝트 소개글이 뜨는 부분 ~~~</p>
 					<p>${project.p_backer} 명 후원중</p>
 				</div>
 			</div>
@@ -179,6 +175,7 @@
   	
   	<!-- 커스텀 스크립트 -->
   	<script>
+  		// 관심목록 버튼
   		function addList(p_seq) {
   			$.ajax({
   				type: "POST",
@@ -202,14 +199,16 @@
   			});
   		}
   		// 후원하기 버튼
-  		function BACK(p_seq, r_seq, r_price, r_count) {
-  			var addMoney = $(this).$("#r_addMoney").val();
-  			alert(addMoney);
+  		function back_this(r_seq) {
+  			var formsubmitSerialArray = $('#form'+r_seq).serializeArray();
+  			var formsubmit = JSON.stringify(objectifyForm(formsubmitSerialArray));
+  			//var formsubmit = $("#form1").serialize();
   			if(confirm("후원하시겠습니까 ?")){
   				$.ajax({
   	  				type: "POST",
   	  				url: "/subPage/back.do",
-  	  				data: {p_seq:p_seq, r_seq:r_seq, r_price:r_price, r_count:r_count},
+	  	  			contentType: 'application/json; charset=utf-8',
+  	  				data: formsubmit,
   	  				success: function(data) {
   	  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
   	  					if(data == 'F') {
@@ -218,15 +217,27 @@
   	  					}
   	  					if(data == 'Y'){
   	  						location.href = "redirect:/subPage/detail";
-  	  						alert("관심 목록에 추가되었습니다");
+  	  						alert("후원이 완료되었습니다");
   	  					}
   	  					if(data == 'D') {
   	  						alert("이미 후원중인 프로젝트입니다");
   	  					}
   	  				},
-  	  				error: function(data) {alert('문제가 발생했습니다');}
+  	  				error: function(request, status, error) {alert("문제가 발생했습니다");}
   	  			});
   			}
+  		}
+  		function objectifyForm(formArray) {//serializeArray data function
+  			var returnArray = {};
+  			for (var i = 0; i < formArray.length; i++) {
+  				returnArray[formArray[i]['name']] = formArray[i]['value'];
+  			}
+  			return returnArray;
+  		}
+  		// 후원하면 BACK 버튼 생김
+  		function addSubmit(r_seq) {
+  			$(".BACK").attr("disabled", false);
+  			$('#addMondy'+r_seq).focus();
   		}
   	</script>
   	<script>

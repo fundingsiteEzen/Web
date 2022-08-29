@@ -13,7 +13,6 @@ import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.subPage.dto.projectDTO;
-import com.fun.myPage.dto.userinfoDTO;
 
 @Service
 public class myServiceImpl implements mySerivce {
@@ -93,20 +92,16 @@ public class myServiceImpl implements mySerivce {
 		return dao.addAccount(aDTO);
 
 	}
-
-	// 회원 정보 수정
-	@Override
-	public int mymyUpdate(userinfoDTO UserinfoDTO) {
-		return dao.mymyUpdate(UserinfoDTO);
-	}
 	
-	public int updateProfile(userinfoDTO UserinfoDTO) {
-		return dao.updateProfile(UserinfoDTO);
+	// (7) 카드 정보 불러오기
+	@Override
+	public List<cardInfoDTO> List_CARD(String id) throws Exception {
+		
+
+		System.out.println("cardServiceImpl cardList() 시작");
+		return dao.List_CARD(id);
+		
 	}
 
-	@Override
-	public userinfoDTO getUserInfo(String string) {
-		return dao.getUserInfo(string);
-	}
 }
 

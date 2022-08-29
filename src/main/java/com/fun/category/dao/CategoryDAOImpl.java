@@ -30,8 +30,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		
 		List<CategoryDTO> SpringList = sqlSession.selectList(namespace + ".spring_categoryList");
 		
-		System.out.println("CategoryDAOImpl SpringList() Data ==> " + SpringList);
-		
 		return SpringList;	
 	}
 	
@@ -44,8 +42,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		System.out.println("CategoryDAOImpl SummerList() 시작");
 		
 		List<CategoryDTO> SummerList = sqlSession.selectList(namespace + ".summer_categoryList");
-		
-		System.out.println("CategoryDAOImpl SummerList() Data ==> " + SummerList);
 		
 		return SummerList;	
 	}
@@ -60,8 +56,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		
 		List<CategoryDTO> AutumnList = sqlSession.selectList(namespace + ".autumn_categoryList");
 		
-		System.out.println("CategoryDAOImpl AutumnList() Data ==> " + AutumnList);
-		
 		return AutumnList;	
 	}
 	
@@ -74,8 +68,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		System.out.println("CategoryDAOImpl WinterList() 시작");
 		
 		List<CategoryDTO> WinterList = sqlSession.selectList(namespace + ".winter_categoryList");
-		
-		System.out.println("CategoryDAOImpl WinterList() Data ==> " + WinterList);
 		
 		return WinterList;	
 	}

@@ -31,7 +31,6 @@ public class CategoryController {
 		System.out.println("CategoryController SpringList() 시작");
 		
 		List<CategoryDTO> SpringList = categoryService.SpringList();
-		System.out.println("CategoryController SpringList() Data ==> " + SpringList);
 		model.addAttribute("SpringList", SpringList);	
 	}
 	
@@ -44,7 +43,6 @@ public class CategoryController {
 		System.out.println("CategoryController SummerList() 시작");
 		
 		List<CategoryDTO> SummerList = categoryService.SummerList();
-		System.out.println("CategoryController SummerList() Data ==> " + SummerList);
 		model.addAttribute("SummerList", SummerList);
 	}
 	
@@ -57,7 +55,6 @@ public class CategoryController {
 		System.out.println("CategoryController AutumnList() 시작");
 		
 		List<CategoryDTO> AutumnList = categoryService.AutumnList();
-		System.out.println("CategoryController AutumnList() Data ==> " + AutumnList);
 		model.addAttribute("AutumnList", AutumnList);
 	}
 	
@@ -70,7 +67,6 @@ public class CategoryController {
 		System.out.println("CategoryController WinterList() 시작");
 		
 		List<CategoryDTO> WinterList = categoryService.WinterList();
-		System.out.println("CategoryController WinterList() Data ==> " + WinterList);
 		model.addAttribute("WinterList", WinterList);
 	}
 } // End - public class CategoryController

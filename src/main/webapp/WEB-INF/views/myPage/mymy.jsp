@@ -24,14 +24,17 @@
 	<link rel="stylesheet" href="${contextPath}/css/modal.css">
 	
 	<style>
-	* {
-	    margin: 0 auto;
-	    padding: 0;
-	    list-style: none;}
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500&display=swap');
+    * {
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        font-family: 'Hahmlet', serif;}
+     label{font-weight: 500;}
 	.bg-image {
-	    background-image: url('${contextPath}/images/MAIN_img/summer02.png');
+	    background-image: url('${contextPath}/images/MAIN_img/summer.jpg');
 	    background-attachment: fixed;
-	    height: 200px;
+	    height: 300px;
 	}
 	.main-back {
 	}
@@ -168,9 +171,16 @@
                    </div>
                 <div class="row pay" align="center">
                     <h4>등록된 결제수단이 없습니다</h4>
+                    <!-- 카드 정보  -->         
+                    <c:forEach items="${CardList}" var="cardListOne">
+						<h2>************${cardListOne.ci_num4 }</h2>
+					</c:forEach>
                     <h3 class="card">+ CARD</h3>
                     <h3 class="account">+ ACCOUNT</h3>
                 </div>
+                <!-- 카드 정보  -->         
+				
+		
             </div>
             
             <!-- 카드 & 계좌 모달창 -->
