@@ -18,10 +18,10 @@
 	</select>
 	
 	<!-- 회원가입 시 회원정보 넣기 -->
-	<insert id="addMember" parameterType="com.fun.subPage.dto.newUserinfoDTO">
+	<insert id="addMember" parameterType="com.fun.subPage.dto.userinfoDTO">
 		<![CDATA[
 		INSERT INTO userinfo
-		VALUES(#{id}, #{pass}, #{name}, #{email}, #{user_auth})
+		VALUES(#{id}, #{pass}, #{name}, #{email}, #{profile_img}, #{address}, #{user_auth})
 		]]>
 	</insert>
 	

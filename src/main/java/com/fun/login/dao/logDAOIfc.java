@@ -9,7 +9,7 @@ public interface logDAOIfc {
 	public userinfoDTO searchID(String id) throws Exception;
 	
 	// 회원가입
-	public int addMember(newUserinfoDTO userinfo) throws Exception;
+	public int addMember(userinfoDTO userinfo) throws Exception;
 	
 	// 아이디 중복체크
 	public int checkID(String id) throws Exception;
