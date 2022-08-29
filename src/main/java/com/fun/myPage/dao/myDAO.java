@@ -3,7 +3,6 @@ package com.fun.myPage.dao;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
@@ -30,5 +29,9 @@ public interface myDAO {
 	// 계좌 정보 입력
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
+	// 카드정보 가져오기
+	public List<cardInfoDTO> List_CARD(String id) throws Exception;
 	
+	// 계좌정보 가져오기
+	public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception;
 }

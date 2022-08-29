@@ -199,7 +199,7 @@
 				success: function(data) {
 					if(data == "Y") {
 						alert("취소가 완료되었습니다");
-						location.href = "/myPage/myPage";
+						location.href = "/myPage/myPage.do";
 					}
 				},
 				error: function(data) { alert("에러발생"); }
