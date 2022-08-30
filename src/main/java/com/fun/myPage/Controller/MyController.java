@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fun.category.dto.CategoryDTO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
@@ -43,18 +44,24 @@ public class MyController {
 		
 		// 아이디로 정보 가져오기
 		// 세션으로 아이디 값 가져오기
-//		HttpSession session = req.getSession();
-//		String id = (String)session.getAttribute("userID");
+		//HttpSession session = req.getSession();
+		//String id = (String)session.getAttribute("userID");
+		
+
+		
 		String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
-		
-		// 후원목록 / 관심목록 나누기
+		 
+		// 후원목록 / 관심목록 나누기 / 내 프로젝트
 		List<projectDTO> project_BACK = mService.getProject_back(bDTO);
 		List<projectDTO> project_LIKE = mService.getProject_Like(bDTO);
-		
+		List<projectDTO> getProject_My = mService.getProject_My(id);
 		// model에 붙혀서 전달
 		model.addAttribute("backList", project_BACK);
 		model.addAttribute("likeList", project_LIKE);
+		model.addAttribute("myList", getProject_My);
+		
+		
 		
 	}
 	 @RequestMapping(value="/mymy", method=RequestMethod.GET)

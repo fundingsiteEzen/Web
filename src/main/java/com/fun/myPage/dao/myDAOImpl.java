@@ -27,6 +27,7 @@ public class myDAOImpl implements myDAO{
 		return sqlsession.selectList(namespace + ".backerInfo", id);
 	}
 	
+	
 	// (1)-2 프로젝트 테이블 가져오기(후원목록)
 	public projectDTO getProject_back(String p_seq) throws Exception {
 		
@@ -37,6 +38,12 @@ public class myDAOImpl implements myDAO{
 	public projectDTO getProject_like(String p_seq) throws Exception {
 		
 		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
+	}
+	
+	// (1)-4 프로젝트 테이블 가져오기(내가 등록한 페이지)
+	public List<projectDTO> getProject_My(String id) throws Exception {
+		
+		return sqlsession.selectList(namespace + ".myProInfo", id);
 	}
 
 	// 후원 취소

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.fun.crpage.dto.CrDTO;
 import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
@@ -64,6 +63,14 @@ public class myServiceImpl implements mySerivce {
 			System.out.println("for문 끝난 데이터 :" + pList);
 	
 		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
+		return pList;
+	}
+	
+	// 내 프로젝트 목록
+	@Override
+	public List<projectDTO> getProject_My(String id) throws Exception {
+		List<projectDTO> pList = dao.getProject_My(id);
+		
 		return pList;
 	}
 
@@ -139,6 +146,10 @@ public class myServiceImpl implements mySerivce {
 			// TODO Auto-generated method stub
 			return dao.deleteAccount(aDTO);
 		}
+		
 
+		
+		
 }
+
 
