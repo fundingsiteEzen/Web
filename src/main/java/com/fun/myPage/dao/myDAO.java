@@ -9,6 +9,7 @@ import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 public interface myDAO {
 
@@ -18,11 +19,20 @@ public interface myDAO {
 	// (1)-2 프로젝트 테이블 가져오기(후원목록)
 	public projectDTO getProject_back(String p_seq) throws Exception;
 	
+	// 리워드 테이블 가져오기
+	public rewardDTO getReward_back(int p_seq, int r_seq) throws Exception;
+	
 	// (1)-3 프로젝트 테이블 가져오기(관심목록)
 	public projectDTO getProject_like(String p_seq) throws Exception;
 	
-	// (후원취소)
+	// (후원취소) - backer
 	public int deleteProject(backerDTO bDTO) throws Exception;
+	
+	// (후원취소) - project
+	public int cancel_project(projectDTO dto) throws Exception;
+	
+	// (후원취소) - reward
+	public int cancel_reward(rewardDTO dto) throws Exception;
 	
 	// 카드 정보 입력
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
