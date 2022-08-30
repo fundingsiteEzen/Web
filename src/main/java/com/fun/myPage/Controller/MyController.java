@@ -54,15 +54,16 @@ public class MyController {
 		// 후원목록 / 관심목록 나누기 / 내 프로젝트
 		List<projectDTO> project_BACK = mService.getProject_back(bDTO);
 		List<projectDTO> project_LIKE = mService.getProject_Like(bDTO);
-		List<projectDTO> getProject_My = mService.getProject_My(id);
+		List<projectDTO> getMyProject = mService.getMyProject(id);
 		// model에 붙혀서 전달
 		model.addAttribute("backList", project_BACK);
 		model.addAttribute("likeList", project_LIKE);
-		model.addAttribute("myList", getProject_My);
+		model.addAttribute("myList", getMyProject);
 		
 		
 		
 	}
+	// 카드,계좌
 	 @RequestMapping(value="/mymy", method=RequestMethod.GET)
 	   public void projectList(Model model, cardInfoDTO cDTO, HttpServletRequest req) throws Exception {
 	      

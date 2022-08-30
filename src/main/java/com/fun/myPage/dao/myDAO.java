@@ -22,11 +22,13 @@ public interface myDAO {
 	public projectDTO getProject_like(String p_seq) throws Exception;
 	
 	// 내 프로젝트 가져오기
-	public List<projectDTO> getProject_My(String id) throws Exception;
+	public List<projectDTO> getMyProject(String id) throws Exception;
 		
-	
 	// (후원취소)
 	public int deleteProject(backerDTO bDTO) throws Exception;
+	
+	// 등록 취소
+	/* public int deleteMyProject() throws Exception; */
 	
 	// 카드 정보 입력
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException;

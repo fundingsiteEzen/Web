@@ -40,7 +40,7 @@ public class myDAOImpl implements myDAO{
 	}
 	
 	// 프로젝트 테이블 가져오기(내 프로젝트목록)
-	public List<projectDTO> getProject_My(String id) throws Exception {
+	public List<projectDTO> getMyProject(String id) throws Exception {
 		
 		return sqlsession.selectList(namespace + ".myProInfo", id);
 	}
@@ -51,6 +51,13 @@ public class myDAOImpl implements myDAO{
 		
 		return sqlsession.delete(namespace + ".deleteProject", bDTO);
 	}
+	
+	// 등록 취소
+	/*
+	 * @Override public int deleteMyProject(backerDTO bDTO) throws Exception {
+	 * 
+	 * return sqlsession.delete(namespace + ".deleteMyProject"); }
+	 */
 
 	// 카드 정보 입력
 	@Override

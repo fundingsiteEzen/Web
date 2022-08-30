@@ -208,17 +208,17 @@
                     	</div>
                     	<!-- 등록된 페이지가 있을 경우 -->
                     	<c:forEach items="${myList}" var="list" varStatus="status">
-						<div class="col-sm-4">
-							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-								<div style="overflow: hidden; height:80%">
-									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+							<div class="col-sm-4">
+								<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+									<div style="overflow: hidden; height:80%">
+										<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+									</div>
+									<div>
+										<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+									</div>
 								</div>
-								<div>
-									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-								</div>
+								<button onclick="deleteMyProject(${list.p_seq}, 'Y')">삭제</button>
 							</div>
-							<button onclick="#">삭제</button>
-						</div>
 						</c:forEach>
                     </section>
                 </div>

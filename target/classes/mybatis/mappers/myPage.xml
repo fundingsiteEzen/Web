@@ -40,6 +40,13 @@
 		]]>
 	</delete>
 	
+	<!-- 내 프로젝트 목록에서 없애기 -->
+	<delete id="deleteMyProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		DELETE FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</delete>
+	
 	<!-- 카드 정보 입력 -->
 	<insert id="addCard" parameterType="com.fun.myPage.dto.cardInfoDTO">
 		<![CDATA[
