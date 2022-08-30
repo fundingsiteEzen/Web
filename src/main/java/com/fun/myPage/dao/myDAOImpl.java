@@ -38,6 +38,12 @@ public class myDAOImpl implements myDAO{
 		
 		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
 	}
+	
+	// 프로젝트 테이블 가져오기(내 프로젝트목록)
+	public List<projectDTO> getProject_My(String id) throws Exception {
+		
+		return sqlsession.selectList(namespace + ".myProInfo", id);
+	}
 
 	// 후원 취소
 	@Override

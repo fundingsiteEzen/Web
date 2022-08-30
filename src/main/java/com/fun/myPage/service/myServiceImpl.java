@@ -66,6 +66,14 @@ public class myServiceImpl implements mySerivce {
 		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
 		return pList;
 	}
+	
+	// 내 프로젝트 가져오기
+	@Override
+	public List<projectDTO> getProject_My(String id) throws Exception {
+		List<projectDTO> pList = dao.getProject_My(id);
+		
+		return pList;
+	}
 
 	// (4) 후원 취소
 	@Override
@@ -112,6 +120,8 @@ public class myServiceImpl implements mySerivce {
 	      return dao.List_ACCOUNT(id);
 	      
 	   }
+		
+
 	
 	// 회원 정보 수정
 		@Override
