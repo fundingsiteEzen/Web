@@ -42,6 +42,7 @@ public class myServiceImpl implements mySerivce {
 		// 가져온 테이블에서 p_seq만 뽑아서 'project' 테이블 가져오기
 		List<projectDTO> pList = new ArrayList<projectDTO>(); // List 꼭 생성해줘야함.. ! null로 두면 안됨
 		List<rewardDTO> rList = new ArrayList<rewardDTO>();
+		List<Integer> addMoney = new ArrayList<Integer>();
 		
 			for(int i = 0; i < bList.size(); i++) {
 				if(bList.get(i).getIs_like() == 'N') { // 'N'인 경우만 뽑음
@@ -49,13 +50,18 @@ public class myServiceImpl implements mySerivce {
 					pList.add(dao.getProject_back(p_seq));
 					
 					// p_seq를 뽑으면서 r_seq도 같이 뽑음. 두개 붙혀서 리워드 테이블 가져오기
-					String r_seq = Integer.toString(bList.get(i).getR_seq());
-//					rList.add(dao.getReward_back(p_seq, r_seq));
+					int r_seq = bList.get(i).getR_seq();
+					rList.add(dao.getReward_back(bList.get(i).getP_seq(), r_seq));
+					
+					// 추가후원금 가져오기
+					addMoney.add(bList.get(i).getR_addMoney());
 				}
 			}
 			PR.setpList(pList);
 			PR.setrDTO(rList);
+			PR.setAddMoney(addMoney);
 			System.out.println("for문 끝난 데이터 :" + pList);
+			System.out.println("for문 끝난 리워드 데이터 :" + rList);
 		
 		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
 		return PR;

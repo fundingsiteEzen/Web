@@ -46,6 +46,7 @@ public class myDAOImpl implements myDAO{
 		rewardDTO dto = new rewardDTO();
 		dto.setP_seq(p_seq);
 		dto.setR_seq(r_seq);
+		System.out.println("p_seq 값 : " + p_seq + " r_seq 값 : " + r_seq);
 		
 		return sqlsession.selectOne(namespace + ".rewardInfo", dto);
 	}
@@ -60,13 +61,13 @@ public class myDAOImpl implements myDAO{
 	// (4)-2 프로젝트 테이블 수정
 	public int cancel_project(projectDTO dto) {
 		System.out.println("마이 dao (4) - 프로젝트 수정 실행");
-		return sqlsession.delete(namespace + ".", dto);
+		return sqlsession.delete(namespace + ".cancelProject", dto);
 	}
 	
 	// (4)-3 리워드 테이블 수정
 	public int cancel_reward(rewardDTO dto) {
 		System.out.println("마이 dao (4) - 리워드 수정 실행");
-		return sqlsession.delete(namespace + ".", dto);
+		return sqlsession.delete(namespace + ".cancelReward", dto);
 	}
 
 	// 카드 정보 입력

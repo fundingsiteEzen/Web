@@ -28,7 +28,7 @@
 	<!-- r_seq 값으로 리워드 테이블 가져오기 -->
 	<select id="rewardInfo" resultType="com.fun.subPage.dto.rewardDTO" parameterType="com.fun.subPage.dto.rewardDTO">
 		<![CDATA[
-		SELECT * FROM project WHERE p_seq=#{p_seq} AND r_seq=#{r_seq}
+		SELECT * FROM reward WHERE p_seq=#{p_seq} AND r_seq=#{r_seq}
 		]]>
 	</select>
 	

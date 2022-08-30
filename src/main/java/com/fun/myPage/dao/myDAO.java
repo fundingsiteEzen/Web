@@ -57,4 +57,5 @@ public interface myDAO {
 	public int deleteCard(cardInfoDTO cDTO);
 
 	public int deleteAccount(accountInfoDTO aDTO);
+
 }

@@ -53,14 +53,14 @@ public class MyController {
 		
 		// 후원목록
 		prDTO PR = mService.getProject_back(bDTO);
-		List<projectDTO> project_BACK = PR.getpList();
-		List<rewardDTO> reward_BACK = PR.getrDTO(); // getrDTO지만 List로 리턴함
 		
 		// 관심목록
 		List<projectDTO> project_LIKE = mService.getProject_Like(bDTO);
 		
 		// model에 붙혀서 전달
-		model.addAttribute("backList", project_BACK);
+		model.addAttribute("backList", PR.getpList());
+		model.addAttribute("rewardList", PR.getrDTO());
+		model.addAttribute("addMoney", PR.getAddMoney());
 		model.addAttribute("likeList", project_LIKE);
 		
 	}
@@ -190,6 +190,8 @@ public class MyController {
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("userID");
 		bDTO.setId(id);
+		bDTO.setIs_like('N');
+		bDTO.setP_seq(Integer.parseInt(req.getParameter("p_seq")));
 		
 		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러 'F'는 로그인 안됨
 		String result = null;
@@ -199,7 +201,11 @@ public class MyController {
 			
 			// p_seq, r_seq, r_price, r_addMoney 받아와야함
 			projectDTO pDTO = new projectDTO();
+			pDTO.setP_seq(Integer.parseInt(req.getParameter("p_seq")));
+			pDTO.setP_total(Integer.parseInt(req.getParameter("p_total")));
 			rewardDTO rDTO = new rewardDTO();
+			rDTO.setP_seq(Integer.parseInt(req.getParameter("p_seq")));
+			rDTO.setR_seq(Integer.parseInt(req.getParameter("r_seq")));
 			
 			// 테이블 세개 수정함 cancel_back은 backer테이블 수정 & cancel_project는 project테이블 수정 & cancel_reward는 reward 테이블 수정
 			// DB에 등록이 성공한 경우.
