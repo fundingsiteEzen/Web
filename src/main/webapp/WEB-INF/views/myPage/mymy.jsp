@@ -32,7 +32,7 @@
         font-family: 'Hahmlet', serif;}
      label{font-weight: 500;}
 	.bg-image {
-	    background-image: url('${contextPath}/images/MAIN_img/summer02.png');
+	    background-image: url('${contextPath}/images/MAIN_img/summer.jpg');
 	    background-attachment: fixed;
 	    height: 300px;
 	}
