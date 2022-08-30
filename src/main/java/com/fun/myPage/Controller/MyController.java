@@ -184,7 +184,7 @@ public class MyController {
 		result = mService.addCard(cDTO);
 
 		ModelAndView mav	= new ModelAndView();
-		mav.setViewName("/myPage/mymy");
+		mav.setViewName("redirect:/myPage/mymy");
 		return mav;
 	}
 	
@@ -203,7 +203,7 @@ public class MyController {
 		result = mService.addAccount(aDTO);
 
 		ModelAndView mav	= new ModelAndView();
-		mav.setViewName("/myPage/mymy");
+		mav.setViewName("redirect:/myPage/mymy");
 		return mav;
 	}
 	

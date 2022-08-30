@@ -242,6 +242,7 @@
 		    $("#CardModal").fadeOut(200);
 		});
 		
+		
 		// 계좌
 		$(".account").click(function(){
 		    $("#CashModal").fadeIn(200);
