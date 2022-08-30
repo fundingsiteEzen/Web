@@ -25,6 +25,14 @@
 		]]>
 	</select>
 	
+	<!-- id에 해당하는 프로젝트 테이블 가져오기 -->
+	<select id="myProInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM project WHERE id=#{id}
+		]]>
+	</select>
+	
+	
 	<!-- 후원 & 관심목록에서 없애기 -->
 	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
