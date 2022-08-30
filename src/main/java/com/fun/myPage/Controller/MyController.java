@@ -1,7 +1,6 @@
 package com.fun.myPage.Controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,10 +45,12 @@ public class MyController {
 		// 후원목록 / 관심목록 나누기
 		List<projectDTO> project_BACK = mService.getProject_back(bDTO);
 		List<projectDTO> project_LIKE = mService.getProject_Like(bDTO);
+		List<projectDTO> project_MY = mService.getProject_My(bDTO);
 		
 		// model에 붙혀서 전달
 		model.addAttribute("backList", project_BACK);
 		model.addAttribute("likeList", project_LIKE);
+		model.addAttribute("myList", project_MY);
 		
 	}
 	
@@ -97,8 +98,6 @@ public class MyController {
 		
 		return result;
 	}
-	
-	// 카드 정보 입력
 	
 	@RequestMapping(value="/addCard.do", method=RequestMethod.POST)
 	public ModelAndView addCard(@ModelAttribute("cardInfoDTO") cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response)

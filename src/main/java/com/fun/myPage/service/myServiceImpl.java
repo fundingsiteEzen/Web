@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.fun.category.dto.CategoryDTO;
 import com.fun.crpage.dto.CrDTO;
 import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.accountInfoDTO;
@@ -102,6 +103,22 @@ public class myServiceImpl implements mySerivce {
 		return dao.List_CARD(id);
 		
 	}
-
+	
+	// 나래- 내 프로젝트
+	// (3) 관심목록 가져오기
+	public List<projectDTO> getProject_My(List<backerDTO> bList) throws Exception {
+		List<projectDTO> pList = new ArrayList<projectDTO>(); // List 꼭 생성해줘야함.. ! null로 두면 안됨
+		
+			for(int i = 0; i < bList.size(); i++) {
+				if(bList.get(i).getIs_like() == 'Y') { // 'Y'인 경우만 뽑음
+					String p_seq = Integer.toString(bList.get(i).getP_seq());
+					pList.add(dao.getProject_back(p_seq));
+				}
+			}
+			System.out.println("for문 끝난 데이터 :" + pList);
+	
+		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
+		return pList;
+	}
 }
 

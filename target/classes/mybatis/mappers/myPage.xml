@@ -56,5 +56,12 @@
 		]]>
 	</select>
 	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
+	
+	<!-- project 테이블에서 등록한 프로젝트 가져오기 -->
+	<select id="myProjectInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELETE p_name, p_endDate FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</select>
 
 </mapper>

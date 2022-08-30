@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.fun.category.dto.CategoryDTO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
@@ -37,6 +38,12 @@ public class myDAOImpl implements myDAO{
 		
 		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
 	}
+	
+	public projectDTO getProject_My(String p_seq) throws Exception {
+		
+		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
+	}
+	
 
 	// 후원 취소
 	@Override
@@ -79,6 +86,22 @@ public class myDAOImpl implements myDAO{
 		
 	}
 
+	/*
+	 * // 나래- 내 프로젝트 가져오기
+	 * 
+	 * @Override public List<projectDTO> getProject_My(String id) throws Exception {
+	 * 
+	 * System.out.println("myDAOImpl myProjectInfo() 시작");
+	 * 
+	 * List<projectDTO> myProjectInfo = sqlsession.selectList(namespace +
+	 * ".myProjectInfo", id);
+	 * 
+	 * System.out.println("myDAOImpl myProjectInfo() Data ==> " + myProjectInfo);
+	 * 
+	 * return myProjectInfo; }
+	 */
+	
+	// (1)-2 프로젝트 테이블 가져오기(내 프로젝트)
 	
 
 }
