@@ -88,16 +88,21 @@ public class MyController {
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy.do", method=RequestMethod.GET)
 	public ModelAndView getUserInfo(Model model) throws Exception {
-		userinfoDTO dto = mService.getUserInfo("admin");
+		userinfoDTO dto = mService.getUserInfo("user1");
 		
 		if(dto.getProfile_img() == null || dto.getProfile_img() == "") {
-			dto.setProfile_img("images/SUB/detail01.jpg");
+			dto.setProfile_img("images/profile/detail01.jpg");
 		} else {
 			File file = new File(dto.getProfile_img());
 		}
 		
+		List<cardInfoDTO> cardList = mService.List_CARD(dto.getId());
+	    List<accountInfoDTO> accountList = mService.List_ACCOUNT(dto.getId());
+		
 		ModelAndView mvc = new ModelAndView();
 		mvc.addObject("userInfo", dto);
+		mvc.addObject("cardList", cardList); 
+		mvc.addObject("accountList", accountList);
 		mvc.setViewName("/myPage/mymy");
 		return mvc;
 	}
@@ -127,11 +132,11 @@ public class MyController {
             {
                 String originFilename = multi.getOriginalFilename();
                 String Path = request.getSession().getServletContext().getRealPath("/");
-                File file = new File(Path + "/resources/images/SUB/" , originFilename);
+                File file = new File(Path + "/resources/images/profile/" , originFilename);
                 multi.transferTo(file);
                 userinfoDTO dto = new userinfoDTO();
                 dto.setId(request.getParameter("id"));
-                dto.setProfile_img("images/SUB/" + originFilename);
+                dto.setProfile_img("images/profile/" + originFilename);
                 int result = mService.updateProfile(dto);
                 if (result > 0) {
                 	return "Y";
@@ -173,18 +178,11 @@ public class MyController {
 	@RequestMapping(value="/addCard.do", method=RequestMethod.POST)
 	public ModelAndView addCard(@ModelAttribute("cardInfoDTO") cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
-		System.out.println("MyController에서 받은 cardInfoDTO ==> " + cDTO);
-		
-		String id = "user1";
-		cDTO.setId(id);
-		
-		int result = 0;
-		// 사용자가 입력한 정보를 서비스에게 넘겨주어 처리하게 한다.
-		result = mService.addCard(cDTO);
+		cDTO.setId("user1");
+		int result = mService.addCard(cDTO);
 
 		ModelAndView mav	= new ModelAndView();
-		mav.setViewName("/myPage/mymy");
+		mav.setViewName("redirect:/myPage/mymy.do");
 		return mav;
 	}
 	
@@ -192,22 +190,36 @@ public class MyController {
 	@RequestMapping(value="/addAccount.do", method=RequestMethod.POST)
 	public ModelAndView addAcoount(@ModelAttribute("accountInfoDTO") accountInfoDTO aDTO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
-		System.out.println("MyController에서 받은 accountInfoDTO ==> " + aDTO);
-		
-		String id = "user1";
-		aDTO.setId(id);
-		
-		int result = 0;
-		// 사용자가 입력한 정보를 서비스에게 넘겨주어 처리하게 한다.
-		result = mService.addAccount(aDTO);
+		aDTO.setId("user1");
+		int result = mService.addAccount(aDTO);
 
 		ModelAndView mav	= new ModelAndView();
-		mav.setViewName("/myPage/mymy");
+		mav.setViewName("redirect:/myPage/mymy.do");
 		return mav;
 	}
 	
+	@RequestMapping(value="/deleteCard.do", method=RequestMethod.POST)
+	public ModelAndView deleteCard(@ModelAttribute("cardInfoDTO") cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		cDTO.setId("user1");
+		int result = mService.deleteCard(cDTO);
+
+		ModelAndView mav	= new ModelAndView();
+		mav.setViewName("redirect:/myPage/mymy.do");
+		return mav;
+	}
 	
+	// 계좌 정보 입력
+	@RequestMapping(value="/deleteAccount.do", method=RequestMethod.POST)
+	public ModelAndView deleteAccount(@ModelAttribute("accountInfoDTO") accountInfoDTO aDTO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		aDTO.setId("user1");
+		int result = mService.deleteAccount(aDTO);
+
+		ModelAndView mav	= new ModelAndView();
+		mav.setViewName("redirect:/myPage/mymy.do");
+		return mav;
+	}
 }
 
 

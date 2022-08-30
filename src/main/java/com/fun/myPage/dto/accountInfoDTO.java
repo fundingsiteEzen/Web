@@ -1,6 +1,7 @@
 package com.fun.myPage.dto;
 
 public class accountInfoDTO {
+	private int ai_seq;
 	private String id;			// 유저 아이디
 	private String ai_bank;		// 결제 은행
 	private String ai_num;		// 계좌 번호
@@ -39,11 +40,10 @@ public class accountInfoDTO {
 	public void setai_birth(String ai_birth) {
 		this.ai_birth = ai_birth;
 	}
-
-	
-	// toString
-	@Override
-	public String toString() {
-		return "accountInfoDTO [id=" + id + ", ai_bank=" + ai_bank + ", ai_num=" + ai_num + ", ai_name=" + ai_name + ", ai_birth=" + ai_birth + "]";
+	public int getAi_seq() {
+		return ai_seq;
+	}
+	public void setAi_seq(int ai_seq) {
+		this.ai_seq = ai_seq;
 	}
 }
