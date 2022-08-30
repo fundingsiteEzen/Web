@@ -104,7 +104,19 @@ public class myDAOImpl implements myDAO{
 
 		@Override
 		public userinfoDTO getUserInfo(String string) {
-		return sqlsession.selectOne(namespace + ".getUserInfo", string);
+			return sqlsession.selectOne(namespace + ".getUserInfo", string);
+		}
+
+		@Override
+		public int deleteCard(cardInfoDTO cDTO) {
+			// TODO Auto-generated method stub
+			return sqlsession.delete(namespace + ".deleteCard", cDTO);
+		}
+
+		@Override
+		public int deleteAccount(accountInfoDTO aDTO) {
+			// TODO Auto-generated method stub
+			return sqlsession.delete(namespace + ".deleteAccount", aDTO);
 		}
 	
 

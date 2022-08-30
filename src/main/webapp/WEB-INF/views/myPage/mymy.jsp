@@ -19,7 +19,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="${contextPath}/resources/js/main.js"></script>
 	
 	<!-- css파일 -->
 	<link rel="stylesheet" href="${contextPath}/css/modal.css">
@@ -33,7 +32,7 @@
         font-family: 'Hahmlet', serif;}
      label{font-weight: 500;}
 	.bg-image {
-	    background-image: url('${contextPath}/images/MAIN_img/summer.jpg');
+	    background-image: url('${contextPath}/images/MAIN_img/summer02.png');
 	    background-attachment: fixed;
 	    height: 300px;
 	}
@@ -99,7 +98,98 @@
 		transition: 0.2s;
 		border:  2px solid #fff;
 	}
-
+	
+	li{
+	  list-style-type: none;
+	}
+	
+	/* 보여줄 구간의 높이와 넓이 설정 */
+	#slideShow{
+	  width: 400px;
+	  height: 300px;
+	  position: relative;
+	  margin: 50px auto;
+	  overflow: hidden;
+	  
+	  /*리스트 형식으로 이미지를 일렬로 
+	  정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은
+	  hidden으로 숨겨줘야됨*/
+	}
+	
+	.slideBox{
+	    box-sizing: border-box;
+	    border: 2px solid #333;
+	    border-radius: 15px;
+	    width: 400px;
+	    height: 250px;
+	    line-height: 60px;
+	    font-size: large;
+	    cursor: pointer;
+	    float:left;
+	    margin-right:20px;
+	}
+	
+	.slides{
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+	  transition: left 0.5s ease-out; 
+	  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+	}
+	
+	/* 첫 번째 슬라이드 가운데에 정렬하기위해
+	첫번째 슬라이드만 margin-left조정 */
+	.slides li:first-child{
+	  margin-left: 100px;
+	}
+	
+	/* 슬라이드들 옆으로 정렬 */
+	.slides li:not(:last-child){
+	  float: left;
+	  margin-right: 100px;
+	}
+	
+	.slides li{
+	  float: left;
+	}
+	
+	.controller span{
+	  position:absolute;
+	  background-color: transparent;
+	  color: black;
+	  text-align: center;
+	  border-radius: 50%;
+	  padding: 10px 20px;
+	  top: 110px;
+	  font-size: 1.3em;
+	  cursor: pointer;
+	}
+	
+	/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+	.controller span:hover{
+	  background-color: rgba(128, 128, 128, 0.11);
+	}
+	
+	.prev{
+	  left: 10px;
+	}
+	
+	/* 이전 화살표에 마우스 커서가 올라가 있을때 
+	이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+	.prev:hover{
+	  transform: translateX(-10px);
+	}
+	
+	.next{
+	  right: 10px;
+	}
+	
+	/* 다음 화살표에 마우스 커서가 올라가 있을때 
+	이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+	.next:hover{
+	  transform: translateX(10px);
+	}
 	</style>
 </head>
 
@@ -124,8 +214,6 @@
    				    <input type="file" id="file1" name="file1">
                     </div>
                 </div>
-				
-			
                 <div class="row info" align="center">
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">아이디</label>
@@ -166,33 +254,51 @@
                         </div>
                     </div>
                 </div>
-                   <div class="row" align="center">
+               	<div class="row" align="center">
                     <button class="btn btn-primary" onclick="updateUserInfo();">수정</button>
                     <button class="btn btn-info">취소</button>
-                   </div>
-                <div class="row pay" align="center">
-                    <h4>등록된 결제수단이 없습니다</h4>
-                    <!-- 카드 정보  -->         
-                    <c:forEach items="${CardList}" var="cardListOne">
-                    	<h3>card</h3>
-						<h3>* * * * * * * * * * * * ${cardListOne.ci_num4 }</h3>
-					</c:forEach>
-					<c:forEach items="${AccountList}" var="accountListOne">			
-						<h3>account</h3>
-						<h3>
-						<c:forEach var="i" begin="0" end="${accountListOne.ai_num.length()-5}"> 
-							*
-						</c:forEach>
-						${fn:substring(accountListOne.ai_num, accountListOne.ai_num.length()-4, accountListOne.ai_num.length()) }
-						</h3>
-
-					</c:forEach>
-                    <h3 class="card">+ CARD</h3>
-                    <h3 class="account">+ ACCOUNT</h3>
                 </div>
-                <!-- 카드 정보  -->         
-				
-		
+                  
+                <div class="row pay" align="center">
+                	<h2 style="border-top:solid;">Credit Info</h2>
+                    	<div id="slideShow">
+						    <ul class="slides">
+						    	<c:forEach items="${cardList}" var="cardInfo">
+			                    	<div class="slideBox">
+			                    	<h3>card</h3>
+			                    	<%-- ${cardInfo.ci_num1}-${cardInfo.ci_num2}-${cardInfo.ci_num3}-${cardInfo.ci_num4} --%>
+									<h3>XXXX - 	XXXX - XXXX - ${cardInfo.ci_num4 }</h3>
+									<button onclick="deleteCard(${cardInfo.ci_seq});">삭제</button>
+									</div>
+								</c:forEach>
+						      	<c:forEach items="${accountList}" var="accountInfo">	
+									<div class="slideBox">		
+									<h3>account</h3>
+									<h3>
+									<c:forEach var="i" begin="0" end="${accountInfo.ai_num.length()-5}"> 
+										*
+									</c:forEach>
+									${fn:substring(accountInfo.ai_num, accountInfo.ai_num.length()-4, accountInfo.ai_num.length()) }
+									</h3>
+									<button onclick="deleteAccount(${accountInfo.ai_seq});">삭제</button>
+									</div>
+								</c:forEach>
+								<c:if test="${cardList.size() + accountList.size() < 5}">
+									<div class="slideBox">
+									<h3 class="card">+ CARD</h3>
+	                    			<h3 class="account">+ ACCOUNT</h3>
+	                    			</div>
+								</c:if>
+						    </ul>  
+						    <p class="controller">
+					      
+					      <!-- &lang: 왼쪽 방향 화살표
+					      &rang: 오른쪽 방향 화살표 -->
+					      <span class="prev">&lang;</span>  
+					      <span class="next">&rang;</span>
+					    </p>
+					  </div>
+                </div>
             </div>
             
             <!-- 카드 & 계좌 모달창 -->
@@ -204,7 +310,42 @@
 	<!-- 푸터 -->
 	<jsp:include page="../menu/footer.jsp" flush="false" />
 
-	
+	<script>
+	const slides = document.querySelector('.slides'); //전체 슬라이드 컨테이너
+	const slideImg = document.querySelectorAll('.slides li'); //모든 슬라이드들
+	let currentIdx = 0; //현재 슬라이드 index
+	const slideCount =  document.querySelectorAll('.slideBox').length; // 슬라이드 개수
+	const prev = document.querySelector('.prev'); //이전 버튼
+	const next = document.querySelector('.next'); //다음 버튼
+	const slideWidth = 300; //한개의 슬라이드 넓이
+	const slideMargin = 100; //슬라이드간의 margin 값
+
+	//전체 슬라이드 컨테이너 넓이 설정
+	//slides.style.width = (slideWidth + slideMargin) * slideCount + 'px';
+
+	function moveSlide(num) {
+	  slides.style.left = -num * 420 + 'px';
+	  currentIdx = num;
+	}
+
+	prev.addEventListener('click', function () {
+	  /*첫 번째 슬라이드로 표시 됐을때는 
+	  이전 버튼 눌러도 아무런 반응 없게 하기 위해 
+	  currentIdx !==0일때만 moveSlide 함수 불러옴 */
+
+	  if (currentIdx !== 0) moveSlide(currentIdx - 1);
+	});
+
+	next.addEventListener('click', function () {
+	  /* 마지막 슬라이드로 표시 됐을때는 
+	  다음 버튼 눌러도 아무런 반응 없게 하기 위해
+	  currentIdx !==slideCount - 1 일때만 
+	  moveSlide 함수 불러옴 */
+	  if (currentIdx !== slideCount - 1) {
+	    moveSlide(currentIdx + 1);
+	  }
+	});
+	</script>
 	<!-- 스크립트 -->
     <!-- 사진 바꾸기 tooltip-->
 	<script>
@@ -379,6 +520,37 @@
 	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 	        }.bind(this)
 	    }).open();
+	}
+	
+	function deleteCard(seq) {
+		var id      = $("#id").val();
+		$.ajax({
+			type:		"POST",
+			url:		"/myPage/deleteCard.do",
+			data:		{id: id, ci_seq: seq},
+			success:	function(data) {
+				alert("등록된 카드정보를 삭제하였습니다.");
+				location.reload();
+			},
+			error:		function(data) {
+				alert("error");
+			}
+		});
+	}
+	function deleteAccount(seq) {
+		var id      = $("#id").val();
+		$.ajax({
+			type:		"POST",
+			url:		"/myPage/deleteAccount.do",
+			data:		{id: id, ai_seq: seq},
+			success:	function(data) {
+				alert("등록된 계좌정보를 삭제하였습니다.");
+				location.reload();
+			},
+			error:		function(data) {
+				alert("error");
+			}
+		});
 	}
 	</script>
     
