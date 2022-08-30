@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Repository
@@ -65,33 +66,46 @@ public class myDAOImpl implements myDAO{
 
 	}
 	
-	// 카드 정보 가져오기
+	   // 카드 정보 가져오기
+	   @Override
+	   public List<cardInfoDTO> List_CARD(String id) throws Exception {
+
+	      System.out.println("cardDAOImpl List_CARD() 시작");
+	      
+	      List<cardInfoDTO> List_CARD = sqlsession.selectList(namespace + ".cardList", id);
+	      
+	      System.out.println("cardDAOImpl List_CARD() Data ==> " + List_CARD);
+	      
+	      return List_CARD;
+	      
+	   }
+	   // 계좌 정보 가져오기
+	   @Override
+	   public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
+
+	      System.out.println("accountDAOImpl List_ACCOUNT() 시작");
+	      
+	      List<accountInfoDTO> List_ACCOUNT = sqlsession.selectList(namespace + ".accountList", id);
+	      
+	      System.out.println("accountDAOImpl List_ACCOUNT() Data ==> " + List_ACCOUNT);
+	      
+	      return List_ACCOUNT;
+	      
+	   }
+	// 회원 정보 수정
 	@Override
-	public List<cardInfoDTO> List_CARD(String id) throws Exception {
+		public int mymyUpdate(userinfoDTO UserinfoDTO) {
+			return sqlsession.update(namespace + ".updateUserInfo", UserinfoDTO);
+		}
+		
+		public int updateProfile(userinfoDTO UserinfoDTO) {
+			return sqlsession.update(namespace + ".updateProfile", UserinfoDTO);
+		}
 
-		System.out.println("cardDAOImpl List_CARD() 시작");
-		
-		List<cardInfoDTO> List_CARD = sqlsession.selectList(namespace + ".cardList", id);
-		
-		System.out.println("cardDAOImpl List_CARD() Data ==> " + List_CARD);
-		
-		return List_CARD;
-		
-	}
-	// 계좌 정보 가져오기
-	@Override
-	public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
-
-		System.out.println("accountDAOImpl List_ACCOUNT() 시작");
-		
-		List<accountInfoDTO> List_ACCOUNT = sqlsession.selectList(namespace + ".accountList", id);
-		
-		System.out.println("accountDAOImpl List_ACCOUNT() Data ==> " + List_ACCOUNT);
-		
-		return List_ACCOUNT;
-		
-	}
-
+		@Override
+		public userinfoDTO getUserInfo(String string) {
+		return sqlsession.selectOne(namespace + ".getUserInfo", string);
+		}
 	
 
 }

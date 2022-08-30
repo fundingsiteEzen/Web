@@ -12,6 +12,7 @@
 	z-index: 100;		/* 메뉴바가 최상위에 위치하도록함 */
 	height: 50px;
     background-color: white;
+    margin-bottom: 0;
 	}
 </style>
 

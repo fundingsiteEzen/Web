@@ -33,7 +33,7 @@
 				      		<!-- 아이디 -->
 				      		<div class="form-group">
 				      			<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
-				      			<button onclick="checkId()">중복확인</button>
+				      			<button type="button" class="form-control btn btn-primary submit" onclick="checkId()">중복확인</button>
 				      		</div>
 				      		<!-- 비밀번호 -->
 				            <div class="form-group">
@@ -51,7 +51,7 @@
 				      		<hr>
 				            <!-- sign UP 버튼 -->
 				            <div class="form-group">
-				            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign UP</button>
+				            	<button type="submit" class="btn btn-primary submit px-3">Sign UP</button>
 				            </div>
 				        </form>
 				        

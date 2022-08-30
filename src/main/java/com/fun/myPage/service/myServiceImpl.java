@@ -12,6 +12,7 @@ import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Service
@@ -93,24 +94,39 @@ public class myServiceImpl implements mySerivce {
 
 	}
 	
-	// (7) 카드 정보 불러오기
-	@Override
-	public List<cardInfoDTO> List_CARD(String id) throws Exception {
-		
+	  // (7) 카드 정보 불러오기
+	   @Override
+	   public List<cardInfoDTO> List_CARD(String id) throws Exception {
+	      
 
-		System.out.println("cardServiceImpl cardList() 시작");
-		return dao.List_CARD(id);
-		
-	}
-	// (8) 계좌 정보 불러오기
-	@Override
-	public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
-		
+	      System.out.println("cardServiceImpl cardList() 시작");
+	      return dao.List_CARD(id);
+	      
+	   }
+	   // (8) 계좌 정보 불러오기
+	   @Override
+	   public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
+	      
 
-		System.out.println("accountServiceImpl accountList() 시작");
-		return dao.List_ACCOUNT(id);
+	      System.out.println("accountServiceImpl accountList() 시작");
+	      return dao.List_ACCOUNT(id);
+	      
+	   }
+	
+	// 회원 정보 수정
+		@Override
+		public int mymyUpdate(userinfoDTO UserinfoDTO) {
+			return dao.mymyUpdate(UserinfoDTO);
+		}
 		
-	}
+		public int updateProfile(userinfoDTO UserinfoDTO) {
+			return dao.updateProfile(UserinfoDTO);
+		}
+
+		@Override
+		public userinfoDTO getUserInfo(String string) {
+			return dao.getUserInfo(string);
+		}
 
 }
 

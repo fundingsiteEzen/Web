@@ -26,7 +26,7 @@ public class logDAO {
 	
 	
 	// (3) 회원가입
-	public int addMember(newUserinfoDTO userinfo) {
+	public int addMember(userinfoDTO userinfo) {
 		
 		System.out.println("회원가입(3)dao 실행");
 		

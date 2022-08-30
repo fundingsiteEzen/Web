@@ -24,6 +24,7 @@
             left: 50%; top: 50%;
             transform: translate(-50%, -55%);
             text-align: center;
+            overflow: scroll;
         }
       .inner ul {
       }
