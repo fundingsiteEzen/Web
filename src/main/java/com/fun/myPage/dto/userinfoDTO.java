@@ -1,4 +1,4 @@
-package com.fun.subPage.dto;
+package com.fun.myPage.dto;
 
 import java.util.Map;
 

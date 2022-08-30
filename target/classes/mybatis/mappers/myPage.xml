@@ -35,33 +35,111 @@
 	<!-- 카드 정보 입력 -->
 	<insert id="addCard" parameterType="com.fun.myPage.dto.cardInfoDTO">
 		<![CDATA[
-		insert into cardInfo (id, ci_num1, ci_num2, ci_num3, ci_num4, ci_month, ci_year, ci_pass, ci_birth)
-		values (#{id}, #{ci_num1}, #{ci_num2}, #{ci_num3}, #{ci_num4}, #{ci_month}, #{ci_year}, #{ci_pass}, #{ci_birth})
+		insert into cardInfo (
+			ci_seq,
+			id, 
+			ci_num1, 
+			ci_num2, 
+			ci_num3, 
+			ci_num4, 
+			ci_month, 
+			ci_year, 
+			ci_pass, 
+			ci_birth
+		) values (
+			card_seq.NEXTVAL,
+			#{id},
+			#{ci_num1},
+			#{ci_num2},
+			#{ci_num3},
+			#{ci_num4},
+			#{ci_month},
+			#{ci_year},
+			#{ci_pass},
+			#{ci_birth}
+		)
 		]]>
 	</insert>
 	
 	<!-- 계좌 정보 입력 -->
 	<insert id="addAccount" parameterType="com.fun.myPage.dto.accountInfoDTO">
 		<![CDATA[
-		insert into accountInfo (id, ai_bank, ai_num, ai_name, ai_birth)
-		values (#{id}, #{ai_bank}, #{ai_num}, #{ai_name}, #{ai_birth})
+		insert into accountInfo (
+			ai_seq,
+			id, 
+			ai_bank, 
+			ai_num, 
+			ai_name, 
+			ai_birth
+		) values (
+			account_seq.NEXTVAL,
+			#{id}, 
+			#{ai_bank}, 
+			#{ai_num}, 
+			#{ai_name}, 
+			#{ai_birth}
+		)
 		]]>
 	</insert>
 	
-	<!-- 결제 수단  -->
+	<!-- 카드 정보  -->
 	
 	<select id="cardList" resultType="com.fun.myPage.dto.cardInfoDTO" parameterType="String">
 		<![CDATA[
-		SELECT ci_num4 FROM cardInfo WHERE id=#{id}
+		SELECT * 
+		FROM cardInfo 
+		WHERE id=#{id}
 		]]>
 	</select>
+	
+	<!-- 계좌 정보 -->
+	<select id="accountList" resultType="com.fun.myPage.dto.accountInfoDTO" parameterType="String">
+		<![CDATA[
+		SELECT * 
+		FROM accountInfo 
+		WHERE id=#{id}
+		]]>
+	</select>
+	
+	<delete id="deleteCard" parameterType="com.fun.myPage.dto.cardInfoDTO">
+		<![CDATA[
+		DELETE FROM cardInfo 
+		WHERE ci_seq=#{ci_seq} 
+			AND id=#{id}
+		]]>
+	</delete>
+	
+	<delete id="deleteAccount" parameterType="com.fun.myPage.dto.accountInfoDTO">
+		<![CDATA[
+		DELETE FROM accountInfo 
+		WHERE ai_seq=#{ai_seq} 
+			AND id=#{id}
+		]]>
+	</delete>
 	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
 	
-	<!-- project 테이블에서 등록한 프로젝트 가져오기 -->
-	<select id="myProjectInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+	<!-- 회원정보(비밀번호, 이메일, 배송지)를 수정하기 -->
+	<update id="updateUserInfo" parameterType="com.fun.myPage.dto.userinfoDTO">
 		<![CDATA[
-		SELETE p_name, p_endDate FROM project WHERE p_seq=#{p_seq}
+		UPDATE	userinfo
+			SET	pass = #{pass},
+				email = #{email},
+				address = #{address}
+		WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateProfile" parameterType="com.fun.myPage.dto.userinfoDTO">
+		<![CDATA[
+		UPDATE	userinfo
+			SET	profile_img = #{profile_img}
+		WHERE id = #{id}
+		]]>
+	</update>
+	
+	<select id="getUserInfo" resultType="com.fun.myPage.dto.userinfoDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM userinfo WHERE id=#{id}
 		]]>
 	</select>
-
 </mapper>

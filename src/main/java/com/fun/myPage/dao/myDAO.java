@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.fun.category.dto.CategoryDTO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 public interface myDAO {
@@ -21,9 +21,6 @@ public interface myDAO {
 	// (1)-3 프로젝트 테이블 가져오기(관심목록)
 	public projectDTO getProject_like(String p_seq) throws Exception;
 	
-	// 나래- 내 프로젝트 가져오기
-	public projectDTO getProject_My(String p_seq) throws Exception;
-	
 	// (후원취소)
 	public int deleteProject(backerDTO bDTO) throws Exception;
 	
@@ -33,8 +30,21 @@ public interface myDAO {
 	// 계좌 정보 입력
 	public int addAccount(accountInfoDTO aDTO) throws DataAccessException;
 	
-	// 카드정보 가져오기
-	public List<cardInfoDTO> List_CARD(String id) throws Exception;
+
+	   // 카드정보 가져오기
+	   public List<cardInfoDTO> List_CARD(String id) throws Exception;
+	   
+	   // 계좌정보 가져오기
+	   public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception;
 	
-	
+	// 회원 정보 수정
+	public int mymyUpdate(userinfoDTO UserinfoDTO);
+
+	public int updateProfile(userinfoDTO userinfoDTO);
+
+	public userinfoDTO getUserInfo(String string);
+
+	public int deleteCard(cardInfoDTO cDTO);
+
+	public int deleteAccount(accountInfoDTO aDTO);
 }

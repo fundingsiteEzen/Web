@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.fun.category.dto.CategoryDTO;
 import com.fun.crpage.dto.CrDTO;
 import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
 
 @Service
@@ -94,31 +94,51 @@ public class myServiceImpl implements mySerivce {
 
 	}
 	
-	// (7) 카드 정보 불러오기
-	@Override
-	public List<cardInfoDTO> List_CARD(String id) throws Exception {
-		
+	  // (7) 카드 정보 불러오기
+	   @Override
+	   public List<cardInfoDTO> List_CARD(String id) throws Exception {
+	      
 
-		System.out.println("cardServiceImpl cardList() 시작");
-		return dao.List_CARD(id);
-		
-	}
+	      System.out.println("cardServiceImpl cardList() 시작");
+	      return dao.List_CARD(id);
+	      
+	   }
+	   // (8) 계좌 정보 불러오기
+	   @Override
+	   public List<accountInfoDTO> List_ACCOUNT(String id) throws Exception {
+	      
+
+	      System.out.println("accountServiceImpl accountList() 시작");
+	      return dao.List_ACCOUNT(id);
+	      
+	   }
 	
-	// 나래- 내 프로젝트
-	// (3) 관심목록 가져오기
-	public List<projectDTO> getProject_My(List<backerDTO> bList) throws Exception {
-		List<projectDTO> pList = new ArrayList<projectDTO>(); // List 꼭 생성해줘야함.. ! null로 두면 안됨
+	// 회원 정보 수정
+		@Override
+		public int mymyUpdate(userinfoDTO UserinfoDTO) {
+			return dao.mymyUpdate(UserinfoDTO);
+		}
 		
-			for(int i = 0; i < bList.size(); i++) {
-				if(bList.get(i).getIs_like() == 'Y') { // 'Y'인 경우만 뽑음
-					String p_seq = Integer.toString(bList.get(i).getP_seq());
-					pList.add(dao.getProject_back(p_seq));
-				}
-			}
-			System.out.println("for문 끝난 데이터 :" + pList);
-	
-		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
-		return pList;
-	}
+		public int updateProfile(userinfoDTO UserinfoDTO) {
+			return dao.updateProfile(UserinfoDTO);
+		}
+
+		@Override
+		public userinfoDTO getUserInfo(String string) {
+			return dao.getUserInfo(string);
+		}
+
+		@Override
+		public int deleteCard(cardInfoDTO cDTO) {
+			// TODO Auto-generated method stub
+			return dao.deleteCard(cDTO);
+		}
+
+		@Override
+		public int deleteAccount(accountInfoDTO aDTO) {
+			// TODO Auto-generated method stub
+			return dao.deleteAccount(aDTO);
+		}
+
 }
 

@@ -11,7 +11,7 @@
 <div class="modal" id="CardModal">
 	<div class="inner">
 		<div class="paymentCard">
-			<form class="form-horizontal" method="post" action="${contextPath}/myPage/addCard.do">
+			<form class="form-horizontal" id="cardForm" method="post" action="${contextPath}/myPage/addCard.do">
 			<div class="title">신용/체크 카드 등록</div>
                 <div class="cardBox">
                 <div class="cardGap">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 			</div>
-            <button type="submit" class="modalBtn">
+            <button onclick="cardSubmit();" class="modalBtn">
                 <div class="cardBtnY">
                     <span>등록 완료</span>
                 </div>
@@ -86,7 +86,7 @@
 <div class="modal" id="CashModal">
     <div class="inner">
         <div class="paymentCash">
-        <form class="form-horizontal" method="post" action="${contextPath}/myPage/addAccount.do">
+        <form class="form-horizontal" id="accountForm" method="post" action="${contextPath}/myPage/addAccount.do">
 			<div class="title">은행계좌 등록</div>
 			<div class="selectBank">
 			    <div class="sub">
@@ -115,7 +115,7 @@
 				    <input type="text" placeholder="예) 920101" maxlength="6" name="ai_birth" class="inputDetail" value="">
 				    </span>
 				</div>
-				<button type="submit" class="modalBtn">
+				<button onclick="accuountSubmit" class="modalBtn">
 				    <div class="cashBtnY">
 				    <span>등록 완료</span>
 				    </div>
@@ -128,3 +128,14 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function cardSubmit() {
+		var form = new FormData($('#cardForm')[0]);
+		$('#cardForm').submit()
+	}
+	
+	function accuountSubmit() {
+		
+	}
+</script>

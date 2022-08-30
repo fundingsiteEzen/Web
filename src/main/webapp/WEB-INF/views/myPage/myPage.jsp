@@ -57,8 +57,13 @@
             font-size: small;
         }
 
+		.nav_box{
+			height: 1000px;
+		}
         .my_nav {
             padding-top: 60px;
+            top: 1px;
+  	        position:sticky;
         }
         .my_nav li {
             line-height: 80px;
@@ -79,12 +84,47 @@
             display: none;
         }
         
-        /* 프로젝트 목록 */
+        /* 관심목록 css(수정아직 안함) */
 		.col-sm-4 {
 		height:	300px;
 		cursor: pointer;
 		margin-bottom: 40px;
 		}
+		
+		/* 후원목록 css */
+        .thumbnail {
+            border-radius: 0;
+            margin: 0;
+            margin-bottom: 40px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .thumbnail:hover {
+        	box-shadow: 0 0 13px rgba(0,0,0, 0.2);
+        }
+
+        .img_box {
+            height: 200px;
+            padding: 0;
+            overflow: hidden;
+            
+        }
+        .img_box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+			transition: all 0.3s ease-in-out;
+			overflow: hidden;
+        }
+        .img_box img:hover {
+        	transform: scale(1.15);
+        }
+        .info_box {
+            display: inline-block;
+        }
+        .delete_btn {margin-top: 10px;}
+        
 	</style>
 </head>
 <body>
@@ -104,7 +144,7 @@
                         <div class="profile-img">
                             <img src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
                         </div>
-                        <div align="center">
+                        <div class="nav_box" align="center">
                             <ul class="my_nav">
                                 <li class="fund">후원 목록</li>
                                 <li class="like">관심 목록</li>
@@ -116,22 +156,28 @@
                 <!-- 오른쪽 영역(닉네임, 썸네일 목록) -->
                 <div class="col-sm-9 section">
                     <div class="nickname">
-                        <h3>닉네임<span onclick="location.href='/myPage/mymy'">(수정go)</span></h3>
+                        <h3>${nickName}&nbsp;&nbsp;<span class="glyphicon glyphicon-cog" onclick="location.href='/myPage/mymy'" style="font-size:0.8em; color:#aaa;" data-toggle="tooltip" title="정보 수정"></span></h3>
                     </div>
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">
 						<c:forEach items="${backList}" var="list" varStatus="status">
-						<div class="col-sm-4">
-							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-								<div style="overflow: hidden; height:80%">
-									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
-								</div>
-								<div>
-									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-								</div>
-							</div>
-							<button onclick="deleteProject(${list.p_seq}, 'N')">삭제</button>
-						</div>
+						<div class="thumbnail row" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+                            <div class="img_box col-sm-5">
+                                <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
+                            </div>
+                            <div class="col-sm-7 info_span">
+                                <h3>${list.p_name}</h3>
+                                <span>선택한 리워드</span><br>
+                                <div align="right">
+                                    <span>{추가 후원금}원</span><br>
+                                    <span style="font-size: 24px;">{총 결제액}원</span><br>
+                                </div>
+                                <div align="center">
+                                    <span>결제예정일 ${list.p_payDate}</span><br>
+                                    <button class="btn delete_btn" onclick="deleteProject(${list.p_seq}, 'N')">취소하기</button>
+                                </div>
+                            </div>
+                        </div>
 						</c:forEach>
                     </section>
                     <!-- 관심 목록 띄우기 -->
@@ -182,6 +228,9 @@
 	<jsp:include page="../menu/footer.jsp" flush="false" />
 	
 	<script>
+	$(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        });
 	// 후원 목록
 	$(".fund").click(function() {
         $(".fund_list").css("display", "block");
@@ -206,6 +255,7 @@
 
 	<script>
 	function deleteProject(p_seq, is_like) {
+	   event.stopPropagation();
 		var chk = confirm("정말 취소하시겠습니까?");
 		if (chk) {
 			$.ajax({
