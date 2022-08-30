@@ -132,6 +132,10 @@
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 알럿창 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
+	
     <!-- 배경 이미지 -->
 	<div class="container-fluid bg-image"></div>
 	<!-- 메인 -->
@@ -198,9 +202,24 @@
 
                     </section>
                     <section class="my_list">
+                    	<!-- 등록된 페이지가 없을경우 -->
                     	<div align="center">등록한 프로젝트가 없습니다<br>
 	                    	<a href="/crpage/cr">프로젝트 등록하기</a>
                     	</div>
+                    	<!-- 등록된 페이지가 있을 경우 -->
+                    	<c:forEach items="${myList}" var="list" varStatus="status">
+							<div class="col-sm-4">
+								<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+									<div style="overflow: hidden; height:80%">
+										<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+									</div>
+									<div>
+										<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+									</div>
+								</div>
+								<button onclick="deleteMyProject(${list.p_seq}, 'Y')">삭제</button>
+							</div>
+						</c:forEach>
                     </section>
                 </div>
             </div>
@@ -248,14 +267,27 @@
 				data: {p_seq: p_seq, is_like: is_like},
 				success: function(data) {
 					if(data == "Y") {
-						alert("취소가 완료되었습니다");
-						location.href = "/myPage/myPage";
+						Swal.fire({
+	  						  icon: 'success',
+	  						  title: '취소가 완료되었습니다.',
+	  						  showConfirmButton: false,
+	  						  timer: 1500
+	  						}).then((value) => {
+ 	  				 	if (value) {
+ 	  					location.href = "/myPage/myPage";
+ 	  					}
+	  				});
 					}
 				},
-				error: function(data) { alert("에러발생"); }
+				error: function(data) { 	
+					Swal.fire({
+					icon: 'error',
+					title: '문제가 발생했습니다',
+					}); }
 			});
 		}
 	}	
+	
 </script>
 </body>
 </html>

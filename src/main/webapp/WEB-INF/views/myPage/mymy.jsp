@@ -190,6 +190,20 @@
 	.next:hover{
 	  transform: translateX(10px);
 	}
+	/* 내정보 수정 인풋 css */
+	.form-control {
+  height: 35px;
+  color: white !important;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 0.3s;
+}
+.form-control:hover {
+background-color: #ccc
+}
 	</style>
 </head>
 
@@ -198,6 +212,10 @@
 	
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
+	
+	<!-- 알럿창 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
 	
 	<!-- 배경 이미지 -->
 	<div class="container-fluid bg-image"></div>
@@ -222,27 +240,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-offset-3 col-sm-2">이름</label>
+                        <label class="control-label col-sm-offset-3 col-sm-2">닉네임</label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="name" placeholder="" value="${userInfo.name}" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">비밀번호</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <input type="password" class="form-control" id="pass" placeholder="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">비밀번호 확인</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <input type="password" class="form-control" id="pass_re" placeholder="">
                             <font id="ckpwd" size="2"></font>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">이메일</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" id="email" placeholder="" value="${userInfo.email}">
                         </div>
                     </div>
@@ -383,6 +401,7 @@
 		    $("#CardModal").fadeOut(200);
 		});
 		
+		
 		// 계좌
 		$(".account").click(function(){
 		    $("#CashModal").fadeIn(200);
@@ -415,7 +434,10 @@
  
         filesArr.forEach(function(f) {
             if (!f.type.match(reg)) {
-                alert("확장자는 이미지 확장자만 가능합니다.");
+                Swal.fire({
+                	  icon: 'error',
+                	  title: '확장자는 이미지 확장자만 가능합니다.',
+                	})
                 return;
             }
  
@@ -446,11 +468,17 @@
 	           , contentType : false
 	           , data : form
 	           , success:function(data) {
-	        	   alert("회원 정보 수정이 완료되었습니다.");
+	        	   Swal.fire({
+	        		   icon: 'success',
+	        		   title: '회원 정보 수정이 완료되었습니다.',
+	        		 })
 	        	   location.reload();
 	           }
 	           ,error: function (e) { 
-	        	   alert("프로필 사진 업로드에 실패했습니다.")
+	        	       Swal.fire({
+                	  icon: 'error',
+                	  title: '프로필 사진 업로드에 실패했습니다.',
+                	})
 	           }
 	       });
 	}

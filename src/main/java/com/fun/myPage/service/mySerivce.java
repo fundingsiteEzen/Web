@@ -21,8 +21,15 @@ public interface mySerivce {
 	// 관심목록 가져오기
 	public List<projectDTO> getProject_Like(List<backerDTO> bList) throws Exception;
 	
+	// 내 프로젝트 가져오기
+	public List<projectDTO> getMyProject(String id) throws Exception;
+			
 	// 후원 삭제하기
 	public int deleteProject(backerDTO bDTO) throws Exception;
+	
+	/*
+	 * // 내 프로젝트 삭제하기 public int deleteMyProject() throws Exception;
+	 */
 	
 	// 카드 정보 입력
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException;

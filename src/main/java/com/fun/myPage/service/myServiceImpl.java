@@ -67,6 +67,16 @@ public class myServiceImpl implements mySerivce {
 		return pList;
 	}
 
+	// 내 프로젝트 가져오기
+	@Override
+	public List<projectDTO> getMyProject(String id) throws Exception {
+		List<projectDTO> pList = dao.getMyProject(id);
+		
+		System.out.println("myServiceImpl 내 프로젝트 가져오기 실행");
+		
+		return pList;
+	}
+	
 	// (4) 후원 취소
 	@Override
 	public int deleteProject(backerDTO bDTO) throws Exception {
@@ -75,6 +85,16 @@ public class myServiceImpl implements mySerivce {
 		
 		return dao.deleteProject(bDTO);
 	}
+	
+	// 등록 취소
+	/*
+	 * @Override public int deleteMyProject() throws Exception {
+	 * 
+	 * System.out.println("myServiceImpl 내 프로젝트 삭제 실행");
+	 * 
+	 * return 0; }
+	 */
+	
 	
 	// (5) 카드 정보 입력
 	@Override
@@ -112,6 +132,8 @@ public class myServiceImpl implements mySerivce {
 	      return dao.List_ACCOUNT(id);
 	      
 	   }
+		
+
 	
 	// 회원 정보 수정
 		@Override
