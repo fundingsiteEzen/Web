@@ -43,4 +43,8 @@ public interface myDAO {
 	public int updateProfile(userinfoDTO userinfoDTO);
 
 	public userinfoDTO getUserInfo(String string);
+
+	public int deleteCard(cardInfoDTO cDTO);
+
+	public int deleteAccount(accountInfoDTO aDTO);
 }
