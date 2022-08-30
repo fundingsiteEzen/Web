@@ -190,6 +190,20 @@
 	.next:hover{
 	  transform: translateX(10px);
 	}
+	/* 내정보 수정 인풋 css */
+	.form-control {
+  height: 35px;
+  color: white !important;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 0.3s;
+}
+.form-control:hover {
+background-color: #ccc
+}
 	</style>
 </head>
 
