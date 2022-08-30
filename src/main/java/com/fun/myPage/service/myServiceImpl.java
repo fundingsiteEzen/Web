@@ -128,5 +128,17 @@ public class myServiceImpl implements mySerivce {
 			return dao.getUserInfo(string);
 		}
 
+		@Override
+		public int deleteCard(cardInfoDTO cDTO) {
+			// TODO Auto-generated method stub
+			return dao.deleteCard(cDTO);
+		}
+
+		@Override
+		public int deleteAccount(accountInfoDTO aDTO) {
+			// TODO Auto-generated method stub
+			return dao.deleteAccount(aDTO);
+		}
+
 }
 

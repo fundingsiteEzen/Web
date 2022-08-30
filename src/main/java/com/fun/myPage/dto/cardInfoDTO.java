@@ -1,6 +1,7 @@
 package com.fun.myPage.dto;
 
 public class cardInfoDTO {
+	private int ci_seq;
 	private String id;			// 유저 아이디
 	private String ci_num1;		// 카드 번호 1~4
 	private String ci_num2;		// 카드 번호 5~8
@@ -67,13 +68,10 @@ public class cardInfoDTO {
 	public void setci_birth(String ci_birth) {
 		this.ci_birth = ci_birth;
 	}
-	
-	
-
-	
-	// toString
-	@Override
-	public String toString() {
-		return "cardInfoDTO [id=" + id + ", ci_num1=" + ci_num1 + ", ci_num2=" + ci_num2 + ", ci_num3=" + ci_num3 + ", ci_num4=" + ci_num4 + ", ci_month=" + ci_month + ", ci_year=" + ci_year + ", ci_pass=" + ci_pass + ", ci_birth=" + ci_birth + "]";
+	public int getCi_seq() {
+		return ci_seq;
+	}
+	public void setCi_seq(int ci_seq) {
+		this.ci_seq = ci_seq;
 	}
 }
