@@ -152,7 +152,7 @@
 		<!-- 다시입력, 등록 버튼 -->
 		<div class="form-group" style="margin-top:40px">
 			<div align="center">
-				<button type="reset"  class="btn btn-primary">다시 입력</button>
+				<button onclick="location.reload();" class="btn btn-primary">다시 입력</button>
 				<button type="submit" class="btn btn-success" onclick="fn_submit()">펀딩 등록</button>
 			</div>
 		</div>
