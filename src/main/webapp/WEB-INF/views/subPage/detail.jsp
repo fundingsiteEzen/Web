@@ -83,6 +83,9 @@
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 알럿창 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
 	<!-- container 시작 -->
 	<div class="container-fluid wrap">
         <div class="container main">
@@ -203,18 +206,38 @@
   				success: function(data) {
   					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
   					if(data == 'F') {
-  						alert("로그인이 필요한 서비스입니다");
-  						location.href = "/login.do";
+  						Swal.fire({
+  						  icon: 'warning',
+  						  title: '로그인이 필요한 서비스입니다.',
+  						  text: '로그인 화면으로 이동합니다.',
+  						}).then((value) => {
+  	  						if (value) {
+  	  							location.href = "/login.do";
+  	  						}
+  	  					});
   					}
+  				
+  					 
   					if(data == 'Y'){
   						location.href = "redirect:/subPage/detail";
-  						alert("관심 목록에 추가되었습니다");
+  						Swal.fire({
+  						  icon: 'success',
+  						  title: '관심 목록에 추가되었습니다',
+  						  showConfirmButton: false,
+  						  timer: 1500
+  						})
   					}
   					if(data == 'D') {
-  						alert("이미 후원중인 프로젝트입니다");
+  						Swal.fire({
+  						  icon: 'error',
+  						  title: '이미 관심 프로젝트입니다',
+  						})
   					}
   				},
-  				error: function(data) {alert('문제가 발생했습니다');}
+  				error: function(data) {	Swal.fire({
+					  icon: 'error',
+						  title: '문제가 발생했습니다',
+						});}
   			});
   		}
   		// 후원하기 버튼
@@ -231,18 +254,33 @@
   	  				success: function(data) {
   	  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
   	  					if(data == 'F') {
-  	  						alert("로그인이 필요한 서비스입니다");
-  	  						location.href = "/login.do";
+  	  					Swal.fire({
+    						  icon: 'warning',
+    						  title: '로그인이 필요한 서비스입니다.',
+    						  text: '로그인 화면으로 이동합니다.',
+    						}).then((value) => {
+    	  						if (value) {
+    	  							location.href = "/login.do";
+    	  						}
+    	  					});
   	  					}
   	  					if(data == 'Y'){
   	  						location.href = "redirect:/subPage/detail";
-  	  						alert("후원이 완료되었습니다");
+  	  						Swal.fire({
+    						  icon: 'success',
+    						  title: '후원이 완료되었습니다',
+    						  showConfirmButton: false,
+    						  timer: 1500
+    						})
   	  					}
   	  					if(data == 'D') {
-  	  						alert("이미 후원중인 프로젝트입니다");
+  	  					Swal.fire({
+    						  icon: 'error',
+    						  title: '이미 후원중인 프로젝트입니다',
+    						})
   	  					}
   	  				},
-  	  				error: function(request, status, error) {alert("문제가 발생했습니다");}
+  	  				error: function(request, status, error) {Swal.fire('문제가 발생했습니다','question');}
   	  			});
   			}
   		}

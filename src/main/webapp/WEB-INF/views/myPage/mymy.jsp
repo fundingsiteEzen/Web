@@ -213,6 +213,10 @@ background-color: #ccc
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 알럿창 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
+	
 	<!-- 배경 이미지 -->
 	<div class="container-fluid bg-image"></div>
 	<!-- 메인 -->
@@ -430,7 +434,10 @@ background-color: #ccc
  
         filesArr.forEach(function(f) {
             if (!f.type.match(reg)) {
-                alert("확장자는 이미지 확장자만 가능합니다.");
+                Swal.fire({
+                	  icon: 'error',
+                	  title: '확장자는 이미지 확장자만 가능합니다.',
+                	})
                 return;
             }
  
@@ -461,11 +468,17 @@ background-color: #ccc
 	           , contentType : false
 	           , data : form
 	           , success:function(data) {
-	        	   alert("회원 정보 수정이 완료되었습니다.");
+	        	   Swal.fire({
+	        		   icon: 'success',
+	        		   title: '회원 정보 수정이 완료되었습니다.',
+	        		 })
 	        	   location.reload();
 	           }
 	           ,error: function (e) { 
-	        	   alert("프로필 사진 업로드에 실패했습니다.")
+	        	       Swal.fire({
+                	  icon: 'error',
+                	  title: '프로필 사진 업로드에 실패했습니다.',
+                	})
 	           }
 	       });
 	}

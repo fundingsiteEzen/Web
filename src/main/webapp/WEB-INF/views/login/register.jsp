@@ -17,6 +17,9 @@
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 알럿창 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
 	<!-- 전체 section -->
 	<section class="ftco-section">
 		<div class="container">
@@ -69,7 +72,6 @@
   	<!-- 아이디 중복체크 -->
   	<script>
   		function checkId() {
-  			alert("아이디 체크");
   			$.ajax({
   				type: "post",
 				url: "/checkId.do",
@@ -77,13 +79,22 @@
 				data: {"id": $("#id").val()},
 				success: function(data, textStatus) {
 					if(data == 1){
-						alert("이미 사용중인 아이디입니다.");
+						Swal.fire({
+							icon: 'error',
+							title: '이미 사용중인 아이디입니다.'
+						})
 						$("#id").val('');
 					} else if(data == 0) {
-						alert("사용 가능한 아이디입니다");
+						Swal.fire({
+							icon: 'success',
+							title: '사용 가능한 아이디입니다.'
+						})
 					}
 				}, error: function(data, textStatus) {
-					alert("에러");
+					Swal.fire({
+						icon: 'error',
+						title: '문제가 발생했습니다.'
+					})
 				}
   			});
   		}

@@ -132,6 +132,10 @@
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
 	
+	<!-- 알럿창 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
+	
     <!-- 배경 이미지 -->
 	<div class="container-fluid bg-image"></div>
 	<!-- 메인 -->
@@ -248,14 +252,27 @@
 				data: {p_seq: p_seq, is_like: is_like},
 				success: function(data) {
 					if(data == "Y") {
-						alert("취소가 완료되었습니다");
-						location.href = "/myPage/myPage";
+						Swal.fire({
+	  						  icon: 'success',
+	  						  title: '취소가 완료되었습니다.',
+	  						  showConfirmButton: false,
+	  						  timer: 1500
+	  						}).then((value) => {
+ 	  				 	if (value) {
+ 	  					location.href = "/myPage/myPage";
+ 	  					}
+	  				});
 					}
 				},
-				error: function(data) { alert("에러발생"); }
+				error: function(data) { 	
+					Swal.fire({
+					icon: 'error',
+					title: '문제가 발생했습니다',
+					}); }
 			});
 		}
 	}	
+	
 </script>
 </body>
 </html>
