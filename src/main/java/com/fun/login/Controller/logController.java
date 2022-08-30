@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fun.login.service.logService;
-import com.fun.subPage.dto.newUserinfoDTO;
 import com.fun.subPage.dto.userinfoDTO;
 
 @Controller
@@ -99,6 +98,7 @@ public class logController {
 					// 세션을 만들고, 세션에 해당 로그인 정보를 붙힘
 					session.setAttribute("userID", uDTO.getId());
 					session.setAttribute("isLogin", true);
+					session.setAttribute("nickName", uDTO.getName());
 					mav.setViewName("redirect:/");
 					System.out.println("로그인 완료");
 				} // 비밀번호가 일치하지 않는 경우
@@ -137,7 +137,7 @@ public class logController {
 	
 	// 3. 회원가입
 	@RequestMapping(value="/addMember.do", method=RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("userinfo") newUserinfoDTO uDTO, HttpServletRequest req, HttpServletResponse res)
+	public ModelAndView addMember(@ModelAttribute("userinfo") userinfoDTO uDTO, HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 		
 		req.setCharacterEncoding("UTF-8");
@@ -149,8 +149,10 @@ public class logController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		uDTO.setPass(passwordEncoder.encode(uDTO.getPass())); // 비밀번호 암호화
 		System.out.println("암호화 끝난 값" + uDTO.getPass());
-		uDTO.setName(uDTO.getId());
+		uDTO.setName(uDTO.getId()); // 최초 가입시 닉네임은 id와 동일
 		uDTO.setUser_auth("USER");
+		uDTO.setAddress(""); // 배송지는 없음
+		uDTO.setProfile_img("noProfile"); // 프로필 사진 고정
 		
 		int result = lSerivce.addMember(uDTO);
 		

@@ -9,7 +9,7 @@ public interface logServiceIfc {
 	public userinfoDTO login(userinfoDTO userinfo) throws Exception;
 	
 	// 3. 회원가입
-	public int addMember(newUserinfoDTO userinfo) throws Exception;
+	public int addMember(userinfoDTO userinfo) throws Exception;
 	
 	// 아이디 중복체크
 	public int checkId(String id) throws Exception;

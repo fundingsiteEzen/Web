@@ -22,9 +22,9 @@ public class logService implements logServiceIfc {
 	}
 
 	// (3) 회원가입
-	public int addMember(newUserinfoDTO userinfo) throws Exception {
+	public int addMember(userinfoDTO uDTO) throws Exception {
 		System.out.println("회원가입 service(3)");
-		return dao.addMember(userinfo);
+		return dao.addMember(uDTO);
 	}
 	
 	
