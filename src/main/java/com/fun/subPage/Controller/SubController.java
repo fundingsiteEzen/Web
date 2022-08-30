@@ -66,6 +66,7 @@ public class SubController {
 		
 		// 달성률 구하기
 		int percent = (int)((double)Pdto.getP_total() / (double)Pdto.getP_goal() * 100);
+		System.out.println("달성률 ::: " + percent);
 		
 		// 슬라이드 이미지 가져오기
 		String str = Pdto.getP_slide();

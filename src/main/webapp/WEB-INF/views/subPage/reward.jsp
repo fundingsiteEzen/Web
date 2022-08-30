@@ -39,6 +39,8 @@
 		
 		.BACK {
 		}
+		.inner::-webkit-scrollbar {
+			display: none; }/* Chrome, Safari, Opera*/
 </style>
 
 
