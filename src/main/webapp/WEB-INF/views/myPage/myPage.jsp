@@ -228,7 +228,7 @@
 										<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
 									</div>
 								</div>
-								<button onclick="deleteMyProject(${list.p_seq}, 'Y')">삭제</button>
+								<button onclick="deleteMyProject(${list.p_seq})">삭제</button>
 							</div>
 						</c:forEach>
                     </section>
@@ -268,6 +268,7 @@
 	<!-- 삭제버튼 -->
 
 	<script>
+	// 관심목록 삭제
 	function deleteProject(p_seq, is_like) {
 	   event.stopPropagation();
 		var chk = confirm("관심목록에서 삭제하시겠습니까 ?");
@@ -319,7 +320,40 @@
 				});
 			}
 		}
-	deleteBACK
+	
+	// 내 프로젝트 삭제
+		function deleteMyProject(p_seq) {
+	   event.stopPropagation();
+		var chk = confirm("등록한 프로젝트를 삭제하시겠습니까 ?");
+		if (chk) {
+			$.ajax({
+				type: "POST",
+				url: "/myPage/deleteMyProject.do",
+				data: {p_seq: p_seq},
+				success: function(data) {
+					if(data == "Y") {
+						alert("삭제되었습니다");
+						location.href = "/myPage/myPage";
+						Swal.fire({
+	  						  icon: 'success',
+	  						  title: '취소가 완료되었습니다.',
+	  						  showConfirmButton: false,
+	  						  timer: 1500
+	  						}).then((value) => {
+ 	  				 	if (value) {
+ 	  					location.href = "/myPage/myPage";
+ 	  					}
+	  				});
+					}
+				},
+				error: function(data) { 	
+					Swal.fire({
+					icon: 'error',
+					title: '문제가 발생했습니다',
+					}); }
+			});
+		}
+	}
 </script>
 </body>
 </html>
