@@ -71,7 +71,7 @@
 		margin-bottom: 40px;
 		}
 		/* 이미지 오버 효과 */
-		img {
+		.main img {
 		  transform: scale(1);
 		  -webkit-transform: scale(1);
 		  -moz-transform: scale(1);
@@ -79,14 +79,14 @@
 		  -o-transform: scale(1);
 		  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
 		}
-		img:hover {
+		.main img:hover {
 		  transform: scale(1.2);
 		  -webkit-transform: scale(1.2);
 		  -moz-transform: scale(1.2);
 		  -ms-transform: scale(1.2);
 		  -o-transform: scale(1.2);
 		}
-		img {width:325px; height:280px; overflow:hidden; }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
+		.main img {width:325px; height:280px; overflow:hidden; }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
 		
 	</style>
 </head>
@@ -95,9 +95,6 @@
 
 <!-- 상단 메뉴바 -->
 <jsp:include page="menu/navigation.jsp" flush="false" />
-
-
-
 
 	<!-- container 시작 -->
 	<div class="container-fluid wrap">

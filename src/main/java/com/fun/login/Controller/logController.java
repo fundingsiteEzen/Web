@@ -98,6 +98,8 @@ public class logController {
 					session.setAttribute("userID", uDTO.getId());
 					session.setAttribute("isLogin", true);
 					session.setAttribute("nickName", uDTO.getName());
+					session.setAttribute("profile", uDTO.getProfile_img());
+					System.out.println(uDTO.getProfile_img());
 					mav.setViewName("redirect:/");
 					System.out.println("로그인 완료");
 				} // 비밀번호가 일치하지 않는 경우
