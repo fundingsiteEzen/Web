@@ -265,13 +265,13 @@
     	  					});
   	  					}
   	  					if(data == 'Y'){
-  	  						location.href = "redirect:/subPage/detail";
   	  						Swal.fire({
     						  icon: 'success',
     						  title: '후원이 완료되었습니다',
     						  showConfirmButton: false,
     						  timer: 1500
     						})
+    						setTimeout("location.href='/myPage/myPage'",1000);
   	  					}
   	  					if(data == 'D') {
   	  					Swal.fire({
@@ -291,14 +291,9 @@
   			}
   			return returnArray;
   		}
-  		// 후원하면 BACK 버튼 생김
-  		function addSubmit(r_seq) {
-  			$(".BACK").attr("disabled", false);
-  			$('#addMondy'+r_seq).focus();
-  		}
   	</script>
   	<script>
-  		// 모달창
+  		// 리워드 모달창
   		$(".back_btn").click(function(){
 	        $(".modal").fadeIn(200);
 	    });

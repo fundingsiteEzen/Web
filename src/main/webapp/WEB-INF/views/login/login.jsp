@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/login.css">
 	
 	<!-- RSA 인증 -->
 	<script type="text/javascript" src="${contextPath}/js/rsa.js"></script>
@@ -60,7 +60,7 @@
 	
 </head>
 	
-<body class="img js-fullheight" style="background-image: url('${contextPath}/images/MAIN_img/autumn.png');">
+<body class="img js-fullheight" style="background-image: url('${contextPath}/images/MAIN_img/autumn.jpg');">
 	
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
@@ -74,7 +74,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
+					<div class="login-wrap">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
 				      	
 				      	<form action="${contextPath}/rsalogin.do" class="signin-form" method="post" onsubmit="return login()"> <!-- 로그인하기 form -->
@@ -108,8 +108,9 @@
 		</div>
 	</section>
 
+<!-- 
 	<script src="js/main.js"></script>
-
+ -->
 </body>
 </html>
 
