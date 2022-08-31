@@ -49,6 +49,10 @@ public class myDAOImpl implements myDAO{
 		System.out.println("p_seq 값 : " + p_seq + " r_seq 값 : " + r_seq);
 		
 		return sqlsession.selectOne(namespace + ".rewardInfo", dto);
+	// 프로젝트 테이블 가져오기(내 프로젝트목록)
+	public List<projectDTO> getMyProject(String id) throws Exception {
+		
+		return sqlsession.selectList(namespace + ".myProInfo", id);
 	}
 
 	// (4)-1 후원 취소 bakcer테이블 수정
@@ -69,6 +73,12 @@ public class myDAOImpl implements myDAO{
 		System.out.println("마이 dao (4) - 리워드 수정 실행");
 		return sqlsession.delete(namespace + ".cancelReward", dto);
 	}
+	// 등록 취소
+	/*
+	 * @Override public int deleteMyProject(backerDTO bDTO) throws Exception {
+	 * 
+	 * return sqlsession.delete(namespace + ".deleteMyProject"); }
+	 */
 
 	// 카드 정보 입력
 	@Override

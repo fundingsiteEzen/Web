@@ -19,19 +19,19 @@
 					<div class="cardBody">
 					    <div class="cardNum">
 					        <span class="inCardNum">
-					        <input type="text" placeholder="0000" maxlength="4" class="textCardNum" value="" name="ci_num1">
+					        <input required type="text" placeholder="0000" maxlength="4" class="textCardNum" value="" name="ci_num1">
 					        </span>
 					        <span class="jMWjNk">-</span>
 					        <span class="inCardNum">
-					        <input type="password" placeholder="0000" maxlength="4" class="pwdCardNum" value="" name="ci_num2">
+					        <input required type="password" placeholder="0000" maxlength="4" class="pwdCardNum" value="" name="ci_num2">
 					        </span>
 					        <span class="jMWjNk">-</span>
 					        <span class="inCardNum">
-					        <input type="password" placeholder="0000" maxlength="4" class="pwdCardNum" value="" name="ci_num3">
+					        <input required type="password" placeholder="0000" maxlength="4" class="pwdCardNum" value="" name="ci_num3">
 					        </span>
 					        <span class="jMWjNk">-</span>
 					        <span class="inCardNum">
-					        <input type="text" placeholder="0000" maxlength="4" class="textCardNum" value="" name="ci_num4">
+					        <input required type="text" placeholder="0000" maxlength="4" class="textCardNum" value="" name="ci_num4">
 					        </span>
 					    </div>
 					</div>
@@ -57,14 +57,14 @@
                     <div class="cardSubT">카드 비밀번호 앞 2자리</div>
                     <div class="cardBody">
                         <span class="cardInfo">
-                        <input type="password" placeholder="앞 2자리를 입력해주세요." maxlength="2" class="pwdCardNum" value="" name="ci_pass"></span>
+                        <input required type="password" placeholder="앞 2자리를 입력해주세요." maxlength="2" class="pwdCardNum" value="" name="ci_pass"></span>
                     </div>
                 </div>
                 <div class="cardGap">
                     <div class="cardSubT">소유주 생년월일</div>
                     <div class="cardBody">
                         <span class="cardInfo">
-                        <input type="text" placeholder="예) 920101" maxlength="6" class="textCardNum" value="" name="ci_birth"></span>
+                        <input required type="text" placeholder="예) 920101" maxlength="6" class="textCardNum" value="" name="ci_birth"></span>
                     </div>
                 </div>
 			</div>
@@ -100,19 +100,19 @@
 				<div class="sub">
 				    <div class="subTitle">계좌번호</div>
 				    <span class="inputBox">
-				    <input type="text" placeholder="공백, -없이 입력해주세요." maxlength="20" name="ai_num" class="inputDetail" value="">
+				    <input required type="text" placeholder="공백, -없이 입력해주세요." maxlength="20" name="ai_num" class="inputDetail" value="">
 				    </span>
 				</div>
 				<div class="sub">
 				    <div class="subTitle">예금주명</div>
 				    <span class="inputBox">
-				    <input type="text" inputmode="text" placeholder="예금주 명을 입력해주세요." name="ai_name" class="inputDetail" value="">
+				    <input required type="text" inputmode="text" placeholder="예금주 명을 입력해주세요." name="ai_name" class="inputDetail" value="">
 				    </span>
 				</div>
 				<div class="sub">
 				    <div class="subTitle">예금주 생년월일</div>
 				    <span class="inputBox">
-				    <input type="text" placeholder="예) 920101" maxlength="6" name="ai_birth" class="inputDetail" value="">
+				    <input required type="text" placeholder="예) 920101" maxlength="6" name="ai_birth" class="inputDetail" value="">
 				    </span>
 				</div>
 				<button onclick="accuountSubmit" class="modalBtn">

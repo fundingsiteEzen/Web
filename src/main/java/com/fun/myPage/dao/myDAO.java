@@ -33,6 +33,11 @@ public interface myDAO {
 	
 	// (후원취소) - reward
 	public int cancel_reward(rewardDTO dto) throws Exception;
+	// 내 프로젝트 가져오기
+	public List<projectDTO> getMyProject(String id) throws Exception;
+		
+	// 등록 취소
+	/* public int deleteMyProject() throws Exception; */
 	
 	// 카드 정보 입력
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException;

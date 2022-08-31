@@ -32,13 +32,6 @@
 		]]>
 	</select>
 	
-	<!-- 후원 & 관심목록에서 없애기 -->
-	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
-		<![CDATA[
-		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like} AND id=#{id}
-		]]>
-	</delete>
-	
 	<!-- (1) 프로젝트 테이블 수정하기(후원자 수 - 1, 후원금액 - a) -->
 	<update id="cancelProject" parameterType="com.fun.subPage.dto.projectDTO">
 		<![CDATA[
@@ -52,8 +45,28 @@
 		UPDATE reward SET r_count=r_count-1 WHERE p_seq=#{p_seq} AND r_seq=#{r_seq}
 		]]>
 	</update>
+
+	<!-- 후원 & 관심목록에서 없애기 -->
+	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like} AND id=#{id}
+		]]>
+	</delete>
+
+
+	<!-- id에 해당하는 프로젝트 테이블 가져오기 -->
+	<select id="myProInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM project WHERE id=#{id}
+		]]>
+	</select>
 	
-	
+	<!-- 내 프로젝트 목록에서 없애기 -->
+	<delete id="deleteMyProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		DELETE FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</delete>
 	
 	<!-- 카드 정보 입력 -->
 	<insert id="addCard" parameterType="com.fun.myPage.dto.cardInfoDTO">

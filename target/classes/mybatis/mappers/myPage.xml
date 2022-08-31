@@ -32,6 +32,14 @@
 		]]>
 	</select>
 	
+	<!-- id에 해당하는 프로젝트 테이블 가져오기 -->
+	<select id="myProInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM project WHERE id=#{id}
+		]]>
+	</select>
+	
+	
 	<!-- 후원 & 관심목록에서 없애기 -->
 	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
@@ -53,7 +61,12 @@
 		]]>
 	</update>
 	
-	
+	<!-- 내 프로젝트 목록에서 없애기 -->
+	<delete id="deleteMyProject" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		DELETE FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</delete>
 	
 	<!-- 카드 정보 입력 -->
 	<insert id="addCard" parameterType="com.fun.myPage.dto.cardInfoDTO">
