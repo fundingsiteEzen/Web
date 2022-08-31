@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
@@ -155,7 +156,17 @@ public class myDAOImpl implements myDAO{
 			return sqlsession.delete(namespace + ".deleteAccount", aDTO);
 		}
 
-		
+		// 회원 탈퇴
+		@Transactional
+		public int drop_User(String id) throws Exception {
+			int result = 0;
+			
+			result += sqlsession.delete(namespace + ".dropUser", id);
+			result += sqlsession.delete(namespace + ".dropProject", id);
+			result += sqlsession.delete(namespace + ".dropBacker", id);
+			
+			return result;
+		};
 	
 
 }
