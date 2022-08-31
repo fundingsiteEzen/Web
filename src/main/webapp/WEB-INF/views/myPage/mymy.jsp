@@ -44,7 +44,7 @@
 	}
 	
 	.profile-img {
-	    margin-top: -80px;
+	    margin-top: -120px;
 	    width: 200px;
 	    height: 200px;
 	    position: relative;
@@ -219,9 +219,9 @@
 	
 	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
 	<%
-	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
-		response.sendRedirect("/login.do");
-	}
+//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+//		response.sendRedirect("/login.do");
+//	}
 	%>
 </head>
 
