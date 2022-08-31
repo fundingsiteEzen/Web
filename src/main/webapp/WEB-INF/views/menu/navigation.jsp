@@ -56,6 +56,7 @@
       <ul class="nav navbar-nav navbar-right">
         <c:choose>
 		<c:when test="${isLogin == null}">
+			<li><a href="/myPage/myPage">마이페이지</a></li>
 	        <li><a href="/login.do">LOGIN</a></li>
 		</c:when>
 		<c:when test="${isLogin == true}">
