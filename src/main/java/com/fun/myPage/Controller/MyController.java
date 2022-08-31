@@ -102,8 +102,9 @@ public class MyController {
 	public ModelAndView getUserInfo(Model model, HttpServletRequest req) throws Exception {
 		
 		// 세션으로 아이디 값 가져오기
-		HttpSession session = req.getSession();
-		String id = (String)session.getAttribute("userID");
+//		HttpSession session = req.getSession();
+//		String id = (String)session.getAttribute("userID");
+		String id ="user1";
 		
 		// 아이디로 userinfo 받아오기
 		userinfoDTO dto = mService.getUserInfo(id);

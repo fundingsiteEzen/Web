@@ -39,7 +39,7 @@
         }
 
         .profile-img {
-            margin-top: -80px;
+            margin-top: -100px;
             width: 200px;
             height: 200px;
         }
@@ -134,6 +134,13 @@
         	top:10px; left: 10px; }
         
 	</style>
+	
+	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
+	<%
+//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+//		response.sendRedirect("/login.do");
+//	}
+	%>
 </head>
 <body>
 	
@@ -154,7 +161,7 @@
                 <div class="col-sm-3 aisde">
                     <aside>
                         <div class="profile-img">
-                            <img src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
+                            <img src="${contextPath}/${profile}" class="img-circle profile">
                         </div>
                         <div class="nav_box" align="center">
                             <ul class="my_nav">
