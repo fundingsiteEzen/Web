@@ -171,14 +171,14 @@
                             </div>
                             <div class="col-sm-7 info_span">
                                 <h3>${list.p_name}</h3>
-                                <span>선택한 리워드</span><br>
+                                <span>${rewardList[status.index].r_content}</span><br>
                                 <div align="right">
-                                    <span>{추가 후원금}원</span><br>
-                                    <span style="font-size: 24px;">{총 결제액}원</span><br>
+                                    <span>+ 추가 후원 ${addMoney[status.index]} 원</span><br>
+                                    <span style="font-size: 24px;">${rewardList[status.index].r_price + addMoney[status.index]} 원</span><br>
                                 </div>
                                 <div align="center">
                                     <span>결제예정일 ${list.p_payDate}</span><br>
-                                    <button class="btn delete_btn" onclick="deleteProject(${list.p_seq}, 'N')">취소하기</button>
+                                    <button class="btn delete_btn" onclick="deleteBACK(${list.p_seq}, ${rewardList[status.index].r_seq}, ${rewardList[status.index].r_price + addMoney[status.index]})">취소하기</button>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +259,7 @@
 	<script>
 	function deleteProject(p_seq, is_like) {
 	   event.stopPropagation();
-		var chk = confirm("정말 취소하시겠습니까?");
+		var chk = confirm("관심목록에서 삭제하시겠습니까 ?");
 		if (chk) {
 			$.ajax({
 				type: "POST",
@@ -267,6 +267,8 @@
 				data: {p_seq: p_seq, is_like: is_like},
 				success: function(data) {
 					if(data == "Y") {
+						alert("삭제되었습니다");
+						location.href = "/myPage/myPage";
 						Swal.fire({
 	  						  icon: 'success',
 	  						  title: '취소가 완료되었습니다.',
@@ -286,8 +288,27 @@
 					}); }
 			});
 		}
-	}	
+	}
 	
+	function deleteBACK(p_seq, r_seq, p_total) {
+		   event.stopPropagation();
+			var chk = confirm("정말 취소하시겠습니까 ?");
+			if (chk) {
+				$.ajax({
+					type: "POST",
+					url: "/myPage/deleteBack.do",
+					data: {p_seq: p_seq, r_seq: r_seq, p_total: p_total},
+					success: function(data) {
+						if(data == "Y") {
+							alert("취소가 완료되었습니다");
+							location.href = "/myPage/myPage";
+						}
+					},
+					error: function(data) { alert("에러발생"); }
+				});
+			}
+		}
+	deleteBACK
 </script>
 </body>
 </html>
