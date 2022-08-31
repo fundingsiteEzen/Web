@@ -86,9 +86,8 @@
         
         /* 관심목록 css(수정아직 안함) */
 		.col-sm-4 {
-		height:	300px;
-		cursor: pointer;
-		margin-bottom: 40px;
+			cursor: pointer;
+			margin-bottom: 20px;
 		}
 		
 		/* 후원목록 css */
@@ -98,6 +97,7 @@
             margin-bottom: 40px;
             transition: 0.25s;
             cursor: pointer;
+            position: relative;
         }
         .thumbnail:hover {
         	box-shadow: 0 0 13px rgba(0,0,0, 0.2);
@@ -109,7 +109,10 @@
             overflow: hidden;
             
         }
-        .img_box img {
+        .thumb_img {
+        	height: 200px;
+        }
+        .img_box img, .thumb_img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -117,13 +120,18 @@
 			transition: all 0.3s ease-in-out;
 			overflow: hidden;
         }
+        /*
         .img_box img:hover {
         	transform: scale(1.15);
         }
+        */
         .info_box {
             display: inline-block;
         }
         .delete_btn {margin-top: 10px;}
+        .heart { 
+        	position: absolute;
+        	top:10px; left: 10px; }
         
 	</style>
 </head>
@@ -169,7 +177,7 @@
                             <div class="img_box col-sm-5">
                                 <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
                             </div>
-                            <div class="col-sm-7 info_span">
+                            <div class="col-sm-7">
                                 <h3>${list.p_name}</h3>
                                 <span>${rewardList[status.index].r_content}</span><br>
                                 <div align="right">
@@ -188,18 +196,21 @@
                     <section class="like_list">
                         <c:forEach items="${likeList}" var="list" varStatus="status">
 						<div class="col-sm-4">
-							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-								<div style="overflow: hidden; height:80%">
-									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+							<div class="thumbnail" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+								<div class="thumb_img">
+									<img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
 								</div>
-								<div>
-									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								<h4>${list.p_name}<br/></h4>
+								<h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								<!--
+								<div class="progress" style="height: 10px;" >
+									<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
+								-->
+								<button class="heart btn" onclick="deleteProject(${list.p_seq}, 'Y')"><span class="glyphicon glyphicon-heart"></span></button>
 							</div>
-							<button onclick="deleteProject(${list.p_seq}, 'Y')">삭제</button>
 						</div>
 						</c:forEach>
-
                     </section>
                     <section class="my_list">
                     	<!-- 등록된 페이지가 없을경우 -->

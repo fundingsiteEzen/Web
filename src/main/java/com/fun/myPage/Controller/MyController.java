@@ -47,8 +47,8 @@ public class MyController {
 		
 		// 아이디로 정보 가져오기
 		// 세션으로 아이디 값 가져오기
-		//HttpSession session = req.getSession();
-		//String id = (String)session.getAttribute("userID");
+//		HttpSession session = req.getSession();
+//		String id = (String)session.getAttribute("userID");
 		
 		String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
@@ -144,6 +144,7 @@ public class MyController {
 		}
 	}
 
+	// 프로필 사진 업로드
 	@ResponseBody
 	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
 	public String result(@RequestParam("file1") MultipartFile multi,HttpServletRequest request,HttpServletResponse response, Model model) {
@@ -168,6 +169,33 @@ public class MyController {
 		return "N";
 	}
 	
+	// 회원 탈퇴
+	@ResponseBody
+	@RequestMapping(value="/dropUser.do", method=RequestMethod.POST)
+	@Transactional
+	public String dropUser(Model model, HttpServletRequest req) throws Exception {
+		
+		String id = req.getParameter("id");
+		System.out.println("탈퇴할 아이디 : " + id);
+		
+		// 후원목록을 가져오고 후원 기록을 삭제함
+		List<backerDTO> bDTO = mService.getBacker(id);
+		prDTO PR = mService.getProject_back(bDTO);
+		for(int i = 0; i < PR.getpList().size(); i++) {
+			PR.getpList().get(i).setP_total(PR.getAddMoney().get(i) + PR.getrDTO().get(i).getR_price());
+			mService.cancel_project(PR.getpList().get(i)); // 후원한 프로젝트 테이블을 수정
+			
+			mService.cancel_reward(PR.getrDTO().get(i)); // 리워드 테이블도 수정
+		}
+
+		// 프로젝트 테이블+reward 테이블, backer 테이블, userinfo 테이블 삭제
+		String result = null;
+		if(mService.drop_User(id) > 0) {
+			result = "Y";
+		} else result = "N";
+				
+		return result;
+	}
 	
 	// 관심 목록 삭제
 	@ResponseBody

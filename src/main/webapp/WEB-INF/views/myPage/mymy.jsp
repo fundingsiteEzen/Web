@@ -279,6 +279,7 @@
                	<div class="row" align="center">
                     <button class="btn" onclick="updateUserInfo();">수정</button>
                     <button class="btn">취소</button>
+                    <button class="btn" type="button" onclick="dropUser()">탈퇴</button>
                 </div>
                 <div class="col-sm-12 navigation" align="center">
 					<div class="col-sm-1"></div>
@@ -548,6 +549,30 @@
 
 	}
 	
+	/// 회원 탈퇴 ///
+	function dropUser() {
+		alert("누름");
+		if(confirm("탈퇴하시겠습니까 ?")){
+			$.ajax({
+				type:		"POST",
+				url:		"/myPage/dropUser.do",
+				data:		{"id": $("#id").val()},
+				success:	function(data) {
+					if(data == "Y") {
+						alert("회원탈퇴가 완료되었습니다");
+						location.href = "/logout.do";
+					}
+					if(data == "N")
+					alert("탈퇴하지 못했습니다");
+				},
+				error:		function(data) {
+					alert("오류발생");
+				}
+			});
+		}
+	}
+	
+	/// 다음 API ///
 	function goPopup(){
 		new daum.Postcode({
 	        oncomplete: function(data) {
@@ -558,6 +583,8 @@
 	    }).open();
 	}
 	
+	
+	/// 카드 & 계좌 삭제 ///
 	function deleteCard(seq) {
 		var id      = $("#id").val();
 		$.ajax({
