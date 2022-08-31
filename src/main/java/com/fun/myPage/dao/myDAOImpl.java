@@ -49,6 +49,9 @@ public class myDAOImpl implements myDAO{
 		System.out.println("p_seq 값 : " + p_seq + " r_seq 값 : " + r_seq);
 		
 		return sqlsession.selectOne(namespace + ".rewardInfo", dto);
+	
+	}
+	
 	// 프로젝트 테이블 가져오기(내 프로젝트목록)
 	public List<projectDTO> getMyProject(String id) throws Exception {
 		
