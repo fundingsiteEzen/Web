@@ -58,6 +58,12 @@
     }
 	</script>
 	
+	<!-- 로그인한 상태로 로그인 페이지에 들어갈 수 없게함 -->
+	<%
+	if(session.getAttribute("isLogin") != null) {
+		response.sendRedirect("/");
+	}
+	%>
 </head>
 	
 <body class="img js-fullheight" style="background-image: url('${contextPath}/images/MAIN_img/autumn.jpg');">

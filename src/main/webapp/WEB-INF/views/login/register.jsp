@@ -11,6 +11,12 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+	<!-- 로그인한 상태로 회원가입 페이지에 들어갈 수 없게함 -->
+	<%
+	if(session.getAttribute("isLogin") != null) {
+		response.sendRedirect("/");
+	}
+	%>
 	</head>
 	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 	
