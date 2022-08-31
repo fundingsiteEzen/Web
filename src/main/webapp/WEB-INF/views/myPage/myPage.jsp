@@ -199,19 +199,18 @@
 							<button onclick="deleteProject(${list.p_seq}, 'Y')">삭제</button>
 						</div>
 						</c:forEach>
-
+					<!-- 내 프로젝트 목록 띄우기 -->
                     </section>
                     <section class="my_list">
-                    	<!-- choose 바로밑에 주석뜨면 오류남 -->
                     	<c:choose>
+                    		<%-- 등록된 내 프로젝트가 없을경우 --%>
 	                    	<c:when test="${myList.isEmpty()}">
-	                    	<!-- 등록된 내 프로젝트가 없을경우 -->
 	                    		<div align="center">등록한 프로젝트가 없습니다<br>
 			                    	<a href="/crpage/cr">프로젝트 등록하기</a>
 		                    	</div>
 	                    	</c:when>
+	                    	<%-- 등록된 프로젝트가 있을경우에 프로젝트 등록 띄우기 --%>
 	                    	<c:otherwise>
-	                    	<!-- 등록된 내 프로젝트가 있을경우에도 프로젝트 등록 띄우기 -->
 	                    		<div align="center"><a href="/crpage/cr">프로젝트 등록하기</a></div>
 	                    	</c:otherwise>
 	                    </c:choose>
