@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   
+<!-- 임시 xml. 마이페이지에서 파생 -->
+
+<mapper namespace="com.fun.backDelete">
+
+	<!-- (1) 프로젝트 테이블 수정하기(후원자 수 - 1, 후원금액 - a) -->
+	<update id="updateProject" parameterType="com.fun.subPage.dto.projectDTO">
+		<![CDATA[
+		UPDATE project SET p_backer=p_backer-1, p_total=p_total-#{p_total} WHERE p_seq=#{p_seq}
+		]]>
+	</update>
+	
+	<!-- (2) 리워드 테이블 수정하기(남은 수량 + 1)-->
+	<update id="updateReward" parameterType="com.fun.subPage.dto.rewardDTO">
+		<![CDATA[
+		UPDATE reward SET r_count=r_count-1 WHERE p_seq=#{p_seq} AND r_seq=#{r_seq}
+		]]>
+	</update>
+
+</mapper>

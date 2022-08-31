@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.fun.crpage.dto.CrDTO;
 import com.fun.myPage.dao.myDAO;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.prDTO;
 import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 @Service
 public class myServiceImpl implements mySerivce {
@@ -34,21 +35,36 @@ public class myServiceImpl implements mySerivce {
 	}
 	
 	// (2) 후원목록 가져오기
-	public List<projectDTO> getProject_back(List<backerDTO> bList) throws Exception {
+	public prDTO getProject_back(List<backerDTO> bList) throws Exception {
+		
+		prDTO PR = new prDTO();
 		
 		// 가져온 테이블에서 p_seq만 뽑아서 'project' 테이블 가져오기
 		List<projectDTO> pList = new ArrayList<projectDTO>(); // List 꼭 생성해줘야함.. ! null로 두면 안됨
+		List<rewardDTO> rList = new ArrayList<rewardDTO>();
+		List<Integer> addMoney = new ArrayList<Integer>();
 		
 			for(int i = 0; i < bList.size(); i++) {
 				if(bList.get(i).getIs_like() == 'N') { // 'N'인 경우만 뽑음
 					String p_seq = Integer.toString(bList.get(i).getP_seq());
 					pList.add(dao.getProject_back(p_seq));
+					
+					// p_seq를 뽑으면서 r_seq도 같이 뽑음. 두개 붙혀서 리워드 테이블 가져오기
+					int r_seq = bList.get(i).getR_seq();
+					rList.add(dao.getReward_back(bList.get(i).getP_seq(), r_seq));
+					
+					// 추가후원금 가져오기
+					addMoney.add(bList.get(i).getR_addMoney());
 				}
 			}
+			PR.setpList(pList);
+			PR.setrDTO(rList);
+			PR.setAddMoney(addMoney);
 			System.out.println("for문 끝난 데이터 :" + pList);
+			System.out.println("for문 끝난 리워드 데이터 :" + rList);
 		
 		// 'projcet' 테이블을 List에 담아서 컨트롤러로 보냄
-		return pList;
+		return PR;
 	}
 
 	// (3) 관심목록 가져오기
@@ -67,17 +83,17 @@ public class myServiceImpl implements mySerivce {
 		return pList;
 	}
 
-	// 내 프로젝트 가져오기
-	@Override
-	public List<projectDTO> getMyProject(String id) throws Exception {
-		List<projectDTO> pList = dao.getMyProject(id);
-		
-		System.out.println("myServiceImpl 내 프로젝트 가져오기 실행");
-		
-		return pList;
-	}
+// 내 프로젝트 가져오기
+@Override
+public List<projectDTO> getMyProject(String id) throws Exception {
+	List<projectDTO> pList = dao.getMyProject(id);
 	
-	// (4) 후원 취소
+	System.out.println("myServiceImpl 내 프로젝트 가져오기 실행");
+	
+	return pList;
+}
+
+	// (4)-1 후원 취소	
 	@Override
 	public int deleteProject(backerDTO bDTO) throws Exception {
 		
@@ -86,6 +102,17 @@ public class myServiceImpl implements mySerivce {
 		return dao.deleteProject(bDTO);
 	}
 	
+	// (4)-2 프로젝트 테이블 수정
+	public int cancel_project(projectDTO dto) throws Exception {
+		System.out.println("마이 서비스 (4) - 프로젝트 수정 실행");
+		return dao.cancel_project(dto);
+	}
+	
+	// (4)-3 리워드 테이블 수정
+	public int cancel_reward(rewardDTO dto) throws Exception {
+		System.out.println("마이 서비스 (4) - 리워드 수정 실행");
+		return dao.cancel_reward(dto);
+	}
 	// 등록 취소
 	/*
 	 * @Override public int deleteMyProject() throws Exception {
@@ -132,8 +159,6 @@ public class myServiceImpl implements mySerivce {
 	      return dao.List_ACCOUNT(id);
 	      
 	   }
-		
-
 	
 	// 회원 정보 수정
 		@Override

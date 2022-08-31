@@ -12,6 +12,7 @@ import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
 import com.fun.myPage.dto.userinfoDTO;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 @Repository
 public class myDAOImpl implements myDAO{
@@ -39,19 +40,39 @@ public class myDAOImpl implements myDAO{
 		return sqlsession.selectOne(namespace + ".projectInfo", p_seq);
 	}
 	
+	// 리워드 테이블 가져오기
+	public rewardDTO getReward_back(int p_seq, int r_seq) throws Exception {
+		
+		rewardDTO dto = new rewardDTO();
+		dto.setP_seq(p_seq);
+		dto.setR_seq(r_seq);
+		System.out.println("p_seq 값 : " + p_seq + " r_seq 값 : " + r_seq);
+		
+		return sqlsession.selectOne(namespace + ".rewardInfo", dto);
 	// 프로젝트 테이블 가져오기(내 프로젝트목록)
 	public List<projectDTO> getMyProject(String id) throws Exception {
 		
 		return sqlsession.selectList(namespace + ".myProInfo", id);
 	}
 
-	// 후원 취소
+	// (4)-1 후원 취소 bakcer테이블 수정
 	@Override
 	public int deleteProject(backerDTO bDTO) throws Exception {
 		
 		return sqlsession.delete(namespace + ".deleteProject", bDTO);
 	}
 	
+	// (4)-2 프로젝트 테이블 수정
+	public int cancel_project(projectDTO dto) {
+		System.out.println("마이 dao (4) - 프로젝트 수정 실행");
+		return sqlsession.delete(namespace + ".cancelProject", dto);
+	}
+	
+	// (4)-3 리워드 테이블 수정
+	public int cancel_reward(rewardDTO dto) {
+		System.out.println("마이 dao (4) - 리워드 수정 실행");
+		return sqlsession.delete(namespace + ".cancelReward", dto);
+	}
 	// 등록 취소
 	/*
 	 * @Override public int deleteMyProject(backerDTO bDTO) throws Exception {

@@ -26,19 +26,21 @@
             text-align: center;
             overflow: scroll;
         }
-      .inner ul {
-      }
-      .inner form {
-         height: 200px;
-         padding-top: 30px;
-      }
-      .inner form:hover {
-         background-color: #ccc;
-         cursor: pointer;
-      }
-      
-      .BACK {
-      }
+		.inner ul {
+		}
+		.inner form {
+			height: 200px;
+			padding-top: 30px;
+		}
+		.inner form:hover {
+			background-color: #ccc;
+			cursor: pointer;
+		}
+		
+		.BACK {
+		}
+		.inner::-webkit-scrollbar {
+			display: none; }/* Chrome, Safari, Opera*/
 </style>
 
 

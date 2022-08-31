@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
 import com.fun.myPage.dto.cardInfoDTO;
+import com.fun.myPage.dto.prDTO;
 import com.fun.myPage.dto.userinfoDTO;
 import com.fun.myPage.service.mySerivce;
 import com.fun.subPage.dto.projectDTO;
+import com.fun.subPage.dto.rewardDTO;
 
 @Controller
 @RequestMapping(value="/myPage")
@@ -50,13 +53,18 @@ public class MyController {
 		
 		String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
-		 
+		
+		// 후원목록
+		prDTO PR = mService.getProject_back(bDTO);
+		
 		// 후원목록 / 관심목록 나누기 / 내 프로젝트
 		List<projectDTO> project_BACK = mService.getProject_back(bDTO);
 		List<projectDTO> project_LIKE = mService.getProject_Like(bDTO);
 		List<projectDTO> getMyProject = mService.getMyProject(id);
 		// model에 붙혀서 전달
-		model.addAttribute("backList", project_BACK);
+		model.addAttribute("backList", PR.getpList());
+		model.addAttribute("rewardList", PR.getrDTO());
+		model.addAttribute("addMoney", PR.getAddMoney());
 		model.addAttribute("likeList", project_LIKE);
 		model.addAttribute("myList", getMyProject);
 		
@@ -156,7 +164,7 @@ public class MyController {
 	}
 	
 	
-	// 후원 & 관심 목록 삭제
+	// 관심 목록 삭제
 	@ResponseBody
 	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	public String deleteProject(Model model, HttpServletRequest req, backerDTO bDTO) throws Exception {
@@ -176,6 +184,49 @@ public class MyController {
 			System.out.println("삭제실패");
 			result = "N";
 		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteBack.do", method=RequestMethod.POST)
+	@Transactional
+	// 후원 목록 삭제
+	public String deleteBack(Model model, HttpServletRequest req, backerDTO bDTO) throws Exception {
+		
+		// 아이디는 세션에서 받아옴
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
+		bDTO.setId(id);
+		bDTO.setIs_like('N');
+		bDTO.setP_seq(Integer.parseInt(req.getParameter("p_seq")));
+		
+		// 'Y'는 등록 성공 'D'는 중복 있음 'N'은 에러 'F'는 로그인 안됨
+		String result = null;
+		
+		// 로그인 여부 확인
+		if(session.getAttribute("isLogin") != null) {
+			
+			// p_seq, r_seq, r_price, r_addMoney 받아와야함
+			projectDTO pDTO = new projectDTO();
+			pDTO.setP_seq(Integer.parseInt(req.getParameter("p_seq")));
+			pDTO.setP_total(Integer.parseInt(req.getParameter("p_total")));
+			rewardDTO rDTO = new rewardDTO();
+			rDTO.setP_seq(Integer.parseInt(req.getParameter("p_seq")));
+			rDTO.setR_seq(Integer.parseInt(req.getParameter("r_seq")));
+			
+			// 테이블 세개 수정함 cancel_back은 backer테이블 수정 & cancel_project는 project테이블 수정 & cancel_reward는 reward 테이블 수정
+			// DB에 등록이 성공한 경우.
+			if(mService.deleteProject(bDTO) == 1 && mService.cancel_project(pDTO) == 1 && mService.cancel_reward(rDTO) == 1) {
+				System.out.println("등록성공");
+				result = "Y";
+			} // 등록에 실패한 경우
+			else {
+				System.out.println("등록실패");
+				result = "N";
+			}
+			
+		} else { result="F"; }
 		
 		return result;
 	}
