@@ -49,26 +49,22 @@ public class MyController {
 		//HttpSession session = req.getSession();
 		//String id = (String)session.getAttribute("userID");
 		
-
-		
 		String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
 		
 		// 후원목록
 		prDTO PR = mService.getProject_back(bDTO);
 		
-		// 후원목록 / 관심목록 나누기 / 내 프로젝트
-		List<projectDTO> project_BACK = mService.getProject_back(bDTO);
+		// 관심목록 / 내 프로젝트
 		List<projectDTO> project_LIKE = mService.getProject_Like(bDTO);
 		List<projectDTO> getMyProject = mService.getMyProject(id);
+		
 		// model에 붙혀서 전달
 		model.addAttribute("backList", PR.getpList());
 		model.addAttribute("rewardList", PR.getrDTO());
 		model.addAttribute("addMoney", PR.getAddMoney());
 		model.addAttribute("likeList", project_LIKE);
 		model.addAttribute("myList", getMyProject);
-		
-		
 		
 	}
 	// 카드,계좌
