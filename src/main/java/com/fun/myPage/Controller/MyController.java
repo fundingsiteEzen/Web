@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -98,8 +99,14 @@ public class MyController {
 	}
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy.do", method=RequestMethod.GET)
-	public ModelAndView getUserInfo(Model model) throws Exception {
-		userinfoDTO dto = mService.getUserInfo("user1");
+	public ModelAndView getUserInfo(Model model, HttpServletRequest req) throws Exception {
+		
+		// 세션으로 아이디 값 가져오기
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
+		
+		// 아이디로 userinfo 받아오기
+		userinfoDTO dto = mService.getUserInfo(id);
 		
 		if(dto.getProfile_img() == null || dto.getProfile_img() == "") {
 			dto.setProfile_img("images/profile/detail01.jpg");
@@ -124,6 +131,8 @@ public class MyController {
 	public String updateUserInfo(Locale locale, Model model, @RequestParam Map<String,String> userInfo) throws Exception {
 		if (userInfo.get("pass").equals(userInfo.get("pass_re"))) {
 			userinfoDTO dto = new userinfoDTO();
+			
+			// 회원정보 수정 후 비밀번호 암호화
 			dto.setUserInfo(userInfo);
 			if(mService.mymyUpdate(dto) > 0) {
 				return "Y";

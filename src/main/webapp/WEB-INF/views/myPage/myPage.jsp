@@ -160,7 +160,7 @@
                 <!-- 오른쪽 영역(닉네임, 썸네일 목록) -->
                 <div class="col-sm-9 section">
                     <div class="nickname">
-                        <h3>${nickName}&nbsp;&nbsp;<span class="glyphicon glyphicon-cog" onclick="location.href='/myPage/mymy'" style="font-size:0.8em; color:#aaa;" data-toggle="tooltip" title="정보 수정"></span></h3>
+                        <h3>${nickName}&nbsp;&nbsp;<span class="glyphicon glyphicon-cog" onclick="location.href='/myPage/mymy.do'" style="font-size:0.8em; color:#aaa;" data-toggle="tooltip" title="정보 수정"></span></h3>
                     </div>
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">

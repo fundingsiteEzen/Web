@@ -89,7 +89,6 @@ public class logController {
 			
 			// 해당 정보가 있을 경우
 			if(uDTO != null) {
-				
 				// 아이디와 비밀번호가 일치할 경우
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				boolean match = passwordEncoder.matches(userinfo.getPass(), uDTO.getPass());
@@ -152,7 +151,7 @@ public class logController {
 		uDTO.setName(uDTO.getId()); // 최초 가입시 닉네임은 id와 동일
 		uDTO.setUser_auth("USER");
 		uDTO.setAddress(""); // 배송지는 없음
-		uDTO.setProfile_img("noProfile"); // 프로필 사진 고정
+		uDTO.setProfile_img("images/profile/spring.jpg"); // 프로필 사진 고정
 		
 		int result = lSerivce.addMember(uDTO);
 		
