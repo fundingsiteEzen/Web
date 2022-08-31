@@ -103,6 +103,17 @@
 	  list-style-type: none;
 	}
 	
+	.navigation {
+		margin-top: 80px;
+		margin-bottom: 50px;
+	}
+	.navigation h3 {
+		margin-top: -0.5em;
+	}
+	.line {
+		border-bottom: 2px solid #ccc;
+	}
+	
 	/* 보여줄 구간의 높이와 넓이 설정 */
 	#slideShow{
 	  width: 400px;
@@ -176,34 +187,34 @@
 	}
 	
 	/* 이전 화살표에 마우스 커서가 올라가 있을때 
-	이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+	이전 화살표가 살짝 왼쪽으로 이동하는 효과
 	.prev:hover{
 	  transform: translateX(-10px);
 	}
-	
+	*/
 	.next{
 	  right: 10px;
 	}
 	
 	/* 다음 화살표에 마우스 커서가 올라가 있을때 
-	이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+	이전 화살표가 살짝 오른쪽으로 이동하는 효과
 	.next:hover{
 	  transform: translateX(10px);
 	}
+	*/
 	/* 내정보 수정 인풋 css */
 	.form-control {
-  height: 35px;
-  color: white !important;
-  border: 1px solid #ccc;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
-  transition: 0.3s;
-}
-.form-control:hover {
-background-color: #ccc
-}
+	  height: 35px;
+	  border: 1px solid #ccc;
+	  background: rgba(255, 255, 255, 0.08);
+	  border-radius: 40px;
+	  padding-left: 20px;
+	  padding-right: 20px;
+	  transition: 0.3s;
+	}
+	.form-control:hover {
+		background-color: #ccc
+	}
 	</style>
 </head>
 
@@ -216,14 +227,12 @@ background-color: #ccc
 	<!-- 알럿창 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	
-	
 	<!-- 배경 이미지 -->
 	<div class="container-fluid bg-image"></div>
 	<!-- 메인 -->
     <div class="container-fluid main-back">
     	<div class="container main">
             <div class="row">  
-
                 <div class="profile-img" data-toggle="tooltip" title="사진 바꾸기">
                 	<img id="img" src="${contextPath}/${userInfo.profile_img}" class="img-circle profile">
                     <div class="opacity img-circle profile">
@@ -234,15 +243,10 @@ background-color: #ccc
                 </div>
                 <div class="row info" align="center">
                     <div class="form-group">
-                        <label class="control-label col-sm-offset-3 col-sm-2">아이디</label>
-                        <div class="col-sm-3">
-                        	<input type="text" class="form-control" id="id" placeholder="" value="${userInfo.id}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group">
+                       	<input type="hidden" class="form-control" id="id" placeholder="" value="${userInfo.id}" readonly>
                         <label class="control-label col-sm-offset-3 col-sm-2">닉네임</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="name" placeholder="" value="${userInfo.name}" readonly>
+                            <input type="text" class="form-control" id="name" placeholder="" value="${userInfo.name}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -266,19 +270,23 @@ background-color: #ccc
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">주소</label>
-                        <div class="col-sm-4" style="display: flex;">
+                        <div class="col-sm-3" style="display: flex;">
                             <input type="text" class="form-control" id="address" placeholder="" value="${userInfo.address}">
-                  			<button class="btn btn-primary" onclick="goPopup();" style="height: fit-content;">찾기</button>
+               			<button class="btn" onclick="goPopup();" style="height: fit-content;">찾기</button>
                         </div>
                     </div>
                 </div>
                	<div class="row" align="center">
-                    <button class="btn btn-primary" onclick="updateUserInfo();">수정</button>
-                    <button class="btn btn-info">취소</button>
+                    <button class="btn" onclick="updateUserInfo();">수정</button>
+                    <button class="btn">취소</button>
                 </div>
-                  
+                <div class="col-sm-12 navigation" align="center">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-4 line"></div>
+					<div class="col-sm-2"><h3>결제 정보</h3></div>
+					<div class="col-sm-4 line"></div>
+				</div>  
                 <div class="row pay" align="center">
-                	<h2 style="border-top:solid;">Credit Info</h2>
                     	<div id="slideShow">
 						    <ul class="slides">
 						    	<c:forEach items="${cardList}" var="cardInfo">
@@ -436,7 +444,7 @@ background-color: #ccc
             if (!f.type.match(reg)) {
                 Swal.fire({
                 	  icon: 'error',
-                	  title: '확장자는 이미지 확장자만 가능합니다.',
+                	  title: '이미지만 등록 가능니다.',
                 	})
                 return;
             }

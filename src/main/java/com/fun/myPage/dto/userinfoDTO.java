@@ -2,6 +2,8 @@ package com.fun.myPage.dto;
 
 import java.util.Map;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class userinfoDTO {
 
 	private String id;	//아이디
@@ -62,7 +64,8 @@ public class userinfoDTO {
 				this.setId(map.get(key));
 				break;
 			case "pass":
-				this.setPass(map.get(key));
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				this.setPass(passwordEncoder.encode(map.get(key)));
 				break;
 			case "name":
 				this.setName(map.get(key));
