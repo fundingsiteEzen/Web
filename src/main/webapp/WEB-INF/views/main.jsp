@@ -228,9 +228,7 @@
 		display: none;
 		z-index: 999;
 	}
-		
 	</style>
-	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script>
     $(function() {
         $(window).scroll(function() {

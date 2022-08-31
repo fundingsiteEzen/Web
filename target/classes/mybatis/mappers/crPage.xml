@@ -8,10 +8,11 @@
 	<!-- 프로젝트 내용 입력 -->
 	<insert id="register" parameterType="com.fun.crpage.dto.CrDTO">
 		<![CDATA[
-	 	INSERT INTO project(p_seq, id, p_name, p_category, p_beginDate, p_endDate, p_payDate, p_content, p_goal, p_thumb, p_slide, p_imgCnt)
+	 	INSERT INTO project(p_seq, id, p_name, p_category, p_beginDate, p_endDate, p_payDate,
+	 	p_content, p_ing, p_backer, p_goal, p_thumb, p_slide, p_imgCnt, p_total)
 	 	VALUES (
 	 	#{p_seq}, #{id}, #{p_name}, #{p_category}, sysdate, #{p_endDate}, #{p_payDate}
-	 	, #{p_content}, #{p_goal}, #{p_thumb}, #{p_slide}, #{p_imgCnt}
+	 	, #{p_content}, 'Y', 0, #{p_goal}, #{p_thumb}, #{p_slide}, #{p_imgCnt}, 0
 	 	)
 		]]>
 	</insert>

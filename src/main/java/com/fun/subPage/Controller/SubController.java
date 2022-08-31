@@ -66,6 +66,7 @@ public class SubController {
 		
 		// 달성률 구하기
 		int percent = (int)((double)Pdto.getP_total() / (double)Pdto.getP_goal() * 100);
+		System.out.println("달성률 ::: " + percent);
 		
 		// 슬라이드 이미지 가져오기
 		String str = Pdto.getP_slide();
@@ -152,6 +153,7 @@ public class SubController {
 			bDTO.setP_seq(dto.getP_seq());
 			bDTO.setIs_like('N');
 			bDTO.setR_addMoney(dto.getR_addMoney());
+			bDTO.setR_seq(dto.getR_seq());
 			
 			// 중복 검사. 유저가 해당 프로젝트를 후원했는지 여부를 검사함. mapper에 보낼때 매개변수 두 개 이상 보내려면 객체로 보내야함 !
 			if(sService.check_back(bDTO) == 0) { // 중복 값이 없는 경우

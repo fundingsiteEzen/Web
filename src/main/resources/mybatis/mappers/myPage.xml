@@ -25,20 +25,41 @@
 		]]>
 	</select>
 	
-	<!-- id에 해당하는 프로젝트 테이블 가져오기 -->
-	<select id="myProInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+	<!-- r_seq 값으로 리워드 테이블 가져오기 -->
+	<select id="rewardInfo" resultType="com.fun.subPage.dto.rewardDTO" parameterType="com.fun.subPage.dto.rewardDTO">
 		<![CDATA[
-		SELECT * FROM project WHERE id=#{id}
+		SELECT * FROM reward WHERE p_seq=#{p_seq} AND r_seq=#{r_seq}
 		]]>
 	</select>
 	
+	<!-- (1) 프로젝트 테이블 수정하기(후원자 수 - 1, 후원금액 - a) -->
+	<update id="cancelProject" parameterType="com.fun.subPage.dto.projectDTO">
+		<![CDATA[
+		UPDATE project SET p_backer=p_backer-1, p_total=p_total-#{p_total} WHERE p_seq=#{p_seq}
+		]]>
+	</update>
 	
+	<!-- (2) 리워드 테이블 수정하기(남은 수량 + 1)-->
+	<update id="cancelReward" parameterType="com.fun.subPage.dto.rewardDTO">
+		<![CDATA[
+		UPDATE reward SET r_count=r_count-1 WHERE p_seq=#{p_seq} AND r_seq=#{r_seq}
+		]]>
+	</update>
+
 	<!-- 후원 & 관심목록에서 없애기 -->
 	<delete id="deleteProject" parameterType="com.fun.myPage.dto.backerDTO">
 		<![CDATA[
 		DELETE FROM backer WHERE p_seq=#{p_seq} AND is_like=#{is_like} AND id=#{id}
 		]]>
 	</delete>
+
+
+	<!-- id에 해당하는 프로젝트 테이블 가져오기 -->
+	<select id="myProInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
+		<![CDATA[
+		SELECT * FROM project WHERE id=#{id}
+		]]>
+	</select>
 	
 	<!-- 내 프로젝트 목록에서 없애기 -->
 	<delete id="deleteMyProject" parameterType="com.fun.myPage.dto.backerDTO">
@@ -131,7 +152,6 @@
 			AND id=#{id}
 		]]>
 	</delete>
-	<!-- r_seq 값이 있는 경우만. 리워드 테이블 가져오기 -->
 	
 	<!-- 회원정보(비밀번호, 이메일, 배송지)를 수정하기 -->
 	<update id="updateUserInfo" parameterType="com.fun.myPage.dto.userinfoDTO">

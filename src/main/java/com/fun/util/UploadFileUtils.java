@@ -43,8 +43,8 @@ public class UploadFileUtils {
 		
 		// 이미지 사이즈를 줄여서 저장함
 		BufferedImage sourceImg = ImageIO.read(new File(uploadPath, savedName));
-		BufferedImage destImg	= Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 300);
-		ImageIO.write(destImg, savedName, target);
+		BufferedImage destImg	= Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_WIDTH, 300);
+		ImageIO.write(destImg, "jpg", target);
 		
 		System.out.println("작업 완료된 값 : " + savedName);
 		return savedName;
