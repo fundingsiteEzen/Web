@@ -62,7 +62,7 @@
 	</select>
 	
 	<!-- 내 프로젝트 목록에서 없애기 -->
-	<delete id="deleteMyProject" parameterType="com.fun.myPage.dto.backerDTO">
+	<delete id="deleteMyProject" parameterType="com.fun.subPage.dto.projectDTO">
 		<![CDATA[
 		DELETE FROM project WHERE p_seq=#{p_seq}
 		]]>

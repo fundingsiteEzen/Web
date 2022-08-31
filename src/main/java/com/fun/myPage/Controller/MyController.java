@@ -236,6 +236,26 @@ public class MyController {
 		return result;
 	}
 	
+	// 내 프로젝트 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteMyProject.do", method=RequestMethod.POST)
+	public String deleteMyProject(Model model, HttpServletRequest req, projectDTO pDTO) throws Exception {
+		
+		System.out.println("마이페이지에서 받아온 p_Seq값 : " + pDTO.getP_seq());
+		
+		String result = null;
+		if(mService.deleteMyProject(pDTO) <= 1) { // 삭제가 성공한 경우
+			System.out.println("삭제성공");
+			result = "Y";
+		} // 삭제에 실패한 경우
+		else {
+			System.out.println("삭제실패");
+			result = "N";
+		}
+		
+		return result;
+	}
+	
 	// 카드 정보 입력
 	
 	@RequestMapping(value="/addCard.do", method=RequestMethod.POST)

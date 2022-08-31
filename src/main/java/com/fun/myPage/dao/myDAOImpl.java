@@ -77,12 +77,11 @@ public class myDAOImpl implements myDAO{
 		return sqlsession.delete(namespace + ".cancelReward", dto);
 	}
 	// 등록 취소
-	/*
-	 * @Override public int deleteMyProject(backerDTO bDTO) throws Exception {
-	 * 
-	 * return sqlsession.delete(namespace + ".deleteMyProject"); }
-	 */
-
+	 public int deleteMyProject(projectDTO dto) throws Exception {
+		 System.out.println("deleteMyProject (DAO) 실행");
+		 return sqlsession.delete(namespace + ".deleteMyProject", dto); 
+	 }
+	  
 	// 카드 정보 입력
 	@Override
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException {
@@ -155,6 +154,8 @@ public class myDAOImpl implements myDAO{
 			// TODO Auto-generated method stub
 			return sqlsession.delete(namespace + ".deleteAccount", aDTO);
 		}
+
+		
 	
 
 }
