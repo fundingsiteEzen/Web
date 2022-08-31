@@ -216,6 +216,13 @@
 		background-color: #ccc
 	}
 	</style>
+	
+	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
+	<%
+	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+		response.sendRedirect("/login.do");
+	}
+	%>
 </head>
 
 
