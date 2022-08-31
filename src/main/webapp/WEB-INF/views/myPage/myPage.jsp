@@ -39,7 +39,7 @@
         }
 
         .profile-img {
-            margin-top: -100px;
+            margin-top: -80px;
             width: 200px;
             height: 200px;
         }
@@ -86,8 +86,9 @@
         
         /* 관심목록 css(수정아직 안함) */
 		.col-sm-4 {
-			cursor: pointer;
-			margin-bottom: 20px;
+		height:	300px;
+		cursor: pointer;
+		margin-bottom: 40px;
 		}
 		
 		/* 후원목록 css */
@@ -97,7 +98,6 @@
             margin-bottom: 40px;
             transition: 0.25s;
             cursor: pointer;
-            position: relative;
         }
         .thumbnail:hover {
         	box-shadow: 0 0 13px rgba(0,0,0, 0.2);
@@ -109,10 +109,7 @@
             overflow: hidden;
             
         }
-        .thumb_img {
-        	height: 200px;
-        }
-        .img_box img, .thumb_img img {
+        .img_box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -120,27 +117,15 @@
 			transition: all 0.3s ease-in-out;
 			overflow: hidden;
         }
-        /*
         .img_box img:hover {
         	transform: scale(1.15);
         }
-        */
         .info_box {
             display: inline-block;
         }
         .delete_btn {margin-top: 10px;}
-        .heart { 
-        	position: absolute;
-        	top:10px; left: 10px; }
         
 	</style>
-	
-	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
-	<%
-//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
-//		response.sendRedirect("/login.do");
-//	}
-	%>
 </head>
 <body>
 	
@@ -161,7 +146,7 @@
                 <div class="col-sm-3 aisde">
                     <aside>
                         <div class="profile-img">
-                            <img src="${contextPath}/${profile}" class="img-circle profile">
+                            <img src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
                         </div>
                         <div class="nav_box" align="center">
                             <ul class="my_nav">
@@ -184,7 +169,7 @@
                             <div class="img_box col-sm-5">
                                 <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-7 info_span">
                                 <h3>${list.p_name}</h3>
                                 <span>${rewardList[status.index].r_content}</span><br>
                                 <div align="right">
@@ -203,29 +188,35 @@
                     <section class="like_list">
                         <c:forEach items="${likeList}" var="list" varStatus="status">
 						<div class="col-sm-4">
-							<div class="thumbnail" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-								<div class="thumb_img">
-									<img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
+							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+								<div style="overflow: hidden; height:80%">
+									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 								</div>
-								<h4>${list.p_name}<br/></h4>
-								<h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-								<!--
-								<div class="progress" style="height: 10px;" >
-									<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								<div>
+									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
 								</div>
-								-->
-								<button class="heart btn" onclick="deleteProject(${list.p_seq}, 'Y')"><span class="glyphicon glyphicon-heart"></span></button>
 							</div>
+							<button onclick="deleteProject(${list.p_seq}, 'Y')">삭제</button>
 						</div>
 						</c:forEach>
+
                     </section>
                     <section class="my_list">
-                    	<!-- 등록된 페이지가 없을경우 -->
-                    	<div align="center">등록한 프로젝트가 없습니다<br>
-	                    	<a href="/crpage/cr">프로젝트 등록하기</a>
-                    	</div>
-                    	<!-- 등록된 페이지가 있을 경우 -->
-                    	<c:forEach items="${myList}" var="list" varStatus="status">
+                    	<!-- choose 바로밑에 주석뜨면 오류남 -->
+                    	<c:choose>
+	                    	<c:when test="${myList.isEmpty()}">
+	                    	<!-- 등록된 내 프로젝트가 없을경우 -->
+	                    		<div align="center">등록한 프로젝트가 없습니다<br>
+			                    	<a href="/crpage/cr">프로젝트 등록하기</a>
+		                    	</div>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    	<!-- 등록된 내 프로젝트가 있을경우에도 프로젝트 등록 띄우기 -->
+	                    		<div align="center"><a href="/crpage/cr">프로젝트 등록하기</a></div>
+	                    	</c:otherwise>
+	                    </c:choose>
+                    	<!-- 내 프로젝트 목록 띄우기 -->
+                    	<c:forEach items="${myList}" var="list" varStatus="status">	
 							<div class="col-sm-4">
 								<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 									<div style="overflow: hidden; height:80%">
