@@ -130,15 +130,27 @@
   		}
   		function register(){
   	        if(click == 0) {
-  				alert("아이디 중복확인은 필수입니다.");
+  				//alert("아이디 중복확인은 필수입니다.");
+  				Swal.fire({
+				icon: 'warning',
+				title: '아이디 중복확인은 필수입니다.',
+				})
   				return false;
   			}
   			if($("#pass").val().length < 6) {
-  				alert("비밀번호는 최소 6자리로 입력하세요.");
+  				//alert("비밀번호는 최소 6자리로 입력하세요.");
+  				Swal.fire({
+				icon: 'warning',
+				title: '비밀번호는 최소 6자리로 입력하세요.',
+				})
   				return false;
   			}
   			if($('#pass').val() != $('#pass_re').val()){
-  	            alert("비밀번호가 일치하지 않습니다.");
+  	            //alert("비밀번호가 일치하지 않습니다.");
+			  	Swal.fire({
+				icon: 'warning',
+				title: '비밀번호가 일치하지 않습니다.',
+				})
   	            $('#pass').focus();
   	            return false;
   	        }

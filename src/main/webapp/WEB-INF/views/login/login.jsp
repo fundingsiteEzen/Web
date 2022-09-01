@@ -33,13 +33,21 @@
         var pw = $("#USER_PW_TEXT");
     
         if(id.val() == ""){
-            alert("아이디를 입력 해주세요.");
+            //alert("아이디를 입력 해주세요.");
+			Swal.fire({
+			icon: 'warning',
+			title: '아이디를 입력 해주세요.',
+			})
             id.focus();
             return false;
         }
         
         if(pw.val() == ""){
-            alert("비밀번호를 입력 해주세요.");
+            //alert("비밀번호를 입력 해주세요.");
+			Swal.fire({
+			icon: 'warning',
+			title: '비밀번호를 입력 해주세요.',
+			})
             pw.focus();
             return false;
         }
