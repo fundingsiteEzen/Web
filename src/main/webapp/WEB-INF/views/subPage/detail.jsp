@@ -177,6 +177,7 @@
 				<div class="col-sm-8">
 					<p>${project.p_content}</p>
 				</div>
+				<!-- 
 				<div class="col-sm-12 navigation" align="center">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-4 line"></div>
@@ -184,6 +185,7 @@
 					<div class="col-sm-4 line"></div>
 					<p>${project.p_backer} 명 후원중</p>
 				</div>
+				 -->
 			</div>
         </div>
     </div>
