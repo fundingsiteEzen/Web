@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -46,8 +47,8 @@ public class MyController {
 		
 		// 아이디로 정보 가져오기
 		// 세션으로 아이디 값 가져오기
-		//HttpSession session = req.getSession();
-		//String id = (String)session.getAttribute("userID");
+//		HttpSession session = req.getSession();
+//		String id = (String)session.getAttribute("userID");
 		
 		String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
@@ -98,20 +99,23 @@ public class MyController {
 	}
 	// 회원정보 수정화면으로 이동
 	@RequestMapping(value="/mymy.do", method=RequestMethod.GET)
-	public ModelAndView getUserInfo(Model model) throws Exception {
-		userinfoDTO dto = mService.getUserInfo("user1");
+	public ModelAndView getUserInfo(Model model, HttpServletRequest req) throws Exception {
 		
-		// 사용자가 저장한 프로필 사진이 없으면 기본 사진 detail01 보여줌
+		// 세션으로 아이디 값 가져오기
+//		HttpSession session = req.getSession();
+//		String id = (String)session.getAttribute("userID");
+		String id ="user1";
+		
+		// 아이디로 userinfo 받아오기
+		userinfoDTO dto = mService.getUserInfo(id);
+		
 		if(dto.getProfile_img() == null || dto.getProfile_img() == "") {
 			dto.setProfile_img("images/profile/detail01.jpg");
 		} else {
-			// 프로필 사진 파일객체 생성
 			File file = new File(dto.getProfile_img());
 		}
 		
-		// 카드 정보 조회
 		List<cardInfoDTO> cardList = mService.List_CARD(dto.getId());
-		// 계좌 정보 조회
 	    List<accountInfoDTO> accountList = mService.List_ACCOUNT(dto.getId());
 		
 		ModelAndView mvc = new ModelAndView();
@@ -126,10 +130,10 @@ public class MyController {
 	@ResponseBody
 	@RequestMapping(value = "/mymyUpdate.do", method = RequestMethod.POST)
 	public String updateUserInfo(Locale locale, Model model, @RequestParam Map<String,String> userInfo) throws Exception {
-		// 비밀번호랑 비밀번호 확인 값을 체크
 		if (userInfo.get("pass").equals(userInfo.get("pass_re"))) {
 			userinfoDTO dto = new userinfoDTO();
-			// Map -> DTO
+			
+			// 회원정보 수정 후 비밀번호 암호화
 			dto.setUserInfo(userInfo);
 			if(mService.mymyUpdate(dto) > 0) {
 				return "Y";
@@ -141,15 +145,14 @@ public class MyController {
 		}
 	}
 
+	// 프로필 사진 업로드
 	@ResponseBody
 	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
 	public String result(@RequestParam("file1") MultipartFile multi,HttpServletRequest request,HttpServletResponse response, Model model) {
     	try {
-    		// 파일이 존재하면 수행
             if(!multi.isEmpty())
             {
                 String originFilename = multi.getOriginalFilename();
-                // 프로젝트의 resources 경로를 가져옴
                 String Path = request.getSession().getServletContext().getRealPath("/");
                 File file = new File(Path + "/resources/images/profile/" , originFilename);
                 multi.transferTo(file);
@@ -167,6 +170,33 @@ public class MyController {
 		return "N";
 	}
 	
+	// 회원 탈퇴
+	@ResponseBody
+	@RequestMapping(value="/dropUser.do", method=RequestMethod.POST)
+	@Transactional
+	public String dropUser(Model model, HttpServletRequest req) throws Exception {
+		
+		String id = req.getParameter("id");
+		System.out.println("탈퇴할 아이디 : " + id);
+		
+		// 후원목록을 가져오고 후원 기록을 삭제함
+		List<backerDTO> bDTO = mService.getBacker(id);
+		prDTO PR = mService.getProject_back(bDTO);
+		for(int i = 0; i < PR.getpList().size(); i++) {
+			PR.getpList().get(i).setP_total(PR.getAddMoney().get(i) + PR.getrDTO().get(i).getR_price());
+			mService.cancel_project(PR.getpList().get(i)); // 후원한 프로젝트 테이블을 수정
+			
+			mService.cancel_reward(PR.getrDTO().get(i)); // 리워드 테이블도 수정
+		}
+
+		// 프로젝트 테이블+reward 테이블, backer 테이블, userinfo 테이블 삭제
+		String result = null;
+		if(mService.drop_User(id) > 0) {
+			result = "Y";
+		} else result = "N";
+				
+		return result;
+	}
 	
 	// 관심 목록 삭제
 	@ResponseBody
@@ -231,6 +261,26 @@ public class MyController {
 			}
 			
 		} else { result="F"; }
+		
+		return result;
+	}
+	
+	// 내 프로젝트 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteMyProject.do", method=RequestMethod.POST)
+	public String deleteMyProject(Model model, HttpServletRequest req, projectDTO pDTO) throws Exception {
+		
+		System.out.println("마이페이지에서 받아온 p_Seq값 : " + pDTO.getP_seq());
+		
+		String result = null;
+		if(mService.deleteMyProject(pDTO) <= 1) { // 삭제가 성공한 경우
+			System.out.println("삭제성공");
+			result = "Y";
+		} // 삭제에 실패한 경우
+		else {
+			System.out.println("삭제실패");
+			result = "N";
+		}
 		
 		return result;
 	}

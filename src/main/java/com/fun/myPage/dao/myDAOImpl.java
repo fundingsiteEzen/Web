@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fun.myPage.dto.accountInfoDTO;
 import com.fun.myPage.dto.backerDTO;
@@ -77,12 +78,11 @@ public class myDAOImpl implements myDAO{
 		return sqlsession.delete(namespace + ".cancelReward", dto);
 	}
 	// 등록 취소
-	/*
-	 * @Override public int deleteMyProject(backerDTO bDTO) throws Exception {
-	 * 
-	 * return sqlsession.delete(namespace + ".deleteMyProject"); }
-	 */
-
+	 public int deleteMyProject(projectDTO dto) throws Exception {
+		 System.out.println("deleteMyProject (DAO) 실행");
+		 return sqlsession.delete(namespace + ".deleteMyProject", dto); 
+	 }
+	  
 	// 카드 정보 입력
 	@Override
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException {
@@ -155,6 +155,18 @@ public class myDAOImpl implements myDAO{
 			// TODO Auto-generated method stub
 			return sqlsession.delete(namespace + ".deleteAccount", aDTO);
 		}
+
+		// 회원 탈퇴
+		@Transactional
+		public int drop_User(String id) throws Exception {
+			int result = 0;
+			
+			result += sqlsession.delete(namespace + ".dropUser", id);
+			result += sqlsession.delete(namespace + ".dropProject", id);
+			result += sqlsession.delete(namespace + ".dropBacker", id);
+			
+			return result;
+		};
 	
 
 }

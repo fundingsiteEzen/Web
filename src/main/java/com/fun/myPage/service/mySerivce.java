@@ -34,12 +34,13 @@ public interface mySerivce {
 	// *** 후원 삭제하기
 	// 리워드 테이블 수정
 	public int cancel_reward(rewardDTO dto) throws Exception;
+	
 	// 내 프로젝트 가져오기
 	public List<projectDTO> getMyProject(String id) throws Exception;
 			
-	/*
-	 * // 내 프로젝트 삭제하기 public int deleteMyProject() throws Exception;
-	 */
+	 //내 프로젝트 삭제하기 
+	 public int deleteMyProject(projectDTO dto) throws Exception;
+	 
 	
 	// 카드 정보 입력
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
@@ -67,5 +68,8 @@ public interface mySerivce {
 	
 	// 계좌 정보 삭제
 	public int deleteAccount(accountInfoDTO aDTO);
+	
+	// 회원 탈퇴
+	public int drop_User(String id) throws Exception;
 
 }

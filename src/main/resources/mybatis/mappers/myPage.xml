@@ -62,7 +62,7 @@
 	</select>
 	
 	<!-- 내 프로젝트 목록에서 없애기 -->
-	<delete id="deleteMyProject" parameterType="com.fun.myPage.dto.backerDTO">
+	<delete id="deleteMyProject" parameterType="com.fun.subPage.dto.projectDTO">
 		<![CDATA[
 		DELETE FROM project WHERE p_seq=#{p_seq}
 		]]>
@@ -177,4 +177,25 @@
 		SELECT * FROM userinfo WHERE id=#{id}
 		]]>
 	</select>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<!-- 1. backer 테이블 삭제 -->
+	<delete id="dropUser" parameterType="String">
+		<![CDATA[
+		DELETE FROM backer WHERE id=#{id}
+		]]>
+	</delete>
+	<!-- 2. project 테이블 삭제 -->
+	<delete id="dropProject" parameterType="String">
+		<![CDATA[
+		DELETE FROM project WHERE id=#{id}
+		]]>
+	</delete>
+	<!-- 3. userinfo 테이블 삭제 -->
+	<delete id="dropBacker" parameterType="String">
+		<![CDATA[
+		DELETE FROM userinfo WHERE id=#{id}
+		]]>
+	</delete>
 </mapper>

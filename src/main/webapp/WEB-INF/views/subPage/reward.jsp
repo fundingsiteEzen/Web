@@ -39,30 +39,41 @@
 		
 		.BACK {
 		}
+		/*
 		.inner::-webkit-scrollbar {
-			display: none; }/* Chrome, Safari, Opera*/
+			display: none; }
+		*/
 </style>
 
 
 <!-- 리워드 창 -->
 <div class="modal">
    <div class="inner">
-            <c:forEach items="${rewardList}" var="list" varStatus="status">
-                     <form action="/subPage/back.do" method="post" id="form${list.r_seq}" onclick="addSubmit(${list.r_seq})">
-                        <span>선택 ${list.r_seq}</span><br>
-                        <span>${list.r_count}개 남음</span>
-                        <h3 style="text-align: center;">${list.r_price} 원</h3>
-                        <span>${list.r_content}</span><br>
-                        <input type="text" name="r_addMoney" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="addMondy${list.r_seq}">
-                        <input type="hidden" name="p_seq" value="${project.p_seq}">
-                        <input type="hidden" name="r_seq" value="${list.r_seq}">
-                        <input type="hidden" name="r_price" value="${list.r_price}">
-                        <input type="hidden" name="r_count" value="${list.r_count}">
-                        <!-- 
-                        <button type="submit">back</button>
-                         -->
-                        <button type="button" class="BACK" onclick="back_this(${list.r_seq})" disabled>back</button>
-                     </form>
-            </c:forEach>
+		<c:forEach items="${rewardList}" var="list" varStatus="status">
+		         <form action="/subPage/back.do" method="post" id="form${list.r_seq}" onclick="addSubmit(${list.r_seq})">
+		            <span>선택 ${list.r_seq}</span><br>
+		            <span>${list.r_count}개 남음</span>
+		            <h3 style="text-align: center;">${list.r_price} 원</h3>
+		            <span>${list.r_content}</span><br>
+		            <input type="text" name="r_addMoney" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="addMondy${list.r_seq}">
+		            <input type="hidden" name="p_seq" value="${project.p_seq}">
+		            <input type="hidden" name="r_seq" value="${list.r_seq}">
+		            <input type="hidden" name="r_price" value="${list.r_price}">
+		            <input type="hidden" name="r_count" value="${list.r_count}">
+		            <button type="button" class="BACK" onclick="back_this(${list.r_seq})" disabled>back</button>
+		         </form>
+		</c:forEach>
    </div>
 </div>
+
+<script>
+	// 후원하면 BACK 버튼 생김
+	$(document).ready(function(){
+		$(".BACK").hide();
+    });
+	function addSubmit(r_seq) {
+		$(".BACK").attr("disabled", false);
+		$(".BACK").show();
+		$('#addMondy'+r_seq).focus();
+	}
+</script>

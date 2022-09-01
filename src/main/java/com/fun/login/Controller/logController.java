@@ -89,7 +89,6 @@ public class logController {
 			
 			// 해당 정보가 있을 경우
 			if(uDTO != null) {
-				
 				// 아이디와 비밀번호가 일치할 경우
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				boolean match = passwordEncoder.matches(userinfo.getPass(), uDTO.getPass());
@@ -99,6 +98,8 @@ public class logController {
 					session.setAttribute("userID", uDTO.getId());
 					session.setAttribute("isLogin", true);
 					session.setAttribute("nickName", uDTO.getName());
+					session.setAttribute("profile", uDTO.getProfile_img());
+					System.out.println(uDTO.getProfile_img());
 					mav.setViewName("redirect:/");
 					System.out.println("로그인 완료");
 				} // 비밀번호가 일치하지 않는 경우
@@ -127,7 +128,8 @@ public class logController {
 		// 나는 여기에 if session != null 을 감쌌는데 크게 필요 없는듯.
 		session.removeAttribute("userID");
 		session.removeAttribute("isLogin");
-		// 이거 invalid어쩌구로 session 삭제해주기.. 로그아웃했다가 재 로그인 하는 경우도 생각
+		session.removeAttribute("nickName");
+		session.removeAttribute("profile");
 		
 		ModelAndView mav = new ModelAndView("redirect:/");
 		
@@ -152,7 +154,7 @@ public class logController {
 		uDTO.setName(uDTO.getId()); // 최초 가입시 닉네임은 id와 동일
 		uDTO.setUser_auth("USER");
 		uDTO.setAddress(""); // 배송지는 없음
-		uDTO.setProfile_img("noProfile"); // 프로필 사진 고정
+		uDTO.setProfile_img("images/profile/spring.jpg"); // 프로필 사진 고정
 		
 		int result = lSerivce.addMember(uDTO);
 		

@@ -71,7 +71,7 @@
 		margin-bottom: 40px;
 		}
 		/* 이미지 오버 효과 */
-		img {
+		.main img {
 		  transform: scale(1);
 		  -webkit-transform: scale(1);
 		  -moz-transform: scale(1);
@@ -79,14 +79,13 @@
 		  -o-transform: scale(1);
 		  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
 		}
-		img:hover {
+		.main img:hover {
 		  transform: scale(1.2);
 		  -webkit-transform: scale(1.2);
 		  -moz-transform: scale(1.2);
 		  -ms-transform: scale(1.2);
 		  -o-transform: scale(1.2);
 		}
-		img {width:325px; height:280px; overflow:hidden; }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
 		
 	</style>
 </head>
@@ -95,9 +94,6 @@
 
 <!-- 상단 메뉴바 -->
 <jsp:include page="menu/navigation.jsp" flush="false" />
-
-
-
 
 	<!-- container 시작 -->
 	<div class="container-fluid wrap">
@@ -121,7 +117,7 @@
 						<!-- 고유번호(seq)페이지로 이동 -->
 						<div align="center" class="col-sm-3 category p_spring" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
 							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}"/>
 							</div>
 							<div>
 								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
@@ -228,9 +224,7 @@
 		display: none;
 		z-index: 999;
 	}
-		
 	</style>
-	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script>
     $(function() {
         $(window).scroll(function() {
