@@ -182,7 +182,11 @@
 	    
 	    filesArr.forEach(function(f) {
 	        if (!f.type.match(reg)) {
-	            alert("이미지만 첨부 가능합니다.");
+	            //alert("이미지만 첨부 가능합니다.");
+	        	Swal.fire({
+				icon: 'warning',
+				title: '이미지만 첨부 가능합니다.',
+				})
 	            return;
 	        }
 	        
@@ -211,8 +215,13 @@
 			processData:	false,
 			contentType:	false,
 			success: function(request, status, error) {
-				alert("성공");
+				//alert("성공");
+				Swal.fire({
+				icon: 'success',
+				title: '성공',
+				})
 				alert(request); // 이거 저장된 파일 이름.. !!
+				
 			},
 			error: function(request, status, error) {
 				// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -223,11 +232,19 @@
 	// 입력 값 체크
 	function checkInfo() {
 		if(idx == 0) {
-			alert("이미지를 한 장 이상 첨부하세요");
+			//alert("이미지를 한 장 이상 첨부하세요");
+			Swal.fire({
+			icon: 'warning',
+			title: '이미지를 한 장 이상 첨부하세요.',
+			})
 		}
 		var text = $(".summernote").val();
 		if(text == "") {
-			alert("프로젝트 계획을 입력하세요");
+			//alert("프로젝트 계획을 입력하세요");
+			Swal.fire({
+			icon: 'warning',
+			title: '프로젝트 계획을 입력하세요.',
+			})
 		}
 	}
 </script>
