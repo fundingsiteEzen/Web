@@ -130,7 +130,9 @@
         .delete_btn {margin-top: 10px;}
         .heart { 
         	position: absolute;
-        	top:10px; left: 10px; }
+        	top:10px; right: 10px; }
+        
+        .addPro { margin-top: -50px; }
         	
         <!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
 	<%
@@ -225,31 +227,37 @@
 					<!-- 내 프로젝트 목록 띄우기 -->
                     </section>
                     <section class="my_list">
+                    	<div align="right">
+	                    	<button class="btn addPro" onclick="location.href='/crpage/cr';">+ 프로젝트 등록하기</button>
+                    	</div>
                     	<c:choose>
                     		<%-- 등록된 내 프로젝트가 없을경우 --%>
 	                    	<c:when test="${myList.isEmpty()}">
 	                    		<div align="center">등록한 프로젝트가 없습니다<br>
-			                    	<a href="/crpage/cr">프로젝트 등록하기</a>
 		                    	</div>
 	                    	</c:when>
-	                    	<%-- 등록된 프로젝트가 있을경우에 프로젝트 등록 띄우기 --%>
-	                    	<c:otherwise>
-	                    		<div align="center"><a href="/crpage/cr">프로젝트 등록하기</a></div>
-	                    	</c:otherwise>
 	                    </c:choose>
                     	<!-- 내 프로젝트 목록 띄우기 -->
                     	<c:forEach items="${myList}" var="list" varStatus="status">	
-							<div class="col-sm-4">
-								<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-									<div style="overflow: hidden; height:80%">
-										<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
-									</div>
-									<div>
-										<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-									</div>
-								</div>
-								<button onclick="deleteMyProject(${list.p_seq})">삭제</button>
-							</div>
+							<div class="thumbnail row" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+                            <div class="img_box col-sm-5">
+                                <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <h3>${list.p_name}</h3>
+                                <div align="left">
+                                	<span>목표금액 ${list.p_goal}</span><br>
+                                	<span>모인 금액 ${list.p_total}</span><br>
+                                	<span>현재 후원자 수 ${list.p_backer}</span><br>
+                                </div>
+                                <div align="right">
+                                    <span>${list.p_beginDate} ~ ${list.p_endDate}</span><br>
+                                </div>
+                                <div align="center">
+                                    <button class="btn delete_btn" onclick="deleteMyProject(${list.p_seq})">프로젝트 삭제하기</button>
+                                </div>
+                            </div>
+                        </div>
 						</c:forEach>
                     </section>
                 </div>
