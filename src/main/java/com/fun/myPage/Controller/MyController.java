@@ -101,13 +101,17 @@ public class MyController {
 	public ModelAndView getUserInfo(Model model) throws Exception {
 		userinfoDTO dto = mService.getUserInfo("user1");
 		
+		// 사용자가 저장한 프로필 사진이 없으면 기본 사진 detail01 보여줌
 		if(dto.getProfile_img() == null || dto.getProfile_img() == "") {
 			dto.setProfile_img("images/profile/detail01.jpg");
 		} else {
+			// 프로필 사진 파일객체 생성
 			File file = new File(dto.getProfile_img());
 		}
 		
+		// 카드 정보 조회
 		List<cardInfoDTO> cardList = mService.List_CARD(dto.getId());
+		// 계좌 정보 조회
 	    List<accountInfoDTO> accountList = mService.List_ACCOUNT(dto.getId());
 		
 		ModelAndView mvc = new ModelAndView();
@@ -122,8 +126,10 @@ public class MyController {
 	@ResponseBody
 	@RequestMapping(value = "/mymyUpdate.do", method = RequestMethod.POST)
 	public String updateUserInfo(Locale locale, Model model, @RequestParam Map<String,String> userInfo) throws Exception {
+		// 비밀번호랑 비밀번호 확인 값을 체크
 		if (userInfo.get("pass").equals(userInfo.get("pass_re"))) {
 			userinfoDTO dto = new userinfoDTO();
+			// Map -> DTO
 			dto.setUserInfo(userInfo);
 			if(mService.mymyUpdate(dto) > 0) {
 				return "Y";
@@ -139,9 +145,11 @@ public class MyController {
 	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
 	public String result(@RequestParam("file1") MultipartFile multi,HttpServletRequest request,HttpServletResponse response, Model model) {
     	try {
+    		// 파일이 존재하면 수행
             if(!multi.isEmpty())
             {
                 String originFilename = multi.getOriginalFilename();
+                // 프로젝트의 resources 경로를 가져옴
                 String Path = request.getSession().getServletContext().getRealPath("/");
                 File file = new File(Path + "/resources/images/profile/" , originFilename);
                 multi.transferTo(file);

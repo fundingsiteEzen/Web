@@ -56,12 +56,16 @@ public interface mySerivce {
 	// 회원 정보 수정
 	public int mymyUpdate(userinfoDTO UserinfoDTO);
 
+	// 회원 프로필사진 수정
 	public int updateProfile(userinfoDTO dto);
-
+	
+	
 	public userinfoDTO getUserInfo(String string);
-
+	
+	// 카드 정보 삭제
 	public int deleteCard(cardInfoDTO cDTO);
-
+	
+	// 계좌 정보 삭제
 	public int deleteAccount(accountInfoDTO aDTO);
 
 }
