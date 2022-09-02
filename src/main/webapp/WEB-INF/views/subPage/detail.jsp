@@ -299,7 +299,7 @@
 	     						})
 	   	  					}
 	   	  				},
-	   	  				error: function(request, status, error) {Swal.fire('문제가 발생했습니다','question');}
+	   	  				error: function(request, status, error) {Swal.fire({title:'문제가 발생했습니다', icon:'question'});}
 	   	  			}); // -ajax 끝
 				} // if문 끝
   			});
@@ -323,6 +323,37 @@
 			//}
 		//});
   	</script>
+  	
+  	<!-- TOP BTN[S] -->
+	<a id="MOVE_TOP_BTN" href="#"><img src="${contextPath}/images/simple-scroll-up-button1.png" style="width:25px; height:25px; border-radius: 15px;" title="위로가기"></a>
+	<style>
+	a#MOVE_TOP_BTN {
+		position: fixed;
+		right: 2%;
+		bottom: 50px;
+		display: none;
+		z-index: 999;
+	}
+	</style>
+	<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+	</script>
+<!-- TOP BTN[E] -->
   	
 </body>
 </html>

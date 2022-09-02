@@ -47,10 +47,10 @@ public class MyController {
 		
 		// 아이디로 정보 가져오기
 		// 세션으로 아이디 값 가져오기
-//		HttpSession session = req.getSession();
-//		String id = (String)session.getAttribute("userID");
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
 		
-		String id = "user1";
+		//String id = "user1";
 		List<backerDTO> bDTO = mService.getBacker(id);
 		
 		// 후원목록
@@ -265,7 +265,7 @@ public class MyController {
 		return result;
 	}
 	
-	// 내 프로젝트 삭제
+	// 등록한 프로젝트 삭제
 	@ResponseBody
 	@RequestMapping(value="/deleteMyProject.do", method=RequestMethod.POST)
 	public String deleteMyProject(Model model, HttpServletRequest req, projectDTO pDTO) throws Exception {
@@ -274,6 +274,25 @@ public class MyController {
 		
 		String result = null;
 		if(mService.deleteMyProject(pDTO) <= 1) { // 삭제가 성공한 경우
+			System.out.println("삭제성공");
+			result = "Y";
+		} // 삭제에 실패한 경우
+		else {
+			System.out.println("삭제실패");
+			result = "N";
+		}
+		
+		return result;
+	}
+	// 등록한 프로젝트 삭제시 찜목록, 후원목록 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteMyProject2.do", method=RequestMethod.POST)
+	public String deleteMyProject(Model model, HttpServletRequest req, backerDTO bDTO) throws Exception {
+		
+		System.out.println("마이페이지에서 받아온 p_Seq값 : " + bDTO.getP_seq());
+	
+		String result = null;
+		if(mService.deleteMyProject2(bDTO) <= 1) { // 삭제가 성공한 경우
 			System.out.println("삭제성공");
 			result = "Y";
 		} // 삭제에 실패한 경우
