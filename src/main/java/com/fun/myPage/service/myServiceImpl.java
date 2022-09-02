@@ -113,15 +113,23 @@ public class myServiceImpl implements mySerivce {
 		System.out.println("마이 서비스 (4) - 리워드 수정 실행");
 		return dao.cancel_reward(dto);
 	}
-	// 등록 취소
-	 @Override public int deleteMyProject(projectDTO dto) throws Exception {
+	// 등록한 프로젝트 삭제
+	 @Override 
+	 public int deleteMyProject(projectDTO dto) throws Exception {
 	 
 	 System.out.println("myServiceImpl 내 프로젝트 삭제 실행");
 	 
 	 return dao.deleteMyProject(dto); 
 	 }
 	 
-	
+	// 등록한 프로젝트 삭제시 찜목록, 후원목록 삭제
+	 @Override 
+	 public int deleteMyProject2(backerDTO dto) throws Exception {
+	 
+	 System.out.println("myServiceImpl 찜목록, 후원목록 삭제 실행");
+	 
+	 return dao.deleteMyProject2(dto); 
+	 }
 	
 	// (5) 카드 정보 입력
 	@Override

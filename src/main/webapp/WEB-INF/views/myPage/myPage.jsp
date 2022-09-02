@@ -130,7 +130,9 @@
         .delete_btn {margin-top: 10px;}
         .heart { 
         	position: absolute;
-        	top:10px; left: 10px; }
+        	top:10px; right: 10px; }
+        
+        .addPro { margin-top: -50px; }
         	
         <!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
 	<%
@@ -225,31 +227,37 @@
 					<!-- 내 프로젝트 목록 띄우기 -->
                     </section>
                     <section class="my_list">
+                    	<div align="right">
+	                    	<button class="btn addPro" onclick="location.href='/crpage/cr';">+ 프로젝트 등록하기</button>
+                    	</div>
                     	<c:choose>
                     		<%-- 등록된 내 프로젝트가 없을경우 --%>
 	                    	<c:when test="${myList.isEmpty()}">
 	                    		<div align="center">등록한 프로젝트가 없습니다<br>
-			                    	<a href="/crpage/cr">프로젝트 등록하기</a>
 		                    	</div>
 	                    	</c:when>
-	                    	<%-- 등록된 프로젝트가 있을경우에 프로젝트 등록 띄우기 --%>
-	                    	<c:otherwise>
-	                    		<div align="center"><a href="/crpage/cr">프로젝트 등록하기</a></div>
-	                    	</c:otherwise>
 	                    </c:choose>
                     	<!-- 내 프로젝트 목록 띄우기 -->
                     	<c:forEach items="${myList}" var="list" varStatus="status">	
-							<div class="col-sm-4">
-								<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-									<div style="overflow: hidden; height:80%">
-										<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
-									</div>
-									<div>
-										<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-									</div>
-								</div>
-								<button onclick="deleteMyProject(${list.p_seq})">삭제</button>
-							</div>
+							<div class="thumbnail row" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+                            <div class="img_box col-sm-5">
+                                <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <h3>${list.p_name}</h3>
+                                <div align="left">
+                                	<span>목표금액 ${list.p_goal}</span><br>
+                                	<span>모인 금액 ${list.p_total}</span><br>
+                                	<span>현재 후원자 수 ${list.p_backer}</span><br>
+                                </div>
+                                <div align="right">
+                                    <span>${list.p_beginDate} ~ ${list.p_endDate}</span><br>
+                                </div>
+                                <div align="center">
+                                    <button class="btn delete_btn" onclick="deleteMyProject(${list.p_seq})">프로젝트 삭제하기</button>
+                                </div>
+                            </div>
+                        </div>
 						</c:forEach>
                     </section>
                 </div>
@@ -290,9 +298,20 @@
 	<script>
 	// 관심목록 삭제
 	function deleteProject(p_seq, is_like) {
-	   event.stopPropagation();
-		var chk = confirm("관심목록에서 삭제하시겠습니까 ?");
-		if (chk) {
+		event.stopPropagation();
+		Swal.fire({
+  			   title: '관심목록에서 삭제하시겠습니까 ?',
+  			   text: '목록에서 다시 등록할 수 있습니다.',
+  			   icon: 'info',
+  			   
+  			   showCancelButton: true, // cancel버튼을 표시함
+  			   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+  			   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+  			   confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+  			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  			}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+  			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
 			$.ajax({
 				type: "POST",
 				url: "/myPage/delete.do",
@@ -315,38 +334,93 @@
 					Swal.fire({
 					icon: 'error',
 					title: '문제가 발생했습니다',
-					}); }
-			});
-		}
-	}
-	
-	function deleteBACK(p_seq, r_seq, p_total) {
-		   event.stopPropagation();
-			var chk = confirm("정말 취소하시겠습니까 ?");
-			if (chk) {
-				$.ajax({
-					type: "POST",
-					url: "/myPage/deleteBack.do",
-					data: {p_seq: p_seq, r_seq: r_seq, p_total: p_total},
-					success: function(data) {
-						if(data == "Y") {
-							alert("취소가 완료되었습니다");
-							location.href = "/myPage/myPage";
-						}
-					},
-					error: function(data) { alert("에러발생"); }
+					});
+					}
 				});
-			}
-		}
-	
+  			}
+		});
+	} //function deleteProject(p_seq, is_like) 끝
+	</script>
+	<script>
+	function deleteBACK(p_seq, r_seq, p_total) {
+		event.stopPropagation();
+		Swal.fire({
+  			title: '정말 취소하시겠습니까 ?',
+  			text: '목록에서 다시 후원할 수 있습니다.',
+  			icon: 'info',
+  			   
+  			showCancelButton: true, // cancel버튼을 표시함
+  			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+  			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+  			confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+  			cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  		}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+  			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
+				$.ajax({
+				type: "POST",
+				url: "/myPage/deleteBack.do",
+				data: {p_seq: p_seq, r_seq: r_seq, p_total: p_total},
+				success: function(data) {
+					if(data == "Y") {
+						//alert("취소가 완료되었습니다");
+						//location.href = "/myPage/myPage";
+						Swal.fire({
+	   						icon: 'success',
+	   						title: '취소가 완료되었습니다.',
+	   						}).then((value) => {
+	   	  						if (value) {
+	   	  						location.href = "/myPage/myPage";
+	   	  						}
+	   	  						});
+					}
+				},		 //success: function(data) 끝		
+				error: function(data) {
+					Swal.fire({
+						icon: 'error',
+						title: '에러가 발생했습니다.',
+						});}
+			}); //$.ajax 끝
+		} // if (result.isConfirmed) 끝
+  	}); //then(result) 끝 
+} //function deleteBACK끝
+	</script>
+	<script>
 	// 내 프로젝트 삭제
-		function deleteMyProject(p_seq) {
-	   event.stopPropagation();
+	function deleteMyProject(p_seq) {
+   		event.stopPropagation();
 		var chk = confirm("등록한 프로젝트를 삭제하시겠습니까 ?");
 		if (chk) {
 			$.ajax({
 				type: "POST",
 				url: "/myPage/deleteMyProject.do",
+				data: {p_seq: p_seq},
+				success: function(data) {
+					if(data == "Y") {
+						//alert("삭제되었습니다");
+						//location.href = "/myPage/myPage";
+						Swal.fire({
+	  						  icon: 'success',
+	  						  title: '취소가 완료되었습니다.',
+	  						  showConfirmButton: false,
+	  						  timer: 1500
+	  					}).then((value) => {
+	 	  				 	if (value) {
+	 	  					location.href = "/myPage/myPage";
+	 	  					}
+	  					});
+					} // End - if(data == "Y")
+				},
+				error: function(data) { 	
+					Swal.fire({
+					icon: 'error',
+					title: '문제가 발생했습니다',
+					}); 
+				}
+			});
+			$.ajax({
+				type: "POST",
+				url: "/myPage/deleteMyProject2.do",
 				data: {p_seq: p_seq},
 				success: function(data) {
 					if(data == "Y") {
@@ -357,21 +431,54 @@
 	  						  title: '취소가 완료되었습니다.',
 	  						  showConfirmButton: false,
 	  						  timer: 1500
-	  						}).then((value) => {
- 	  				 	if (value) {
- 	  					location.href = "/myPage/myPage";
- 	  					}
-	  				});
-					}
+	  					}).then((value) => {
+	 	  				 	if (value) {
+	 	  					location.href = "/myPage/myPage";
+	 	  					}
+	  					});
+					} // End - if(data == "Y")
 				},
 				error: function(data) { 	
 					Swal.fire({
 					icon: 'error',
 					title: '문제가 발생했습니다',
-					}); }
+					}); 
+				}
 			});
 		}
 	}
 </script>
+
+<!-- TOP BTN[S] -->
+	<a id="MOVE_TOP_BTN" href="#"><img src="${contextPath}/images/simple-scroll-up-button1.png" style="width:25px; height:25px; border-radius: 15px;" title="위로가기"></a>
+	<style>
+	a#MOVE_TOP_BTN {
+		position: fixed;
+		right: 2%;
+		bottom: 50px;
+		display: none;
+		z-index: 999;
+	}
+	</style>
+	<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+	</script>
+<!-- TOP BTN[E] -->
+
 </body>
 </html>

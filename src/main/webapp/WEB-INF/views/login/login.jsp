@@ -33,13 +33,21 @@
         var pw = $("#USER_PW_TEXT");
     
         if(id.val() == ""){
-            alert("아이디를 입력 해주세요.");
+            //alert("아이디를 입력 해주세요.");
+			Swal.fire({
+			icon: 'warning',
+			title: '아이디를 입력 해주세요.',
+			})
             id.focus();
             return false;
         }
         
         if(pw.val() == ""){
-            alert("비밀번호를 입력 해주세요.");
+            //alert("비밀번호를 입력 해주세요.");
+			Swal.fire({
+			icon: 'warning',
+			title: '비밀번호를 입력 해주세요.',
+			})
             pw.focus();
             return false;
         }
@@ -64,9 +72,18 @@
 		response.sendRedirect("/");
 	}
 	%>
+	
+	<style>
+		.social a {
+			margin-top: 10px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			border-radius: 25px;
+		}
+	</style>
 </head>
 	
-<body class="img js-fullheight" style="background-image: url('${contextPath}/images/MAIN_img/autumn.jpg');">
+<body style="background-image: url('${contextPath}/images/MAIN_img/autumn.jpg');">
 	
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
@@ -79,8 +96,9 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<div class="login-wrap" align="center">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
 				      	
 				      	<form action="${contextPath}/rsalogin.do" class="signin-form" method="post" onsubmit="return login()"> <!-- 로그인하기 form -->
@@ -113,10 +131,10 @@
 			</div>
 		</div>
 	</section>
+	
+	<!-- 푸터 -->
+	<jsp:include page="../menu/footer.jsp" flush="false" />
 
-<!-- 
-	<script src="js/main.js"></script>
- -->
 </body>
 </html>
 
