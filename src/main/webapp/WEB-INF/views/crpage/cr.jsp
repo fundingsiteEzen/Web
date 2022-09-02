@@ -107,7 +107,7 @@
 		
 		<!-- 프로젝트 시작, 종료일 (자동) -->
 		<div class="form-group">
-			<!-- <label>프로젝트 시작날짜</label><br/> -->
+			<!-- <label>프로젝트 시작날짜</label> -->
 			<!-- *****************현재날짜로 입력받게 할 예정*************** -->
 		 	<!-- <input type="date" id="p_beginDate" name="p_beginDate"> -->
 			
