@@ -75,6 +75,9 @@
 	.line {
 		border-bottom: 2px solid #ccc;
 	}
+	.content {
+		padding-bottom: 80px;
+	}
   
   </style>
 
@@ -158,7 +161,7 @@
 								<!-- 리스트 추가버튼 -->
 								<button type="button" class="col-sm-4 List_btn" onclick="addList(${project.p_seq})"><span class="glyphicon glyphicon-heart-empty"></span></button>
 								<!-- 후원버튼 -->
-								<button type="button" class="col-sm-7 back_btn">후원하기</button>
+								<button type="button" class="col-sm-7 back_btn" onclick="location.href='${contextPath}/subPage/detailR?p_seq=${project.p_seq}';">후원하기</button>
 							</div>
 						</div>
 					</div>
@@ -174,7 +177,7 @@
 					<div class="col-sm-4 line"></div>
 				</div>
 				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
+				<div class="col-sm-8 content">
 					<p>${project.p_content}</p>
 				</div>
 				<!-- 
@@ -310,15 +313,15 @@
   		}
   	</script>
   	<script>
-  		// 리워드 모달창
-  		$(".back_btn").click(function(){
-	        $(".modal").fadeIn(200);
-	    });
-		$(document).mouseup(function (e){
-		if($(".modal").has(e.target).length === 0){
-			$(".modal").fadeOut(200);
-			}
-		});
+  		// 리워드 모달창 (현재 안씀)
+  		//$(".back_btn").click(function(){
+	        //$(".modal").fadeIn(200);
+	    //});
+		//$(document).mouseup(function (e){
+		//if($(".modal").has(e.target).length === 0){
+			//$(".modal").fadeOut(200);
+			//}
+		//});
   	</script>
   	
 </body>
