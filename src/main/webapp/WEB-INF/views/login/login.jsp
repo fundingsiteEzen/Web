@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/login.css">
 	
 	<!-- RSA 인증 -->
 	<script type="text/javascript" src="${contextPath}/js/rsa.js"></script>
@@ -33,13 +33,21 @@
         var pw = $("#USER_PW_TEXT");
     
         if(id.val() == ""){
-            alert("아이디를 입력 해주세요.");
+            //alert("아이디를 입력 해주세요.");
+			Swal.fire({
+			icon: 'warning',
+			title: '아이디를 입력 해주세요.',
+			})
             id.focus();
             return false;
         }
         
         if(pw.val() == ""){
-            alert("비밀번호를 입력 해주세요.");
+            //alert("비밀번호를 입력 해주세요.");
+			Swal.fire({
+			icon: 'warning',
+			title: '비밀번호를 입력 해주세요.',
+			})
             pw.focus();
             return false;
         }
@@ -58,9 +66,24 @@
     }
 	</script>
 	
+	<!-- 로그인한 상태로 로그인 페이지에 들어갈 수 없게함 -->
+	<%
+	if(session.getAttribute("isLogin") != null) {
+		response.sendRedirect("/");
+	}
+	%>
+	
+	<style>
+		.social a {
+			margin-top: 10px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			border-radius: 25px;
+		}
+	</style>
 </head>
 	
-<body class="img js-fullheight" style="background-image: url('${contextPath}/images/MAIN_img/autumn.png');">
+<body style="background-image: url('${contextPath}/images/MAIN_img/autumn.jpg');">
 	
 	<!-- 네비게이션 -->
 	<jsp:include page="../menu/navigation.jsp" flush="false" />
@@ -73,8 +96,9 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<div class="login-wrap" align="center">
 				      	<h3 class="mb-4 text-center">LOGIN</h3>
 				      	
 				      	<form action="${contextPath}/rsalogin.do" class="signin-form" method="post" onsubmit="return login()"> <!-- 로그인하기 form -->
@@ -107,8 +131,9 @@
 			</div>
 		</div>
 	</section>
-
-	<script src="js/main.js"></script>
+	
+	<!-- 푸터 -->
+	<jsp:include page="../menu/footer.jsp" flush="false" />
 
 </body>
 </html>

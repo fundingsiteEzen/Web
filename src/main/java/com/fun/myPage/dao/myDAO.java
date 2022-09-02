@@ -63,5 +63,8 @@ public interface myDAO {
 	public int deleteCard(cardInfoDTO cDTO);
 
 	public int deleteAccount(accountInfoDTO aDTO);
+	
+	// 회원 탈퇴
+	public int drop_User(String id) throws Exception;
 
 }

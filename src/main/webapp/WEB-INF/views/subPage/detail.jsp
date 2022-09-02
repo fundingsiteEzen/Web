@@ -177,6 +177,7 @@
 				<div class="col-sm-8">
 					<p>${project.p_content}</p>
 				</div>
+				<!-- 
 				<div class="col-sm-12 navigation" align="center">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-4 line"></div>
@@ -184,6 +185,7 @@
 					<div class="col-sm-4 line"></div>
 					<p>${project.p_backer} 명 후원중</p>
 				</div>
+				 -->
 			</div>
         </div>
     </div>
@@ -245,44 +247,59 @@
   			var formsubmitSerialArray = $('#form'+r_seq).serializeArray();
   			var formsubmit = JSON.stringify(objectifyForm(formsubmitSerialArray));
   			//var formsubmit = $("#form1").serialize();
-  			if(confirm("후원하시겠습니까 ?")){
-  				$.ajax({
-  	  				type: "POST",
-  	  				url: "/subPage/back.do",
-	  	  			contentType: 'application/json; charset=utf-8',
-  	  				data: formsubmit,
-  	  				success: function(data) {
-  	  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
-  	  					if(data == 'F') {
-  	  					Swal.fire({
-    						  icon: 'warning',
-    						  title: '로그인이 필요한 서비스입니다.',
-    						  text: '로그인 화면으로 이동합니다.',
-    						}).then((value) => {
-    	  						if (value) {
-    	  							location.href = "/login.do";
-    	  						}
-    	  					});
-  	  					}
-  	  					if(data == 'Y'){
-  	  						location.href = "redirect:/subPage/detail";
-  	  						Swal.fire({
-    						  icon: 'success',
-    						  title: '후원이 완료되었습니다',
-    						  showConfirmButton: false,
-    						  timer: 1500
-    						})
-  	  					}
-  	  					if(data == 'D') {
-  	  					Swal.fire({
-    						  icon: 'error',
-    						  title: '이미 후원중인 프로젝트입니다',
-    						})
-  	  					}
-  	  				},
-  	  				error: function(request, status, error) {Swal.fire('문제가 발생했습니다','question');}
-  	  			});
-  			}
+  			
+  			// confirm창 보이기
+  			Swal.fire({
+  			   title: '후원하시겠습니까 ?',
+  			   text: '결제는 나중에 이루어집니다.',
+  			   icon: 'info',
+  			   
+  			   showCancelButton: true, // cancel버튼을 표시함
+  			   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+  			   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+  			   confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+  			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  			}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+  			   if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
+	  				 $.ajax({
+	   	  				type: "POST",
+	   	  				url: "/subPage/back.do",
+	 	  	  			contentType: 'application/json; charset=utf-8',
+	   	  				data: formsubmit,
+	   	  				success: function(data) {
+	   	  					// 이때 받아오는 data는 서브 컨트롤러(2)에서 반환한 값
+	   	  					if(data == 'F') {
+	   	  					Swal.fire({
+	     						  icon: 'warning',
+	     						  title: '로그인이 필요한 서비스입니다.',
+	     						  text: '로그인 화면으로 이동합니다.',
+	     						}).then((value) => {
+	     	  						if (value) {
+	     	  							location.href = "/login.do";
+	     	  						}
+	     	  					});
+	   	  					}
+	   	  					if(data == 'Y'){
+	   	  						Swal.fire({
+	     						  icon: 'success',
+	     						  title: '후원이 완료되었습니다',
+	     						  showConfirmButton: false,
+	     						  timer: 1500
+	     						})
+	     						setTimeout("location.href='/myPage/myPage'",1500);
+	   	  					}
+	   	  					if(data == 'D') {
+	   	  					Swal.fire({
+	     						  icon: 'error',
+	     						  title: '이미 후원중인 프로젝트입니다',
+	     						})
+	   	  					}
+	   	  				},
+	   	  				error: function(request, status, error) {Swal.fire('문제가 발생했습니다','question');}
+	   	  			}); // -ajax 끝
+				} // if문 끝
+  			});
   		}
   		function objectifyForm(formArray) {//serializeArray data function
   			var returnArray = {};
@@ -291,14 +308,9 @@
   			}
   			return returnArray;
   		}
-  		// 후원하면 BACK 버튼 생김
-  		function addSubmit(r_seq) {
-  			$(".BACK").attr("disabled", false);
-  			$('#addMondy'+r_seq).focus();
-  		}
   	</script>
   	<script>
-  		// 모달창
+  		// 리워드 모달창
   		$(".back_btn").click(function(){
 	        $(".modal").fadeIn(200);
 	    });

@@ -128,7 +128,8 @@ public class logController {
 		// 나는 여기에 if session != null 을 감쌌는데 크게 필요 없는듯.
 		session.removeAttribute("userID");
 		session.removeAttribute("isLogin");
-		// 이거 invalid어쩌구로 session 삭제해주기.. 로그아웃했다가 재 로그인 하는 경우도 생각
+		session.removeAttribute("nickName");
+		session.removeAttribute("profile");
 		
 		ModelAndView mav = new ModelAndView("redirect:/");
 		

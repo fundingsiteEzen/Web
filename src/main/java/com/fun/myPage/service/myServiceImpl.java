@@ -160,7 +160,7 @@ public class myServiceImpl implements mySerivce {
 	      
 	   }
 	
-	// 회원 정보 수정
+	   // 회원 정보 수정
 		@Override
 		public int mymyUpdate(userinfoDTO UserinfoDTO) {
 			return dao.mymyUpdate(UserinfoDTO);
@@ -187,5 +187,11 @@ public class myServiceImpl implements mySerivce {
 			return dao.deleteAccount(aDTO);
 		}
 
+		
+		// 회원 탈퇴
+		public int drop_User(String id) throws Exception {
+			return dao.drop_User(id);
+		}
+		
 }
 

@@ -44,7 +44,7 @@
 	}
 	
 	.profile-img {
-	    margin-top: -80px;
+	    margin-top: -120px;
 	    width: 200px;
 	    height: 200px;
 	    position: relative;
@@ -216,6 +216,13 @@
 		background-color: #ccc
 	}
 	</style>
+	
+	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
+	<%
+//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+//		response.sendRedirect("/login.do");
+//	}
+	%>
 </head>
 
 
@@ -279,6 +286,7 @@
                	<div class="row" align="center">
                     <button class="btn" onclick="updateUserInfo();">수정</button>
                     <button class="btn">취소</button>
+                    <button class="btn" type="button" onclick="dropUser()">탈퇴</button>
                 </div>
                 <div class="col-sm-12 navigation" align="center">
 					<div class="col-sm-1"></div>
@@ -502,25 +510,49 @@
 		var	address	= $("#address").val();
 		
 		if (pass == null || pass == ""){
-			alert("비밀번호 필드를 입력 해주세요.")
+			//alert("비밀번호 필드를 입력 해주세요.")
+			Swal.fire({
+			  icon: 'warning',
+			  title: '비밀번호 필드를 입력 해주세요.',
+				})
 			$("#pass").focus();
 			return;
 		} else if (pass_re == null || pass_re == ""){
-			alert("비밀번호 확인 필드를 입력 해주세요.")
+			//alert("비밀번호 확인 필드를 입력 해주세요.")
+			Swal.fire({
+			  icon: 'warning',
+			  title: '비밀번호 확인 필드를 입력 해주세요.',
+				})
 			$("#pass_re").focus();
 			return;
 		} else if (pass.length < 6 || pass.length > 15){
-			alert("비밀번호는 6~15자리 내로 입력 해주세요.")
+			//alert("비밀번호는 6~15자리 내로 입력 해주세요.")
+			Swal.fire({
+			  icon: 'warning',
+			  title: '비밀번호는 6~15자리 내로 입력 해주세요.',
+				})
 			return;
 		} else if (pass != pass_re){
-			alert("비밀번호가 일치하지 않습니다.")
+			//alert("비밀번호가 일치하지 않습니다.")
+			Swal.fire({
+			  icon: 'warning',
+			  title: '비밀번호가 일치하지 않습니다.',
+				})
 			return;
 		} else if (email == null || email == ""){
-			alert("이메일 필드를 입력 해주세요.")
+			//alert("이메일 필드를 입력 해주세요.")
+			Swal.fire({
+			  icon: 'warning',
+			  title: '이메일 필드를 입력 해주세요.',
+				})
 			$("#email").focus();
 			return;
 		} else if (address == null || address == ""){
-			alert("주소 필드를 입력 해주세요.")
+			//alert("주소 필드를 입력 해주세요.")
+			Swal.fire({
+			  icon: 'warning',
+			  title: '주소 필드를 입력 해주세요.',
+				})
 			$("#address").focus();
 			return;
 		}
@@ -534,20 +566,91 @@
 					if ($("#file1")[0].files.length > 0) {
 						this.imgUpload();
 					} else {
-						alert("회원 정보 수정이 완료되었습니다.");
-						location.reload();
+						//alert("회원 정보 수정이 완료되었습니다.");
+						//location.reload();
+						Swal.fire({
+   						  icon: 'success',
+   						  title: '회원 정보 수정이 완료되었습니다.',
+   						}).then((value) => {
+   	  						if (value) {
+   	  						location.reload();
+   	  						}
+   	  					});
 					}
 				} else {
-					alert("회원 정보 수정이 실패하였습니다.");
+					//alert("회원 정보 수정이 실패하였습니다.");
+					Swal.fire({
+ 						  icon: 'error',
+ 						  title: '회원 정보 수정이 실패하였습니다.',
+ 						})
 				}		
 			}.bind(this),
 			error:		function(data) {
-				alert("회원 정보 수정이 실패하였습니다.");
+				// alert("회원 정보 수정이 실패하였습니다.");
+				Swal.fire({
+					  icon: 'error',
+					  title: '회원 정보 수정이 실패하였습니다.',
+					})
 			}
 		});
 
 	}
 	
+	/// 회원 탈퇴 ///
+	function dropUser() {
+		 alert("누름");
+		if(confirm("탈퇴하시겠습니까 ?")){
+		/* if(Swal.fire({
+  			   title: '탈퇴하시겠습니까 ?',
+  			   text: '되돌릴 수 없습니다.',
+  			   icon: 'warning',
+  			   
+  			   showCancelButton: true, // cancel버튼을 표시함
+  			   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+  			   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+  			   confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+  			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  			})) {
+			.then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+	  			   if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
+			*/
+	  			$.ajax({
+				type:		"POST",
+				url:		"/myPage/dropUser.do",
+				data:		{"id": $("#id").val()},
+				success:	function(data) {
+					if(data == "Y") {
+						//alert("회원탈퇴가 완료되었습니다");
+						//location.href = "/logout.do";
+						Swal.fire({
+	  						  icon: 'success',
+	  						  title: '회원탈퇴가 완료되었습니다.',
+	  						}).then((value) => {
+	  	  						if (value) {
+	  	  							location.href = "/logout.do";
+	  	  						}
+	  	  					});
+					}
+					if(data == "N")
+					// alert("탈퇴하지 못했습니다");
+					Swal.fire({
+						  icon: 'error',
+							  title: '탈퇴하지 못했습니다',
+							});
+				},
+				error:		function(data) {
+					//alert("오류발생");
+					Swal.fire({
+						  icon: 'error',
+							  title: '오류발생',
+							});
+				}
+			});
+		}
+	}
+	
+	/// 다음 API ///
 	function goPopup(){
 		new daum.Postcode({
 	        oncomplete: function(data) {
@@ -558,6 +661,8 @@
 	    }).open();
 	}
 	
+	
+	/// 카드 & 계좌 삭제 ///
 	function deleteCard(seq) {
 		var id      = $("#id").val();
 		$.ajax({
@@ -565,11 +670,23 @@
 			url:		"/myPage/deleteCard.do",
 			data:		{id: id, ci_seq: seq},
 			success:	function(data) {
-				alert("등록된 카드정보를 삭제하였습니다.");
-				location.reload();
+				//alert("등록된 카드정보를 삭제하였습니다.");
+				//location.reload();
+				Swal.fire({
+						  icon: 'success',
+						  title: '등록된 카드정보를 삭제하였습니다.',
+						}).then((value) => {
+	  						if (value) {
+	  						location.reload();
+	  						}
+	  					});
 			},
 			error:		function(data) {
-				alert("error");
+				//alert("error");
+				Swal.fire({
+					  icon: 'error',
+					  title: '카드정보 삭제에 실패했습니다.',
+					})
 			}
 		});
 	}
@@ -580,11 +697,23 @@
 			url:		"/myPage/deleteAccount.do",
 			data:		{id: id, ai_seq: seq},
 			success:	function(data) {
-				alert("등록된 계좌정보를 삭제하였습니다.");
-				location.reload();
+				//alert("등록된 계좌정보를 삭제하였습니다.");
+				//location.reload();
+				Swal.fire({
+					  icon: 'success',
+					  title: '등록된 계좌정보를 삭제하였습니다.',
+					}).then((value) => {
+						if (value) {
+						location.reload();
+						}
+					});
 			},
 			error:		function(data) {
-				alert("error");
+				//alert("error");
+				Swal.fire({
+					  icon: 'error',
+					  title: '계좌정보 삭제에 실패했습니다.',
+					})
 			}
 		});
 	}
