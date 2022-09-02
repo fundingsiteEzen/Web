@@ -132,7 +132,8 @@
 								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
 							</div>
 							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								<h4>${list.p_name}</h4>
+								<h5 style="color: rgb(250,50,0, 0.7);">후원종료일 ${list.p_endDate}</h5>
 							</div>
 						</div>
 					</c:forEach>

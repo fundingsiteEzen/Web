@@ -213,8 +213,10 @@
 								<div class="thumb_img">
 									<img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
 								</div>
-								<h4>${list.p_name}<br/></h4>
-								<h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								<div align="center"><h4>${list.p_name}</h4></div>
+								<div align="right">
+								<h5 style="color: rgba(250,50,0, 0.7); font-size: 0.8em;">종료일: ${list.p_endDate}</h5>
+								</div>
 								<!--
 								<div class="progress" style="height: 10px;" >
 									<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>

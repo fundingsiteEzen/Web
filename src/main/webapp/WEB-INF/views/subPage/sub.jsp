@@ -49,6 +49,7 @@
         padding-top: 20px;
         padding-right: 30px;
         padding-left: 30px;
+        cursor: pointer;
 	}
     .form-box:hover {
         transform: scale(1.08);
