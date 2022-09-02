@@ -298,9 +298,8 @@
 	<script>
 	// 관심목록 삭제
 	function deleteProject(p_seq, is_like) {
-	   event.stopPropagation();
-		var chk = confirm("관심목록에서 삭제하시겠습니까 ?");
-		/* Swal.fire({
+		event.stopPropagation();
+		Swal.fire({
   			   title: '관심목록에서 삭제하시겠습니까 ?',
   			   text: '목록에서 다시 등록할 수 있습니다.',
   			   icon: 'info',
@@ -313,8 +312,6 @@
   			   
   			}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
   			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
-			*/
-  				if (chk) {
 			$.ajax({
 				type: "POST",
 				url: "/myPage/delete.do",
@@ -337,41 +334,58 @@
 					Swal.fire({
 					icon: 'error',
 					title: '문제가 발생했습니다',
-					}); }
-			});
-		}
-	}
-	
-	function deleteBACK(p_seq, r_seq, p_total) {
-		   event.stopPropagation();
-			var chk = confirm("정말 취소하시겠습니까 ?");
-			if (chk) {
-				$.ajax({
-					type: "POST",
-					url: "/myPage/deleteBack.do",
-					data: {p_seq: p_seq, r_seq: r_seq, p_total: p_total},
-					success: function(data) {
-						if(data == "Y") {
-							//alert("취소가 완료되었습니다");
-							//location.href = "/myPage/myPage";
-							Swal.fire({
-		   						  icon: 'success',
-		   						  title: '취소가 완료되었습니다.',
-		   						}).then((value) => {
-		   	  						if (value) {
-		   	  						location.href = "/myPage/myPage";
-		   	  						}
-		   	  					});
-						}
-					},
-					error: function(data) { Swal.fire({
- 						  icon: 'error',
-   						  title: '에러가 발생했습니다.',
-   						}) }
+					});
+					}
 				});
-			}
-		}
-	
+  			}
+		});
+	} //function deleteProject(p_seq, is_like) 끝
+	</script>
+	<script>
+	function deleteBACK(p_seq, r_seq, p_total) {
+		event.stopPropagation();
+		Swal.fire({
+  			title: '정말 취소하시겠습니까 ?',
+  			text: '목록에서 다시 후원할 수 있습니다.',
+  			icon: 'info',
+  			   
+  			showCancelButton: true, // cancel버튼을 표시함
+  			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+  			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+  			confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+  			cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  		}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+  			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
+				$.ajax({
+				type: "POST",
+				url: "/myPage/deleteBack.do",
+				data: {p_seq: p_seq, r_seq: r_seq, p_total: p_total},
+				success: function(data) {
+					if(data == "Y") {
+						//alert("취소가 완료되었습니다");
+						//location.href = "/myPage/myPage";
+						Swal.fire({
+	   						icon: 'success',
+	   						title: '취소가 완료되었습니다.',
+	   						}).then((value) => {
+	   	  						if (value) {
+	   	  						location.href = "/myPage/myPage";
+	   	  						}
+	   	  						});
+					}
+				},		 //success: function(data) 끝		
+				error: function(data) {
+					Swal.fire({
+						icon: 'error',
+						title: '에러가 발생했습니다.',
+						});}
+			}); //$.ajax 끝
+		} // if (result.isConfirmed) 끝
+  	}); //then(result) 끝 
+} //function deleteBACK끝
+	</script>
+	<script>
 	// 내 프로젝트 삭제
 	function deleteMyProject(p_seq) {
    		event.stopPropagation();

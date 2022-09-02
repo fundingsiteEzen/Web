@@ -296,7 +296,7 @@
 	     						})
 	   	  					}
 	   	  				},
-	   	  				error: function(request, status, error) {Swal.fire('문제가 발생했습니다','question');}
+	   	  				error: function(request, status, error) {Swal.fire({title:'문제가 발생했습니다', icon:'question'});}
 	   	  			}); // -ajax 끝
 				} // if문 끝
   			});
