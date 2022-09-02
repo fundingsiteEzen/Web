@@ -300,7 +300,21 @@
 	function deleteProject(p_seq, is_like) {
 	   event.stopPropagation();
 		var chk = confirm("관심목록에서 삭제하시겠습니까 ?");
-		if (chk) {
+		/* Swal.fire({
+  			   title: '관심목록에서 삭제하시겠습니까 ?',
+  			   text: '목록에서 다시 등록할 수 있습니다.',
+  			   icon: 'info',
+  			   
+  			   showCancelButton: true, // cancel버튼을 표시함
+  			   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+  			   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+  			   confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+  			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  			}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+  			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
+			*/
+  				if (chk) {
 			$.ajax({
 				type: "POST",
 				url: "/myPage/delete.do",
@@ -338,11 +352,22 @@
 					data: {p_seq: p_seq, r_seq: r_seq, p_total: p_total},
 					success: function(data) {
 						if(data == "Y") {
-							alert("취소가 완료되었습니다");
-							location.href = "/myPage/myPage";
+							//alert("취소가 완료되었습니다");
+							//location.href = "/myPage/myPage";
+							Swal.fire({
+		   						  icon: 'success',
+		   						  title: '취소가 완료되었습니다.',
+		   						}).then((value) => {
+		   	  						if (value) {
+		   	  						location.href = "/myPage/myPage";
+		   	  						}
+		   	  					});
 						}
 					},
-					error: function(data) { alert("에러발생"); }
+					error: function(data) { Swal.fire({
+ 						  icon: 'error',
+   						  title: '에러가 발생했습니다.',
+   						}) }
 				});
 			}
 		}
@@ -358,8 +383,8 @@
 				data: {p_seq: p_seq},
 				success: function(data) {
 					if(data == "Y") {
-						alert("삭제되었습니다");
-						location.href = "/myPage/myPage";
+						//alert("삭제되었습니다");
+						//location.href = "/myPage/myPage";
 						Swal.fire({
 	  						  icon: 'success',
 	  						  title: '취소가 완료되었습니다.',
@@ -409,5 +434,37 @@
 		}
 	}
 </script>
+
+<!-- TOP BTN[S] -->
+	<a id="MOVE_TOP_BTN" href="#"><img src="${contextPath}/images/simple-scroll-up-button1.png" style="width:25px; height:25px; border-radius: 15px;" title="위로가기"></a>
+	<style>
+	a#MOVE_TOP_BTN {
+		position: fixed;
+		right: 2%;
+		bottom: 50px;
+		display: none;
+		z-index: 999;
+	}
+	</style>
+	<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+	</script>
+<!-- TOP BTN[E] -->
+
 </body>
 </html>
