@@ -347,7 +347,7 @@
 		Swal.fire({
   			title: '정말 취소하시겠습니까 ?',
   			text: '목록에서 다시 후원할 수 있습니다.',
-  			icon: 'info',
+  			icon: 'warning',
   			   
   			showCancelButton: true, // cancel버튼을 표시함
   			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
@@ -388,9 +388,20 @@
 	<script>
 	// 내 프로젝트 삭제
 		function deleteMyProject(p_seq) {
-	   event.stopPropagation();
-		var chk = confirm("등록한 프로젝트를 삭제하시겠습니까 ?");
-		if (chk) {
+	    event.stopPropagation();
+	    Swal.fire({
+ 			title: '등록한 프로젝트를 삭제하시겠습니까 ?',
+ 			text: '내 프로젝트에서 다시 등록할 수 있습니다.',
+ 			icon: 'warning',
+ 			   
+ 			showCancelButton: true, // cancel버튼을 표시함
+ 			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+ 			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+ 			confirmButtonText: '진행', // confirm 버튼 텍스트 지정
+ 			cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+ 			   
+ 		}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+ 			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
 			$.ajax({
 				type: "POST",
 				url: "/myPage/deleteMyProject.do",
@@ -405,18 +416,19 @@
 	   						}).then((value) => {
 	   	  						if (value) {
 	   	  						location.href = "/myPage/myPage";
-	   	  						}
-	   	  					});
-					}
-				},
+	   	  					}
+   	  						});
+				}
+			},		 //success: function(data) 끝	
 				error: function(data) { 	
 					Swal.fire({
 					icon: 'error',
 					title: '문제가 발생했습니다',
 					}); }
-			});
-		}
-	}
+			}); //$.ajax 끝
+ 			} // if (result.isConfirmed) 끝
+ 	  	}); //then(result) 끝 
+ 	} //function deleteBACK끝
 </script>
 
 <!-- TOP BTN[S] -->
