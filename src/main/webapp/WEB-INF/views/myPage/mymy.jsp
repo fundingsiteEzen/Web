@@ -598,9 +598,7 @@
 	
 	/// 회원 탈퇴 ///
 	function dropUser() {
-		 alert("누름");
-		// if(confirm("탈퇴하시겠습니까 ?")){
-		if(Swal.fire({
+		 Swal.fire({
   			   title: '탈퇴하시겠습니까 ?',
   			   text: '되돌릴 수 없습니다.',
   			   icon: 'warning',
@@ -611,10 +609,8 @@
   			   confirmButtonText: '진행', // confirm 버튼 텍스트 지정
   			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
   			   
-  			})) {
-			.then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
-	  			   if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
-		
+  			}).then(result => { // 확인 or 취소 버튼을 눌렀을 경우 후속 동작
+	  			if (result.isConfirmed) { // cofirm 창에서 확인을 눌렀을 경우
 	  			$.ajax({
 				type:		"POST",
 				url:		"/myPage/dropUser.do",
@@ -631,26 +627,25 @@
 	  	  							location.href = "/logout.do";
 	  	  						}
 	  	  					});
-					},
+					}
 					if(data == "N") {
 					// alert("탈퇴하지 못했습니다");
 					Swal.fire({
 						  icon: 'error',
 							  title: '탈퇴하지 못했습니다',
 							});
-				},
-				} // success:	function(data) 끝
+					}
+				}, //success:	function(data) 끝
 				error:		function(data) {
 					//alert("오류발생");
 					Swal.fire({
 						  icon: 'error',
 							  title: '오류발생',
-							});}
-				}); //$.ajax 끝
-	 			} // if (result.isConfirmed) 끝
-	 	  	}); //then(result) 끝
-		}
-	} //function dropUser()끝
+						});}
+				}); // $.ajax 끝
+			} //if (result.isConfirmed)끝
+		}); //.then(result)  끝
+	 }// function dropUser()끝
 	
 	/// 다음 API ///
 	function goPopup(){
