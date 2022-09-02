@@ -75,9 +75,9 @@ public class MyController {
 	      System.out.println("마이 컨트롤러(2) 실행");
 	      // 카드 정보 뿌리기
 	      // 계좌 정보 뿌리기
-	      //HttpSession session = req.getSession();
-	      //String id = (String)session.getAttribute("userID");
-	      String id = "user1";
+	      HttpSession session = req.getSession();
+	      String id = (String)session.getAttribute("userID");
+	      //String id = "user1";
 	      cDTO.setId(id);
 	   
 	   
@@ -102,9 +102,9 @@ public class MyController {
 	public ModelAndView getUserInfo(Model model, HttpServletRequest req) throws Exception {
 		
 		// 세션으로 아이디 값 가져오기
-//		HttpSession session = req.getSession();
-//		String id = (String)session.getAttribute("userID");
-		String id ="user1";
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("userID");
+		//String id ="user1";
 		
 		// 아이디로 userinfo 받아오기
 		userinfoDTO dto = mService.getUserInfo(id);

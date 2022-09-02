@@ -136,9 +136,9 @@
         	
         <!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
 	<%
-//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
-//		response.sendRedirect("/login.do");
-//	}
+	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+		response.sendRedirect("/login.do");
+	}
 	%>
         
 	</style>
@@ -302,7 +302,7 @@
 		function deleteProject(p_seq, is_like) {
 			event.stopPropagation();
 			Swal.fire({
-					 title: '관심목록에서 삭제하시겠습니까 ?',
+					 title: '관심목록에서 삭제할까요 ?',
 					 text: '목록에서 다시 등록할 수 있습니다.',
 					 icon: 'info',
 					 
@@ -393,7 +393,7 @@
 			function deleteMyProject(p_seq) {
 			event.stopPropagation();
 			Swal.fire({
-				 title: '등록한 프로젝트를 삭제하시겠습니까 ?',
+				 title: '등록한 프로젝트를<br>삭제하시겠습니까 ?',
 				 text: '내 프로젝트에서 다시 등록할 수 있습니다.',
 				 icon: 'warning',
 					

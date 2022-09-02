@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>REWARD</title>
 	<!-- 제이쿼리 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
@@ -88,7 +88,7 @@
 				<div class="form-box col-sm-8" align="center" id="div${list.r_seq}" onclick="addSubmit(${list.r_seq})">
 			        <form action="/subPage/back.do" method="post" id="form${list.r_seq}">
 			            <div align="left">선택 ${list.r_seq}</div>
-			            <div align="left">${list.r_count}개 남음</div><br>
+			            <div align="left">${list.r_count}개 남음</div>
 			            <span style="font-size: 1.2em; white-space:pre;">▷ ${list.r_content}</span><br>
 			            <div align="right">최소 후원금액</div>
 			            <div align="right" style="font-size: 1.5em;">${list.r_price} 원</div>
@@ -162,7 +162,7 @@
 	   	  					}
 	   	  					if(data == 'D') {
 	   	  					Swal.fire({
-	     						  icon: 'error',
+	     						  icon: 'info',
 	     						  title: '이미 후원중인 프로젝트입니다',
 	     						})
 	   	  					}

@@ -80,7 +80,7 @@
 	}
 	.card, .account {
 	    box-sizing: border-box;
-	    border: 2px solid #333;
+	    border: 2px solid #ccc;
 	    border-radius: 15px;
 	    width: 150px;
 	    line-height: 60px;
@@ -129,7 +129,7 @@
 	
 	.slideBox{
 	    box-sizing: border-box;
-	    border: 2px solid #333;
+	    border: 2px solid #ccc;
 	    border-radius: 15px;
 	    width: 400px;
 	    height: 250px;
@@ -219,9 +219,9 @@
 	
 	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
 	<%
-//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
-//		response.sendRedirect("/login.do");
-//	}
+	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+		response.sendRedirect("/login.do");
+	}
 	%>
 </head>
 
@@ -285,7 +285,6 @@
                 </div>
                	<div class="row" align="center">
                     <button class="btn" onclick="updateUserInfo();">수정</button>
-                    <button class="btn">취소</button>
                     <button class="btn" type="button" onclick="dropUser()">탈퇴</button>
                 </div>
                 <div class="col-sm-12 navigation" align="center">
