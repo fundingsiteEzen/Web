@@ -39,7 +39,7 @@
         }
 
         .profile-img {
-            margin-top: -80px;
+            margin-top: -100px;
             width: 200px;
             height: 200px;
         }
@@ -86,9 +86,8 @@
         
         /* 관심목록 css(수정아직 안함) */
 		.col-sm-4 {
-		height:	300px;
-		cursor: pointer;
-		margin-bottom: 40px;
+			cursor: pointer;
+			margin-bottom: 20px;
 		}
 		
 		/* 후원목록 css */
@@ -98,18 +97,21 @@
             margin-bottom: 40px;
             transition: 0.25s;
             cursor: pointer;
+            position: relative;
         }
         .thumbnail:hover {
         	box-shadow: 0 0 13px rgba(0,0,0, 0.2);
         }
-
         .img_box {
             height: 200px;
             padding: 0;
             overflow: hidden;
-            
         }
-        .img_box img {
+        .thumb_img {
+        	height: 200px;
+        }
+
+        .img_box img, .thumb_img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -117,13 +119,27 @@
 			transition: all 0.3s ease-in-out;
 			overflow: hidden;
         }
+        /*
         .img_box img:hover {
         	transform: scale(1.15);
         }
+        */
         .info_box {
             display: inline-block;
         }
         .delete_btn {margin-top: 10px;}
+        .heart { 
+        	position: absolute;
+        	top:10px; right: 10px; }
+        
+        .addPro { margin-top: -50px; }
+        	
+        <!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
+	<%
+//	if(session.getAttribute("isLogin") == null || session.getAttribute("isLogin").equals("")) {
+//		response.sendRedirect("/login.do");
+//	}
+	%>
         
 	</style>
 </head>
@@ -135,7 +151,6 @@
 	<!-- 알럿창 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	
-	
     <!-- 배경 이미지 -->
 	<div class="container-fluid bg-image"></div>
 	<!-- 메인 -->
@@ -146,7 +161,7 @@
                 <div class="col-sm-3 aisde">
                     <aside>
                         <div class="profile-img">
-                            <img src="${contextPath}/images/SUB/detail01.jpg" class="img-circle profile">
+                            <img src="${contextPath}/${profile}" class="img-circle profile">
                         </div>
                         <div class="nav_box" align="center">
                             <ul class="my_nav">
@@ -164,12 +179,15 @@
                     </div>
                     <!-- 후원 목록 띄우기 -->
                     <section class="fund_list">
+                    	<c:if test="${backList[0] == null}">
+                    		<div align="center">후원 중인 프로젝트가 없습니다</div>
+                    	</c:if>
 						<c:forEach items="${backList}" var="list" varStatus="status">
 						<div class="thumbnail row" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
                             <div class="img_box col-sm-5">
                                 <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
                             </div>
-                            <div class="col-sm-7 info_span">
+                            <div class="col-sm-7">
                                 <h3>${list.p_name}</h3>
                                 <span>${rewardList[status.index].r_content}</span><br>
                                 <div align="right">
@@ -186,47 +204,60 @@
                     </section>
                     <!-- 관심 목록 띄우기 -->
                     <section class="like_list">
+                    	<c:if test="${likeList[0] == null}">
+                    		<div align="center">관심 목록이 비었습니다</div>
+                    	</c:if>
                         <c:forEach items="${likeList}" var="list" varStatus="status">
 						<div class="col-sm-4">
-							<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-								<div style="overflow: hidden; height:80%">
-									<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+							<div class="thumbnail" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+								<div class="thumb_img">
+									<img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
 								</div>
-								<div>
-									<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								<h4>${list.p_name}<br/></h4>
+								<h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+								<!--
+								<div class="progress" style="height: 10px;" >
+									<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
+								-->
+								<button class="heart btn" onclick="deleteProject(${list.p_seq}, 'Y')"><span class="glyphicon glyphicon-heart"></span></button>
 							</div>
-							<button onclick="deleteProject(${list.p_seq}, 'Y')">삭제</button>
 						</div>
 						</c:forEach>
 					<!-- 내 프로젝트 목록 띄우기 -->
                     </section>
                     <section class="my_list">
+                    	<div align="right">
+	                    	<button class="btn addPro" onclick="location.href='/crpage/cr';">+ 프로젝트 등록하기</button>
+                    	</div>
                     	<c:choose>
                     		<%-- 등록된 내 프로젝트가 없을경우 --%>
 	                    	<c:when test="${myList.isEmpty()}">
 	                    		<div align="center">등록한 프로젝트가 없습니다<br>
-			                    	<a href="/crpage/cr">프로젝트 등록하기</a>
 		                    	</div>
 	                    	</c:when>
-	                    	<%-- 등록된 프로젝트가 있을경우에 프로젝트 등록 띄우기 --%>
-	                    	<c:otherwise>
-	                    		<div align="center"><a href="/crpage/cr">프로젝트 등록하기</a></div>
-	                    	</c:otherwise>
 	                    </c:choose>
                     	<!-- 내 프로젝트 목록 띄우기 -->
                     	<c:forEach items="${myList}" var="list" varStatus="status">	
-							<div class="col-sm-4">
-								<div align="center" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-									<div style="overflow: hidden; height:80%">
-										<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
-									</div>
-									<div>
-										<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
-									</div>
-								</div>
-								<button onclick="deleteMyProject(${list.p_seq})">삭제</button>
-							</div>
+							<div class="thumbnail row" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+                            <div class="img_box col-sm-5">
+                                <img src="${contextPath}/images/thumnail/${list.p_thumb}"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <h3>${list.p_name}</h3>
+                                <div align="left">
+                                	<span>목표금액 ${list.p_goal}</span><br>
+                                	<span>모인 금액 ${list.p_total}</span><br>
+                                	<span>현재 후원자 수 ${list.p_backer}</span><br>
+                                </div>
+                                <div align="right">
+                                    <span>${list.p_beginDate} ~ ${list.p_endDate}</span><br>
+                                </div>
+                                <div align="center">
+                                    <button class="btn delete_btn" onclick="deleteMyProject(${list.p_seq})">프로젝트 삭제하기</button>
+                                </div>
+                            </div>
+                        </div>
 						</c:forEach>
                     </section>
                 </div>
@@ -276,16 +307,14 @@
 				data: {p_seq: p_seq, is_like: is_like},
 				success: function(data) {
 					if(data == "Y") {
-						alert("삭제되었습니다");
-						location.href = "/myPage/myPage";
 						Swal.fire({
 	  						  icon: 'success',
-	  						  title: '취소가 완료되었습니다.',
+	  						  title: '삭제되었습니다.',
 	  						  showConfirmButton: false,
 	  						  timer: 1500
 	  						}).then((value) => {
  	  				 	if (value) {
- 	  					location.href = "/myPage/myPage";
+ 	  				 	location.href = "/myPage/myPage";
  	  					}
 	  				});
 					}
