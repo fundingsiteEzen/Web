@@ -37,9 +37,12 @@ public interface myDAO {
 	// 내 프로젝트 가져오기
 	public List<projectDTO> getMyProject(String id) throws Exception;
 		
-	// 등록 취소
+	// 등록한 프로젝트 삭제
 	public int deleteMyProject(projectDTO dto) throws Exception;
 	
+	// 등록한 프로젝트 삭제시 찜목록, 후원목록 삭제
+	public int deleteMyProject2(backerDTO dto) throws Exception;
+		
 	// 카드 정보 입력
 	public int addCard(cardInfoDTO cDTO) throws DataAccessException;
 	

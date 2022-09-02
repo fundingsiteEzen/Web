@@ -373,8 +373,8 @@
 		}
 	
 	// 내 프로젝트 삭제
-		function deleteMyProject(p_seq) {
-	   event.stopPropagation();
+	function deleteMyProject(p_seq) {
+   		event.stopPropagation();
 		var chk = confirm("등록한 프로젝트를 삭제하시겠습니까 ?");
 		if (chk) {
 			$.ajax({
@@ -386,20 +386,50 @@
 						//alert("삭제되었습니다");
 						//location.href = "/myPage/myPage";
 						Swal.fire({
-	   						  icon: 'success',
-	   						  title: '삭제되었습니다.',
-	   						}).then((value) => {
-	   	  						if (value) {
-	   	  						location.href = "/myPage/myPage";
-	   	  						}
-	   	  					});
-					}
+	  						  icon: 'success',
+	  						  title: '취소가 완료되었습니다.',
+	  						  showConfirmButton: false,
+	  						  timer: 1500
+	  					}).then((value) => {
+	 	  				 	if (value) {
+	 	  					location.href = "/myPage/myPage";
+	 	  					}
+	  					});
+					} // End - if(data == "Y")
 				},
 				error: function(data) { 	
 					Swal.fire({
 					icon: 'error',
 					title: '문제가 발생했습니다',
-					}); }
+					}); 
+				}
+			});
+			$.ajax({
+				type: "POST",
+				url: "/myPage/deleteMyProject2.do",
+				data: {p_seq: p_seq},
+				success: function(data) {
+					if(data == "Y") {
+						alert("삭제되었습니다");
+						location.href = "/myPage/myPage";
+						Swal.fire({
+	  						  icon: 'success',
+	  						  title: '취소가 완료되었습니다.',
+	  						  showConfirmButton: false,
+	  						  timer: 1500
+	  					}).then((value) => {
+	 	  				 	if (value) {
+	 	  					location.href = "/myPage/myPage";
+	 	  					}
+	  					});
+					} // End - if(data == "Y")
+				},
+				error: function(data) { 	
+					Swal.fire({
+					icon: 'error',
+					title: '문제가 발생했습니다',
+					}); 
+				}
 			});
 		}
 	}

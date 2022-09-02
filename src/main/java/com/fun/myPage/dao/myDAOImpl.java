@@ -77,11 +77,17 @@ public class myDAOImpl implements myDAO{
 		System.out.println("마이 dao (4) - 리워드 수정 실행");
 		return sqlsession.delete(namespace + ".cancelReward", dto);
 	}
-	// 등록 취소
-	 public int deleteMyProject(projectDTO dto) throws Exception {
-		 System.out.println("deleteMyProject (DAO) 실행");
-		 return sqlsession.delete(namespace + ".deleteMyProject", dto); 
-	 }
+	// 등록한 프로젝트 삭제
+	public int deleteMyProject(projectDTO dto) throws Exception {
+		System.out.println("deleteMyProject (DAO) 실행");
+		return sqlsession.delete(namespace + ".deleteMyProject", dto); 
+	}
+	 
+	// 등록한 프로젝트 삭제시 찜목록, 후원목록 삭제
+	public int deleteMyProject2(backerDTO dto) throws Exception {
+		System.out.println("deleteMyProject2 (DAO) 실행");
+		return sqlsession.delete(namespace + ".deleteMyList", dto); 
+	}
 	  
 	// 카드 정보 입력
 	@Override
