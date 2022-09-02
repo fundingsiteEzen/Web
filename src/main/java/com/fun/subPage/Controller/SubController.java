@@ -4,11 +4,11 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fun.myPage.dto.backerDTO;
-import com.fun.subPage.dto.creatorDTO;
 import com.fun.subPage.dto.prbDTO;
 import com.fun.subPage.dto.projectDTO;
 import com.fun.subPage.dto.rewardDTO;
@@ -29,7 +27,7 @@ import com.fun.subPage.service.subService;
 @RequestMapping(value="/subPage")
 public class SubController {
 	
-	@Inject
+	@Autowired
 	subService sService;
 
 	
@@ -45,8 +43,8 @@ public class SubController {
 		System.out.println("Pdto 가져온 데이터 : " + Pdto);
 		
 		// 2. reward 테이블 가져오기
-		List<projectDTO> r_list = sService.rewardList(p_seq);
-		System.out.println("리워드 리스트 가져온 데이터 : " + r_list);
+//		List<projectDTO> r_list = sService.rewardList(p_seq);
+//		System.out.println("리워드 리스트 가져온 데이터 : " + r_list);
 		
 		// 3. creator 테이블 가져오기.. 현재 creator 테이블을 안 씀..
 		// 1에서 가져온 테이블에서 id를 넘김
@@ -75,7 +73,7 @@ public class SubController {
 		// 4. model에 붙히기
 		// 프로젝트 정보, 리워드 정보, 남은 날짜, 달성률, 슬라이드 이미지
 		model.addAttribute("project", Pdto);
-		model.addAttribute("rewardList", r_list);
+//		model.addAttribute("rewardList", r_list);
 		model.addAttribute("dayCount", dayCount);
 		model.addAttribute("percent", percent);
 //		model.addAttribute("creator", Cdto);
@@ -184,6 +182,27 @@ public class SubController {
 		
 		return result;
 		
+	}
+	
+	// (4) 리워드 페이지로 이동
+	@RequestMapping(value="/detailR", method=RequestMethod.GET)
+	public String goReward(Model model, HttpServletRequest req) throws Exception {
+		
+		// 1. project 테이블 가져오기
+		// 이전화면에서 p_seq 값을 받아옴
+		String p_seq = req.getParameter("p_seq");
+		
+		projectDTO Pdto = sService.projectList(p_seq);
+		System.out.println("Pdto 가져온 데이터 : " + Pdto);
+		
+		// 2. reward 테이블 가져오기
+		List<projectDTO> r_list = sService.rewardList(p_seq);
+		System.out.println("리워드 리스트 가져온 데이터 : " + r_list);
+		
+		model.addAttribute("project", Pdto);
+		model.addAttribute("rewardList", r_list);
+		
+		return "/subPage/sub";
 	}
 	
 }
