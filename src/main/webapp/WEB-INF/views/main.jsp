@@ -2,15 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="today" value="<%=new java.util.Date()%>" />
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>VIVA</title>
 	<!-- 제이쿼리 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
@@ -66,22 +68,19 @@
 		
 		/* 프로젝트 목록 */
 		.category {
-		height:	300px;
 		cursor: pointer;
-		margin-bottom: 40px;
+		margin-bottom: 80px;
+		height: 300px;
 		}
 		.img_box {
 			overflow: hidden;
 			transition: all 0.3s ease-in-out;
 		}
-		.img_box img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
+		/*
 		.img_box:hover {
-			box-shadow: 0 0 13px rgba(0,0,0, 0.4);
+			box-shadow: 0 0 10px rgba(0,0,0, 0.3);
 		}
+		*/
 		
 		/* 이미지 오버 효과 */
 		.main img {
@@ -98,6 +97,26 @@
 		  -moz-transform: scale(1.2);
 		  -ms-transform: scale(1.2);
 		  -o-transform: scale(1.2);
+		}
+		
+		.dDay {
+			position: absolute;
+			top: -3px; right: 10px;
+			border-radius: 10px;
+			padding: 5px;
+		}
+		.progress {
+			appearance: none;
+			width: 100%;
+			height: 5px;
+			text-align: left;
+			margin: 0;
+		}
+		.progress::-webkit-progress-bar {
+			background:#f7f7f7;
+		}
+		.progress::-webkit-progress-value {
+			background: #dd6a58;
 		}
 		
 	</style>
@@ -124,52 +143,80 @@
                         </ul>
                     </div>
                 </div>
+				<jsp:useBean id="today" class="java.util.Date" />
                 <div class="row filter">
 	                <!-- 봄 -->
 	                <c:forEach items="${SpringList}" var="list" varStatus="status">
-						<div align="center" class="col-sm-3 category p_spring" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+						<div class="col-sm-3 category p_spring" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+							<fmt:parseNumber value="${today.time / (1000*60*60*24)}" integerOnly="true" var="sysDate" />
+							<fmt:parseNumber value="${list.p_endDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate" />
+							<div class="img_box" style="overflow: hidden; height:80%; width: 100%;">
+								<img class="img-responsive center-block" style="object-fit: cover;" src="${contextPath}/images/thumnail/${list.p_thumb}" width= "100%" height="100%"/>
 							</div>
-							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+							<div style="position:relative;">
+								<div align="center"><h4 style="margin-top: 15px;">${list.p_name}</h4></div>
+								<progress class="progress" value="${list.p_total / list.p_goal * 100}" min="0" max="100"></progress>
+								<div class="row" style="padding-top: 5px;">
+									<div class="col-sm-6" align="left" style="font-size: 0.9em; padding: 0 5px;"><fmt:formatNumber type="number" value="${list.p_total / list.p_goal * 100}" maxFractionDigits="0"/>% 달성</div>
+									<div class="col-sm-6" align="right" style="font-size: 0.9em; padding: 0 5px;">D-${endDate - sysDate}</div>
+								</div>
 							</div>
 						</div>
 					</c:forEach>
 	                <!-- 봄 끝 -->
 	                <!-- 여름 -->
 	                <c:forEach items="${SummerList}" var="list" varStatus="status">
-						<div align="center" class="col-sm-3 category p_summer" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+						<div class="col-sm-3 category p_summer" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+							<fmt:parseNumber value="${today.time / (1000*60*60*24)}" integerOnly="true" var="sysDate" />
+							<fmt:parseNumber value="${list.p_endDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate" />
+							<div class="img_box" style="overflow: hidden; height:80%; width: 100%;">
+								<img class="img-responsive center-block" style="object-fit: cover;" src="${contextPath}/images/thumnail/${list.p_thumb}" width= "100%" height="100%"/>
 							</div>
-							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+							<div style="position:relative;">
+								<div align="center"><h4 style="margin-top: 15px;">${list.p_name}</h4></div>
+								<progress class="progress" value="${list.p_total / list.p_goal * 100}" min="0" max="100"></progress>
+								<div class="row" style="padding-top: 5px;">
+									<div class="col-sm-6" align="left" style="font-size: 0.9em; padding: 0 5px;"><fmt:formatNumber type="number" value="${list.p_total / list.p_goal * 100}" maxFractionDigits="0"/>% 달성</div>
+									<div class="col-sm-6" align="right" style="font-size: 0.9em; padding: 0 5px;">D-${endDate - sysDate}</div>
+								</div>
 							</div>
 						</div>
 					</c:forEach>
 					<!-- 여름 끝 -->
 					<!-- 가을 -->
 					<c:forEach items="${AutumnList}" var="list" varStatus="status">
-						<div align="center" class="col-sm-3 category p_autumn" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+						<div class="col-sm-3 category p_autumn" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+							<fmt:parseNumber value="${today.time / (1000*60*60*24)}" integerOnly="true" var="sysDate" />
+							<fmt:parseNumber value="${list.p_endDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate" />
+							<div class="img_box" style="overflow: hidden; height:80%; width: 100%;">
+								<img class="img-responsive center-block" style="object-fit: cover;" src="${contextPath}/images/thumnail/${list.p_thumb}" width= "100%" height="100%"/>
 							</div>
-							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+							<div style="position:relative;">
+								<div align="center"><h4 style="margin-top: 15px;">${list.p_name}</h4></div>
+								<progress class="progress" value="${list.p_total / list.p_goal * 100}" min="0" max="100"></progress>
+								<div class="row" style="padding-top: 5px;">
+									<div class="col-sm-6" align="left" style="font-size: 0.9em; padding: 0 5px;"><fmt:formatNumber type="number" value="${list.p_total / list.p_goal * 100}" maxFractionDigits="0"/>% 달성</div>
+									<div class="col-sm-6" align="right" style="font-size: 0.9em; padding: 0 5px;">D-${endDate - sysDate}</div>
+								</div>
 							</div>
 						</div>
 					</c:forEach>
 					<!-- 가을 끝 -->
 					<!-- 겨울 -->
 					<c:forEach items="${WinterList}" var="list" varStatus="status">
-						<!-- 고유번호(seq)페이지로 이동 -->
-						<div align="center" class="col-sm-3 category p_winter" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
-							<div style="overflow: hidden; height:80%">
-								<img class="img-responsive center-block" src="${contextPath}/images/thumnail/${list.p_thumb}" height="100%"/>
+						<div class="col-sm-3 category p_winter" onclick="location.href='${contextPath}/subPage/detail?p_seq=${list.p_seq}';">
+							<fmt:parseNumber value="${today.time / (1000*60*60*24)}" integerOnly="true" var="sysDate" />
+							<fmt:parseNumber value="${list.p_endDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate" />
+							<div class="img_box" style="overflow: hidden; height:80%; width: 100%;">
+								<img class="img-responsive center-block" style="object-fit: cover;" src="${contextPath}/images/thumnail/${list.p_thumb}" width= "100%" height="100%"/>
 							</div>
-							<div>
-								<h4>${list.p_name}<br/></h4><h5 style="color: rgb(250,50,0);">종료일: ${list.p_endDate}</h5>
+							<div style="position:relative;">
+								<div align="center"><h4 style="margin-top: 15px;">${list.p_name}</h4></div>
+								<progress class="progress" value="${list.p_total / list.p_goal * 100}" min="0" max="100"></progress>
+								<div class="row" style="padding-top: 5px;">
+									<div class="col-sm-6" align="left" style="font-size: 0.9em; padding: 0 5px;"><fmt:formatNumber type="number" value="${list.p_total / list.p_goal * 100}" maxFractionDigits="0"/>% 달성</div>
+									<div class="col-sm-6" align="right" style="font-size: 0.9em; padding: 0 5px;">D-${endDate - sysDate}</div>
+								</div>
 							</div>
 						</div>
 					</c:forEach>

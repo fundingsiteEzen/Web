@@ -51,6 +51,22 @@
         .right {
 			width: 200px;
         }
+        
+        .card {
+		    box-sizing: border-box;
+		    border: 2px solid #ccc;
+		    border-radius: 15px;
+		    width: 150px;
+		    line-height: 50px;
+		    font-size: large;
+		    cursor: pointer;
+		    display: inline-block;
+		}
+		.card:hover {
+			background-color: #ccc;
+			transition: 0.2s;
+			border:  2px solid #fff;
+		}
     </style>
     
     <!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
@@ -77,7 +93,7 @@
 		<div class="form-group">
 		  <label>창작자</label>
 		  <input type="hidden" class="form-control" id="id" name="id" value="${userID}" readonly>  <!-- 세션에서 가져온 아이디. 로그인 기능 끝나고 주석 해제 -->
-		  <h3>닉네임</h3>
+		  <h3>${nickName}</h3>
 		</div>
 		
 		<!-- 카테고리 선택(선택하면 자동) -->
@@ -152,8 +168,8 @@
 		<!-- 다시입력, 등록 버튼 -->
 		<div class="form-group" style="margin-top:40px">
 			<div align="center">
-				<button onclick="location.reload();" class="btn btn-primary">다시 입력</button>
-				<button type="submit" class="btn btn-success" onclick="fn_submit()">펀딩 등록</button>
+				<button onclick="location.reload();" class="card">다시 입력</button>
+				<button type="submit" class="card" onclick="fn_submit()">펀딩 등록</button>
 			</div>
 		</div>
 	</form>
