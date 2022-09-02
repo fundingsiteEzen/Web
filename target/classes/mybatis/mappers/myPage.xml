@@ -53,7 +53,6 @@
 		]]>
 	</delete>
 
-
 	<!-- id에 해당하는 프로젝트 테이블 가져오기 -->
 	<select id="myProInfo" resultType="com.fun.subPage.dto.projectDTO" parameterType="String">
 		<![CDATA[
@@ -65,6 +64,13 @@
 	<delete id="deleteMyProject" parameterType="com.fun.subPage.dto.projectDTO">
 		<![CDATA[
 		DELETE FROM project WHERE p_seq=#{p_seq}
+		]]>
+	</delete>
+	
+	<!-- 등록한 프로젝트 삭제시 찜목록, 후원목록 삭제 -->
+	<delete id="deleteMyList" parameterType="com.fun.myPage.dto.backerDTO">
+		<![CDATA[
+		DELETE FROM backer WHERE p_seq=#{p_seq}
 		]]>
 	</delete>
 	
