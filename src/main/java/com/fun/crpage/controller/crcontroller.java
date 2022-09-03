@@ -75,7 +75,9 @@ public class crcontroller {
 		
 		String str = crDTO.getP_slide();
 		String[] strArr = str.split(",");
-		crDTO.setP_thumb(strArr[0]); // 받은 이미지의 첫번째 사진을 썸네일 이미지로 지정함
+		System.out.println("p_thumb의 값 ::: " + crDTO.getP_thumb());
+		int p_thumb = Integer.parseInt(crDTO.getP_thumb());
+		crDTO.setP_thumb(strArr[p_thumb]); // 받은 이미지의 첫번째 사진을 썸네일 이미지로 지정함
 		crDTO.setP_imgCnt(strArr.length); // 첨부한 이미지의 갯수를 저장함
 		
 		int result = 0;
@@ -95,6 +97,8 @@ public class crcontroller {
 	@RequestMapping(value="/file", method=RequestMethod.POST)
 	public String inputFile(List<MultipartFile> file, HttpServletRequest req) throws Exception {
 		
+		System.out.println("이미지 등록 thumb값 :: " + req.getParameter("p_thumb"));
+		
 		String contextRoot = new HttpServletRequestWrapper(req).getRealPath("/");
 		String thumbPath = contextRoot + "resources/images/thumnail";
 		String slidePath = contextRoot + "resources/images/SUB";
@@ -106,11 +110,10 @@ public class crcontroller {
 //		System.out.println("파일크기 : " + file.getSize());
 //		System.out.println("컨텐츠 타입 : " + file.getContentType());
 		
+		int p_thumb = Integer.parseInt(req.getParameter("p_thumb"));
 		for(int i = 0; i < file.size(); i++) {
-			if(i == 0) {
 				new ResponseEntity<String>(
 						UploadFileUtils.uploadThumbFile(thumbPath, file.get(i).getOriginalFilename(), file.get(i).getBytes()), HttpStatus.OK);
-			}
 				new ResponseEntity<String>(
 						UploadFileUtils.uploadFile(slidePath, file.get(i).getOriginalFilename(), file.get(i).getBytes()), HttpStatus.OK);
 		}
