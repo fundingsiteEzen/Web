@@ -32,6 +32,7 @@
             overflow: auto;
             white-space: nowrap;
             width: 100%;
+            position:relative;
         }
         .img {
             padding-right: 10px;
@@ -50,6 +51,19 @@
         }
         .right {
 			width: 200px;
+        }
+        .img:hover{
+        	cursor: pointer;
+        }
+        .thumb_box {
+        	position: absolute;
+        	top: 0; left: 0;
+        	text-align: center;
+        	padding: 10px;
+        	width: 50px;
+        	background: #dc4545;
+        	color: white;
+        	font-weight: bold;
         }
         
         .card {
@@ -132,7 +146,10 @@
 			<label>이미지 첨부</label><br/>
 			<input type="file" id="file1" name="p_slide" multiple required/>
             <label class="img_button" for="file1">+ 추가</label>
-			<div class="img_add"></div>
+			<div class="img_add">
+				<div class="thumb_box">대표</div>
+			</div>
+			<input type="hidden" id="p_thumb" name="p_thumb" value="0">
 		</div>
 		
 		<!-- 프로젝트 소개글 -->
@@ -212,7 +229,7 @@
 	        reader.onload = function(e) {
 	        	content_files.push(f);
 	        	formData.append("file", content_files[idx]);
-	            var str = "<img class='img add"+idx+"'>";
+	            var str = "<img class='img add"+idx+"' onclick='addThumb(" + idx + ")'>";
 		        $(".img_add").append(str);
 	        	$('.add'+idx).attr("src", e.target.result);
 	        	idx++;
@@ -220,9 +237,18 @@
 	        	reader.readAsDataURL(f);
 		});
 		console.log(content_files);
-	}	
+	}
+	
+	function addThumb(idx) {
+		if($(".img").is(".img_thumb")) {
+			$(".img").removeClass("img_thumb"); }
+		$(".add"+idx).addClass("img_thumb");
+		$(".thumb_box").css("left", idx*300);
+		$("#p_thumb").val(idx);
+	}
 	function addFile() {
 		// processData와 contentType을 false로 해서 보내주어야함
+		formData.append( "p_thumb", $("#p_thumb").val() );
 		$.ajax({
 			type: "post",
 			url: "/crpage/file",
@@ -237,7 +263,6 @@
 				title: '성공',
 				})
 				alert(request); // 이거 저장된 파일 이름.. !!
-				
 			},
 			error: function(request, status, error) {
 				// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

@@ -215,6 +215,12 @@
 	.form-control:hover {
 		background-color: #ccc
 	}
+	.check {
+		position: relative;}
+	.duple { 
+		position:absolute;
+		top: 20%;
+		right: 30px; }
 	</style>
 	
 	<!-- 로그인 정보가 없으면 들어갈 수 없게 함 -->
@@ -259,14 +265,14 @@
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">비밀번호</label>
                         <div class="col-sm-3">
-                            <input type="password" class="form-control" id="pass" placeholder="">
+                            <input type="password" class="form-control" id="pass" placeholder="" maxlength="15">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-offset-3 col-sm-2">비밀번호 확인</label>
-                        <div class="col-sm-3">
-                            <input type="password" class="form-control" id="pass_re" placeholder="">
-                            <font id="ckpwd" size="2"></font>
+                        <div class="col-sm-3 check">
+                            <input type="password" class="form-control" id="pass_re" placeholder="" maxlength="15">
+                            <span class="duple check_pass glyphicon"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -389,18 +395,18 @@
 
     <!-- 비밀번호 일치 확인-->
     <script>
-		$(function() {
-		   $('#pass').keyup(function(){
-		      $('#ckpwd').html('');
-		   });
-		   
+	    $('#pass').keyup(function(){
+				$('.check_pass').removeClass('glyphicon-ok');
+				$('.check_pass').removeClass('glyphicon-remove');
+	   	});
+			$(function() {
 		    $('#pass_re').keyup(function(){
 		        if($('#pass').val() != $('#pass_re').val()){
-		            $('#ckpwd').html('비밀번호가 일치하지 않습니다.<br>');
-		            $('#ckpwd').attr('color', 'red');
+		            $('.check_pass').removeClass('glyphicon-ok');
+		            $('.check_pass').addClass('glyphicon-remove');
 		        } else {
-		            $('#ckpwd').html('비밀번호가 일치합니다.<br>');
-		            $('#ckpwd').attr('color', 'blue');
+		            $('.check_pass').removeClass('glyphicon-remove');
+		            $('.check_pass').addClass('glyphicon-ok');
 		        }
 		    });
 		});
