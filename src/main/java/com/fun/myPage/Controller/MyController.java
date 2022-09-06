@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -118,6 +117,9 @@ public class MyController {
 		List<cardInfoDTO> cardList = mService.List_CARD(dto.getId());
 	    List<accountInfoDTO> accountList = mService.List_ACCOUNT(dto.getId());
 		
+	    session.setAttribute("nickName", dto.getName());
+		session.setAttribute("profile", dto.getProfile_img());
+	    
 		ModelAndView mvc = new ModelAndView();
 		mvc.addObject("userInfo", dto);
 		mvc.addObject("cardList", cardList); 
@@ -135,6 +137,7 @@ public class MyController {
 			
 			// 회원정보 수정 후 비밀번호 암호화
 			dto.setUserInfo(userInfo);
+			System.out.println("받아온 닉네임 값 ::: " + dto.getName());
 			if(mService.mymyUpdate(dto) > 0) {
 				return "Y";
 			} else {

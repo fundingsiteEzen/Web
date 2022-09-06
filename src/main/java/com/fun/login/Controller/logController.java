@@ -213,14 +213,14 @@ public class logController {
 			PublicKey publicKey = keyPair.getPublic();
 			PrivateKey privateKey = keyPair.getPrivate();
 			
-			session.setAttribute(logController.RSA_WEB_KEY, privateKey); // session에 RSA 개인키를 세션에 저장
+			session.setAttribute(logController.RSA_WEB_KEY, privateKey); // session에 RSA 개인키를 저장
 			
 			RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
 			String publicKeyModulus = publicSpec.getModulus().toString(16);
 			String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
 			
-			request.setAttribute("RSAModulus", publicKeyModulus); // rsa modulus 를 request 에 추가
-			request.setAttribute("RSAExponent", publicKeyExponent); // rsa exponent 를 request 에 추가
+			request.setAttribute("RSAModulus", publicKeyModulus);
+			request.setAttribute("RSAExponent", publicKeyExponent);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
