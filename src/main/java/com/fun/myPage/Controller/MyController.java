@@ -319,7 +319,9 @@ public class MyController {
 	@RequestMapping(value="/addCard.do", method=RequestMethod.POST)
 	public ModelAndView addCard(@ModelAttribute("cardInfoDTO") cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		cDTO.setId("user1");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userID");
+		cDTO.setId(id);
 		int result = mService.addCard(cDTO);
 
 		ModelAndView mav	= new ModelAndView();
@@ -333,7 +335,9 @@ public class MyController {
 	@RequestMapping(value="/addAccount.do", method=RequestMethod.POST)
 	public ModelAndView addAcoount(@ModelAttribute("accountInfoDTO") accountInfoDTO aDTO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		aDTO.setId("user1");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userID");
+		aDTO.setId(id);
 		int result = mService.addAccount(aDTO);
 
 		ModelAndView mav	= new ModelAndView();
@@ -345,7 +349,9 @@ public class MyController {
 	@RequestMapping(value="/deleteCard.do", method=RequestMethod.POST)
 	public ModelAndView deleteCard(@ModelAttribute("cardInfoDTO") cardInfoDTO cDTO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		cDTO.setId("user1");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userID");
+		cDTO.setId(id);
 		int result = mService.deleteCard(cDTO);
 
 		ModelAndView mav	= new ModelAndView();
@@ -357,7 +363,9 @@ public class MyController {
 	@RequestMapping(value="/deleteAccount.do", method=RequestMethod.POST)
 	public ModelAndView deleteAccount(@ModelAttribute("accountInfoDTO") accountInfoDTO aDTO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		aDTO.setId("user1");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userID");
+		aDTO.setId(id);
 		int result = mService.deleteAccount(aDTO);
 
 		ModelAndView mav	= new ModelAndView();
