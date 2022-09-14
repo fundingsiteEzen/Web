@@ -78,6 +78,9 @@
 	.content {
 		padding-bottom: 80px;
 	}
+	.progress-bar {
+		background: #dd6a58;
+	}
   
   </style>
 

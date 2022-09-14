@@ -159,11 +159,12 @@
 		]]>
 	</delete>
 	
-	<!-- 회원정보(비밀번호, 이메일, 배송지)를 수정하기 -->
+	<!-- 회원정보(닉네임, 비밀번호, 이메일, 배송지)를 수정하기 -->
 	<update id="updateUserInfo" parameterType="com.fun.myPage.dto.userinfoDTO">
 		<![CDATA[
 		UPDATE	userinfo
-			SET	pass = #{pass},
+			SET name = #{name},
+				pass = #{pass},
 				email = #{email},
 				address = #{address}
 		WHERE id = #{id}

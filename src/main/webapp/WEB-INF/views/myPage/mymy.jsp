@@ -492,8 +492,12 @@
 	        	   Swal.fire({
 	        		   icon: 'success',
 	        		   title: '회원 정보 수정이 완료되었습니다.',
-	        		 })
-	        	   location.reload();
+	        		   timer: 1500
+	        		 }).then((value) => {
+ 						if (value) {
+  	  						location.reload();
+  	  						}
+  	  					});
 	           }
 	           ,error: function (e) { 
 	        	       Swal.fire({
@@ -509,6 +513,7 @@
 	//-----------------------------------------------------------------------------------------------------------
 	function updateUserInfo() {
 		var id      = $("#id").val();
+		var name      = $("#name").val();
 		var	pass	= $("#pass").val();
 		var	pass_re	= $("#pass_re").val();
 		var	email	= $("#email").val();
@@ -565,7 +570,7 @@
 		$.ajax({
 			type:		"POST",
 			url:		"/myPage/mymyUpdate.do",
-			data:		{id: id, pass: pass, pass_re: pass_re, email: email, address:address},
+			data:		{id: id, name: name, pass: pass, pass_re: pass_re, email: email, address:address},
 			success:	function(data) {
 				if(data == "Y") {
 					if ($("#file1")[0].files.length > 0) {
@@ -627,6 +632,7 @@
 						Swal.fire({
 	  						  icon: 'success',
 	  						  title: '회원탈퇴가 완료되었습니다.',
+	  						  timer: 1500
 	  						}).then((value) => {
 	  	  						if (value) {
 	  	  							location.href = "/logout.do";
@@ -680,6 +686,7 @@
 						}).then((value) => {
 	  						if (value) {
 	  						location.reload();
+	  						timer: 1500
 	  						}
 	  					});
 			},
@@ -704,6 +711,7 @@
 				Swal.fire({
 					  icon: 'success',
 					  title: '등록된 계좌정보를 삭제하였습니다.',
+					  timer: 1500
 					}).then((value) => {
 						if (value) {
 						location.reload();
