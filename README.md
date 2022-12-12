@@ -1,11 +1,21 @@
 # Web
 fundingWeb
-## STACKS
-![html](https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![css](https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![javascript](https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![jquery](https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
-<br>
-![mysql](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![amazonaws](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
-![github](https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white)
+
+- Tool
+  - STS
+  - OracleDB
+  - Tomcat9.0
+  - github
+  - JQuery
+  - CSS
+  - Html
+  - Bootstrap
+  
+- 구현 기능
+  - 로그인(인코더)
+  - 회원가입(인코더)
+  - 목록페이지(카테고리 별 목록 보여주기)
+  - 상세페이지(펀딩, 찜, 원하는금액 입력가능)
+  - 마이페이지(찜보기, 찜삭제, 등록한 펀딩 삭제)
+  - 프로필 변경(프로필 사진 변경, 계좌등록과 삭제, 카드 등록과 삭제)
+  - 등록페이지(summernote사용, 사진등록, 첫번째사진 대표사진, 클릭으로 대표사진변경, 펀딩 금액과 내용 설정)
